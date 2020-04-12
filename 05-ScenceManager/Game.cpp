@@ -5,6 +5,7 @@
 #include "Utils.h"
 
 #include "PlayScence.h"
+#include "Map.h"
 
 CGame * CGame::__instance = NULL;
 
@@ -373,6 +374,8 @@ void CGame::_ParseSection_SCENES(string line)
 */
 void CGame::Load(LPCWSTR gameFile)
 {
+	
+
 	DebugOut(L"[INFO] Start loading game file : %s\n", gameFile);
 
 	ifstream f;
