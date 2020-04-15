@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
 
 #include "PlayScence.h"
@@ -7,9 +7,11 @@
 #include "Sprites.h"
 #include "Portal.h"
 
+#include "CSimon.h"
+
 using namespace std;
 
-CPlayScene::CPlayScene(int id, LPCWSTR filePath):
+CPlayScene::CPlayScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
 	key_handler = new CPlayScenceKeyHandler(this);
@@ -27,7 +29,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define SCENE_SECTION_ANIMATION_SETS	5
 #define SCENE_SECTION_OBJECTS	6
 
-#define OBJECT_TYPE_MARIO	0
+#define OBJECT_TYPE_SIMON	0
 #define OBJECT_TYPE_BRICK	1
 #define OBJECT_TYPE_GOOMBA	2
 #define OBJECT_TYPE_KOOPAS	3
@@ -71,7 +73,7 @@ void CPlayScene::_ParseSection_SPRITES(string line)
 	if (tex == NULL)
 	{
 		DebugOut(L"[ERROR] Texture ID %d not found!\n", texID);
-		return; 
+		return;
 	}
 
 	CSprites::GetInstance()->Add(ID, l, t, r, b, tex);
@@ -91,7 +93,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 	for (int i = 1; i < tokens.size(); i += 2)	// why i+=2 ?  sprite_id | frame_time  
 	{
 		int sprite_id = atoi(tokens[i].c_str());
-		int frame_time = atoi(tokens[i+1].c_str());
+		int frame_time = atoi(tokens[i + 1].c_str());
 		ani->Add(sprite_id, frame_time);
 	}
 
@@ -108,12 +110,12 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 
 	LPANIMATION_SET s = new CAnimationSet();
 
-	CAnimations *animations = CAnimations::GetInstance();
+	CAnimations* animations = CAnimations::GetInstance();
 
 	for (int i = 1; i < tokens.size(); i++)
 	{
 		int ani_id = atoi(tokens[i].c_str());
-		
+
 		LPANIMATION ani = animations->Get(ani_id);
 		s->push_back(ani);
 	}
@@ -122,7 +124,7 @@ void CPlayScene::_ParseSection_ANIMATION_SETS(string line)
 }
 
 /*
-	Parse a line in section [OBJECTS] 
+	Parse a line in section [OBJECTS]
 */
 void CPlayScene::_ParseSection_OBJECTS(string line)
 {
@@ -138,20 +140,20 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 
 	int ani_set_id = atoi(tokens[3].c_str());
 
-	CAnimationSets * animation_sets = CAnimationSets::GetInstance();
+	CAnimationSets* animation_sets = CAnimationSets::GetInstance();
 
-	CGameObject *obj = NULL;
+	CGameObject* obj = NULL;
 
 	switch (object_type)
 	{
-	case OBJECT_TYPE_MARIO:
-		if (player!=NULL) 
+	case OBJECT_TYPE_SIMON:
+		if (player != NULL)
 		{
-			DebugOut(L"[ERROR] MARIO object was created before!\n");
+			DebugOut(L"[ERROR] SIMON object was created before!\n");
 			return;
 		}
-		obj = new CMario(x,y); 
-		player = (CMario*)obj;  
+		obj = new CSimon(x, y);
+		player = (CSimon*)obj;
 
 		DebugOut(L"[INFO] Player object created!\n");
 		break;
@@ -159,13 +161,13 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK: obj = new CBrick(); break;
 	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(); break;
 	case OBJECT_TYPE_PORTAL:
-		{	
-			float r = atof(tokens[4].c_str());
-			float b = atof(tokens[5].c_str());
-			int scene_id = atoi(tokens[6].c_str());
-			obj = new CPortal(x, y, r, b, scene_id);
-		}
-		break;
+	{
+		float r = atof(tokens[4].c_str());
+		float b = atof(tokens[5].c_str());
+		int scene_id = atoi(tokens[6].c_str());
+		obj = new CPortal(x, y, r, b, scene_id);
+	}
+	break;
 	default:
 		DebugOut(L"[ERR] Invalid object type: %d\n", object_type);
 		return;
@@ -188,7 +190,7 @@ void CPlayScene::Load()
 	f.open(sceneFilePath);
 
 	// current resource section flag
-	int section = SCENE_SECTION_UNKNOWN;					
+	int section = SCENE_SECTION_UNKNOWN;
 
 	char str[MAX_SCENE_LINE];
 	while (f.getline(str, MAX_SCENE_LINE))
@@ -198,26 +200,30 @@ void CPlayScene::Load()
 		if (line[0] == '#') continue;	// skip comment lines	
 
 		if (line == "[TEXTURES]") { section = SCENE_SECTION_TEXTURES; continue; }
-		if (line == "[SPRITES]") { 
-			section = SCENE_SECTION_SPRITES; continue; }
-		if (line == "[ANIMATIONS]") { 
-			section = SCENE_SECTION_ANIMATIONS; continue; }
-		if (line == "[ANIMATION_SETS]") { 
-			section = SCENE_SECTION_ANIMATION_SETS; continue; }
-		if (line == "[OBJECTS]") { 
-			section = SCENE_SECTION_OBJECTS; continue; }
-		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }	
+		if (line == "[SPRITES]") {
+			section = SCENE_SECTION_SPRITES; continue;
+		}
+		if (line == "[ANIMATIONS]") {
+			section = SCENE_SECTION_ANIMATIONS; continue;
+		}
+		if (line == "[ANIMATION_SETS]") {
+			section = SCENE_SECTION_ANIMATION_SETS; continue;
+		}
+		if (line == "[OBJECTS]") {
+			section = SCENE_SECTION_OBJECTS; continue;
+		}
+		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
 		// data section
 		//
 		switch (section)
-		{ 
-			case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
-			case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
-			case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
-			case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
-			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+		{
+		case SCENE_SECTION_TEXTURES: _ParseSection_TEXTURES(line); break;
+		case SCENE_SECTION_SPRITES: _ParseSection_SPRITES(line); break;
+		case SCENE_SECTION_ANIMATIONS: _ParseSection_ANIMATIONS(line); break;
+		case SCENE_SECTION_ANIMATION_SETS: _ParseSection_ANIMATION_SETS(line); break;
+		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
 		}
 	}
 
@@ -245,13 +251,13 @@ void CPlayScene::Update(DWORD dt)
 	}
 
 	// skip the rest if scene was already unloaded (Mario::Update might trigger PlayScene::Unload)
-	if (player == NULL) return; 
+	if (player == NULL) return;
 
-	// Update camera to follow mario
+	// Update camera to follow simon
 	float cx, cy;
 	player->GetPosition(cx, cy);
 
-	CGame *game = CGame::GetInstance();
+	CGame* game = CGame::GetInstance();
 	cx -= game->GetScreenWidth() / 2;
 	cy -= game->GetScreenHeight() / 2;
 
@@ -282,38 +288,56 @@ void CPlayScenceKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
-	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
+	CSimon* simon = ((CPlayScene*)scence)->GetPlayer();
 	switch (KeyCode)
 	{
 	case DIK_SPACE:
-		if (mario->isJumping == false) {
-			mario->SetState(MARIO_STATE_JUMP);
-			mario->isJumping = true;
+		if (simon->isJumping == false) {
+			simon->SetState(SIMON_STATE_JUMP);
+			simon->isJumping = true;
 		}
 		break;
-	case DIK_A: 
-		mario->Reset();
+	case DIK_A:
+		simon->Reset();
 		break;
 	}
 }
 
-void CPlayScenceKeyHandler::KeyState(BYTE *states)
+void CPlayScenceKeyHandler::KeyState(BYTE* states)
 {
-	CGame *game = CGame::GetInstance();
-	CMario *mario = ((CPlayScene*)scence)->GetPlayer();
+	CGame* game = CGame::GetInstance();
+	CSimon* simon = ((CPlayScene*)scence)->GetPlayer();
 
-	// disable control key when Mario die 
-	if (mario->GetState() == MARIO_STATE_DIE) return;
+	// disable control key when Simon die 
+	if (simon->GetState() == SIMON_STATE_DIE)
+	{
+		return;
+	}
 	if (game->IsKeyDown(DIK_RIGHT))
 	{
-		mario->SetState(MARIO_STATE_WALKING_RIGHT);
-		mario->isFlip = true;
+		simon->SetState(SIMON_STATE_WALKING_RIGHT);
+		simon->isFlip = true;
 	}
 	else if (game->IsKeyDown(DIK_LEFT))
 	{
-		mario->SetState(MARIO_STATE_WALKING_LEFT);
-		mario->isFlip = false;
+		simon->SetState(SIMON_STATE_WALKING_LEFT);
+		simon->isFlip = false;
+	}
+	else if (game->IsKeyDown(DIK_DOWN))
+	{
+		simon->SetState(SIMON_STATE_SIT);
+		if (game->IsKeyDown(DIK_C))
+		{
+			simon->isAttack = true;
+		}
+	}
+	else if (game->IsKeyDown(DIK_C))
+	{
+		simon->isAttack = true;
+		simon->SetState(SIMON_STATE_ATTACK);
 	}
 	else
-		mario->SetState(MARIO_STATE_IDLE);
+	{
+		simon->SetState(SIMON_STATE_IDLE);
+	}
 }

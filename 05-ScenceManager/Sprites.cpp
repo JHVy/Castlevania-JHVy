@@ -29,7 +29,7 @@ void CSprite::Draw(float x, float y, int alpha, int isFlip)
 	}
 	else
 	{
-		game->DrawFlipX(x + 32 ,y , texture, left, top, right, bottom, alpha); // khi lật thì nõ sẽ vẽ đối xứng, nên phải trừ đi width của simon để nó vễ đúng position ban đầu. ừaa 
+		game->DrawFlipX(x + 15 ,y , texture, left, top, right, bottom, alpha); // khi lật thì nõ sẽ vẽ đối xứng, nên phải trừ đi width của simon để nó vễ đúng position ban đầu. 
 	}
 }
 

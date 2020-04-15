@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="CSimon.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Portal.cpp" />
@@ -135,7 +136,6 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mario.cpp" />
     <ClCompile Include="PlayScence.cpp" />
     <ClCompile Include="Scence.cpp" />
     <ClCompile Include="Sprites.cpp" />
@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="CSimon.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Portal.h" />
@@ -152,7 +153,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="KeyEventHandler.h" />
-    <ClInclude Include="Mario.h" />
     <ClInclude Include="PlayScence.h" />
     <ClInclude Include="Scence.h" />
     <ClInclude Include="Sprites.h" />
