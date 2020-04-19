@@ -15,6 +15,8 @@ CGameObject::CGameObject(LPCWSTR texturePath)
 
 void CGameObject::Update(DWORD dt)
 {
+	x += 0.05f * dt;
+	if (x > 320) x = 0;
 }
 
 void CGameObject::Render()
