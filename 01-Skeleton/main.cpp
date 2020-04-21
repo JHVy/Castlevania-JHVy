@@ -1,42 +1,52 @@
 /* =============================================================
-	INTRODUCTION TO GAME PROGRAMMING SE102
-	
-	SAMPLE 01 - SKELETON CODE 
+INTRODUCTION TO GAME PROGRAMMING SE102
 
-	This sample illustrates how to:
+SAMPLE 00 - INTRODUCTORY CODE
 
-	1/ Re-Organize intro code to allow better scalability
+This sample illustrates how to:
+
+1/ Create a window
+2/ Initiate DirectX 9, Direct3D, DirectX Sprite
+3/ Draw a static brick sprite to the screen
+
+WARNING: This example contains a hell LOT of *sinful* programming practices
 ================================================================ */
 
 #include <windows.h>
 #include <d3d9.h>
 #include <d3dx9.h>
-#include <vector>
 
-#include "debug.h"
-#include "Game.h"
-#include "GameObject.h"
+#include <signal.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdarg.h>
+#include <time.h>
+#include <stdlib.h>
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"01 - Skeleton"
+#define MAIN_WINDOW_TITLE L"00 - Intro"
 
 #define BRICK_TEXTURE_PATH L"brick.png"
-#define MARIO_TEXTURE_PATH L"mario.png"
 
-
-#define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 255, 255)
+#define BACKGROUND_COLOR D3DCOLOR_XRGB(255, 0, 0)
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
-#define MAX_FRAME_RATE 10
+#define MAX_FRAME_RATE 60
 
-using namespace std;
 
-CGame *game;
-CMario *mario;
-CGameObject *brick;
+LPDIRECT3D9 d3d = NULL;						// Direct3D handle
+LPDIRECT3DDEVICE9 d3ddv = NULL;				// Direct3D device object
 
-//vector<LPGAMEOBJECT> objects;  
+LPDIRECT3DSURFACE9 backBuffer = NULL;
+LPD3DXSPRITE spriteHandler = NULL;			// Sprite helper library to help us draw 2D image on the screen 
+
+LPDIRECT3DTEXTURE9 texBrick;				// texture object to store brick image
+
+float brick_x = 0.0f;
+float brick_vx = 0.1f;
+float brick_y = 100.0f;
+
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -51,16 +61,94 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+void DebugOut(wchar_t *fmt, ...)
+{
+	va_list argp;
+	va_start(argp, fmt);
+	wchar_t dbg_out[4096];
+	vswprintf_s(dbg_out, fmt, argp);
+	va_end(argp);
+	OutputDebugString(dbg_out);
+}
+
+void InitDirectX(HWND hWnd)
+{
+	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
+
+	D3DPRESENT_PARAMETERS d3dpp;
+
+	ZeroMemory(&d3dpp, sizeof(d3dpp));
+
+	d3dpp.Windowed = TRUE;
+	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+	d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;
+	d3dpp.BackBufferCount = 1;
+
+	RECT r;
+	GetClientRect(hWnd, &r);	// retrieve window width & height 
+
+	d3dpp.BackBufferHeight = r.bottom + 1;
+	d3dpp.BackBufferWidth = r.right + 1;
+
+	d3d->CreateDevice(
+		D3DADAPTER_DEFAULT,
+		D3DDEVTYPE_HAL,
+		hWnd,
+		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
+		&d3dpp,
+		&d3ddv);
+
+	if (d3ddv == NULL)
+	{
+		OutputDebugString(L"[ERROR] CreateDevice failed\n");
+		return;
+	}
+
+	d3ddv->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
+
+	// Initialize sprite helper from Direct3DX helper library
+	D3DXCreateSprite(d3ddv, &spriteHandler);
+
+	OutputDebugString(L"[INFO] InitGame is done\n");
+
+}
+
 /*
-	Load all game resources. In this example, create a brick object and mario object
+	Load all game resources. In this example, only load brick image
 */
 void LoadResources()
 {
-	mario = new CMario(MARIO_TEXTURE_PATH);
-	mario->SetPosition(10.0f, 130.0f);
+	D3DXIMAGE_INFO info;
+	HRESULT result = D3DXGetImageInfoFromFile(BRICK_TEXTURE_PATH, &info);
+	if (result != D3D_OK)
+	{
+		DebugOut(L"[ERROR] GetImageInfoFromFile failed: %s\n", BRICK_TEXTURE_PATH);
+		return;
+	}
 
-	brick = new CGameObject(BRICK_TEXTURE_PATH);
-	brick->SetPosition(10.0f, 100.0f);
+	result = D3DXCreateTextureFromFileEx(
+		d3ddv,								// Pointer to Direct3D device object
+		BRICK_TEXTURE_PATH,					// Path to the image to load
+		info.Width,							// Texture width
+		info.Height,						// Texture height
+		1,
+		D3DUSAGE_DYNAMIC,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_DEFAULT,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(255, 255, 255),			// Transparent color
+		&info,
+		NULL,
+		&texBrick);								// Created texture pointer
+
+	if (result != D3D_OK)
+	{
+		OutputDebugString(L"[ERROR] CreateTextureFromFile failed\n");
+		return;
+	}
+
+	DebugOut(L"[INFO] Texture loaded Ok: %s \n", BRICK_TEXTURE_PATH);
 }
 
 /*
@@ -69,34 +157,28 @@ void LoadResources()
 */
 void Update(DWORD dt)
 {
-	/*
-	for (int i=0;i<n;i++)
-		objects[i]->Update(dt);
-	*/
-	mario->Update(dt);
-	brick->Update(dt);
+	//brick_x++;
+
+	brick_x = brick_x + brick_vx*dt; 
+	if ( (brick_x > (SCREEN_WIDTH - 32)) || brick_x < 0) brick_vx = -brick_vx;
 }
 
 /*
-	Render a frame 
+Render a frame
 */
 void Render()
 {
-	LPDIRECT3DDEVICE9 d3ddv = game->GetDirect3DDevice();
-	LPDIRECT3DSURFACE9 bb = game->GetBackBuffer();
-	LPD3DXSPRITE spriteHandler = game->GetSpriteHandler();
-
 	if (d3ddv->BeginScene())
 	{
-		// Clear back buffer with a color
-		d3ddv->ColorFill(bb, NULL, BACKGROUND_COLOR);
+		// Clear screen (back buffer) with a color
+		d3ddv->ColorFill(backBuffer, NULL, BACKGROUND_COLOR);
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
+		D3DXVECTOR3 p(brick_x,100.0f, 0);
 
-		mario->Render();
-		brick->Render();
-
+		//D3DXVECTOR3 p(100.0f,10.0f, 0);
+		spriteHandler->Draw(texBrick, NULL, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
 
 		spriteHandler->End();
 		d3ddv->EndScene();
@@ -140,7 +222,7 @@ HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int Sc
 			hInstance,
 			NULL);
 
-	if (!hWnd) 
+	if (!hWnd)
 	{
 		OutputDebugString(L"[ERROR] CreateWindow failed");
 		DWORD ErrCode = GetLastError();
@@ -183,7 +265,7 @@ int Run()
 			Render();
 		}
 		else
-			Sleep(tickPerFrame - dt);	
+			Sleep(tickPerFrame - dt);
 	}
 
 	return 1;
@@ -192,9 +274,7 @@ int Run()
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-	game = CGame::GetInstance();
-	game->Init(hWnd);
+	InitDirectX(hWnd);
 
 	LoadResources();
 	Run();

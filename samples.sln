@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05-ScenceManager", "05-ScenceManager\05-ScenceManager.vcxproj", "{C83A385D-5992-4E1B-B783-AB1D446414D5}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03-Keyboard-States", "03-Keyboard-States\03-Keyboard-States.vcxproj", "{5BB3DC44-D6AF-494B-9841-43B9AE3C6588}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04-Collision", "04-Collision\04-Collision.vcxproj", "{0CEDCE73-9775-46A9-9D9D-B8424E7D599D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FullGame", "FullGame\FullGame.vcxproj", "{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,20 @@ Global
 		{0CEDCE73-9775-46A9-9D9D-B8424E7D599D}.Release|Win32.Build.0 = Release|Win32
 		{0CEDCE73-9775-46A9-9D9D-B8424E7D599D}.Release|x64.ActiveCfg = Release|x64
 		{0CEDCE73-9775-46A9-9D9D-B8424E7D599D}.Release|x64.Build.0 = Release|x64
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|Win32.Build.0 = Debug|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|x64.ActiveCfg = Debug|x64
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Debug|x64.Build.0 = Debug|x64
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|Any CPU.ActiveCfg = Release|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|Win32.ActiveCfg = Release|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|Win32.Build.0 = Release|Win32
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|x64.ActiveCfg = Release|x64
+		{53DC11EF-3371-4BCA-B41F-71F4C8B3B8CA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

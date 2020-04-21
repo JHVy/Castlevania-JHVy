@@ -1,14 +1,14 @@
 /* =============================================================
 	INTRODUCTION TO GAME PROGRAMMING SE102
-	
+
 	SAMPLE 05 - SCENCE MANAGER
 
 	This sample illustrates how to:
 
-		1/ Implement a scence manager 
-		2/ Load scene from "database", add/edit/remove scene without changing code 
-		3/ Dynamically move between scenes without hardcode logic 
-		
+		1/ Implement a scence manager
+		2/ Load scene from "database", add/edit/remove scene without changing code
+		3/ Dynamically move between scenes without hardcode logic
+
 ================================================================ */
 
 #include <windows.h>
@@ -37,7 +37,7 @@
 
 #define MAX_FRAME_RATE 120
 
-CGame *game;
+CGame* game;
 Map* map;
 
 void LoadMap()
@@ -70,7 +70,7 @@ void Update(DWORD dt)
 }
 
 /*
-	Render a frame 
+	Render a frame
 */
 void Render()
 {
@@ -132,7 +132,7 @@ HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int Sc
 			hInstance,
 			NULL);
 
-	if (!hWnd) 
+	if (!hWnd)
 	{
 		OutputDebugString(L"[ERROR] CreateWindow failed");
 		DWORD ErrCode = GetLastError();
@@ -173,12 +173,12 @@ int Run()
 			frameStart = now;
 
 			game->ProcessKeyboard();
-			
+
 			Update(dt);
 			Render();
 		}
 		else
-			Sleep(tickPerFrame - dt);	
+			Sleep(tickPerFrame - dt);
 	}
 
 	return 1;

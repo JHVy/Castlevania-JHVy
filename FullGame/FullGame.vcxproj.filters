@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>TextureManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations.cpp">
+      <Filter>TextureManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="CSimon.cpp">
+      <Filter>GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayScence.cpp">
+      <Filter>GameManagement\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Scence.cpp">
+      <Filter>GameManagement\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>TextureManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Goomba.cpp">
+      <Filter>GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Koopas.cpp">
+      <Filter>GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\tinyxmlparser.cpp">
+      <Filter>TextureManagement\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\tinyxmlerror.cpp">
+      <Filter>TextureManagement\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\tinyxml.cpp">
+      <Filter>TextureManagement\XML</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\tinystr.cpp">
+      <Filter>TextureManagement\XML</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>TextureManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations.h">
+      <Filter>TextureManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="CSimon.h">
+      <Filter>GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScence.h">
+      <Filter>GameManagement\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Scence.h">
+      <Filter>GameManagement\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>TextureManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Koopas.h">
+      <Filter>GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Goomba.h">
+      <Filter>GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\tinyxml.h">
+      <Filter>TextureManagement\XML</Filter>
+    </ClInclude>
+    <ClInclude Include="XML\tinystr.h">
+      <Filter>TextureManagement\XML</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{95e98e85-e540-4cdf-8b93-60e53977e260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureManagement">
+      <UniqueIdentifier>{bce6ddcc-f3f1-43de-a78a-985016bd83c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManagement">
+      <UniqueIdentifier>{85e32d73-fe50-411f-995e-30a6dfe40e05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Character">
+      <UniqueIdentifier>{7ebf5ca9-dc07-4c41-ac2d-4629dd37530a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManagement\Screen">
+      <UniqueIdentifier>{280feed5-66f8-4f82-8611-9c667d5ca5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{c062e021-5850-4548-a52e-37b194b396bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureManagement\XML">
+      <UniqueIdentifier>{41d49b3e-3e9c-4668-8812-186e48d93206}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="Animations.xml">
+      <Filter>TextureManagement\XML</Filter>
+    </Xml>
+    <Xml Include="Sprites.xml">
+      <Filter>TextureManagement\XML</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>
