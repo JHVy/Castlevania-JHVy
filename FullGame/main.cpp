@@ -28,6 +28,9 @@
 #include "PlayScence.h"
 #include "Map.h"
 
+// loader utils
+#include "Loader.h"
+
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"SAMPLE 05 - SCENCE MANAGER"
 
@@ -35,7 +38,7 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
-#define MAX_FRAME_RATE 120
+#define MAX_FRAME_RATE 60
 
 CGame* game;
 Map* map;
@@ -188,19 +191,26 @@ int Run()
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	game = CGame::GetInstance();
-	game->Init(hWnd);
-	game->InitKeyboard();
+	LoadSpriteResource();
 
-	game->Load(L"mario-sample.txt");
-	LoadMap();
+	DebugOut(L"[INFO] END GAME\n");
+
+	//HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	//game = CGame::GetInstance();
+	//game->Init(hWnd);
+	//game->InitKeyboard();
+
+	//game->Load(L"mario-sample.txt");
+	//LoadMap();
 
 
-	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER); // ch?nh l?i kích c? màn hình
+	//SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER); // ch?nh l?i kích c? màn hình
 
-	Run();
+	//Run();
+
+	
 
 	return 0;
 }

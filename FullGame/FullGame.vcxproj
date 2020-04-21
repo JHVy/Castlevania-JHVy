@@ -128,6 +128,7 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="CSimon.cpp" />
+    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Portal.cpp" />
@@ -148,7 +149,9 @@
   <ItemGroup>
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Config.h" />
     <ClInclude Include="CSimon.h" />
+    <ClInclude Include="Loader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Portal.h" />

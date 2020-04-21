@@ -56,6 +56,9 @@
     <ClCompile Include="XML\tinystr.cpp">
       <Filter>TextureManagement\XML</Filter>
     </ClCompile>
+    <ClCompile Include="Loader.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -109,6 +112,12 @@
     <ClInclude Include="XML\tinystr.h">
       <Filter>TextureManagement\XML</Filter>
     </ClInclude>
+    <ClInclude Include="Loader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>Config</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -131,6 +140,9 @@
     </Filter>
     <Filter Include="TextureManagement\XML">
       <UniqueIdentifier>{41d49b3e-3e9c-4668-8812-186e48d93206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{5cf54c01-f4e6-4940-966a-76f1ae9b46f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

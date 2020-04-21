@@ -20,6 +20,7 @@ public:
 
 	void Draw(float x, float y, int alpha = 255, int isFlip=-1);
 
+	int getID() { return id; }
 };
 
 typedef CSprite * LPSPRITE;
@@ -35,6 +36,7 @@ class CSprites
 
 public:
 	void Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
+	void Add(LPSPRITE lpsprite);
 	LPSPRITE Get(int id);
 	void CSprites::Clear();
 
