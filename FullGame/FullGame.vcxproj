@@ -151,6 +151,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="CSimon.h" />
+    <ClInclude Include="Define.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Koopas.h" />

@@ -30,6 +30,7 @@
 
 // loader utils
 #include "Loader.h"
+#include "Define.h"
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"SAMPLE 05 - SCENCE MANAGER"
@@ -177,8 +178,8 @@ int Run()
 
 			game->ProcessKeyboard();
 
-			Update(dt);
-			Render();
+			//Update(dt);
+			//Render();
 		}
 		else
 			Sleep(tickPerFrame - dt);
@@ -191,24 +192,23 @@ int Run()
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-
-	LoadSpriteResource();
-
 	DebugOut(L"[INFO] END GAME\n");
 
-	//HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
+	HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	//game = CGame::GetInstance();
-	//game->Init(hWnd);
-	//game->InitKeyboard();
+	game = CGame::GetInstance();
+	game->Init(hWnd);
+	game->InitKeyboard();
+
+	LoadSpriteResource();
 
 	//game->Load(L"mario-sample.txt");
 	//LoadMap();
 
 
-	//SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER); // ch?nh l?i kích c? màn hình
+	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER); // ch?nh l?i kích c? màn hình
 
-	//Run();
+	Run();
 
 	
 
