@@ -25,31 +25,16 @@
 #include "Goomba.h"
 
 
-#include "PlayScence.h"
 #include "Map.h"
 
 // loader utils
 #include "Loader.h"
 #include "Define.h"
 
-#define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"SAMPLE 05 - SCENCE MANAGER"
 
-#define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
-
-#define MAX_FRAME_RATE 60
 
 CGame* game;
 Map* map;
-
-void LoadMap()
-{
-	// load map
-	map = new Map();
-	map->LoadMap("textures\\Scene1.csv");
-}
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -70,7 +55,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 */
 void Update(DWORD dt)
 {
-	CGame::GetInstance()->GetCurrentScene()->Update(dt);
+	//CGame::GetInstance()->GetCurrentScene()->Update(dt);
 }
 
 /*
@@ -92,7 +77,8 @@ void Render()
 		// draw map
 		//map->DrawMap();
 
-		CGame::GetInstance()->GetCurrentScene()->Render();
+		//CGame::GetInstance()->GetCurrentScene()->Render();
+		game->display();
 
 		spriteHandler->End();
 		d3ddv->EndScene();
@@ -176,10 +162,10 @@ int Run()
 		{
 			frameStart = now;
 
-			game->ProcessKeyboard();
+			//game->ProcessKeyboard();
 
-			//Update(dt);
-			//Render();
+			Update(dt);
+			Render();
 		}
 		else
 			Sleep(tickPerFrame - dt);
@@ -192,8 +178,6 @@ int Run()
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	DebugOut(L"[INFO] END GAME\n");
-
 	HWND hWnd = CreateGameWindow(hInstance, nCmdShow, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	game = CGame::GetInstance();

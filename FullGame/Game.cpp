@@ -4,8 +4,8 @@
 #include "Game.h"
 #include "Utils.h"
 
-#include "PlayScence.h"
 #include "Map.h"
+#include "Animations.h"
 
 CGame * CGame::__instance = NULL;
 
@@ -59,6 +59,9 @@ void CGame::Init(HWND hWnd)
 	D3DXCreateSprite(d3ddv, &spriteHandler);
 
 	OutputDebugString(L"[INFO] InitGame done;\n");
+	
+	// init params
+
 }
 
 /*
@@ -362,14 +365,14 @@ void CGame::_ParseSection_SETTINGS(string line)
 
 void CGame::_ParseSection_SCENES(string line)
 {
-	vector<string> tokens = split(line);
+	/*vector<string> tokens = split(line);
 
 	if (tokens.size() < 2) return;
 	int id = atoi(tokens[0].c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[1]);
 
 	LPSCENE scene = new CPlayScene(id, path);
-	scenes[id] = scene;
+	scenes[id] = scene;*/
 }
 
 /*
@@ -427,4 +430,9 @@ void CGame::SwitchScene(int scene_id)
 	LPSCENE s = scenes[scene_id];
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
 	s->Load();	
+}
+
+// new version
+void CGame::display() {
+
 }

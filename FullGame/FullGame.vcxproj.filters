@@ -20,9 +20,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
-    <ClCompile Include="PlayScence.cpp">
-      <Filter>GameManagement\Screen</Filter>
-    </ClCompile>
     <ClCompile Include="Scence.cpp">
       <Filter>GameManagement\Screen</Filter>
     </ClCompile>
@@ -59,6 +56,9 @@
     <ClCompile Include="Loader.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="CastlevaniaScreen.cpp">
+      <Filter>GameManagement\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -78,9 +78,6 @@
     </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>GameManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayScence.h">
-      <Filter>GameManagement\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Scence.h">
       <Filter>GameManagement\Screen</Filter>
@@ -120,6 +117,9 @@
     </ClInclude>
     <ClInclude Include="Define.h">
       <Filter>Define</Filter>
+    </ClInclude>
+    <ClInclude Include="CastlevaniaScreen.h">
+      <Filter>GameManagement\Screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

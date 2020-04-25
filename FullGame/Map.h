@@ -10,24 +10,24 @@
 
 using namespace std;
 
+const int maxHeight = 60;
 
 class Map
 {
 public:
 	Map();
+	Map(int mapType);
 	~Map();
 
-	int scene;
 
-	int width;
-	int height;
-	int col;
-	int row;
-	int numCol;
-	int numRow;
-	int listTile[100][100];
+private:
+	int numRows, numcols; 
+	int cellHeight, cellWidth;
+	
+	// cell type
+	int cellTypes[maxHeight][maxHeight];
 
-	RECT GetSourceRect(int index);
+public:
 	void LoadMap(const char* filepath);
 	void DrawMap();
 
