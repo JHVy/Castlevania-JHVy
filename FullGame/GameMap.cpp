@@ -9,25 +9,18 @@ GameMap::GameMap() {
 	this->numRows = 12;
 }
 
-GameMap::GameMap(int _numCols, int _numRows)
-{
-	this->numCols = _numCols;
-	this->numRows = _numRows;
-}
-
-
 GameMap::~GameMap()
 {
 }
 
-void GameMap::LoadMap(string filepath) {
+void GameMap::LoadMap(string filepath, int _numCols, int _numRows) {
 	ifstream inFile;
 	inFile.open(filepath);
 
 
-	for (int i = 0; i < numRows; i++)
+	for (int i = 0; i < _numRows; i++)
 	{
-		for (int j = 0; j < numCols; j++)
+		for (int j = 0; j < _numCols; j++)
 		{
 			inFile >> cellTypes[i][j];
 		}
@@ -36,7 +29,7 @@ void GameMap::LoadMap(string filepath) {
 
 int GameMap::getTitle(int x, int y)
 {
-	return this->cellTypes[x][y];
+	return cellTypes[x][y];
 }
 
 
@@ -67,10 +60,10 @@ void GameMap::DrawMap(float cam_x, float cam_y) {
 		}
 	}
 	/*if (_scene == 0)
-	{
+	{*/
 		for (int i = (int)cam_x / TILE_SIZE; i <= (int)(cam_x + SCREEN_WIDTH) / BRICK_SIZE; i++)
 			CSprites::GetInstance()->Get(9999)->Draw(i * BRICK_SIZE, 360);
-	}*/
+	//}
 }
 
 //RECT Map::GetSourceRect(int _index)

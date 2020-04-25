@@ -20,6 +20,12 @@ public:
 	CSprite();
 
 	void Draw(float x, float y, int alpha = 255);
+	void DrawFlipX(float x, float y, int alpha);
+
+	void DrawCam(float x, float y, int alpha = 255);
+	int getHeight() { return bottom - top; }
+	int getwidth() { return right - left; }
+	void load(std::ifstream& inFile);
 
 	int getID() { return id; }
 };

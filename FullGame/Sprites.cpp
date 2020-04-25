@@ -11,7 +11,6 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEX
 	this->bottom = bottom;
 	this->texture = tex;
 }
-
 CSprite::CSprite()
 {
 	this->id = 0;
@@ -36,7 +35,51 @@ void CSprite::Draw(float x, float y, int alpha)
 	CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, alpha);
 }
 
+void CSprite::DrawFlipX(float x, float y, int alpha) {
+	LPD3DXSPRITE spriteHandler = CGame::GetInstance()->GetSpriteHandler();
 
+	D3DXMATRIX oldMt;
+	spriteHandler->GetTransform(&oldMt);
+
+	D3DXMATRIX newMt;
+
+	D3DXVECTOR2 top_left = D3DXVECTOR2(x, y);
+
+	D3DXVECTOR2 rotate = D3DXVECTOR2(-1, 1);
+
+	D3DXMatrixTransformation2D(&newMt, &top_left, 0.0f, &rotate, NULL, 0.0f, NULL);
+	D3DXMATRIX finalMt = newMt * oldMt;
+
+	spriteHandler->SetTransform(&finalMt);
+
+	x -= getwidth();
+
+	this->DrawCam(x, y, alpha);
+
+	spriteHandler->SetTransform(&oldMt);
+}
+
+void CSprite::DrawCam(float x, float y, int alpha)
+{
+	//CGame* game = CGame::GetInstance();
+	CGame::GetInstance()->DrawFlipX(x, y, texture, left, top, right, bottom, alpha);
+}
+
+void CSprite::load(std::ifstream& inFile)
+{
+	string garbage;
+	int idTexture;
+	inFile >> garbage >> id;
+	inFile >> garbage >> left;
+	inFile >> garbage >> top;
+	inFile >> garbage >> right;
+	inFile >> garbage >> bottom;
+	inFile >> garbage >> idTexture;
+	CTextures* textures = CTextures::GetInstance();
+	texture = textures->Get(idTexture);
+}
+
+// sprites
 void CSprites::Add(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex)
 {
 	LPSPRITE s = new CSprite(id, left, top, right, bottom, tex);
