@@ -129,8 +129,9 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="CastlevaniaScreen.cpp" />
     <ClCompile Include="CSimon.cpp" />
+    <ClCompile Include="Define.cpp" />
     <ClCompile Include="Loader.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Utils.cpp" />
@@ -154,7 +155,7 @@
     <ClInclude Include="CSimon.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Loader.h" />
-    <ClInclude Include="Map.h" />
+    <ClInclude Include="GameMap.h" />
     <ClInclude Include="Koopas.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="Utils.h" />

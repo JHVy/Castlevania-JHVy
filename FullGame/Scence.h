@@ -1,17 +1,20 @@
 #pragma once
 
+#include <cstring>
+#include <string>
 #include <d3dx9.h>
 #include "KeyEventHandler.h"
+
+using namespace std;
 
 class CScene
 {
 protected:
 	CKeyEventHandler * key_handler;
-	int id;
-	LPCWSTR sceneFilePath;
+	string sceneFilePath;
 
 public: 
-	CScene(int id, LPCWSTR filePath);
+	CScene(string filepath);
 
 	CKeyEventHandler * GetKeyEventHandler() { return key_handler; }
 	virtual void Load() = 0;

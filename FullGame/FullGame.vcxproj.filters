@@ -17,9 +17,6 @@
     <ClCompile Include="CSimon.cpp">
       <Filter>GameObject\Character</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>GameManagement</Filter>
-    </ClCompile>
     <ClCompile Include="Scence.cpp">
       <Filter>GameManagement\Screen</Filter>
     </ClCompile>
@@ -59,6 +56,12 @@
     <ClCompile Include="CastlevaniaScreen.cpp">
       <Filter>GameManagement\Screen</Filter>
     </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
+    <ClCompile Include="Define.cpp">
+      <Filter>Define</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -75,9 +78,6 @@
     </ClInclude>
     <ClInclude Include="CSimon.h">
       <Filter>GameObject\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>GameManagement</Filter>
     </ClInclude>
     <ClInclude Include="Scence.h">
       <Filter>GameManagement\Screen</Filter>
@@ -120,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="CastlevaniaScreen.h">
       <Filter>GameManagement\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

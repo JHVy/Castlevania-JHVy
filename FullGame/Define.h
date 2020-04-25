@@ -78,8 +78,6 @@ using namespace std;
 
 #define NUMBER_ERROR 2.0f
 
-D3DCOLOR BACKGROUND_COLOR = BACKGROUND_COLOR_DEFAULT;
-
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(ptr) \

@@ -1,8 +1,12 @@
-#pragma once
+#ifndef __GAMEMAP_H__
+
+#define __GAMEMAP_H__
+
+
 #include <string>
 #include <vector>
 #include "Textures.h"
-#include "Game.h"
+#include "Define.h"
 
 #define SCREEN_WIDTH 520
 #define SCREEN_HEIGHT 460
@@ -12,12 +16,12 @@ using namespace std;
 
 const int maxHeight = 60;
 
-class Map
+class GameMap
 {
 public:
-	Map();
-	Map(int mapType);
-	~Map();
+	GameMap();
+	GameMap(int mapType);
+	~GameMap();
 
 
 private:
@@ -28,8 +32,9 @@ private:
 	int cellTypes[maxHeight][maxHeight];
 
 public:
-	void LoadMap(const char* filepath);
+	void LoadMap(string filepath);
 	void DrawMap();
 
 };
+#endif // !__GAMEMAP_H__
 

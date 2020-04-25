@@ -1,21 +1,29 @@
-#include "Map.h"
+#include "GameMap.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 
-Map::Map() {
+GameMap::GameMap() {
 
 }
 
-Map::Map(int mapType)
+GameMap::GameMap(int mapType)
 {
 	CTextures* textures = CTextures::GetInstance();
 	textures->Add(ID_TEX_MAP1, L"textures\\Level1Entrance.png", D3DCOLOR_XRGB(255, 0, 255));
 }
 
 
-Map::~Map()
+GameMap::~GameMap()
 {
+}
+
+void GameMap::LoadMap(string filepath) {
+
+}
+
+void GameMap::DrawMap() {
+
 }
 
 //RECT Map::GetSourceRect(int _index)

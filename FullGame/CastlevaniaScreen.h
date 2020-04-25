@@ -1,15 +1,20 @@
-#pragma once
+#ifndef __CASTLEVANIASCREEN_H__
 
+#define __CASTLEVANIASCREEN_H__
+
+#include "GameMap.h"
 #include "Scence.h"
-#include "Map.h"
+#include <string>
+#include "KeyEventHandler.h"
+#include "Textures.h"
+#include "Define.h"
 
 class CastlevaniaScreen: public CScene
 {
+	GameMap * gameMap;
 public:
-	CastlevaniaScreen(int id, LPCWSTR filePath);
+	CastlevaniaScreen(string filePath);
 
-private:
-	Map *mapOfScreen;
 
 protected:	
 	virtual void Load();
@@ -17,4 +22,6 @@ protected:
 	virtual void Render();
 	virtual void Unload();
 };
+
+#endif // !__CASTLEVANIASCREEN_H__
 

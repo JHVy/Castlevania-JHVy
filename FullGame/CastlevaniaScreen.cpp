@@ -1,10 +1,10 @@
 #include "CastlevaniaScreen.h"
 
-CastlevaniaScreen::CastlevaniaScreen(int id, LPCWSTR filePath)
-	: CScene(id, filePath) 
+CastlevaniaScreen::CastlevaniaScreen( string filePath)
+	: CScene(filePath) 
 {
 
-	this->mapOfScreen = new Map();
+	this->gameMap = new GameMap();
 }
 
 void CastlevaniaScreen::Load() {

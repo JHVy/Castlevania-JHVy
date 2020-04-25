@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "Utils.h"
 
-#include "Map.h"
+#include "GameMap.h"
 #include "Animations.h"
 
 CGame * CGame::__instance = NULL;
@@ -365,14 +365,9 @@ void CGame::_ParseSection_SETTINGS(string line)
 
 void CGame::_ParseSection_SCENES(string line)
 {
-	/*vector<string> tokens = split(line);
-
-	if (tokens.size() < 2) return;
-	int id = atoi(tokens[0].c_str());
-	LPCWSTR path = ToLPCWSTR(tokens[1]);
-
-	LPSCENE scene = new CPlayScene(id, path);
-	scenes[id] = scene;*/
+	// load screen
+	LPSCENE screen = new CastlevaniaScreen("texture/map.txt");
+	this->screens[1] = screen;
 }
 
 /*
@@ -420,14 +415,14 @@ void CGame::SwitchScene(int scene_id)
 {
 	DebugOut(L"[INFO] Switching to scene %d\n", scene_id);
 
-	scenes[current_scene]->Unload();;
+	this->screens[current_scene]->Unload();;
 
 	CTextures::GetInstance()->Clear();
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();
 
 	current_scene = scene_id;
-	LPSCENE s = scenes[scene_id];
+	LPSCENE s = this->screens[scene_id];
 	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
 	s->Load();	
 }

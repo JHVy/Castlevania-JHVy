@@ -25,7 +25,7 @@
 #include "Goomba.h"
 
 
-#include "Map.h"
+#include "GameMap.h"
 
 // loader utils
 #include "Loader.h"
@@ -34,7 +34,6 @@
 
 
 CGame* game;
-Map* map;
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

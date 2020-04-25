@@ -11,6 +11,7 @@
 #include <dinput.h>
 
 #include "Scence.h"
+#include "CastlevaniaScreen.h"
 
 using namespace std;
 
@@ -41,7 +42,7 @@ class CGame
 	int screen_width;
 	int screen_height; 
 
-	unordered_map<int, LPSCENE> scenes;
+	unordered_map<int, LPSCENE> screens;
 	int current_scene; 
 
 	void _ParseSection_SETTINGS(string line);
@@ -61,7 +62,7 @@ public:
 	void ProcessKeyboard();
 
 	void Load(LPCWSTR gameFile);
-	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
+	LPSCENE GetCurrentScene() { return this->screens[current_scene]; }
 	void SwitchScene(int scene_id);
 
 	int GetScreenWidth() { return screen_width; }
