@@ -17,8 +17,9 @@ class CSprite
 	LPDIRECT3DTEXTURE9 texture;
 public: 
 	CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex);
+	CSprite();
 
-	void Draw(float x, float y, int alpha = 255, int isFlip=-1);
+	void Draw(float x, float y, int alpha = 255);
 
 	int getID() { return id; }
 };

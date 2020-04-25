@@ -366,47 +366,50 @@ void CGame::_ParseSection_SETTINGS(string line)
 void CGame::_ParseSection_SCENES(string line)
 {
 	// load screen
-	LPSCENE screen = new CastlevaniaScreen("texture/map.txt");
-	this->screens[1] = screen;
+	
 }
 
 /*
 	Load game campaign file and load/initiate first scene
 */
-void CGame::Load(LPCWSTR gameFile)
+void CGame::Load()
 {
 	
 
-	DebugOut(L"[INFO] Start loading game file : %s\n", gameFile);
+	//DebugOut(L"[INFO] Start loading game file : %s\n", gameFile);
 
-	ifstream f;
-	f.open(gameFile);
-	char str[MAX_GAME_LINE];
+	//ifstream f;
+	//f.open(gameFile);
+	//char str[MAX_GAME_LINE];
 
-	// current resource section flag
-	int section = GAME_FILE_SECTION_UNKNOWN;
+	//// current resource section flag
+	//int section = GAME_FILE_SECTION_UNKNOWN;
 
-	while (f.getline(str, MAX_GAME_LINE))
-	{
-		string line(str);
+	//while (f.getline(str, MAX_GAME_LINE))
+	//{
+	//	string line(str);
 
-		if (line[0] == '#') continue;	// skip comment lines	
+	//	if (line[0] == '#') continue;	// skip comment lines	
 
-		if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
-		if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
+	//	if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
+	//	if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
 
-		//
-		// data section
-		//
-		switch (section)
-		{
-			case GAME_FILE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
-			case GAME_FILE_SECTION_SCENES: _ParseSection_SCENES(line); break;
-		}
-	}
-	f.close();
+	//	//
+	//	// data section
+	//	//
+	//	switch (section)
+	//	{
+	//		case GAME_FILE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
+	//		case GAME_FILE_SECTION_SCENES: _ParseSection_SCENES(line); break;
+	//	}
+	//}
+	//f.close();
 
-	DebugOut(L"[INFO] Loading game file : %s has been loaded successfully\n",gameFile);
+	//DebugOut(L"[INFO] Loading game file : %s has been loaded successfully\n",gameFile);
+
+	LPSCENE screen = new CastlevaniaScreen("");
+	this->screens[1] = screen;
+	this->current_scene = 1;
 
 	SwitchScene(current_scene);
 }
@@ -429,5 +432,6 @@ void CGame::SwitchScene(int scene_id)
 
 // new version
 void CGame::display() {
-
+	// render screen
+	this->screens[this->current_scene]->Render();
 }

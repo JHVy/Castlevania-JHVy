@@ -12,6 +12,16 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEX
 	this->texture = tex;
 }
 
+CSprite::CSprite()
+{
+	this->id = 0;
+	this->left = 0;
+	this->top = 0;
+	this->right = 0;
+	this->bottom = 0;
+	this->texture = NULL;
+}
+
 CSprites * CSprites::__instance = NULL;
 
 CSprites *CSprites::GetInstance()
@@ -20,20 +30,10 @@ CSprites *CSprites::GetInstance()
 	return __instance;
 }
 
-void CSprite::Draw(float x, float y, int alpha, int isFlip)
+void CSprite::Draw(float x, float y, int alpha)
 {
-	CGame * game = CGame::GetInstance();
-
-	// DebugOut(L"[DRAW] Flip: %d \n", isFlip);
-
-	if (isFlip == 1)
-	{
-		game->Draw(x, y, texture, left, top, right, bottom, alpha);
-	}
-	else
-	{
-		game->DrawFlipX(x + 15 ,y , texture, left, top, right, bottom, alpha); // khi lật thì nõ sẽ vẽ đối xứng, nên phải trừ đi width của simon để nó vễ đúng position ban đầu. 
-	}
+	//CGame* game = CGame::GetInstance();
+	CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, alpha);
 }
 
 

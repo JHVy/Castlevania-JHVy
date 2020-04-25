@@ -40,7 +40,7 @@ void CAnimation::Render(float x, float y, int alpha, int isFlip)
 	}
 
 	//DebugOut(L"[DRAW] position object render animation: %f, %f, \n", x, y);
-	frames[currentFrame]->GetSprite()->Draw(x, y, alpha, isFlip);
+	frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
 }
 
 CAnimations * CAnimations::__instance = NULL;

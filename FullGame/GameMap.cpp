@@ -1,16 +1,18 @@
 #include "GameMap.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "fstream"
 
 
 GameMap::GameMap() {
-
+	this->numCols = 88;
+	this->numRows = 12;
 }
 
-GameMap::GameMap(int mapType)
+GameMap::GameMap(int _numCols, int _numRows)
 {
-	CTextures* textures = CTextures::GetInstance();
-	textures->Add(ID_TEX_MAP1, L"textures\\Level1Entrance.png", D3DCOLOR_XRGB(255, 0, 255));
+	this->numCols = _numCols;
+	this->numRows = _numRows;
 }
 
 
@@ -19,11 +21,56 @@ GameMap::~GameMap()
 }
 
 void GameMap::LoadMap(string filepath) {
+	ifstream inFile;
+	inFile.open(filepath);
 
+
+	for (int i = 0; i < numRows; i++)
+	{
+		for (int j = 0; j < numCols; j++)
+		{
+			inFile >> cellTypes[i][j];
+		}
+	}
 }
 
-void GameMap::DrawMap() {
+int GameMap::getTitle(int x, int y)
+{
+	return this->cellTypes[x][y];
+}
 
+
+void GameMap::DrawMap(float cam_x, float cam_y) {
+	if (cam_y == 0)
+	{
+		for (int i = (int)cam_y / TILE_SIZE; i < (int)(cam_y + SCREEN_HEIGHT) / TILE_SIZE + 2; i++)
+		{
+			for (int j = (int)cam_x / TILE_SIZE; j < (int)(cam_x + SCREEN_WIDTH) / TILE_SIZE + 3; j++)
+			{
+				if (!(i < 0 || j >= numCols))
+					CSprites::GetInstance()->Get(getTitle(i, j))->Draw(TILE_SIZE * j, TILE_SIZE * i + 40);
+			}
+		}
+	}
+	else
+	{
+		for (int i = (int)cam_y / TILE_SIZE; i < 12; i++)
+		{
+			for (int j = (int)cam_x / 64; j < (int)(cam_x + SCREEN_WIDTH) / TILE_SIZE + 3; j++)
+			{
+				if (!(i < 0 || j >= numCols))
+				{
+					CSprites::GetInstance()->Get(getTitle(i, j))->Draw(TILE_SIZE * j, TILE_SIZE * i + 80);
+				}
+
+			}
+		}
+	}
+	/*if (_scene == 0)
+	{
+		for (int i = (int)cam_x / TILE_SIZE; i <= (int)(cam_x + SCREEN_WIDTH) / BRICK_SIZE; i++)
+			CSprites::GetInstance()->Get(9999)->Draw(i * BRICK_SIZE, 360);
+	}*/
 }
 
 //RECT Map::GetSourceRect(int _index)
