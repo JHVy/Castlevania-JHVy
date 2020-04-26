@@ -30,19 +30,19 @@ Simon::Simon() {
 	weapons[eType::HOLLYWATTER] = CHollyWatter::GetInstance();
 	weapons[eType::BOONGMERANG] = CBoongmerang::GetInstance();*/
 
-	AddAnimation(400);		//0. idle left 
-	AddAnimation(401);		//1. walk left
-	AddAnimation(402);		//2. jump left
-	AddAnimation(403);		//3. sit left
-	AddAnimation(404);		//4. stand attack
-	AddAnimation(405);		//5. sit attack
-	AddAnimation(399);		//6. trans
-	AddAnimation(406);		//7. go up
-	AddAnimation(407);		//8. go down
-	AddAnimation(408);		//9. hurt
-	AddAnimation(409);		//10. idle up
-	AddAnimation(410);		//11. idle down
-	AddAnimation(411);		//12. die
+	//AddAnimation(400);		//0. idle left 
+	//AddAnimation(401);		//1. walk left
+	//AddAnimation(402);		//2. jump left
+	//AddAnimation(403);		//3. sit left
+	//AddAnimation(404);		//4. stand attack
+	//AddAnimation(405);		//5. sit attack
+	//AddAnimation(399);		//6. trans
+	//AddAnimation(406);		//7. go up
+	//AddAnimation(407);		//8. go down
+	//AddAnimation(408);		//9. hurt
+	//AddAnimation(409);		//10. idle up
+	//AddAnimation(410);		//11. idle down
+	//AddAnimation(411);		//12. die
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -146,7 +146,16 @@ void Simon::Render()
 	{
 		alpha = (GetTickCount() - start_disappear) / 1000 * 50;
 	}
-	animations[id]->Render(x, y, nx, alpha);
+	
+	id = SIMON_ANI_WALKING;
+	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
+	ani->Render(x, y, nx, alpha);
+
+	//if (animations[id] != NULL) {
+	//	//animations[id]->Render(x, y, nx, alpha);
+	//	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
+	//	ani->Render(x, y, nx, alpha);
+	//}
 	//RenderBoundingBox();
 	/*if (isFall)
 	{

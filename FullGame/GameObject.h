@@ -68,7 +68,7 @@ public:
 	int _type;
 	int _energy;
 
-	vector<LPANIMATION> animations;
+	unordered_map<int, LPANIMATION> animations;
 	LPANIMATION animation;
 
 public: 

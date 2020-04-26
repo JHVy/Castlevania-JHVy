@@ -374,39 +374,6 @@ void CGame::_ParseSection_SCENES(string line)
 */
 void CGame::Load()
 {
-	
-
-	//DebugOut(L"[INFO] Start loading game file : %s\n", gameFile);
-
-	//ifstream f;
-	//f.open(gameFile);
-	//char str[MAX_GAME_LINE];
-
-	//// current resource section flag
-	//int section = GAME_FILE_SECTION_UNKNOWN;
-
-	//while (f.getline(str, MAX_GAME_LINE))
-	//{
-	//	string line(str);
-
-	//	if (line[0] == '#') continue;	// skip comment lines	
-
-	//	if (line == "[SETTINGS]") { section = GAME_FILE_SECTION_SETTINGS; continue; }
-	//	if (line == "[SCENES]") { section = GAME_FILE_SECTION_SCENES; continue; }
-
-	//	//
-	//	// data section
-	//	//
-	//	switch (section)
-	//	{
-	//		case GAME_FILE_SECTION_SETTINGS: _ParseSection_SETTINGS(line); break;
-	//		case GAME_FILE_SECTION_SCENES: _ParseSection_SCENES(line); break;
-	//	}
-	//}
-	//f.close();
-
-	//DebugOut(L"[INFO] Loading game file : %s has been loaded successfully\n",gameFile);
-
 	LPSCENE screen = new CastlevaniaScreen("");
 	this->screens[1] = screen;
 	this->current_scene = 1;

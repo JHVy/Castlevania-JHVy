@@ -139,7 +139,7 @@ void CGameObject::RenderBoundingBox()
 void CGameObject::AddAnimation(int aniId)
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(aniId);
-	animations.push_back(ani);
+	animations[aniId] = ani;
 }
 
 CGameObject::~CGameObject()

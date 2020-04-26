@@ -9,6 +9,7 @@
 #include "Textures.h"
 #include "Define.h"
 #include "Simon.h"
+#include "Loader.h"
 
 class CastlevaniaScreen: public CScene
 {
