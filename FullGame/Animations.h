@@ -34,7 +34,6 @@ public:
 	int GetCurrentFrame() { return currentFrame; }
 	void Render(float x, float y, int trend, int alpha = 255);
 	void Render(float x, float y, int alpha = 255);
-	int GetCurrentFrame() { return currentFrame; }
 	void ResetFrame() { lastFrameTime = -1; currentFrame = -1; }
 	int GetLastFrame() { return frames.size() - 1; }
 	void SetFrame(int n) { if (n > -1 && n <= GetLastFrame()) currentFrame = n; }

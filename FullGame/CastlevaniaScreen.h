@@ -8,10 +8,14 @@
 #include "KeyEventHandler.h"
 #include "Textures.h"
 #include "Define.h"
+#include "Simon.h"
 
 class CastlevaniaScreen: public CScene
 {
+protected:
 	GameMap * gameMap;
+	Simon* simon;
+
 public:
 	CastlevaniaScreen(string filePath);
 

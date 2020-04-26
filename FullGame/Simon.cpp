@@ -1,8 +1,8 @@
 #include "Simon.h"
 
 Simon::Simon() {
-	VampireKiller* rob = new VampireKiller();
-	weapons[eType::VAMPIREKILLER] = rob;
+	//VampireKiller* rob = new VampireKiller();
+	//weapons[eType::VAMPIREKILLER] = rob;
 	untouchable = 0;
 	trans_start = 0;
 	_heart = 5;
@@ -45,7 +45,7 @@ Simon::Simon() {
 	AddAnimation(411);		//12. die
 }
 
-void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL) {
+void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 }
 
