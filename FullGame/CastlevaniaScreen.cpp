@@ -31,7 +31,7 @@ void CastlevaniaScreen::Render() {
 
 	float x, y;
 	this->simon->GetPosition(x, y);
-	this->simon->SetPosition(x + 1, y);
+	this->simon->SetPosition(x + 1.5, y);
 
 }
 

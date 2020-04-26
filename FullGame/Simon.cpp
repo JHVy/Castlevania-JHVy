@@ -1,8 +1,9 @@
 #include "Simon.h"
 
 Simon::Simon() {
-	//VampireKiller* rob = new VampireKiller();
-	//weapons[eType::VAMPIREKILLER] = rob;
+	VampireKiller* rob = new VampireKiller();
+	vampireKiller = rob;
+
 	untouchable = 0;
 	trans_start = 0;
 	_heart = 5;
@@ -53,6 +54,8 @@ void Simon::Render()
  {
 	int id;
 
+	state = SIMON_STATE_SIT_ATTACK;
+
 	if (isAutoGo)
 	{
 		//if (CScene::GetInstance()->IsTranScene())
@@ -86,12 +89,20 @@ void Simon::Render()
 	else if (state == SIMON_STATE_SIT_ATTACK)
 	{
 		id = SIMON_ANI_SITTING_ATTACKING;
-		weapons[eType::VAMPIREKILLER]->Render();
+
+		if (vampireKiller != NULL) {
+			vampireKiller->SetPosition(x, y, state);
+			vampireKiller->Render();
+		}
 	}
 	else if (state == SIMON_STATE_STAND_ATTACK)
 	{
 		id = SIMON_ANI_STANDING_ATTACKING;
-		weapons[eType::VAMPIREKILLER]->Render();
+		
+		if (vampireKiller != NULL) {
+			vampireKiller->SetPosition(x, y, state);
+			vampireKiller->Render();
+		}
 
 	}
 	/*else if (state == SIMON_STATE_GO_UP && (isCanOnStair == 1 || isOnStair))
@@ -147,15 +158,10 @@ void Simon::Render()
 		alpha = (GetTickCount() - start_disappear) / 1000 * 50;
 	}
 	
-	id = SIMON_ANI_WALKING;
+	//id = SIMON_ANI_STANDING_ATTACKING;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 	ani->Render(x, y, nx, alpha);
 
-	//if (animations[id] != NULL) {
-	//	//animations[id]->Render(x, y, nx, alpha);
-	//	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
-	//	ani->Render(x, y, nx, alpha);
-	//}
 	//RenderBoundingBox();
 	/*if (isFall)
 	{

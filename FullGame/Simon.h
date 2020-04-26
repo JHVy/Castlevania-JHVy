@@ -103,6 +103,9 @@ protected:
 	bool isUnder;
 	float start_x, start_y;
 
+	// weapon 
+	VampireKiller* vampireKiller;
+
 public:
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);

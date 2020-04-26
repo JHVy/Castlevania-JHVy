@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+class VampireKiller;
+
 class Weapon: public CGameObject
 {
 protected:
