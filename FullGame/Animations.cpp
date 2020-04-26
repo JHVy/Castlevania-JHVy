@@ -20,7 +20,7 @@ void CAnimation::Add(int spriteId, DWORD time)
 }
 
 // NOTE: sometimes Animation object is NULL ??? HOW ??? 
-void CAnimation::Render(float x, float y, int alpha, int isFlip)
+void CAnimation::Render(float x, float y, int trend, int alpha)
 {
 	DWORD now = GetTickCount();
 	if (currentFrame == -1)
@@ -36,10 +36,37 @@ void CAnimation::Render(float x, float y, int alpha, int isFlip)
 			currentFrame++;
 			lastFrameTime = now;
 			if (currentFrame == frames.size()) currentFrame = 0;
+			//DebugOut(L"now: %d, lastFrameTime: %d, t: %d\n", now, lastFrameTime, t);
 		}
+
+	}
+	if (trend < 0)
+		frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
+	else
+		frames[currentFrame]->GetSprite()->DrawFlipX(x, y, alpha);
+}
+
+void CAnimation::Render(float x, float y, int alpha)
+{
+	DWORD now = GetTickCount();
+	if (currentFrame == -1)
+	{
+		currentFrame = 0;
+		lastFrameTime = now;
+	}
+	else
+	{
+		DWORD t = frames[currentFrame]->GetTime();
+		if (now - lastFrameTime > t)
+		{
+			currentFrame++;
+			lastFrameTime = now;
+			if (currentFrame == frames.size()) currentFrame = 0;
+			//DebugOut(L"now: %d, lastFrameTime: %d, t: %d\n", now, lastFrameTime, t);
+		}
+
 	}
 
-	//DebugOut(L"[DRAW] position object render animation: %f, %f, \n", x, y);
 	frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
 }
 

@@ -20,11 +20,6 @@
 #include "GameObject.h"
 #include "Textures.h"
 
-#include "CSimon.h"
-#include "Brick.h"
-#include "Goomba.h"
-
-
 #include "GameMap.h"
 
 // loader utils

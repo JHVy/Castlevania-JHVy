@@ -8,11 +8,15 @@
 #include "GameObject.h"
 #include "Sprites.h"
 
-CGameObject::CGameObject()
+CGameObject::CGameObject(float _x = 0, float _y = 0, int type = 0)
 {
-	x = y = 0;
+	x = _x;
+	y = _y;
 	vx = vy = 0;
-	nx = 1;	
+	nx = 1;
+	state = 1;
+	_type = type;
+	_energy = 1;
 }
 
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
@@ -132,8 +136,16 @@ void CGameObject::RenderBoundingBox()
 	CGame::GetInstance()->Draw(x, y, bbox, rect.left, rect.top, rect.right, rect.bottom, 32);
 }
 
+void CGameObject::AddAnimation(int aniId)
+{
+	LPANIMATION ani = CAnimations::GetInstance()->Get(aniId);
+	animations.push_back(ani);
+}
 
 CGameObject::~CGameObject()
 {
-
+	if (animation != NULL)
+		delete animation;
+	animation = NULL;
+	animations.clear();
 }

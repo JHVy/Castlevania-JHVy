@@ -14,29 +14,14 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
-    <ClCompile Include="CSimon.cpp">
-      <Filter>GameObject\Character</Filter>
-    </ClCompile>
     <ClCompile Include="Scence.cpp">
       <Filter>GameManagement\Screen</Filter>
     </ClCompile>
     <ClCompile Include="Textures.cpp">
       <Filter>TextureManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Brick.cpp">
-      <Filter>GameObject\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>GameObject\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Koopas.cpp">
-      <Filter>GameObject\Character</Filter>
-    </ClCompile>
     <ClCompile Include="Utils.cpp">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>GameObject\Character</Filter>
     </ClCompile>
     <ClCompile Include="XML\tinyxmlparser.cpp">
       <Filter>TextureManagement\XML</Filter>
@@ -62,6 +47,15 @@
     <ClCompile Include="Define.cpp">
       <Filter>Define</Filter>
     </ClCompile>
+    <ClCompile Include="Simon.cpp">
+      <Filter>GameObject\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="VampireKiller.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -76,9 +70,6 @@
     <ClInclude Include="Game.h">
       <Filter>GameManagement</Filter>
     </ClInclude>
-    <ClInclude Include="CSimon.h">
-      <Filter>GameObject\Character</Filter>
-    </ClInclude>
     <ClInclude Include="Scence.h">
       <Filter>GameManagement\Screen</Filter>
     </ClInclude>
@@ -88,20 +79,8 @@
     <ClInclude Include="KeyEventHandler.h">
       <Filter>GameManagement</Filter>
     </ClInclude>
-    <ClInclude Include="Brick.h">
-      <Filter>GameObject\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Koopas.h">
-      <Filter>GameObject\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>GameObject\Character</Filter>
-    </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>GameObject\Character</Filter>
     </ClInclude>
     <ClInclude Include="XML\tinyxml.h">
       <Filter>TextureManagement\XML</Filter>
@@ -123,6 +102,15 @@
     </ClInclude>
     <ClInclude Include="GameMap.h">
       <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="Simon.h">
+      <Filter>GameObject\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="VampireKiller.h">
+      <Filter>GameObject\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +140,9 @@
     </Filter>
     <Filter Include="Define">
       <UniqueIdentifier>{a7f1e4f1-ae3a-45e7-84b4-d476b3abaa86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Weapon">
+      <UniqueIdentifier>{759d4f2a-801a-44d2-9224-f789e632d908}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

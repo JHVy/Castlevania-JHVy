@@ -21,7 +21,7 @@ void CastlevaniaScreen::Update() {
 }
 
 void CastlevaniaScreen::Render() {
-	this->gameMap->DrawMap(40, 0);
+	this->gameMap->DrawMap(0, 0);
 
 }
 

@@ -44,13 +44,17 @@ struct CCollisionEvent
 class CGameObject
 {
 public:
+	int id;
 
+	// toa do
 	float x; 
 	float y;
 
+	// quang duong di chuyen
 	float dx;	// dx = vx*dt
 	float dy;	// dy = vy*dt
 
+	// van toc
 	float vx;
 	float vy;
 
@@ -58,9 +62,14 @@ public:
 
 	int state;
 
+	// thoi gian di chuyen
 	DWORD dt; 
 
-	LPANIMATION_SET animation_set;
+	int _type;
+	int _energy;
+
+	vector<LPANIMATION> animations;
+	LPANIMATION animation;
 
 public: 
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
@@ -72,11 +81,13 @@ public:
 	void SetTrend(int nx) { this->nx = nx; }
 	int GetTrend() { return nx; }
 
+	int GetType() { return _type; }
+
 	int GetState() { return this->state; }
 
 	void RenderBoundingBox();
 
-	void SetAnimationSet(LPANIMATION_SET ani_set) { animation_set = ani_set; }
+	//void SetAnimationSet(LPANIMATION_SET ani_set) { animation_set = ani_set; }
 
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);
@@ -90,13 +101,21 @@ public:
 		float &rdx, 
 		float &rdy);
 
-	CGameObject();
+	CGameObject(float _x = 0, float _y = 0, int type = 0);
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
 
+	void AddAnimation(int aniId);
+
+	int GetID() { return id; }
+	void SetID(int id) { this->id = id; }
+
+	int GetEnergy() { return _energy; }
+	virtual void Hurt() { _energy -= 2; }
+	virtual void Go() {}
 
 	~CGameObject();
 };
