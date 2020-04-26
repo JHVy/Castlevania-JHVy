@@ -19,7 +19,7 @@ void CastlevaniaScreen::Load() {
 	this->gameMap->setId(1);
 	this->gameMap->LoadMap("textures/map.txt", 24, 12);
 
-	this->simon->SetPosition(80, 300);
+	this->simon->SetPosition(200, 300);
 	
 }
 

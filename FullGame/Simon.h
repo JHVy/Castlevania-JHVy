@@ -111,8 +111,17 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void Render();
 
+	// check state
+	bool IsAttacking() { if (attack_start > 0) return true; return false; }
+
 	void SetState(int state);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+
+private:
+	// helper
+	CAnimation* getAnimation(int id) {
+		return CAnimations::GetInstance()->Get(id);
+	}
 };
 

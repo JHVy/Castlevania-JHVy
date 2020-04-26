@@ -18,6 +18,6 @@ public:
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj);
 
-	CAnimation* GetAnimation() { return animation; }
+	CAnimation* GetAnimation() { return CAnimations::GetInstance()->Get(600); }
 };
 

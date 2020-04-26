@@ -25,7 +25,6 @@ public:
 
 private:
 	LPDIRECTINPUTDEVICE8 didv;
-
 	BYTE  keyStates[256]; // DirectInput keyboard state buffer
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 

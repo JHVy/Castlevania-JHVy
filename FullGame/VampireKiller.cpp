@@ -52,6 +52,7 @@ void VampireKiller::Render()
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
 	ani->Render(x, y, nx, 255);
+	y += 15;
 
 	/*y += 15;
 	if (ani->GetCurrentFrame() < 2)

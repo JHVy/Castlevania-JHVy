@@ -20,11 +20,12 @@ void CastkeKeyEventHandler::OnKeyDown(int KeyCode)
 			break;
 
 		case DIK_DOWN:
+			simon->SetState(SIMON_STATE_SIT);
 			break;
 
 		case DIK_UP:
-			if (simon->GetState() == SIMON_STATE_SIT)
-				return;
+			/*if (simon->GetState() == SIMON_STATE_SIT)
+				return;*/
 			simon->SetState(SIMON_STATE_GO_UP);
 			break;
 
@@ -63,53 +64,55 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 {
 	Simon* simon = this->castleVaninaScreen->simon;
 
-	/*if (simon->GetState() == SIMON_STATE_SIT_ATTACK || simon->GetState() == SIMON_STATE_STAND_ATTACK)
+	if (simon->GetState() == SIMON_STATE_SIT_ATTACK || simon->GetState() == SIMON_STATE_STAND_ATTACK)
 		return;
-	if (game->IsKeyDown(DIK_Z) && game->IsKeyDown(DIK_DOWN) && !simon->IsAttacking())
+	if (IsKeyDown(DIK_Z) && IsKeyDown(DIK_DOWN) && !simon->IsAttacking())
 	{
 		simon->SetState(SIMON_STATE_SIT_ATTACK);
 	}
-	else if (game->IsKeyDown(DIK_Z) && game->IsKeyDown(DIK_UP) && !simon->IsAttacking())
+	/*else if (IsKeyDown(DIK_Z) && IsKeyDown(DIK_UP) && !simon->IsAttacking())
 	{
 		simon->SetState(SIMON_STATE_ATTACK_DAGGER);
 
-	}
-	else if (game->IsKeyDown(DIK_UP) && game->IsKeyDown(DIK_DOWN))
+	}*/
+	else if (IsKeyDown(DIK_UP) && IsKeyDown(DIK_DOWN))
 	{
 		simon->SetState(SIMON_STATE_SIT);
 	}
-	else  if (game->IsKeyDown(DIK_Z))
+	else  if (IsKeyDown(DIK_Z))
 	{
 		if (simon->GetState() == SIMON_STATE_SIT || simon->GetState() == SIMON_STATE_SIT_ATTACK)
 			simon->SetState(SIMON_STATE_UP);
-		else if ((simon->GetState() == SIMON_STATE_IDLE || simon->GetState() == SIMON_STATE_WALKING_LEFT || simon->GetState() == SIMON_STATE_WALKING_RIGHT) && !simon->IsAttacking())
+		else 
+			if ((simon->GetState() == SIMON_STATE_IDLE || simon->GetState() == SIMON_STATE_WALKING_LEFT || simon->GetState() == SIMON_STATE_WALKING_RIGHT) && !simon->IsAttacking())
 			simon->SetState(SIMON_STATE_STAND_ATTACK);
 	}
-	else if (game->IsKeyDown(DIK_X))
+	else if (IsKeyDown(DIK_X))
 	{
 		simon->SetState(SIMON_STATE_JUMP);
 	}
-	else if (game->IsKeyDown(DIK_DOWN) && game->IsKeyDown(DIK_Z) && !simon->IsAttacking())
+	else if (IsKeyDown(DIK_DOWN) && IsKeyDown(DIK_Z) && !simon->IsAttacking())
 	{
 		simon->SetState(SIMON_STATE_SIT_ATTACK);
 
 
 	}
-	else if (game->IsKeyDown(DIK_DOWN))
+	else if (IsKeyDown(DIK_DOWN))
 	{
 		simon->SetState(SIMON_STATE_GO_DOWN);
 
 	}
-	else if (game->IsKeyDown(DIK_RIGHT))
+	else if (IsKeyDown(DIK_RIGHT))
 	{
 		simon->SetTrend(1);
-		if (simon->IsOnStair()) {
+		/*if (simon->IsOnStair()) {
 			if (simon->GetStairTrend() == 0)
 				simon->SetState(SIMON_STATE_IDLE_UP);
 			else
 				simon->SetState(SIMON_STATE_IDLE_DOWN);
 		}
-		else if (!simon->IsAttacking())
+		else*/ 
+		if (!simon->IsAttacking())
 		{
 			if (simon->GetState() == SIMON_STATE_SIT)
 			{
@@ -119,17 +122,18 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 				simon->SetState(SIMON_STATE_WALKING_RIGHT);
 		}
 	}
-	else if (game->IsKeyDown(DIK_LEFT))
+	else if (IsKeyDown(DIK_LEFT))
 	{
 		simon->SetTrend(-1);
-		if (simon->IsOnStair()) {
+		/*if (simon->IsOnStair()) {
 			if (simon->GetStairTrend() != 0)
 				simon->SetState(SIMON_STATE_IDLE_UP);
 			else
 				simon->SetState(SIMON_STATE_IDLE_DOWN);
 
 		}
-		else if (!simon->IsAttacking())
+		else */
+			if (!simon->IsAttacking())
 		{
 			if (simon->GetState() == SIMON_STATE_SIT)
 			{
@@ -139,23 +143,24 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 				simon->SetState(SIMON_STATE_WALKING_LEFT);
 		}
 	}
-	else if (game->IsKeyDown(DIK_UP))
+	else if (IsKeyDown(DIK_UP))
 	{
 		simon->SetState(SIMON_STATE_GO_UP);
 	}
-	else if (!game->IsKeyDown(DIK_DOWN) && !game->IsKeyDown(DIK_Z)) {
+	else if (!IsKeyDown(DIK_DOWN) && !IsKeyDown(DIK_Z)) {
 
-		if (simon->IsOnStair()) {
+		/*if (simon->IsOnStair()) {
 			if ((simon->GetStairTrend() == 0 && simon->GetNx() == 1) || (simon->GetStairTrend() == 1 && simon->GetNx() == -1))
 				simon->SetState(SIMON_STATE_IDLE_UP);
 			else
 				simon->SetState(SIMON_STATE_IDLE_DOWN);
 		}
-		else if (simon->GetState() == SIMON_STATE_SIT || simon->GetState() == SIMON_STATE_SIT_ATTACK)
+		else*/ 
+			if (simon->GetState() == SIMON_STATE_SIT || simon->GetState() == SIMON_STATE_SIT_ATTACK)
 			simon->SetState(SIMON_STATE_UP);
 		else
 			simon->SetState(SIMON_STATE_IDLE);
-	}*/
+	}
 
 }
 
