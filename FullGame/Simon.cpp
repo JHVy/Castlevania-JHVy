@@ -54,7 +54,7 @@ void Simon::Render()
  {
 	int id;
 
-	state = SIMON_STATE_SIT_ATTACK;
+	//state = SIMON_STATE_SIT_ATTACK;
 
 	if (isAutoGo)
 	{

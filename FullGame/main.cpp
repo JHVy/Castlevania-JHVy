@@ -156,7 +156,7 @@ int Run()
 		{
 			frameStart = now;
 
-			//game->ProcessKeyboard();
+			game->ProcessKeyboard();
 
 			Update(dt);
 			Render();
@@ -179,6 +179,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	game = CGame::GetInstance();
 	game->Init(hWnd);
 	game->InitKeyboard();
+
+	
 
 	game->Load();
 	LoadSpriteResource();

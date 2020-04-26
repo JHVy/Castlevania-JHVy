@@ -6,6 +6,7 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include "fstream"
+#include <dinput.h>
 
 using namespace std;
 

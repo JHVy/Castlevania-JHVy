@@ -107,11 +107,6 @@ void CGame::DrawFlipX(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, in
 
 }
 
-int CGame::IsKeyDown(int KeyCode)
-{
-	return (keyStates[KeyCode] & 0x80) > 0;
-}
-
 void CGame::InitKeyboard()
 {
 	HRESULT
@@ -177,56 +172,15 @@ void CGame::InitKeyboard()
 	}
 
 	DebugOut(L"[INFO] Keyboard has been initialized successfully\n");
+
+	// init keyboard
+	CastlevaniaScreen* scr = this->screens[this->current_scene];
+	this->keyHandler = new CastkeKeyEventHandler(scr, this->didv);
 }
 
 void CGame::ProcessKeyboard()
 {
-	HRESULT hr; 
-
-	// Collect all key states first
-	hr = didv->GetDeviceState(sizeof(keyStates), keyStates);
-	if (FAILED(hr))
-	{
-		// If the keyboard lost focus or was not acquired then try to get control back.
-		if ((hr == DIERR_INPUTLOST) || (hr == DIERR_NOTACQUIRED))
-		{
-			HRESULT h = didv->Acquire();
-			if (h==DI_OK)
-			{ 
-				DebugOut(L"[INFO] Keyboard re-acquired!\n");
-			}
-			else return;
-		}
-		else
-		{
-			//DebugOut(L"[ERROR] DINPUT::GetDeviceState failed. Error: %d\n", hr);
-			return;
-		}
-	}
-
-	keyHandler->KeyState((BYTE *)&keyStates);
-
-
-
-	// Collect all buffered events
-	DWORD dwElements = KEYBOARD_BUFFER_SIZE;
-	hr = didv->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), keyEvents, &dwElements, 0);
-	if (FAILED(hr))
-	{
-		//DebugOut(L"[ERROR] DINPUT::GetDeviceData failed. Error: %d\n", hr);
-		return;
-	}
-
-	// Scan through all buffered events, check if the key is pressed or released
-	for (DWORD i = 0; i < dwElements; i++)
-	{
-		int KeyCode = keyEvents[i].dwOfs;
-		int KeyState = keyEvents[i].dwData;
-		if ((KeyState & 0x80) > 0)
-			keyHandler->OnKeyDown(KeyCode);
-		else
-			keyHandler->OnKeyUp(KeyCode);
-	}
+	this->keyHandler->ProcessKeyBoard();
 }
 
 CGame::~CGame()
@@ -352,29 +306,12 @@ CGame *CGame::GetInstance()
 #define GAME_FILE_SECTION_SETTINGS 1
 #define GAME_FILE_SECTION_SCENES 2
 
-void CGame::_ParseSection_SETTINGS(string line)
-{
-	vector<string> tokens = split(line);
-
-	if (tokens.size() < 2) return;
-	if (tokens[0] == "start")
-		current_scene = atoi(tokens[1].c_str());
-	else
-		DebugOut(L"[ERROR] Unknown game setting %s\n", ToWSTR(tokens[0]).c_str());
-}
-
-void CGame::_ParseSection_SCENES(string line)
-{
-	// load screen
-	
-}
-
 /*
 	Load game campaign file and load/initiate first scene
 */
 void CGame::Load()
 {
-	LPSCENE screen = new CastlevaniaScreen("");
+	CastlevaniaScreen* screen = new CastlevaniaScreen("");
 	this->screens[1] = screen;
 	this->current_scene = 1;
 
@@ -385,16 +322,19 @@ void CGame::SwitchScene(int scene_id)
 {
 	DebugOut(L"[INFO] Switching to scene %d\n", scene_id);
 
-	this->screens[current_scene]->Unload();;
+	this->screens[current_scene]->Unload();
 
 	CTextures::GetInstance()->Clear();
 	CSprites::GetInstance()->Clear();
 	CAnimations::GetInstance()->Clear();
 
 	current_scene = scene_id;
-	LPSCENE s = this->screens[scene_id];
-	CGame::GetInstance()->SetKeyHandler(s->GetKeyEventHandler());
-	s->Load();	
+	CastlevaniaScreen* s = this->screens[scene_id];
+
+	s->Load();
+
+	// init keyboard
+	this->keyHandler->setCastleScreen(s);
 }
 
 // new version

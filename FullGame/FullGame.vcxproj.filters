@@ -56,6 +56,9 @@
     <ClCompile Include="VampireKiller.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="CastkeKeyEventHandler.cpp">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -75,9 +78,6 @@
     </ClInclude>
     <ClInclude Include="Textures.h">
       <Filter>TextureManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>GameManagement</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>Utils</Filter>
@@ -112,6 +112,12 @@
     <ClInclude Include="VampireKiller.h">
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="KeyEventHandler.h">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClInclude>
+    <ClInclude Include="CastkeKeyEventHandler.h">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -143,6 +149,9 @@
     </Filter>
     <Filter Include="GameObject\Weapon">
       <UniqueIdentifier>{759d4f2a-801a-44d2-9224-f789e632d908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManagement\GameControl">
+      <UniqueIdentifier>{e81352aa-dd83-45b5-a957-8463d370d981}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

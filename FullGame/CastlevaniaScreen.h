@@ -15,13 +15,14 @@ class CastlevaniaScreen: public CScene
 {
 protected:
 	GameMap * gameMap;
+
+public:
 	Simon* simon;
 
 public:
 	CastlevaniaScreen(string filePath);
 
-
-protected:	
+public:	
 	virtual void Load();
 	virtual void Update();
 	virtual void Render();
