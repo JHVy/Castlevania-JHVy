@@ -18,17 +18,19 @@ using namespace std;
 class GameMap
 {
 public:
-	GameMap();
+	GameMap(int _id);
 	~GameMap();
 
 
 private:
 	int numRows, numCols; 
+	int id;
 	
 	// cell type
 	int cellTypes[200][200];
 
 public:
+	void setId(int _id) { this->id = _id; }
 	void LoadMap(string filepath, int _numCols, int _numRows);
 	void DrawMap(float cam_x, float cam_y);
 
