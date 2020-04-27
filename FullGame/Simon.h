@@ -3,6 +3,7 @@
 #include "Define.h"
 #include "Weapon.h"
 #include "VampireKiller.h"
+#include "Utils.h"
 
 #define SIMON_WALKING_SPEED		0.12f
 #define SIMON_JUMP_SPEED_Y		0.36f

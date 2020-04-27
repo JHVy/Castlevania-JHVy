@@ -67,6 +67,46 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	{
 		DebugOut(L" X - Key Down");
 		simon->SetState(SIMON_STATE_JUMP);
+		return;
+	}
+
+	if (IsKeyDown(DIK_LEFT))
+	{
+		simon->SetTrend(-1);
+		if (!simon->IsAttacking())
+		{
+			if (simon->GetState() == SIMON_STATE_SIT)
+			{
+				simon->SetState(SIMON_STATE_UP);
+			}
+			else
+				simon->SetState(SIMON_STATE_WALKING_LEFT);
+		}
+		return;
+	}
+
+	if (IsKeyDown(DIK_RIGHT)) {
+		simon->SetTrend(1);
+		if (!simon->IsAttacking())
+		{
+			if (simon->GetState() == SIMON_STATE_SIT)
+			{
+				simon->SetState(SIMON_STATE_UP);
+			}
+			else
+				simon->SetState(SIMON_STATE_WALKING_RIGHT);
+		}
+		return;
+	}
+
+	if (IsKeyDown(DIK_DOWN)) {
+		if (simon->IsAttacking()) {
+			simon->SetState(SIMON_STATE_SIT_ATTACK);
+		}
+		else {
+			simon->SetState(SIMON_STATE_SIT);
+		}
+		return;
 	}
 
 	return;
