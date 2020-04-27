@@ -14,7 +14,7 @@ public:
 	CastlevaniaScreen* castleVaninaScreen;
 
 public:
-	CastkeKeyEventHandler(CastlevaniaScreen* screen, LPDIRECTINPUTDEVICE8 _didv);
+	CastkeKeyEventHandler(CastlevaniaScreen* screen);
 	void setCastleScreen(CastlevaniaScreen* screen) {
 		this->castleVaninaScreen = screen;
 	}
@@ -24,11 +24,13 @@ public:
 	virtual void OnKeyUp(int KeyCode);
 
 private:
-	LPDIRECTINPUTDEVICE8 didv;
+	LPDIRECTINPUT8       di;		// The DirectInput object  
+	LPDIRECTINPUTDEVICE8 didv; // The keyboard device
 	BYTE  keyStates[256]; // DirectInput keyboard state buffer
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 
 public:
+	void InitKeyBoard(HWND hWnd);
 	void ProcessKeyBoard();
 	int IsKeyDown(int KeyCode);
 };

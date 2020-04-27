@@ -38,16 +38,16 @@ Simon::Simon() {
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
-	vx = -1;
+	/*vx = -1;
 	nx = -1;
 
 	if (x < 20) {
 		vx = -1;
 		x = 500;
-	}
+	}*/
 
-	x = x + vx;
-	y = y + vy;
+	x = x + vx * dt;
+	y = y + vy * dt;
 }
 
 void Simon::Render()
@@ -235,7 +235,7 @@ void Simon::SetState(int state)
 			vx = 0;
 			break;
 		case SIMON_STATE_SIT:
-			//y = 272.0f;
+			y = 272.0f;
 			vx = 0;
 			break;
 		case SIMON_STATE_STAND_ATTACK:
