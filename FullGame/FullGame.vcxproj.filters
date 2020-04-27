@@ -14,9 +14,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
-    <ClCompile Include="Scence.cpp">
-      <Filter>GameManagement\Screen</Filter>
-    </ClCompile>
     <ClCompile Include="Textures.cpp">
       <Filter>TextureManagement</Filter>
     </ClCompile>
@@ -72,9 +69,6 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>GameManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Scence.h">
-      <Filter>GameManagement\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Textures.h">
       <Filter>TextureManagement</Filter>

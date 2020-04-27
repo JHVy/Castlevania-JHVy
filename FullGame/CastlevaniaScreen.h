@@ -3,7 +3,6 @@
 #define __CASTLEVANIASCREEN_H__
 
 #include "GameMap.h"
-#include "Scence.h"
 #include <string>
 #include "KeyEventHandler.h"
 #include "Textures.h"
@@ -11,20 +10,23 @@
 #include "Simon.h"
 #include "Loader.h"
 
-class CastlevaniaScreen: public CScene
+class CastlevaniaScreen
 {
 protected:
 	GameMap * gameMap;
+	
+	string path;
 
 public:
 	Simon* simon;
 
 public:
 	CastlevaniaScreen(string filePath);
+	CastlevaniaScreen();
 
 public:	
 	virtual void Load();
-	virtual void Update();
+	void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
 };

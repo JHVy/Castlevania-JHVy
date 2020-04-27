@@ -311,7 +311,7 @@ CGame *CGame::GetInstance()
 */
 void CGame::Load()
 {
-	CastlevaniaScreen* screen = new CastlevaniaScreen("");
+	CastlevaniaScreen* screen = new CastlevaniaScreen();
 	this->screens[1] = screen;
 	this->current_scene = 1;
 

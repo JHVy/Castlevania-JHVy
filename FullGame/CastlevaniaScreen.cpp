@@ -1,8 +1,12 @@
 #include "CastlevaniaScreen.h"
 
-CastlevaniaScreen::CastlevaniaScreen( string filePath)
-	: CScene(filePath) 
+CastlevaniaScreen::CastlevaniaScreen( string filePath) 
 {
+	this->path = filePath;
+	CastlevaniaScreen();
+}
+
+CastlevaniaScreen::CastlevaniaScreen() {
 	// load resource
 	LoadSpriteResource();
 
@@ -23,8 +27,8 @@ void CastlevaniaScreen::Load() {
 	
 }
 
-void CastlevaniaScreen::Update() {
-
+void CastlevaniaScreen::Update(DWORD dt) {
+	this->simon->Update(dt, NULL);
 }
 
 void CastlevaniaScreen::Render() {
