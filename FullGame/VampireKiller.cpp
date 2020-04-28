@@ -54,9 +54,6 @@ void VampireKiller::Render()
 	ani->Render(x, y, nx, 255);
 	y += 15;
 
-	/*y += 15;
-	if (ani->GetCurrentFrame() < 2)
-		return;*/
 	// RenderBoundingBox();
 }
 
@@ -175,48 +172,7 @@ void VampireKiller::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 	else
 	{
 
-		float min_tx, min_ty, nx = 0, ny;
 
-		//FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-
-		for (UINT i = 0; i < coEventsResult.size(); i++)
-		{
-			/*LPCOLLISIONEVENT e = coEventsResult[i];
-			if (e->obj->GetState() == TORCH_STATE_EXSIST ||
-				((e->obj->GetState() == BOSS_STATE_ATTACK || e->obj->GetState() == BOSS_STATE_FLY) && e->obj->GetType() == eType::BOSS))
-			{
-				e->obj->Hurt();
-
-				if (e->obj->GetEnergy() <= 0)
-				{
-					CSimon* simon = CSimon::GetInstance();
-					if (e->obj->GetType() == eType::GHOST)
-						simon->SetScore(100);
-					else if (e->obj->GetType() == eType::PANTHER)
-						simon->SetScore(300);
-					else if (e->obj->GetType() == eType::BAT)
-						simon->SetScore(200);
-					else if (e->obj->GetType() == eType::FISHMEN)
-						simon->SetScore(300);
-
-					if (e->obj->GetEnergy() <= 0)
-					{
-						if (e->obj->GetType() == eType::BOSS)
-						{
-							e->obj->SetState(BOSS_STATE_NOT_EXSIST);
-							simon->SetScore(1000);
-						}
-						else
-						{
-							e->obj->SetState(TORCH_STATE_NOT_EXSIST);
-						}
-					}
-					simon = NULL;
-				}
-				Sound::GetInstance()->Play(eSound::soundHurting);
-			}*/
-
-		}
 	}
 	for (UINT i = 0; i < coEvents.size(); i++) 
 		delete coEvents[i];

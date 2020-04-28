@@ -16,9 +16,6 @@ CastlevaniaScreen::CastlevaniaScreen() {
 }
 
 void CastlevaniaScreen::Load() {
-	
-	//this->gameMap->setId(2);
-	//this->gameMap->LoadMap("textures/map2.txt", 88, 12);
 
 	this->gameMap->setId(1);
 	this->gameMap->LoadMap("textures/map.txt", 24, 12);
@@ -36,8 +33,6 @@ void CastlevaniaScreen::Render() {
 	this->simon->Render();
 
 	//float x, y;
-	//this->simon->GetPosition(x, y);
-	//this->simon->SetPosition(x + 1.5, y);
 
 }
 

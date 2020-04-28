@@ -85,9 +85,6 @@
     <ClInclude Include="Loader.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>Config</Filter>
-    </ClInclude>
     <ClInclude Include="Define.h">
       <Filter>Define</Filter>
     </ClInclude>
@@ -134,9 +131,6 @@
     </Filter>
     <Filter Include="TextureManagement\XML">
       <UniqueIdentifier>{41d49b3e-3e9c-4668-8812-186e48d93206}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Config">
-      <UniqueIdentifier>{5cf54c01-f4e6-4940-966a-76f1ae9b46f2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Define">
       <UniqueIdentifier>{a7f1e4f1-ae3a-45e7-84b4-d476b3abaa86}</UniqueIdentifier>

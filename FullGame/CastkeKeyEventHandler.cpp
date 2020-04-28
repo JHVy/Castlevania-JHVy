@@ -117,11 +117,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	{
 		simon->SetState(SIMON_STATE_SIT_ATTACK);
 	}
-	/*else if (IsKeyDown(DIK_Z) && IsKeyDown(DIK_UP) && !simon->IsAttacking())
-	{
-		simon->SetState(SIMON_STATE_ATTACK_DAGGER);
-
-	}*/
 	else if (IsKeyDown(DIK_UP) && IsKeyDown(DIK_DOWN))
 	{
 		simon->SetState(SIMON_STATE_SIT);
@@ -152,13 +147,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	else if (IsKeyDown(DIK_RIGHT))
 	{
 		simon->SetTrend(1);
-		/*if (simon->IsOnStair()) {
-			if (simon->GetStairTrend() == 0)
-				simon->SetState(SIMON_STATE_IDLE_UP);
-			else
-				simon->SetState(SIMON_STATE_IDLE_DOWN);
-		}
-		else*/ 
 		if (!simon->IsAttacking())
 		{
 			if (simon->GetState() == SIMON_STATE_SIT)
@@ -172,14 +160,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	else if (IsKeyDown(DIK_LEFT))
 	{
 		simon->SetTrend(-1);
-		/*if (simon->IsOnStair()) {
-			if (simon->GetStairTrend() != 0)
-				simon->SetState(SIMON_STATE_IDLE_UP);
-			else
-				simon->SetState(SIMON_STATE_IDLE_DOWN);
-
-		}
-		else */
 			if (!simon->IsAttacking())
 		{
 			if (simon->GetState() == SIMON_STATE_SIT)
@@ -196,13 +176,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	}
 	else if (!IsKeyDown(DIK_DOWN) && !IsKeyDown(DIK_Z)) {
 
-		/*if (simon->IsOnStair()) {
-			if ((simon->GetStairTrend() == 0 && simon->GetNx() == 1) || (simon->GetStairTrend() == 1 && simon->GetNx() == -1))
-				simon->SetState(SIMON_STATE_IDLE_UP);
-			else
-				simon->SetState(SIMON_STATE_IDLE_DOWN);
-		}
-		else*/ 
 			if (simon->GetState() == SIMON_STATE_SIT || simon->GetState() == SIMON_STATE_SIT_ATTACK)
 			simon->SetState(SIMON_STATE_UP);
 		else

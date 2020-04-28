@@ -38,14 +38,6 @@ Simon::Simon() {
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
-	/*vx = -1;
-	nx = -1;
-
-	if (x < 20) {
-		vx = -1;
-		x = 500;
-	}*/
-
 	x = x + vx * dt;
 	y = y + vy * dt;
 }
@@ -54,24 +46,8 @@ void Simon::Render()
 {
 	int id;
 
-	//state = SIMON_STATE_WALKING_LEFT;
-
 	if (isAutoGo)
 	{
-		//if (CScene::GetInstance()->IsTranScene())
-		//{
-		//	/*
-		//		int id = nextScenceObj->getID()
-		//		CScence *s = CSceneManager::GetScene(id);
-		//		int left = s->getStartX();
-
-		//	*/
-		//	if (state == SIMON_STATE_WALKING_RIGHT)
-		//		id = SIMON_ANI_WALKING;
-		//	else
-		//		id = SIMON_ANI_IDLE;
-		//}
-		//else
 		id = SIMON_ANI_WALKING;
 	}
 	else if (state == SIMON_STATE_DIE)
@@ -158,6 +134,7 @@ void Simon::Render()
 		alpha = (GetTickCount() - start_disappear) / 1000 * 50;
 	}
 
+	DebugOut(L"[START DRAW SIMON] ");
 	//id = SIMON_ANI_STANDING_ATTACKING;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 	ani->Render(x, y, nx, alpha);
@@ -166,28 +143,19 @@ void Simon::Render()
 
 void Simon::SetState(int state)
 {
-	/*if (animations[SIMON_ANI_STANDING_ATTACKING]->GetCurrentFrame() > 0 && this->state == SIMON_STATE_STAND_ATTACK)
-	{
-
-	}
-	else if (animations[SIMON_ANI_SITTING_ATTACKING]->GetCurrentFrame() > 0 && this->state == SIMON_STATE_SIT_ATTACK)
-	{
-
-	}*/
-
 	DebugOut(L"[SIMON-SETSTATE] %d\n", state);
 
 	this->state = state;
 
 	switch (state) {
 		case SIMON_STATE_WALKING_RIGHT:
-			vx = SIMON_WALKING_SPEED;
+			//vx = SIMON_WALKING_SPEED;
 			nx = 1;
 			vy = 0;
 			break;
 
 		case SIMON_STATE_WALKING_LEFT:
-			vx = -SIMON_WALKING_SPEED;
+			//vx = -SIMON_WALKING_SPEED;
 			nx = -1;
 			vy = 0;
 			break;
@@ -273,66 +241,7 @@ void Simon::SetState(int state)
 			vampireKiller->GetAnimation()->ResetFrame();
 			vx = 0;
 			break;
-			/*case SIMON_STATE_ATTACK_DAGGER:
-				attack_start = GetTickCount();
-				vx = 0;
-				if (_heart > 0 && (CBoard::GetInstance()->GetWeapon() != 0))
-				{
-					switch (CBoard::GetInstance()->GetWeapon())
-					{
-					case eType::DAGGER:
-						if (CDagger::GetInstance()->GetState() == DAGGER_STATE_ATTACK)
-						{
-							this->state = SIMON_STATE_IDLE;
-						}
-						else
-						{
-							Sound::GetInstance()->Play(eSound::soundDagger);
-						}
-						break;
-					case eType::ITEMAXE:
-						if (CAxe::GetInstance()->GetState() == DAGGER_STATE_ATTACK || !CAxe::GetInstance()->IsCanAttack())
-						{
-							this->state = SIMON_STATE_IDLE;
-						}
-						else
-						{
-							Sound::GetInstance()->Play(eSound::soundAxe);
-						}
-						break;
-					case eType::ITEMHOLLYWATTER:
-						if (CHollyWatter::GetInstance()->GetState() == DAGGER_STATE_ATTACK)
-						{
-							this->state = SIMON_STATE_IDLE;
-						}
-						else
-						{
-							Sound::GetInstance()->Play(eSound::soundHolyWater);
-						}
-						break;
-					case eType::ITEMBOONGMERANG:
-						if (CBoongmerang::GetInstance()->GetState() == DAGGER_STATE_ATTACK)
-						{
-							this->state = SIMON_STATE_IDLE;
-						}
-						else
-						{
-							Sound::GetInstance()->Play(eSound::soundBoomerang);
-						}
-						break;
 
-					default:
-						this->state = SIMON_STATE_IDLE;
-						break;
-					}
-					animations[SIMON_ANI_STANDING_ATTACKING]->ResetFrame();
-				}
-				else
-				{
-					this->state = SIMON_STATE_IDLE;
-
-				}
-				break;*/
 		case SIMON_STATE_UP:
 			y -= 15;
 
@@ -358,7 +267,6 @@ void Simon::SetState(int state)
 						new_y = y;
 						new_x = x + 100;
 						isUnder = false;
-						//CBat::Start();
 					}
 				}
 				break;
@@ -395,7 +303,6 @@ void Simon::SetState(int state)
 						new_y = y;
 						new_x = x - 100;
 						isUnder = false;
-						//CBat::Stop();
 					}
 				}
 				break;

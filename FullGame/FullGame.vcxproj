@@ -149,7 +149,6 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="CastkeKeyEventHandler.h" />
     <ClInclude Include="CastlevaniaScreen.h" />
-    <ClInclude Include="Config.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="GameMap.h" />

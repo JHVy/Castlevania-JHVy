@@ -21,16 +21,6 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 
 	for (int i = 0; i < listObj.size(); i++)
 	{
-		//if (dynamic_cast<CTorch*>(listObj.at(i)))
-		//{
-		//	if (listObj.at(i)->GetState() == TORCH_STATE_EXSIST)
-		//	{
-		//		LPCOLLISIONEVENT e = SweptAABBEx(listObj.at(i));
-		//		if (e->t > 0) //đụng độ
-		//		{
-		//			listObj.at(i)->SetState(TORCH_STATE_NOT_EXSIST);
-		//		}
-		//	}
-		//}
+
 	}
 }
