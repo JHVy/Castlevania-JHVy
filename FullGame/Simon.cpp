@@ -149,13 +149,13 @@ void Simon::SetState(int state)
 
 	switch (state) {
 		case SIMON_STATE_WALKING_RIGHT:
-			//vx = SIMON_WALKING_SPEED;
+			vx = SIMON_WALKING_SPEED;
 			nx = 1;
 			vy = 0;
 			break;
 
 		case SIMON_STATE_WALKING_LEFT:
-			//vx = -SIMON_WALKING_SPEED;
+			vx = -SIMON_WALKING_SPEED;
 			nx = -1;
 			vy = 0;
 			break;
