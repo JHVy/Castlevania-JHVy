@@ -38,8 +38,18 @@ Simon::Simon() {
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
-	x = x + vx * dt;
+	x = x + 0.75 * vx * dt;
 	y = y + vy * dt;
+	vy += 0.2 * SIMON_GRAVITY * dt;
+
+	if (y > 300) {
+		y = 300;
+		vy = 0;
+		vx = 0;
+		start_jump = 0;
+	}
+
+
 }
 
 void Simon::Render()
@@ -143,11 +153,26 @@ void Simon::Render()
 
 void Simon::SetState(int state)
 {
+	// need update
 	DebugOut(L"[SIMON-SETSTATE] %d\n", state);
 
-	this->state = state;
+	
+	if (start_jump){
+	
+		return;
+	}
+	else {
 
-	switch (state) {
+		this->state = state;
+		switch (state) {
+		case SIMON_STATE_JUMP:
+			if (start_jump)
+				break;
+
+			start_jump = GetTickCount();
+			vy = -SIMON_JUMP_SPEED_Y;
+			break;
+
 		case SIMON_STATE_WALKING_RIGHT:
 			vx = SIMON_WALKING_SPEED;
 			nx = 1;
@@ -166,7 +191,8 @@ void Simon::SetState(int state)
 			break;
 
 		default:
-			return;
+			break;
+		}
 	}
 
 	return;

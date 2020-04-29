@@ -61,6 +61,7 @@ void CastkeKeyEventHandler::OnKeyUp(int KeyCode)
 
 void CastkeKeyEventHandler::KeyState(BYTE* states)
 {
+	// need update
 	Simon* simon = this->castleVaninaScreen->simon;
 
 	if (IsKeyDown(DIK_X))
@@ -72,7 +73,7 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 
 	if (IsKeyDown(DIK_LEFT))
 	{
-		simon->SetTrend(-1);
+		//simon->SetTrend(-1);
 		if (!simon->IsAttacking())
 		{
 			if (simon->GetState() == SIMON_STATE_SIT)
@@ -86,7 +87,7 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	}
 
 	if (IsKeyDown(DIK_RIGHT)) {
-		simon->SetTrend(1);
+		//simon->SetTrend(1);
 		if (!simon->IsAttacking())
 		{
 			if (simon->GetState() == SIMON_STATE_SIT)

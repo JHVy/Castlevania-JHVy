@@ -29,7 +29,7 @@ void CastlevaniaScreen::Update(DWORD dt) {
 }
 
 void CastlevaniaScreen::Render() {
-	this->gameMap->DrawMap(0, 0);
+	this->gameMap->DrawMap(200, 0);
 	this->simon->Render();
 
 	//float x, y;
