@@ -14,7 +14,7 @@
 #include "Loader.h"
 #include "Define.h"
 
-
+// main
 
 CGame* game;
 
