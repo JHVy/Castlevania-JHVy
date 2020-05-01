@@ -52,7 +52,7 @@
 #define ID_WEAPON_DAGGER			1
 
 #define ATTACK_TIME			300
-#define ATTACK_TIME_WAIT	700
+#define ATTACK_TIME_WAIT	300
 #define JUMP_TIME			0
 #define DIE_TIME			2000
 #define TIME_FOR_PER_STEP  200
@@ -104,6 +104,9 @@ protected:
 	bool isUnder;
 	float start_x, start_y;
 
+	// history
+	int last_attack = 0;
+
 	// weapon 
 	VampireKiller* vampireKiller;
 
@@ -114,6 +117,11 @@ public:
 
 	// check state
 	bool IsAttacking() { if (attack_start > 0) return true; return false; }
+	bool IsSitting() {
+		if (this->state == SIMON_STATE_SIT || this->state == SIMON_STATE_SIT_ATTACK)
+			return true;
+		return false;
+	}
 
 	void SetState(int state);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }

@@ -15,18 +15,18 @@ void CastkeKeyEventHandler::OnKeyDown(int KeyCode)
 
 	switch (KeyCode)
 	{
-		case DIK_SPACE:
-			break;
+		//case DIK_SPACE:
+		//	break;
 
-		case DIK_DOWN:
-			simon->SetState(SIMON_STATE_SIT);
-			break;
+		//case DIK_DOWN:
+		//	simon->SetState(SIMON_STATE_SIT);
+		//	break;
 
-		case DIK_UP:
-			/*if (simon->GetState() == SIMON_STATE_SIT)
-				return;*/
-			simon->SetState(SIMON_STATE_GO_UP);
-			break;
+		//case DIK_UP:
+		//	/*if (simon->GetState() == SIMON_STATE_SIT)
+		//		return;*/
+		//	simon->SetState(SIMON_STATE_GO_UP);
+		//	break;
 
 		default:
 			break;
@@ -46,7 +46,7 @@ void CastkeKeyEventHandler::OnKeyUp(int KeyCode)
 			simon->SetState(SIMON_STATE_UP);
 		break;*/
 
-	case DIK_Z:
+	/*case DIK_Z:
 		if (simon->GetState() == SIMON_STATE_SIT_ATTACK)
 		{
 			if (IsKeyDown(DIK_DOWN))
@@ -54,7 +54,7 @@ void CastkeKeyEventHandler::OnKeyUp(int KeyCode)
 			else
 				simon->SetState(SIMON_STATE_UP);
 		}
-		break;
+		break;*/
 
 	}
 }
@@ -71,7 +71,10 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	if (IsKeyDown(DIK_Z)) {
 		DebugOut(L"Z - Key Down");
 		
-		simon->SetState(SIMON_STATE_STAND_ATTACK);
+		if (!simon->IsSitting())
+			simon->SetState(SIMON_STATE_STAND_ATTACK);
+		else
+			simon->SetState(SIMON_STATE_SIT_ATTACK);
 
 		return;
 	}
@@ -119,6 +122,13 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 		else {
 			simon->SetState(SIMON_STATE_SIT);
 		}
+		return;
+	}
+
+	if (IsKeyDown(DIK_UP)) {
+		if (simon->IsSitting())
+			simon->SetState(SIMON_STATE_IDLE);
+
 		return;
 	}
 

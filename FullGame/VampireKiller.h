@@ -11,6 +11,7 @@ public:
 	VampireKiller();
 	void SetPosition(float simon_x, float simon_y, int simon_state, int nx);
 	void Render();
+	void Render(float simon_x, float simon_y, int simon_state, int nx);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	void setDefaultLevel();
 	void setUpLevel();

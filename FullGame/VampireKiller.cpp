@@ -18,34 +18,25 @@ void VampireKiller::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, int _nx)
 {
 	this->nx = _nx;
-	if (_level == 1 || _level == 2)
-	{
-		if (nx < 0)
-		{
-			if (simon_state == SIMON_STATE_SIT_ATTACK)
-				x = simon_x + 90;
-			else
-				x = simon_x - 50;
-		}
-		else {
-			if (simon_state == SIMON_STATE_SIT_ATTACK)
-				x = simon_x + 115;
-			else
-				x = simon_x - 25;
-		}
-	}
-	else
-	{
-		if (nx < 0)
-		{
-			x = simon_x - 75;
-		}
-		else {
-			x = simon_x - 10;
-		}
-	}
 	y = simon_y;
 
+	if (nx < 0)
+	{
+		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
+			x = simon_x - 50;
+			y = simon_y + 15;
+		}
+		else
+			x = simon_x - 50;
+	}
+	else {
+		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
+			x = simon_x - 25;
+			y = simon_y + 15;
+		}
+		else
+			x = simon_x - 25;
+	}
 }
 
 
@@ -53,9 +44,36 @@ void VampireKiller::Render()
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
 	ani->Render(x, y, nx, 255);
-	y += 15;
 
 	// RenderBoundingBox();
+}
+
+void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _nx) {
+	float x1, y1, nx1;
+	
+	nx1 = _nx;
+	y1 = simon_y;
+
+	if (nx < 0)
+	{
+		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
+			x1 = simon_x - 50;
+			y1 = simon_y + 15;
+		}
+		else
+			x1 = simon_x - 50;
+	}
+	else {
+		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
+			x1 = simon_x - 25;
+			y1 = simon_y + 15;
+		}
+		else
+			x1 = simon_x - 25;
+	}
+
+	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
+	ani->Render(x, y, nx, 255);
 }
 
 void VampireKiller::setDefaultLevel()
@@ -175,6 +193,6 @@ void VampireKiller::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 
 
 	}
-	for (UINT i = 0; i < coEvents.size(); i++) 
+	for (UINT i = 0; i < coEvents.size(); i++)
 		delete coEvents[i];
 }
