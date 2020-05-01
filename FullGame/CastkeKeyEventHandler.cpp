@@ -64,6 +64,18 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	// need update
 	Simon* simon = this->castleVaninaScreen->simon;
 
+	if (simon->IsAttacking()) {
+		return;
+	}
+
+	if (IsKeyDown(DIK_Z)) {
+		DebugOut(L"Z - Key Down");
+		
+		simon->SetState(SIMON_STATE_STAND_ATTACK);
+
+		return;
+	}
+
 	if (IsKeyDown(DIK_X))
 	{
 		DebugOut(L" X - Key Down");

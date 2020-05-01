@@ -49,7 +49,17 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		start_jump = 0;
 	}
 
+	if (attack_start) {
+		int t = GetTickCount();
 
+		if (t - attack_start > ATTACK_TIME) {
+			attack_start = 0;
+			this->state = SIMON_STATE_IDLE;
+			return;
+		}
+
+		return;
+	}
 }
 
 void Simon::Render()
@@ -77,7 +87,7 @@ void Simon::Render()
 		id = SIMON_ANI_SITTING_ATTACKING;
 
 		if (vampireKiller != NULL) {
-			vampireKiller->SetPosition(x, y, state);
+			vampireKiller->SetPosition(x, y, state, nx);
 			vampireKiller->Render();
 		}
 	}
@@ -86,7 +96,7 @@ void Simon::Render()
 		id = SIMON_ANI_STANDING_ATTACKING;
 
 		if (vampireKiller != NULL) {
-			vampireKiller->SetPosition(x, y, state);
+			vampireKiller->SetPosition(x, y, state, nx);
 			vampireKiller->Render();
 		}
 
@@ -156,205 +166,213 @@ void Simon::SetState(int state)
 	// need update
 	DebugOut(L"[SIMON-SETSTATE] %d\n", state);
 
-	
-	if (start_jump){
-	
+	if (attack_start)
 		return;
-	}
-	else {
 
-		this->state = state;
-		switch (state) {
-		case SIMON_STATE_JUMP:
-			if (start_jump)
-				break;
+	if (start_jump && state != SIMON_STATE_STAND_ATTACK) 
+		return;
 
-			start_jump = GetTickCount();
-			vy = -SIMON_JUMP_SPEED_Y;
+
+	this->state = state;
+	switch (state) {
+	case SIMON_STATE_STAND_ATTACK:
+		if (attack_start)
+			return;
+
+		attack_start = GetTickCount();
+		this->vampireKiller->GetAnimation()->ResetFrame();
+		break;
+
+	case SIMON_STATE_JUMP:
+		if (start_jump)
 			break;
 
-		case SIMON_STATE_WALKING_RIGHT:
-			vx = SIMON_WALKING_SPEED;
-			nx = 1;
-			vy = 0;
-			break;
+		start_jump = GetTickCount();
+		vy = -SIMON_JUMP_SPEED_Y;
+		break;
 
-		case SIMON_STATE_WALKING_LEFT:
-			vx = -SIMON_WALKING_SPEED;
-			nx = -1;
-			vy = 0;
-			break;
+	case SIMON_STATE_WALKING_RIGHT:
+		vx = SIMON_WALKING_SPEED;
+		nx = 1;
+		vy = 0;
+		break;
 
-		case SIMON_STATE_SIT:
-			vx = 0;
-			vy = 0;
-			break;
+	case SIMON_STATE_WALKING_LEFT:
+		vx = -SIMON_WALKING_SPEED;
+		nx = -1;
+		vy = 0;
+		break;
 
-		default:
-			break;
-		}
+	case SIMON_STATE_SIT:
+		vx = 0;
+		vy = 0;
+		break;
+
+	default:
+		break;
 	}
 
 	return;
-
-
-	if (attack_start > 0)
-	{
-
-	}
-	else if (trans_start > 0) {
-
-	}
-	else if (die_start > 0) {
-
-	}
-	else if (isAutoGo)
-	{
-
-	}
-	else if (untouchable && GetTickCount() - untouchable_start < SIMON_HURT_TIME)
-	{
-
-	}
-	else if (getAnimation(SIMON_ANI_GO_UP)->GetCurrentFrame() > 0 && isOnStair)
-	{
-
-	}
-	else if (getAnimation(SIMON_ANI_GO_DOWN)->GetCurrentFrame() > 0 && isOnStair)
-	{
-
-	}
-	else if (state == SIMON_STATE_JUMP)
-	{
-		if (!start_jump)
-		{
-			if (y < _ground + 1 && y > _ground - 1 && !untouchable) {
-				vy = -SIMON_JUMP_SPEED_Y;
-				start_jump = GetTickCount();
-				if (this->state == SIMON_STATE_IDLE)
-					vx = 0;
-			}
-		}
-	}
-	else
-	{
-		//CGameObject::SetState(state);
-		switch (state)
-		{
-		case SIMON_STATE_WALKING_RIGHT:
-			vx = SIMON_WALKING_SPEED;
-			nx = 1;
-			break;
-		case SIMON_STATE_WALKING_LEFT:
-			vx = -SIMON_WALKING_SPEED;
-			nx = -1;
-			break;
-		case SIMON_STATE_SIT_ATTACK:
-			attack_start = GetTickCount();
-			//Sound::GetInstance()->Play(eSound::soundWhip);
-			getAnimation(SIMON_ANI_SITTING_ATTACKING)->ResetFrame();
-			vampireKiller->GetAnimation()->ResetFrame();
-			vx = 0;
-			break;
-		case SIMON_STATE_SIT:
-			y = 272.0f;
-			vx = 0;
-			break;
-		case SIMON_STATE_STAND_ATTACK:
-			attack_start = GetTickCount();
-			//Sound::GetInstance()->Play(eSound::soundWhip);
-			getAnimation(SIMON_ANI_STANDING_ATTACKING)->ResetFrame();
-			vampireKiller->GetAnimation()->ResetFrame();
-			vx = 0;
-			break;
-
-		case SIMON_STATE_UP:
-			y -= 15;
-
-		case SIMON_STATE_IDLE:
-			vx = 0;
-			break;
-		case SIMON_STATE_GO_UP:
-			if (isOnStair)
-			{
-				if (start_stair == 0)
-				{
-					start_stair = GetTickCount();
-					if (!isUnder)
-					{
-						new_y = y - PER_STEP;
-						if (_stairTrend == 0)
-							new_x = x + PER_STEP;
-						else
-							new_x = x - PER_STEP;
-					}
-					else
-					{
-						new_y = y;
-						new_x = x + 100;
-						isUnder = false;
-					}
-				}
-				break;
-			}
-			if (isCanOnStair != 1)
-			{
-				state = SIMON_STATE_IDLE;
-				vx = 0;
-			}
-			else
-			{
-				isOnStair = true;
-
-				if (abs(auto_x - x) > 0.5f)
-					isAutoGo = true;
-			}
-			break;
-		case SIMON_STATE_GO_DOWN:
-			if (isOnStair)
-			{
-				if (start_stair == 0)
-				{
-					start_stair = GetTickCount();
-					if (!isUnder)
-					{
-						new_y = y + PER_STEP;
-						if (_stairTrend == 0)
-							new_x = x - PER_STEP;
-						else
-							new_x = x + PER_STEP;
-					}
-					else
-					{
-						new_y = y;
-						new_x = x - 100;
-						isUnder = false;
-					}
-				}
-				break;
-			}
-
-			if (isCanOnStair != -1)
-			{
-				this->state = SIMON_STATE_SIT;
-				vx = 0;
-			}
-			else
-			{
-				isOnStair = true;
-
-				if (abs(auto_x - x) > 0.5f)
-					isAutoGo = true;
-			}
-			break;
-		case SIMON_STATE_IDLE_UP:
-		case SIMON_STATE_IDLE_DOWN:
-			vx = vy = 0;
-			break;
-
-		}
-	}
 }
+
+
+//if (attack_start > 0)
+//{
+
+//}
+//else if (trans_start > 0) {
+
+//}
+//else if (die_start > 0) {
+
+//}
+//else if (isAutoGo)
+//{
+
+//}
+//else if (untouchable && GetTickCount() - untouchable_start < SIMON_HURT_TIME)
+//{
+
+//}
+//else if (getAnimation(SIMON_ANI_GO_UP)->GetCurrentFrame() > 0 && isOnStair)
+//{
+
+//}
+//else if (getAnimation(SIMON_ANI_GO_DOWN)->GetCurrentFrame() > 0 && isOnStair)
+//{
+
+//}
+//else if (state == SIMON_STATE_JUMP)
+//{
+//	if (!start_jump)
+//	{
+//		if (y < _ground + 1 && y > _ground - 1 && !untouchable) {
+//			vy = -SIMON_JUMP_SPEED_Y;
+//			start_jump = GetTickCount();
+//			if (this->state == SIMON_STATE_IDLE)
+//				vx = 0;
+//		}
+//	}
+//}
+//else
+//{
+//	//CGameObject::SetState(state);
+//	switch (state)
+//	{
+//	case SIMON_STATE_WALKING_RIGHT:
+//		vx = SIMON_WALKING_SPEED;
+//		nx = 1;
+//		break;
+//	case SIMON_STATE_WALKING_LEFT:
+//		vx = -SIMON_WALKING_SPEED;
+//		nx = -1;
+//		break;
+//	case SIMON_STATE_SIT_ATTACK:
+//		attack_start = GetTickCount();
+//		//Sound::GetInstance()->Play(eSound::soundWhip);
+//		getAnimation(SIMON_ANI_SITTING_ATTACKING)->ResetFrame();
+//		vampireKiller->GetAnimation()->ResetFrame();
+//		vx = 0;
+//		break;
+//	case SIMON_STATE_SIT:
+//		y = 272.0f;
+//		vx = 0;
+//		break;
+//	case SIMON_STATE_STAND_ATTACK:
+//		attack_start = GetTickCount();
+//		//Sound::GetInstance()->Play(eSound::soundWhip);
+//		getAnimation(SIMON_ANI_STANDING_ATTACKING)->ResetFrame();
+//		vampireKiller->GetAnimation()->ResetFrame();
+//		vx = 0;
+//		break;
+
+//	case SIMON_STATE_UP:
+//		y -= 15;
+
+//	case SIMON_STATE_IDLE:
+//		vx = 0;
+//		break;
+//	case SIMON_STATE_GO_UP:
+//		if (isOnStair)
+//		{
+//			if (start_stair == 0)
+//			{
+//				start_stair = GetTickCount();
+//				if (!isUnder)
+//				{
+//					new_y = y - PER_STEP;
+//					if (_stairTrend == 0)
+//						new_x = x + PER_STEP;
+//					else
+//						new_x = x - PER_STEP;
+//				}
+//				else
+//				{
+//					new_y = y;
+//					new_x = x + 100;
+//					isUnder = false;
+//				}
+//			}
+//			break;
+//		}
+//		if (isCanOnStair != 1)
+//		{
+//			state = SIMON_STATE_IDLE;
+//			vx = 0;
+//		}
+//		else
+//		{
+//			isOnStair = true;
+
+//			if (abs(auto_x - x) > 0.5f)
+//				isAutoGo = true;
+//		}
+//		break;
+//	case SIMON_STATE_GO_DOWN:
+//		if (isOnStair)
+//		{
+//			if (start_stair == 0)
+//			{
+//				start_stair = GetTickCount();
+//				if (!isUnder)
+//				{
+//					new_y = y + PER_STEP;
+//					if (_stairTrend == 0)
+//						new_x = x - PER_STEP;
+//					else
+//						new_x = x + PER_STEP;
+//				}
+//				else
+//				{
+//					new_y = y;
+//					new_x = x - 100;
+//					isUnder = false;
+//				}
+//			}
+//			break;
+//		}
+
+//		if (isCanOnStair != -1)
+//		{
+//			this->state = SIMON_STATE_SIT;
+//			vx = 0;
+//		}
+//		else
+//		{
+//			isOnStair = true;
+
+//			if (abs(auto_x - x) > 0.5f)
+//				isAutoGo = true;
+//		}
+//		break;
+//	case SIMON_STATE_IDLE_UP:
+//	case SIMON_STATE_IDLE_DOWN:
+//		vx = vy = 0;
+//		break;
+
+//	}
+//}
+//}
 
 void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {

@@ -15,8 +15,9 @@ void VampireKiller::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 }
 
 
-void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state)
+void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, int _nx)
 {
+	this->nx = _nx;
 	if (_level == 1 || _level == 2)
 	{
 		if (nx < 0)
@@ -24,13 +25,13 @@ void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state)
 			if (simon_state == SIMON_STATE_SIT_ATTACK)
 				x = simon_x + 90;
 			else
-				x = simon_x + 90;
+				x = simon_x - 50;
 		}
 		else {
 			if (simon_state == SIMON_STATE_SIT_ATTACK)
 				x = simon_x + 115;
 			else
-				x = simon_x + 110;
+				x = simon_x - 25;
 		}
 	}
 	else

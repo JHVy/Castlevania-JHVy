@@ -9,7 +9,7 @@ class VampireKiller: public Weapon
 
 public:
 	VampireKiller();
-	void SetPosition(float simon_x, float simon_y, int simon_state);
+	void SetPosition(float simon_x, float simon_y, int simon_state, int nx);
 	void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	void setDefaultLevel();
