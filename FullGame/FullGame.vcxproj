@@ -126,6 +126,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CastkeKeyEventHandler.cpp" />
     <ClCompile Include="CastlevaniaScreen.cpp" />
     <ClCompile Include="Define.cpp" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CastkeKeyEventHandler.h" />
     <ClInclude Include="CastlevaniaScreen.h" />
     <ClInclude Include="Define.h" />

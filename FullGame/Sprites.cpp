@@ -35,11 +35,15 @@ void CSprite::Draw(float x, float y, int alpha)
 
 	DebugOut(L"[Draw] %f %f\n", x, y);
 
+	x -= getwidth();
+
 	CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, alpha);
 }
 
 void CSprite::DrawFlipX(float x, float y, int alpha) {
 	DebugOut(L"[Draw FlipX] %f %f\n", x, y);
+
+
 
 	LPD3DXSPRITE spriteHandler = CGame::GetInstance()->GetSpriteHandler();
 
@@ -57,7 +61,8 @@ void CSprite::DrawFlipX(float x, float y, int alpha) {
 
 	spriteHandler->SetTransform(&finalMt);
 
-	x -= getwidth();
+	
+	//x = 100;
 
 	this->DrawCam(x, y, alpha);
 

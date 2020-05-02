@@ -32,7 +32,7 @@ private:
 public:
 	void setId(int _id) { this->id = _id; }
 	void LoadMap(string filepath, int _numCols, int _numRows);
-	void DrawMap(float cam_x, float cam_y);
+	void DrawMap();
 
 private:
 	int getTitle(int x, int y);

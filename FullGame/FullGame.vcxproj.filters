@@ -56,6 +56,9 @@
     <ClCompile Include="CastkeKeyEventHandler.cpp">
       <Filter>GameManagement\GameControl</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -107,6 +110,9 @@
       <Filter>GameManagement\GameControl</Filter>
     </ClInclude>
     <ClInclude Include="CastkeKeyEventHandler.h">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
       <Filter>GameManagement\GameControl</Filter>
     </ClInclude>
   </ItemGroup>

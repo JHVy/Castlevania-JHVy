@@ -15,6 +15,9 @@
 
 using namespace std;
 
+class CastkeKeyEventHandler;
+class CastlevaniaScreen;
+
 class CGame
 {
 	static CGame * __instance;
@@ -31,14 +34,13 @@ class CGame
 
 	CastkeKeyEventHandler* keyHandler;
 
-	float cam_x = 0.0f;
-	float cam_y = 0.0f;
-
 	int screen_width;
 	int screen_height; 
 
 	unordered_map<int, CastlevaniaScreen*> screens;
 	int current_scene; 
+
+	float cam_x = 0, cam_y = 0;
 
 public:
 	void display();
@@ -59,6 +61,11 @@ public:
 	int GetScreenWidth() { return screen_width; }
 	int GetScreenHeight() { return screen_height; }
 
+	void setCamera(float _x, float _y) {
+		this->cam_x = _x;
+		this->cam_y = _y;
+	}
+
 	static void SweptAABB(
 		float ml,			// move left 
 		float mt,			// move top
@@ -78,19 +85,6 @@ public:
 	LPDIRECT3DSURFACE9 GetBackBuffer() { return backBuffer; }
 	LPD3DXSPRITE GetSpriteHandler() { return this->spriteHandler; }
 
-	void SetCamPos(float x, float y) 
-	{
-		cam_x = x;
-		cam_y = y;
-		if(cam_x < 0)
-			cam_x = 0;
-		if(cam_y < 0)
-			cam_y = 0;
-	}
-	D3DXVECTOR2 CGame::GetCamPos()
-	{
-		return D3DXVECTOR2(cam_x, cam_y);
-	}
 	static CGame * GetInstance();
 
 	~CGame();
