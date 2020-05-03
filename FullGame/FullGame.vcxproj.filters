@@ -60,10 +60,10 @@
       <Filter>GameObject\Object</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
-      <Filter>GameObject\Object</Filter>
+      <Filter>GameObject\Object\Item</Filter>
     </ClCompile>
     <ClCompile Include="ItemHeart.cpp">
-      <Filter>GameObject\Object</Filter>
+      <Filter>GameObject\Object\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,10 +122,10 @@
       <Filter>GameObject\Object</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>GameObject\Object</Filter>
+      <Filter>GameObject\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemHeart.h">
-      <Filter>GameObject\Object</Filter>
+      <Filter>GameObject\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +161,9 @@
     </Filter>
     <Filter Include="GameObject\Object">
       <UniqueIdentifier>{4755e79f-82d2-4450-973f-412761924a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object\Item">
+      <UniqueIdentifier>{2e65d009-23b2-4603-8212-4521e25bd7e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

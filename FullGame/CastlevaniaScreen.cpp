@@ -14,6 +14,41 @@ CastlevaniaScreen::CastlevaniaScreen() {
 	this->simon = new Simon();
 }
 
+CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)
+{
+	switch (object)
+	{
+	
+	case eType::ID_TORCH:
+		return new Torch(x, y, id_item);
+	/*case eType::ID_HIDDEN:
+		return new CHidenObject(x, y, type);*/
+
+	default:
+		return NULL;
+	}
+}
+
+void CastlevaniaScreen::LoadObject(string file_path) {
+	items.clear();
+
+	ifstream inFile(file_path);
+
+	int id, grid_x, grid_y, type, trend, id_item, nx, ny, object;
+	float x, y, w, h;
+
+	if (inFile)
+	{
+		while (inFile >> id >> grid_x >> grid_y >> type >> trend >> x >> y >> w >> h >> id_item >> object)
+		{
+			CGameObject* obj = GetNewObject(type, trend, x, y, w, h, id_item, object);
+			if (obj != NULL)
+				items.push_back(obj);
+		}
+		inFile.close();
+	}
+}
+
 void CastlevaniaScreen::Load() {
 
 	this->gameMap->setId(1);
@@ -25,9 +60,7 @@ void CastlevaniaScreen::Load() {
 	float start_simon_x = 60, start_simon_y = 150;
 	this->simon->SetPosition(start_simon_x, start_simon_y);
 
-	items.clear();
-	items.push_back(new Item_Heart(100, 270));
-	items.push_back(new Item_Heart(400, 270));
+	this->LoadObject("textures/objects_1.txt");
 }
 
 void CastlevaniaScreen::Update(DWORD dt) {
@@ -77,14 +110,13 @@ void CastlevaniaScreen::Render() {
 	// render
 	this->gameMap->DrawMap();
 
-	//this->gameMap->DrawMap(450, 0);
-	this->simon->Render();
-
 	if (!items.empty()) {
 		for (int i = 0; i < items.size(); i++) {
 			items[i]->Render();
 		}
 	}
+
+	this->simon->Render();
 }
 
 void CastlevaniaScreen::Unload() {
