@@ -56,8 +56,14 @@
     <ClCompile Include="CastkeKeyEventHandler.cpp">
       <Filter>GameManagement\GameControl</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>GameManagement\GameControl</Filter>
+    <ClCompile Include="Torch.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemHeart.cpp">
+      <Filter>GameObject\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,8 +118,14 @@
     <ClInclude Include="CastkeKeyEventHandler.h">
       <Filter>GameManagement\GameControl</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>GameManagement\GameControl</Filter>
+    <ClInclude Include="Torch.h">
+      <Filter>GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemHeart.h">
+      <Filter>GameObject\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +158,9 @@
     </Filter>
     <Filter Include="GameManagement\GameControl">
       <UniqueIdentifier>{e81352aa-dd83-45b5-a957-8463d370d981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Object">
+      <UniqueIdentifier>{4755e79f-82d2-4450-973f-412761924a56}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

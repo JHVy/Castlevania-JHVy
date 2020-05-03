@@ -126,13 +126,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp" />
-    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CastkeKeyEventHandler.cpp" />
     <ClCompile Include="CastlevaniaScreen.cpp" />
     <ClCompile Include="Define.cpp" />
+    <ClCompile Include="ItemHeart.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Torch.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -148,13 +150,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h" />
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="CastkeKeyEventHandler.h" />
     <ClInclude Include="CastlevaniaScreen.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="ItemHeart.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="Torch.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

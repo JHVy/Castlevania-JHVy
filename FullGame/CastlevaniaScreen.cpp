@@ -7,8 +7,7 @@ CastlevaniaScreen::CastlevaniaScreen( string filePath)
 }
 
 CastlevaniaScreen::CastlevaniaScreen() {
-	// load resource
-	LoadSpriteResource();
+	
 
 	// init 
 	this->gameMap = new GameMap(2);
@@ -23,15 +22,32 @@ void CastlevaniaScreen::Load() {
 	this->screen_size_x = 23 * 64 - 15;
 	this->screen_size_y = 12 * 64;
 
-	float start_simon_x = 60, start_simon_y = 300;
+	float start_simon_x = 60, start_simon_y = 150;
 	this->simon->SetPosition(start_simon_x, start_simon_y);
+
+	items.clear();
+	items.push_back(new Item_Heart(100, 270));
+	items.push_back(new Item_Heart(400, 270));
 }
 
 void CastlevaniaScreen::Update(DWORD dt) {
 	this->simon->Update(dt, NULL);
 
-	this->UpdateCamera();
+	float simon_x, simon_y;
+	this->simon->GetPosition(simon_x, simon_y);
+	if (simon_x > this->screen_size_x) {
+		simon_x = this->screen_size_x;
+		this->simon->SetPosition(simon_x, simon_y);
+	}
 
+	// update
+	if (!items.empty()) {
+		for (int i = 0; i < items.size(); i++) {
+			items[i]->Update(dt, NULL);
+		}
+	}
+
+	this->UpdateCamera();
 }
 
 void CastlevaniaScreen::UpdateCamera() {
@@ -63,6 +79,12 @@ void CastlevaniaScreen::Render() {
 
 	//this->gameMap->DrawMap(450, 0);
 	this->simon->Render();
+
+	if (!items.empty()) {
+		for (int i = 0; i < items.size(); i++) {
+			items[i]->Render();
+		}
+	}
 }
 
 void CastlevaniaScreen::Unload() {

@@ -42,6 +42,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	y = y + vy * dt;
 	vy += 0.2 * SIMON_GRAVITY * dt;
 
+	if (x < 30) x = 30;
+
 	if (y > 300) {
 		y = 300;
 		vy = 0;

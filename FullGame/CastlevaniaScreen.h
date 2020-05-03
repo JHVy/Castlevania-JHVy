@@ -9,8 +9,9 @@
 #include "Define.h"
 #include "Simon.h"
 #include "Loader.h"
-#include "Camera.h"
 #include "Game.h"
+
+#include "ItemHeart.h"
 
 class CGame;
 
@@ -21,6 +22,7 @@ protected:
 	string path;
 
 	float screen_size_x, screen_size_y;
+	vector<Item*> items;
 	
 public:
 	Simon* simon;
