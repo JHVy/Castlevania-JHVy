@@ -23,7 +23,7 @@ void CastlevaniaScreen::Load() {
 	this->screen_size_x = 23 * 64 - 15;
 	this->screen_size_y = 12 * 64;
 
-	float start_simon_x = 100, start_simon_y = 300;
+	float start_simon_x = 60, start_simon_y = 300;
 	this->simon->SetPosition(start_simon_x, start_simon_y);
 }
 

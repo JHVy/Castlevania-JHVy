@@ -92,8 +92,8 @@ void Simon::Render()
 		id = SIMON_ANI_SITTING_ATTACKING;
 
 		if (vampireKiller != NULL) {
+			vampireKiller->Render(x, y, state, nx);
 			vampireKiller->SetPosition(x, y, state, nx);
-			vampireKiller->Render();
 		}
 	}
 	else if (state == SIMON_STATE_STAND_ATTACK)

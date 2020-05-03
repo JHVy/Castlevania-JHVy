@@ -18,7 +18,7 @@ using namespace std;
 #define SCREEN_WIDTH 520
 #define SCREEN_HEIGHT 460
 
-#define MAX_FRAME_RATE 120
+#define MAX_FRAME_RATE 50
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
 #define ID_TEX 1
