@@ -1,4 +1,5 @@
 #pragma once
+//#include "Game.h"
 #include "GameObject.h"
 #include "Define.h"
 #include "Weapon.h"
@@ -70,6 +71,9 @@
 #define TIME_RATE_END_GAME 50
 
 #define ONE_HIT 2
+
+class CGame;
+class Simon;
 
 class Simon :
 	public CGameObject

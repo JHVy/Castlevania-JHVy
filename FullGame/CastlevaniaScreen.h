@@ -15,6 +15,7 @@
 #include "Torch.h"
 
 class CGame;
+class Simon;
 
 class CastlevaniaScreen
 {
@@ -37,6 +38,10 @@ public:
 	void Update(DWORD dt);
 	virtual void Render();
 	virtual void Unload();
+
+	vector<CGameObject*> getListObject() {
+		return this->items;
+	}
 
 private:
 	void UpdateCamera();

@@ -186,4 +186,6 @@ enum eType
 
 };
 
+class Item;
+
 #endif

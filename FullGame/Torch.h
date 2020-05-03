@@ -1,9 +1,9 @@
 #pragma once
 
+#include "ItemHeart.h"
 #include "GameObject.h"
 #include "Item.h"
 
-#include "ItemHeart.h"
 
 #define TORCH_WIDTH 32
 #define TORCH_HEIGHT 64
@@ -34,6 +34,9 @@
 #define ID_VASE			17
 #define ID_III			18
 
+class Item_Heart;
+class Item;
+
 class Torch : public CGameObject
 {
 private:
@@ -42,6 +45,7 @@ private:
 
 public:
 	Torch(int _x, int _y) {
+		this->_type = eType::TORCH;
 		x = _x;
 		y = _y;
 		this->numAnimation = 501;
@@ -49,6 +53,7 @@ public:
 	}
 
 	Torch(int _x, int _y, int _id_item) {
+		this->_type = eType::TORCH;
 		x = _x;
 		y = _y;
 		this->numAnimation = 501;

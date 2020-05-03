@@ -15,7 +15,7 @@
 
 #define TYPE_ITEM		 0
 #define ITEM_GRAVITY	 0.2f
-#define TIME_ITEM_EXSIST 5000
+#define TIME_ITEM_EXSIST 500
 
 
 class Item : public CGameObject

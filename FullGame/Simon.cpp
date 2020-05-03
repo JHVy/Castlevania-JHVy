@@ -1,4 +1,5 @@
 #include "Simon.h"
+#include "Game.h"
 
 Simon::Simon() {
 	VampireKiller* rob = new VampireKiller();
@@ -38,6 +39,42 @@ Simon::Simon() {
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
+	// collision
+	if (!coObjects->empty() && IsAttacking()) {
+		RECT rect, rect1;
+
+		float l = 0, t = 0, r = 0, b = 0;
+		if (vampireKiller)
+			this->vampireKiller->GetBoundingBox(l, t, r, b);
+
+
+		rect.left = (int)l;
+		rect.top = (int)t;
+		rect.right = (int)r;
+		rect.bottom = (int)b;
+		
+
+		for (int index = 0; index < coObjects->size(); index++) {
+			LPGAMEOBJECT obj = coObjects->at(index);
+
+			if (obj->_type != eType::TORCH)
+				continue;
+			
+			float l1, t1, r1, b1;
+			obj->GetBoundingBox(l1, t1, r1, b1);
+			
+			rect1.left = (int)l1;
+			rect1.top = (int)t1;
+			rect1.right = (int)r1;
+			rect1.bottom = (int)b1;
+
+			if (CGame::GetInstance()->isCollision(rect, rect1)) {
+				obj->SetState(TORCH_STATE_ITEM);
+			}
+		}
+	}
+
+	// update
 	x = x + 0.75 * vx * dt;
 	y = y + vy * dt;
 	vy += 0.2 * SIMON_GRAVITY * dt;
@@ -67,6 +104,8 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 		return;
 	}
+
+	
 }
 
 void Simon::Render()

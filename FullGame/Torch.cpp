@@ -12,6 +12,11 @@ void Torch::Render() {
 
 void Torch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	CGameObject::Update(dt);
+
+	if (state == TORCH_STATE_ITEM) {
+		if (item != NULL)
+			item->Update(dt, coObjects);
+	}
 }
 
 void Torch::GetBoundingBox(float& left, float& top, float& right, float& bottom)
