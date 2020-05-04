@@ -3,7 +3,8 @@
 #include "ItemHeart.h"
 #include "GameObject.h"
 #include "Item.h"
-
+#include "ItemUpgrade.h"
+#include "ItemDagger.h"
 
 #define TORCH_WIDTH 32
 #define TORCH_HEIGHT 64
@@ -62,6 +63,14 @@ public:
 		switch (_id_item) {
 		case ID_HEART:
 			item = new Item_Heart(x, y);
+			return;
+
+		case ID_WHIPUPGRADE:
+			item = new ItemUpgrade(x, y);
+			return;
+
+		case ID_DAGGER:
+			item = new ItemDagger(x, y);
 			return;
 
 		default:

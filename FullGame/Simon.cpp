@@ -93,11 +93,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 		if (t - attack_start > ATTACK_TIME) {
 			attack_start = 0;
-			
-			if (!IsSitting())
-				this->state = SIMON_STATE_IDLE;
-			else
-				this->state = SIMON_STATE_SIT;
+			this->state = SIMON_STATE_IDLE;
 
 			return;
 		}
@@ -249,10 +245,11 @@ void Simon::SetState(int state)
 		break;
 
 	case SIMON_STATE_JUMP:
-		if (start_jump)
+		if (start_jump || currentTime - last_jump < JUMP_WAIT_TIME)
 			break;
 
 		start_jump = GetTickCount();
+		last_jump = start_jump;
 		vy = -SIMON_JUMP_SPEED_Y;
 		y = 300;
 		break;

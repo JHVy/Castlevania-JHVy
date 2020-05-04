@@ -55,7 +55,8 @@
 #define ATTACK_TIME			300
 #define ATTACK_TIME_WAIT	300
 #define JUMP_TIME			0
-#define DIE_TIME			2000
+#define JUMP_WAIT_TIME 1000
+#define DIE_TIME			3000
 #define TIME_FOR_PER_STEP  200
 
 #define SIMON_STRANS_TIME 400
@@ -110,6 +111,7 @@ protected:
 
 	// history
 	int last_attack = 0;
+	int last_jump = 0;
 
 	// weapon 
 	VampireKiller* vampireKiller;
