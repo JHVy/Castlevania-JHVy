@@ -161,11 +161,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 
 
 	}
-	else if (IsKeyDown(DIK_DOWN))
-	{
-		simon->SetState(SIMON_STATE_GO_DOWN);
-
-	}
 	else if (IsKeyDown(DIK_RIGHT))
 	{
 		simon->SetTrend(1);
@@ -191,10 +186,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 			else
 				simon->SetState(SIMON_STATE_WALKING_LEFT);
 		}
-	}
-	else if (IsKeyDown(DIK_UP))
-	{
-		simon->SetState(SIMON_STATE_GO_UP);
 	}
 	else if (!IsKeyDown(DIK_DOWN) && !IsKeyDown(DIK_Z)) {
 

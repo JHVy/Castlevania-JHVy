@@ -7,35 +7,7 @@ Simon::Simon() {
 
 	untouchable = 0;
 	trans_start = 0;
-	_heart = 5;
-	isCanOnStair = 0;
-	isOnStair = false;
-	_stairTrend = 0;
-	_energy = SIMON_MAX_ENERGY;
-	isAutoGo = false;
-	auto_x = -1;
-	_score = 0;
-	_lives = 99;
-	_count = 0;
-	start_stair = 0;
-	isFall = false;
-	isUnder = false;
-	start_disappear = 0;
 	start_jump = 0;
-
-	//AddAnimation(400);		//0. idle left 
-	//AddAnimation(401);		//1. walk left
-	//AddAnimation(402);		//2. jump left
-	//AddAnimation(403);		//3. sit left
-	//AddAnimation(404);		//4. stand attack
-	//AddAnimation(405);		//5. sit attack
-	//AddAnimation(399);		//6. trans
-	//AddAnimation(406);		//7. go up
-	//AddAnimation(407);		//8. go down
-	//AddAnimation(408);		//9. hurt
-	//AddAnimation(409);		//10. idle up
-	//AddAnimation(410);		//11. idle down
-	//AddAnimation(411);		//12. die
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -108,11 +80,7 @@ void Simon::Render()
 {
 	int id;
 
-	if (isAutoGo)
-	{
-		id = SIMON_ANI_WALKING;
-	}
-	else if (state == SIMON_STATE_DIE)
+	 if (state == SIMON_STATE_DIE)
 	{
 		id = SIMON_ANI_DIE;
 	}
@@ -146,17 +114,6 @@ void Simon::Render()
 		}
 
 	}
-	else if (state == SIMON_STATE_GO_UP && (isCanOnStair == 1 || isOnStair))
-	{
-		id = SIMON_ANI_GO_UP;
-	}
-	else if (state == SIMON_STATE_GO_DOWN)
-	{
-		if (isOnStair)
-			id = SIMON_ANI_GO_DOWN;
-		else
-			id = SIMON_ANI_SITTING;
-	}
 	else if (state == SIMON_STATE_ATTACK_DAGGER)
 	{
 		id = SIMON_ANI_STANDING_ATTACKING;
@@ -173,10 +130,6 @@ void Simon::Render()
 		else
 			id = SIMON_ANI_IDLE;
 	}
-	else if (state == SIMON_STATE_HURT)
-	{
-		id = SIMON_ANI_HURT;
-	}
 	else {
 		if (vx == 0)
 		{
@@ -191,13 +144,7 @@ void Simon::Render()
 		id = SIMON_ANI_TRANS;
 	}
 	int alpha = 255;
-	if (untouchable
-		&& (isOnStair || GetTickCount() - untouchable_start > SIMON_HURT_TIME)
-		&& (die_start == 0)) alpha = 128;
-	if (start_disappear)
-	{
-		alpha = (GetTickCount() - start_disappear) / 1000 * 50;
-	}
+
 
 	DebugOut(L"[START DRAW SIMON] ");
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
@@ -295,8 +242,7 @@ void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 		right = this->x + SIMON_WIDTH_DIE;
 		bottom = this->y + SIMON_HEIGHT_DIE;
 	}
-	else if ((state == SIMON_STATE_GO_DOWN && isCanOnStair != -1)
-		|| state == SIMON_STATE_SIT_ATTACK
+	else if ( state == SIMON_STATE_SIT_ATTACK
 		|| (state == SIMON_STATE_SIT)
 		|| (start_jump > 0 && GetTickCount() - start_jump <= SIMON_TIME_STATE_JUMP))
 	{

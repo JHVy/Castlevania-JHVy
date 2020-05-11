@@ -38,7 +38,6 @@ void Torch::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 	}
 	else if (state == TORCH_STATE_ITEM)
 	{
-		//item->SetPosition(x,y);
 		item->GetBoundingBox(left, top, right, bottom);
 	}
 }

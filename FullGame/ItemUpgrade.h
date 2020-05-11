@@ -14,7 +14,6 @@ public:
 	ItemUpgrade(int _x, int _y) : Item(_x, _y) {
 		this->numAnimation = 700;
 		AddAnimation(700);
-		//this->_type = eType::HEART;
 
 	}
 
