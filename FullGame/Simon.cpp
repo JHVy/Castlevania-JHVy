@@ -4,6 +4,8 @@
 Simon::Simon() {
 	VampireKiller* rob = new VampireKiller();
 	vampireKiller = rob;
+	vampireKiller->setUpLevel();
+	vampireKiller->setUpLevel();
 
 	untouchable = 0;
 	trans_start = 0;
@@ -41,8 +43,9 @@ Simon::Simon() {
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	// collision
 	if (!coObjects->empty() && IsAttacking()) {
-		RECT rect, rect1;
+		RECT rect, rect1, rectSimon;
 
+		// weapon vs item
 		float l = 0, t = 0, r = 0, b = 0;
 		if (vampireKiller)
 			this->vampireKiller->GetBoundingBox(l, t, r, b);
@@ -53,6 +56,20 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		rect.right = (int)r;
 		rect.bottom = (int)b;
 		
+		// simon vs item
+		float ls = 0, ts = 0, rs = 0, bs = 0;
+		ls = 0;
+		rs = 0;
+		ts = 0;
+		bs = 0;
+
+		if (vampireKiller)
+			this->vampireKiller->GetBoundingBox(ls, ts, rs, bs);
+
+		rectSimon.left = (int)ls;
+		rectSimon.top = (int)ts;
+		rectSimon.right = (int)rs;
+		rectSimon.bottom = (int)bs;
 
 		for (int index = 0; index < coObjects->size(); index++) {
 			LPGAMEOBJECT obj = coObjects->at(index);
@@ -71,7 +88,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			if (CGame::GetInstance()->isCollision(rect, rect1)) {
 				obj->SetState(TORCH_STATE_ITEM);
 			}
+
+			if (CGame::GetInstance()->isCollision(rectSimon, rect1)) {
+				if (obj->GetState == TORCH_STATE_ITEM)
+					this->vampireKiller->setUpLevel();
+			}
 		}
+
+		
 	}
 
 	// update
