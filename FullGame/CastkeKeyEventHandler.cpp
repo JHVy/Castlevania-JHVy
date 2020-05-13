@@ -41,10 +41,9 @@ void CastkeKeyEventHandler::OnKeyUp(int KeyCode)
 
 	switch (KeyCode)
 	{
-	/*case DIK_DOWN:
-		if (!simon->IsOnStair())
-			simon->SetState(SIMON_STATE_UP);
-		break;*/
+	case DIK_DOWN:
+			simon->SetState(SIMON_STATE_IDLE);
+		break;
 
 	/*case DIK_Z:
 		if (simon->GetState() == SIMON_STATE_SIT_ATTACK)
@@ -52,7 +51,7 @@ void CastkeKeyEventHandler::OnKeyUp(int KeyCode)
 			if (IsKeyDown(DIK_DOWN))
 				simon->SetState(SIMON_STATE_SIT);
 			else
-				simon->SetState(SIMON_STATE_UP);
+				simon->SetState(SIMON_STATE_IDLE);
 		}
 		break;*/
 
@@ -162,11 +161,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 
 
 	}
-	else if (IsKeyDown(DIK_DOWN))
-	{
-		simon->SetState(SIMON_STATE_GO_DOWN);
-
-	}
 	else if (IsKeyDown(DIK_RIGHT))
 	{
 		simon->SetTrend(1);
@@ -192,10 +186,6 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 			else
 				simon->SetState(SIMON_STATE_WALKING_LEFT);
 		}
-	}
-	else if (IsKeyDown(DIK_UP))
-	{
-		simon->SetState(SIMON_STATE_GO_UP);
 	}
 	else if (!IsKeyDown(DIK_DOWN) && !IsKeyDown(DIK_Z)) {
 

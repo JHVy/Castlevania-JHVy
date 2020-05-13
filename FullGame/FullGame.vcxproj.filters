@@ -65,6 +65,12 @@
     <ClCompile Include="ItemHeart.cpp">
       <Filter>GameObject\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="ItemDagger.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUpgrade.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -125,6 +131,12 @@
       <Filter>GameObject\Object\Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemHeart.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDagger.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemUpgrade.h">
       <Filter>GameObject\Object\Item</Filter>
     </ClInclude>
   </ItemGroup>

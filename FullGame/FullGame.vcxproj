@@ -129,8 +129,10 @@
     <ClCompile Include="CastkeKeyEventHandler.cpp" />
     <ClCompile Include="CastlevaniaScreen.cpp" />
     <ClCompile Include="Define.cpp" />
+    <ClCompile Include="ItemDagger.cpp" />
     <ClCompile Include="ItemHeart.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemUpgrade.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Simon.cpp" />
@@ -153,8 +155,10 @@
     <ClInclude Include="CastkeKeyEventHandler.h" />
     <ClInclude Include="CastlevaniaScreen.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="ItemDagger.h" />
     <ClInclude Include="ItemHeart.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemUpgrade.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Simon.h" />

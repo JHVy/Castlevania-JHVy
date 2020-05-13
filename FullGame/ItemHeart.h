@@ -14,7 +14,6 @@ public:
 	Item_Heart(int _x, int _y): Item(_x, _y) {
 		this->numAnimation = 702;
 		AddAnimation(702);
-		//this->_type = eType::HEART;
 		
 	}
 
