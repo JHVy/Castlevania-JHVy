@@ -78,19 +78,19 @@ void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _n
 		if (_nx < 0)
 		{
 			if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-				x1 = simon_x + 55;
+				x1 = simon_x + 45;
 				y1 = simon_y + 15;
 			}
 			else
-				x1 = simon_x + 55;
+				x1 = simon_x + 45;
 		}
 		else {
 			if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-				x1 = simon_x + 65;
+				x1 = simon_x - 55;
 				y1 = simon_y + 15;
 			}
 			else
-				x1 = simon_x + 65;
+				x1 = simon_x + 55;
 		}
 	}
 

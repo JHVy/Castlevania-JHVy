@@ -68,5 +68,13 @@ public:
 	virtual void Render();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+
+	int getItemType() {
+		return this->item->getItemType();
+	}
+
+	void invisibleItem() {
+		this->item->StartInvisible();
+	}
 };
 

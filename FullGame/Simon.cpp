@@ -4,8 +4,8 @@
 Simon::Simon() {
 	VampireKiller* rob = new VampireKiller();
 	vampireKiller = rob;
-	vampireKiller->setUpLevel();
-	vampireKiller->setUpLevel();
+	//vampireKiller->setUpLevel();
+	//vampireKiller->setUpLevel();
 
 	untouchable = 0;
 	trans_start = 0;
@@ -13,7 +13,7 @@ Simon::Simon() {
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
-	// collision
+	// collision weapon
 	if (!coObjects->empty() && IsAttacking()) {
 		RECT rect, rect1, rectSimon;
 
@@ -28,21 +28,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		rect.right = (int)r;
 		rect.bottom = (int)b;
 		
-		// simon vs item
-		float ls = 0, ts = 0, rs = 0, bs = 0;
-		ls = 0;
-		rs = 0;
-		ts = 0;
-		bs = 0;
-
-		if (vampireKiller)
-			this->vampireKiller->GetBoundingBox(ls, ts, rs, bs);
-
-		rectSimon.left = (int)ls;
-		rectSimon.top = (int)ts;
-		rectSimon.right = (int)rs;
-		rectSimon.bottom = (int)bs;
-
 		for (int index = 0; index < coObjects->size(); index++) {
 			LPGAMEOBJECT obj = coObjects->at(index);
 
@@ -60,14 +45,48 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 			if (CGame::GetInstance()->isCollision(rect, rect1)) {
 				obj->SetState(TORCH_STATE_ITEM);
 			}
+		}
+	}
 
-			if (CGame::GetInstance()->isCollision(rectSimon, rect1)) {
-				if (obj->GetState == TORCH_STATE_ITEM)
-					this->vampireKiller->setUpLevel();
+	// collision simon 
+	if (!coObjects->empty()) {
+		RECT rect1, rectSimon;
+
+		// simon vs item
+		float ls = 0, ts = 0, rs = 0, bs = 0;
+		this->GetBoundingBox(ls, ts, rs, bs);
+
+		rectSimon.left = (int)ls;
+		rectSimon.top = (int)ts;
+		rectSimon.right = (int)rs;
+		rectSimon.bottom = (int)bs;
+
+		for (int index = 0; index < coObjects->size(); index++) {
+			LPGAMEOBJECT obj = coObjects->at(index);
+
+			if (obj->_type != eType::TORCH)
+				continue;
+			Torch* z = (Torch*)(obj);
+
+			float l1 = 0, t1 = 0, r1 = 0, b1 = 0;
+			obj->GetBoundingBox(l1, t1, r1, b1);
+
+			rect1.left = (int)l1;
+			rect1.top = (int)t1;
+			rect1.right = (int)r1;
+			rect1.bottom = (int)b1;
+
+			if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
+				if (z->GetState() == TORCH_STATE_ITEM) {
+
+					if (z->getItemType() == eType::WHIPUPGRADE)
+						this->vampireKiller->setUpLevel();
+
+					z->invisibleItem();
+					//this->SetState(TORCH_STATE_NOT_EXSIST);
+				}
 			}
 		}
-
-		
 	}
 
 	// update
@@ -256,21 +275,28 @@ void Simon::SetState(int state)
 
 void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	float x1 = x;
+	float y1 = y;
 
-	left = this->x;
-	top = this->y;
-	right = this->x + SIMON_WIDTH;
-	bottom = this->y + SIMON_HEIGHT_STAND;
+	if (nx > 0)
+		x1 = x + 20;
+	else
+		x1 = x - 40;
+
+	left = x1;
+	top = y1;
+	right = x1 + SIMON_WIDTH;
+	bottom = y1 + SIMON_HEIGHT_STAND;
 	if (state == SIMON_STATE_DIE)
 	{
-		right = this->x + SIMON_WIDTH_DIE;
-		bottom = this->y + SIMON_HEIGHT_DIE;
+		right = x1 + SIMON_WIDTH_DIE;
+		bottom = y1 + SIMON_HEIGHT_DIE;
 	}
 	else if ( state == SIMON_STATE_SIT_ATTACK
 		|| (state == SIMON_STATE_SIT)
 		|| (start_jump > 0 && GetTickCount() - start_jump <= SIMON_TIME_STATE_JUMP))
 	{
-		bottom = this->y + SIMON_HEIGHT_SIT;
+		bottom = y1 + SIMON_HEIGHT_SIT;
 	}
 
 }

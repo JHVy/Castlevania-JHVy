@@ -14,12 +14,11 @@ public:
 	ItemDagger(int _x, int _y) : Item(_x, _y) {
 		this->numAnimation = 701;
 		AddAnimation(701);
-
+		this->itemType = eType::ITEMDAGGER;
 	}
 
 public:
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
-
 };
 
 

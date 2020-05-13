@@ -21,7 +21,10 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	else
 	{
-		if (GetTickCount() - time_exsist >= TIME_ITEM_EXSIST)
+		/*if (GetTickCount() - time_exsist >= TIME_ITEM_EXSIST)
+			state = ITEM_STATE_NOT_EXSIST;*/
+
+		if (time_start_invisible != 0 && GetTickCount() - time_start_invisible >= TIME_TO_INVISIBLE)
 			state = ITEM_STATE_NOT_EXSIST;
 	}
 	CGameObject::Update(dt);
