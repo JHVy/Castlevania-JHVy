@@ -66,6 +66,9 @@ public:
 		this->cam_y = _y;
 	}
 
+	void GetCamera(float& x, float& y) { x = cam_x; y = cam_y; }
+
+
 	static void SweptAABB(
 		float ml,			// move left 
 		float mt,			// move top
