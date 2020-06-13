@@ -54,7 +54,7 @@ void CastlevaniaScreen::LoadObject(string file_path) {
 void CastlevaniaScreen::Load() {
 
 	this->gameMap->setId(1);
-	this->gameMap->LoadMap("textures/map.txt", 24, 12);
+	this->gameMap->LoadMap("Res/maps/map.txt", 24, 12);
 
 	this->screen_size_x = 23 * 64 - 30;
 	this->screen_size_y = 12 * 64;
@@ -62,7 +62,7 @@ void CastlevaniaScreen::Load() {
 	float start_simon_x = 60, start_simon_y = 150;
 	this->simon->SetPosition(start_simon_x, start_simon_y);
 
-	this->LoadObject("textures/objects_1.txt");
+	this->LoadObject("Res/textures/objects_1.txt");
 }
 
 void CastlevaniaScreen::Update(DWORD dt) {
