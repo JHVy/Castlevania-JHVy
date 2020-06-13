@@ -3,24 +3,27 @@
 #include <stdlib.h>
 #include "fstream"
 
-GameMap::GameMap(int _id) {
-	this->numCols = 88;
-	this->numRows = 12;
-	this->id = _id;
+GameMap::GameMap() {
+	this->numCols = 0;
+	this->numRows = 0;
+	this->id = 0;
 }
 
 GameMap::~GameMap()
 {
 }
 
-void GameMap::LoadMap(string filepath, int _numCols, int _numRows) {
+void GameMap::LoadMap(int _id, string filepath, int _numCols, int _numRows) {
 	ifstream inFile;
 	inFile.open(filepath);
 
+	this->id = _id;
+	this->numRows = _numRows;
+	this->numCols = _numCols;
 
-	for (int i = 0; i < _numRows; i++)
+	for (int i = 0; i < numRows; i++)
 	{
-		for (int j = 0; j < _numCols; j++)
+		for (int j = 0; j < numCols; j++)
 		{
 			inFile >> cellTypes[i][j];
 		}

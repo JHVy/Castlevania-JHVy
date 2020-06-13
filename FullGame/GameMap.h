@@ -20,7 +20,7 @@ using namespace std;
 class GameMap
 {
 public:
-	GameMap(int _id);
+	GameMap();
 	~GameMap();
 
 
@@ -33,7 +33,7 @@ private:
 
 public:
 	void setId(int _id) { this->id = _id; }
-	void LoadMap(string filepath, int _numCols, int _numRows);
+	void LoadMap(int _id, string filepath, int _numCols, int _numRows);
 	void DrawMap();
 
 private:
