@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "fstream"
 
-
 GameMap::GameMap(int _id) {
 	this->numCols = 88;
 	this->numRows = 12;
@@ -40,7 +39,7 @@ void GameMap::DrawMap() {
 		for (int j = 0; j < numCols; j++)
 		{
 			float posX = j * TILE_SIZE;
-			float posY = i * TILE_SIZE + 40;
+			float posY = i * TILE_SIZE + SCREEN_PADING_TOP;
 
 			if (posX < 0 || posY < 0) continue;
 			
