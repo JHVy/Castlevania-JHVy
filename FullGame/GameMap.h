@@ -26,14 +26,14 @@ public:
 
 private:
 	int numRows, numCols; 
-	int id;
+	int id, cellW, cellH;
 	
 	// cell type
 	int cellTypes[200][200];
 
 public:
 	void setId(int _id) { this->id = _id; }
-	void LoadMap(int _id, string filepath, int _numCols, int _numRows);
+	void LoadMap(int _id, string filepath);
 	void DrawMap();
 
 private:

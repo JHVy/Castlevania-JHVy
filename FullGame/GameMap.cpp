@@ -13,13 +13,15 @@ GameMap::~GameMap()
 {
 }
 
-void GameMap::LoadMap(int _id, string filepath, int _numCols, int _numRows) {
+void GameMap::LoadMap(int _id, string filepath) {
 	ifstream inFile;
 	inFile.open(filepath);
 
 	this->id = _id;
-	this->numRows = _numRows;
-	this->numCols = _numCols;
+	inFile >> numRows;
+	inFile >> numCols;
+	inFile >> cellW;
+	inFile >> cellH;
 
 	for (int i = 0; i < numRows; i++)
 	{
@@ -41,8 +43,8 @@ void GameMap::DrawMap() {
 	{
 		for (int j = 0; j < numCols; j++)
 		{
-			float posX = j * TILE_SIZE;
-			float posY = i * TILE_SIZE + SCREEN_PADING_TOP;
+			float posX = j * cellW;
+			float posY = i * cellH + SCREEN_PADING_TOP;
 
 			if (posX < 0 || posY < 0) continue;
 			

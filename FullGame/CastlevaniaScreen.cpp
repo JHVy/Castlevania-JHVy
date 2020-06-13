@@ -53,7 +53,7 @@ void CastlevaniaScreen::LoadObject(string file_path) {
 
 void CastlevaniaScreen::Load() {
 
-	this->gameMap->LoadMap(1, "Res/maps/map.txt", 24, 12);
+	this->gameMap->LoadMap(1, "Res/maps/map.txt");
 
 	this->screen_size_x = 23 * 64 - 30;
 	this->screen_size_y = 12 * 64;
