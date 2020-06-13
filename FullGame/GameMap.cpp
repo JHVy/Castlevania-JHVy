@@ -62,7 +62,7 @@ void GameMap::DrawMap() {
 			int i = 5;
 
 			float posX = j * BRICK_SIZE;
-			float posY = i * TILE_SIZE + 40;
+			float posY = i * TILE_SIZE + SCREEN_PADING_TOP;
 
 			if (posX >= 0 && posY >= 0)
 				CSprites::GetInstance()->Get(9999)->Draw(posX, posY);

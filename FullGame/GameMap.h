@@ -35,6 +35,10 @@ public:
 	void setId(int _id) { this->id = _id; }
 	void LoadMap(int _id, string filepath);
 	void DrawMap();
+	int getRows() { return numRows; }
+	int getCols() { return numCols; }
+	int getTileW() { return cellW; }
+	int getTileH() { return cellH; }
 
 private:
 	int getTitle(int x, int y);
