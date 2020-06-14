@@ -120,6 +120,7 @@ void CastlevaniaScreen::Render() {
 	}
 
 	this->simon->Render();
+
 	this->board->Render();
 }
 

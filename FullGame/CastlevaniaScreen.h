@@ -17,6 +17,7 @@
 
 class CGame;
 class Simon;
+class CBoard;
 
 class CastlevaniaScreen
 {
