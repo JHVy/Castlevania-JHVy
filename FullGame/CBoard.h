@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Game.h"
 #include "CCode.h"
+#include "Simon.h"
 
 
 #define SCORE_X 110
