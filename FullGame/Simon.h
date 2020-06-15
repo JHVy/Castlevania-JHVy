@@ -76,6 +76,12 @@ protected:
 	DWORD attack_start;
 	DWORD start_jump;
 
+	int _energy;
+	int _score;
+	int _lives;
+
+	static Simon* _instance;
+
 	unordered_map<int, Weapon*> weapons;
 	bool isFall;
 
@@ -88,6 +94,9 @@ protected:
 	VampireKiller* vampireKiller;
 
 public:
+
+	static Simon* GetInstance();
+
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void Render();
@@ -103,6 +112,21 @@ public:
 	void SetState(int state);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+
+	int GetEnergy()
+	{
+		return _energy;
+	}
+
+	int GetScore()
+	{
+		return _score;
+	}
+
+	int GetLives()
+	{
+		return _lives;
+	}
 
 private:
 	// helper

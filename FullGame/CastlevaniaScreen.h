@@ -10,18 +10,22 @@
 #include "Simon.h"
 #include "Loader.h"
 #include "Game.h"
+#include "CBoard.h"
 
 #include "ItemHeart.h"
 #include "Torch.h"
 
 class CGame;
 class Simon;
+class CBoard;
 
 class CastlevaniaScreen
 {
 protected:
 	GameMap * gameMap;
 	string path;
+
+	CBoard * board;
 
 	float screen_size_x, screen_size_y;
 	vector<CGameObject*> items;

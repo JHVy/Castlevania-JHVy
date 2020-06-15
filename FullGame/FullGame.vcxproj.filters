@@ -71,6 +71,7 @@
     <ClCompile Include="ItemUpgrade.cpp">
       <Filter>GameObject\Object\Item</Filter>
     </ClCompile>
+    <ClCompile Include="CCode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -139,6 +140,7 @@
     <ClInclude Include="ItemUpgrade.h">
       <Filter>GameObject\Object\Item</Filter>
     </ClInclude>
+    <ClInclude Include="CCode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
