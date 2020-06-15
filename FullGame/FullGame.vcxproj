@@ -131,6 +131,8 @@
     <ClCompile Include="CBoard.cpp" />
     <ClCompile Include="CCode.cpp" />
     <ClCompile Include="Define.cpp" />
+    <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="HidenObject.cpp" />
     <ClCompile Include="ItemDagger.cpp" />
     <ClCompile Include="ItemHeart.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -159,6 +161,8 @@
     <ClInclude Include="CBoard.h" />
     <ClInclude Include="CCode.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="HidenObject.h" />
     <ClInclude Include="ItemDagger.h" />
     <ClInclude Include="ItemHeart.h" />
     <ClInclude Include="Item.h" />

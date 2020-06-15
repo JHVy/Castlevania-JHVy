@@ -2,6 +2,7 @@
 #include <fstream>
 
 #include "Game.h"
+#include "GameConfig.h"
 #include "Utils.h"
 
 #include "GameMap.h"
@@ -240,8 +241,13 @@ CGame* CGame::GetInstance()
 */
 void CGame::Load()
 {
-	CastlevaniaScreen* screen = new CastlevaniaScreen();
-	this->screens[1] = screen;
+	
+	for (int i = 0; i < MAX_LEVEL; i++)
+	{
+		CastlevaniaScreen* screen = new CastlevaniaScreen();
+		this->screens[i] = screen;
+	}
+	
 	this->current_scene = 1;
 
 	SwitchScene(current_scene);
@@ -253,9 +259,9 @@ void CGame::SwitchScene(int scene_id)
 
 	this->screens[current_scene]->Unload();
 
-	CTextures::GetInstance()->Clear();
-	CSprites::GetInstance()->Clear();
-	CAnimations::GetInstance()->Clear();
+	//CTextures::GetInstance()->Clear();
+	//CSprites::GetInstance()->Clear();
+	//CAnimations::GetInstance()->Clear();
 
 	current_scene = scene_id;
 	CastlevaniaScreen* s = this->screens[scene_id];
@@ -270,4 +276,11 @@ void CGame::SwitchScene(int scene_id)
 void CGame::display() {
 	// render screen
 	this->screens[this->current_scene]->Render();
+}
+
+void CGame::Update(DWORD dt)
+{
+	if (current_scene != GameConfig::GameLevel)
+		SwitchScene(GameConfig::GameLevel);
+	GetCurrentScene()->Update(dt);
 }

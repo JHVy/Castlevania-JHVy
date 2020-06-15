@@ -17,8 +17,6 @@ CSimon::CSimon(float x, float y) : CGameObject()
 	start_y = y;
 	this->x = x;
 	this->y = y;
-
-
 }
 
 void CSimon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
