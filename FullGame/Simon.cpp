@@ -1,6 +1,17 @@
 #include "Simon.h"
 #include "Game.h"
 
+Simon* Simon::_instance = NULL;
+
+Simon* Simon::GetInstance()
+{
+	if (_instance == NULL)
+	{
+		_instance = new Simon();
+	}
+	return _instance;
+}
+
 Simon::Simon() {
 	VampireKiller* rob = new VampireKiller();
 	vampireKiller = rob;
@@ -10,6 +21,10 @@ Simon::Simon() {
 	untouchable = 0;
 	trans_start = 0;
 	start_jump = 0;
+
+	_energy = 16;
+	_score = 0;
+	_lives = 3;
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
