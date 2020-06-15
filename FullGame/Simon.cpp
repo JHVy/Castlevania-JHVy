@@ -105,9 +105,9 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	}
 
 	// update
-	x = x + 0.75 * vx * dt;
+	x = x + vx * dt;
 	y = y + vy * dt;
-	vy += 0.2 * SIMON_GRAVITY * dt;
+	vy += SIMON_GRAVITY * dt;
 
 	if (x < 30) x = 30;
 
@@ -138,7 +138,7 @@ void Simon::Render()
 {
 	int id;
 
-	 if (state == SIMON_STATE_DIE)
+	if (state == SIMON_STATE_DIE)
 	{
 		id = SIMON_ANI_DIE;
 	}
@@ -188,7 +188,8 @@ void Simon::Render()
 		else
 			id = SIMON_ANI_IDLE;
 	}
-	else {
+	else 
+	{
 		if (vx == 0)
 		{
 			id = SIMON_ANI_IDLE;
@@ -198,6 +199,8 @@ void Simon::Render()
 			id = SIMON_ANI_WALKING;
 		}
 	}
+
+
 	if (trans_start > 0) {
 		id = SIMON_ANI_TRANS;
 	}

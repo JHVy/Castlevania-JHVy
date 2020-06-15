@@ -37,7 +37,6 @@ int GameMap::getTitle(int x, int y)
 	return cellTypes[x][y];
 }
 
-CSprite temp;
 void GameMap::DrawMap() {
 	for (int i = 0; i < numRows; i++)
 	{
@@ -50,22 +49,6 @@ void GameMap::DrawMap() {
 			
 			if (CSprites::GetInstance()->Get(getTitle(i, j)) != NULL) 
 				CSprites::GetInstance()->Get(getTitle(i, j))->Draw(posX, posY);
-			
-				
-		}
-	}
-
-
-	if (this->id == 1)
-	{
-		for (int j = 0; j < numCols*2; j++) {
-			int i = 5;
-
-			float posX = j * BRICK_SIZE;
-			float posY = i * TILE_SIZE + SCREEN_PADING_TOP;
-
-			if (posX >= 0 && posY >= 0)
-				CSprites::GetInstance()->Get(9999)->Draw(posX, posY);
 		}
 	}
 }

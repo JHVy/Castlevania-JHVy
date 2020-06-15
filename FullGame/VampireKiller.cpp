@@ -146,7 +146,6 @@ void VampireKiller::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 
 	CalcPotentialCollisions(&listObj, coEvents);
 
-
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{

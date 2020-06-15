@@ -11,12 +11,12 @@
 using namespace std;
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
-#define MAIN_WINDOW_TITLE L"Castlevania 1986"
+#define MAIN_WINDOW_TITLE L"Castlevania 1986 - JHVy"
 
 #define BACKGROUND_COLOR_DEFAULT D3DCOLOR_XRGB(0, 0, 0)
 #define BACKGROUND_COLOR_CROSS D3DCOLOR_XRGB(188, 188, 188)
-#define SCREEN_WIDTH 560
-#define SCREEN_HEIGHT 460
+#define SCREEN_WIDTH		800	//520
+#define SCREEN_HEIGHT		460
 
 #define MAX_FRAME_RATE 50
 
