@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fstream"
+#include "Utils.h"
 
 GameMap::GameMap() {
 	this->numCols = 0;
@@ -30,6 +31,22 @@ void GameMap::LoadMap(int _id, string filepath) {
 			inFile >> cellTypes[i][j];
 		}
 	}
+
+	int game_stage = _id;
+	//Mapi
+	string sPath = "Res\\maps\\map" + to_string(game_stage) + ".png";
+	CTextures::GetInstance()->Add(game_stage, ToLPCWSTR(sPath), D3DCOLOR_XRGB(255, 0, 255));
+	int index = 0;
+	for (int i = 0; i < numRows; i++)
+	{
+		for (int j = 0; j < numCols; j++)
+		{
+			CSprites::GetInstance()->Add(index++, j * cellW, i * cellH, (j + 1) * cellW, (i + 1) * cellH, 
+				CTextures::GetInstance()->Get(game_stage));
+		}
+	}
+
+
 }
 
 int GameMap::getTitle(int x, int y)

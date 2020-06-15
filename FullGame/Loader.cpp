@@ -64,7 +64,7 @@ void LoadSpriteResource() {
 
 	#pragma region Add sprites Map
 	//Map1
-	textures->Add(ID_TEX_MAP1, L"Res\\maps\\map1.png", D3DCOLOR_XRGB(255, 0, 255));
+	/*textures->Add(ID_TEX_MAP1, L"Res\\maps\\map1.png", D3DCOLOR_XRGB(255, 0, 255));
 	int index = 0;
 	int rowMap = 6, colMap = 24, sizeTile = 64;
 	for (int i = 0; i < rowMap; i++)
@@ -73,7 +73,7 @@ void LoadSpriteResource() {
 		{
 			sprites->Add(index++, j * sizeTile, i * sizeTile, (j + 1) * sizeTile, (i+1) * sizeTile, textures->Get(ID_TEX_MAP1));
 		}
-	}
+	}*/
 
 	//Map2
 	/*textures->Add(ID_TEX_MAP2, L"Res\\maps\\map2.png", D3DCOLOR_XRGB(255, 0, 255));

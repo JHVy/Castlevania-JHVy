@@ -9,7 +9,7 @@
 #include "Define.h"
 #include "Sprites.h"
 
-#define ID_TEX_MAP1 4
+//#define ID_TEX_MAP1 4
 #define TILE_SIZE 64
 #define BRICK_SIZE 32
 
