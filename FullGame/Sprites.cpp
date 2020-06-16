@@ -35,8 +35,6 @@ void CSprite::Draw(float x, float y, int alpha)
 
 	DebugOut(L"[Draw] %f %f\n", x, y);
 
-	x -= getwidth();
-
 	CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, alpha);
 }
 
