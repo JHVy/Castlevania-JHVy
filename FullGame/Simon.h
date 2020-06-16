@@ -10,7 +10,7 @@
 #define SIMON_JUMP_SPEED_Y		0.36f
 #define SIMON_GRAVITY			0.001f
 
-#define SIMON_POS_Y				300
+#define SIMON_POS_Y				320
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
