@@ -1,0 +1,13 @@
+5
+1	60 	150
+2 	40 	320
+3 	810 320
+4 	60 	250
+5 	60 	250
+
+
+
+
+
+//So luong man hinh game
+//id simon_x simon_y

@@ -14,7 +14,19 @@ using namespace std;
 
 class GameConfig
 {
-	public:
-		static int GameLevel;
+private:
+	static GameConfig* _instance;
+	POINT* SimonPosition;
+
+public:
+	int CurrentLevel, MaxLevel;
+
+	GameConfig();
+	~GameConfig();
+	static GameConfig* GetInstance();
+
+	void Load(string filePath);
+	void LevelUp() { if (CurrentLevel < MaxLevel) ++CurrentLevel; }
+	void GetSimonPosition(float& x, float& y);
 };
 
