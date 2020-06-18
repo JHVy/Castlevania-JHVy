@@ -1,7 +1,20 @@
 #include "Simon.h"
 #include "Game.h"
+#include "GameConfig.h"
+
+//Simon* Simon::_instance = NULL;
+//
+//Simon* Simon::GetInstance()
+//{
+//	if (_instance == NULL)
+//	{
+//		_instance = new Simon();
+//	}
+//	return _instance;
+//}
 
 Simon* Simon::_instance = NULL;
+//int Simon::_heart = 0;
 
 Simon* Simon::GetInstance()
 {
@@ -9,6 +22,7 @@ Simon* Simon::GetInstance()
 	{
 		_instance = new Simon();
 	}
+
 	return _instance;
 }
 
@@ -25,6 +39,7 @@ Simon::Simon() {
 	_energy = 16;
 	_score = 0;
 	_lives = 3;
+	_heart = 0;
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -63,7 +78,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		}
 	}
 
-	// collision simon 
+	// collision simon with object item
 	if (!coObjects->empty()) {
 		RECT rect1, rectSimon;
 
@@ -75,49 +90,79 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		rectSimon.top = (int)ts;
 		rectSimon.right = (int)rs;
 		rectSimon.bottom = (int)bs;
+		float l1 = 0, t1 = 0, r1 = 0, b1 = 0;
+		Torch* torch;
+		CHidenObject* hidenObj;
 
-		for (int index = 0; index < coObjects->size(); index++) {
+		for (int index = 0; index < coObjects->size(); index++) 
+		{
 			LPGAMEOBJECT obj = coObjects->at(index);
 
-			if (obj->_type != eType::TORCH)
-				continue;
-			Torch* z = (Torch*)(obj);
+			switch (obj->_type) 
+			{
+				case eType::TORCH:
+					torch = (Torch*)(obj);
 
-			float l1 = 0, t1 = 0, r1 = 0, b1 = 0;
-			obj->GetBoundingBox(l1, t1, r1, b1);
+					obj->GetBoundingBox(l1, t1, r1, b1);
 
-			rect1.left = (int)l1;
-			rect1.top = (int)t1;
-			rect1.right = (int)r1;
-			rect1.bottom = (int)b1;
+					rect1.left = (int)l1;
+					rect1.top = (int)t1;
+					rect1.right = (int)r1;
+					rect1.bottom = (int)b1;
 
-			if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
-				if (z->GetState() == TORCH_STATE_ITEM) {
+					if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
+						if (torch->GetState() == TORCH_STATE_ITEM) {
 
-					if (z->getItemType() == eType::WHIPUPGRADE)
-						this->vampireKiller->setUpLevel();
+							//
 
-					z->invisibleItem();
-					//this->SetState(TORCH_STATE_NOT_EXSIST);
-				}
+							if (torch->getItemType() == eType::WHIPUPGRADE)
+								this->vampireKiller->setUpLevel();
+							else if (torch->getItemType() == eType::HEART)
+								_heart+=5;
+
+							torch->invisibleItem();
+							torch->SetState(TORCH_STATE_NOT_EXSIST);
+						}
+					}
+					break;
+
+				case eType::OBJECT_HIDDEN_DOOR:
+					hidenObj = (CHidenObject*)(obj);
+
+					obj->GetBoundingBox(l1, t1, r1, b1);
+
+					rect1.left = (int)l1;
+					rect1.top = (int)t1;
+					rect1.right = (int)r1;
+					rect1.bottom = (int)b1;
+
+					//Va cham DOOR
+					if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
+						++GameConfig::GameLevel;
+					}
+					break;
+
+				default:
+					break;
 			}
 		}
 	}
 
-	// update
-	x = x + 0.75 * vx * dt;
+	// update simon location
+	x = x + vx * dt;
 	y = y + vy * dt;
-	vy += 0.2 * SIMON_GRAVITY * dt;
+	vy += SIMON_GRAVITY * dt;
 
 	if (x < 30) x = 30;
 
-	if (y > 300) {
-		y = 300;
+	if (y > SIMON_POS_Y) {
+		y = SIMON_POS_Y;
 		vy = 0;
 		vx = 0;
 		start_jump = 0;
 	}
 
+	// simon attack
 	if (attack_start) {
 		int t = GetTickCount();
 
@@ -138,7 +183,7 @@ void Simon::Render()
 {
 	int id;
 
-	 if (state == SIMON_STATE_DIE)
+	if (state == SIMON_STATE_DIE)
 	{
 		id = SIMON_ANI_DIE;
 	}
@@ -188,7 +233,8 @@ void Simon::Render()
 		else
 			id = SIMON_ANI_IDLE;
 	}
-	else {
+	else 
+	{
 		if (vx == 0)
 		{
 			id = SIMON_ANI_IDLE;
@@ -198,6 +244,8 @@ void Simon::Render()
 			id = SIMON_ANI_WALKING;
 		}
 	}
+
+
 	if (trans_start > 0) {
 		id = SIMON_ANI_TRANS;
 	}
@@ -256,21 +304,21 @@ void Simon::SetState(int state)
 		start_jump = GetTickCount();
 		last_jump = start_jump;
 		vy = -SIMON_JUMP_SPEED_Y;
-		y = 300;
+		y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_WALKING_RIGHT:
 		vx = SIMON_WALKING_SPEED;
 		nx = 1;
 		vy = 0;
-		y = 300;
+		y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_WALKING_LEFT:
 		vx = -SIMON_WALKING_SPEED;
 		nx = -1;
 		vy = 0;
-		y = 300;
+		y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_SIT:

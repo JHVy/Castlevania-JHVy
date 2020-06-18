@@ -8,6 +8,7 @@
 
 
 #define DIRECTINPUT_VERSION 0x0800
+#define MAX_LEVEL			5
 #include <dinput.h>
 
 #include "CastlevaniaScreen.h"
@@ -44,6 +45,7 @@ class CGame
 
 public:
 	void display();
+	void Update(DWORD dt);
 
 public:
 	void InitKeyboard();

@@ -71,7 +71,14 @@
     <ClCompile Include="ItemUpgrade.cpp">
       <Filter>GameObject\Object\Item</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="CCode.cpp" />
+=======
+    <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="HidenObject.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
+>>>>>>> 7c137664652efc6396a26deee058919a65eeb81c
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -140,7 +147,14 @@
     <ClInclude Include="ItemUpgrade.h">
       <Filter>GameObject\Object\Item</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="CCode.h" />
+=======
+    <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="HidenObject.h">
+      <Filter>GameObject\Object</Filter>
+    </ClInclude>
+>>>>>>> 7c137664652efc6396a26deee058919a65eeb81c
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

@@ -9,30 +9,36 @@
 #include "Define.h"
 #include "Sprites.h"
 
-#define ID_TEX_MAP1 4
+//#define ID_TEX_MAP1 4
 #define TILE_SIZE 64
 #define BRICK_SIZE 32
+
+#define SCREEN_PADING_TOP				40
 
 using namespace std;
 
 class GameMap
 {
 public:
-	GameMap(int _id);
+	GameMap();
 	~GameMap();
 
 
 private:
 	int numRows, numCols; 
-	int id;
+	int id, cellW, cellH;
 	
 	// cell type
 	int cellTypes[200][200];
 
 public:
 	void setId(int _id) { this->id = _id; }
-	void LoadMap(string filepath, int _numCols, int _numRows);
+	void LoadMap(int _id, string filepath);
 	void DrawMap();
+	int getRows() { return numRows; }
+	int getCols() { return numCols; }
+	int getTileW() { return cellW; }
+	int getTileH() { return cellH; }
 
 private:
 	int getTitle(int x, int y);

@@ -1,4 +1,5 @@
 #include "CastlevaniaScreen.h"
+#include "GameConfig.h"
 
 CastlevaniaScreen::CastlevaniaScreen( string filePath) 
 {
@@ -7,11 +8,9 @@ CastlevaniaScreen::CastlevaniaScreen( string filePath)
 }
 
 CastlevaniaScreen::CastlevaniaScreen() {
-	
-
 	// init 
-	this->gameMap = new GameMap(2);
-	this->simon = new Simon();
+	this->gameMap = new GameMap();
+	this->simon = Simon::GetInstance();
 
 	this -> board = new CBoard();
 }
@@ -23,8 +22,9 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 	
 	case eType::ID_TORCH:
 		return new Torch(x, y, id_item);
-	/*case eType::ID_HIDDEN:
-		return new CHidenObject(x, y, type);*/
+
+	case eType::ID_HIDDEN:
+		return new CHidenObject(x, y, type);
 
 	default:
 		return NULL;
@@ -52,20 +52,21 @@ void CastlevaniaScreen::LoadObject(string file_path) {
 }
 
 void CastlevaniaScreen::Load() {
+	string sScreenID = to_string(GameConfig::GameLevel);
 
-	this->gameMap->setId(1);
-	this->gameMap->LoadMap("Res/maps/map.txt", 24, 12);
+	this->gameMap->LoadMap(GameConfig::GameLevel, "Res/maps/map" + sScreenID + ".txt");
 
-	this->screen_size_x = 23 * 64 - 30;
-	this->screen_size_y = 12 * 64;
+	this->screen_size_x = this->gameMap->getCols() * this->gameMap->getTileW();
+	this->screen_size_y = this->gameMap->getRows() * this->gameMap->getTileH();
 
 	float start_simon_x = 60, start_simon_y = 150;
 	this->simon->SetPosition(start_simon_x, start_simon_y);
 
-	this->LoadObject("Res/textures/objects_1.txt");
+	this->LoadObject("Res/maps/objects_" + sScreenID + ".txt");
 }
 
 void CastlevaniaScreen::Update(DWORD dt) {
+
 	this->simon->Update(dt, &items);
 
 	float simon_x, simon_y;
