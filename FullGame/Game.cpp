@@ -241,8 +241,9 @@ CGame* CGame::GetInstance()
 */
 void CGame::Load()
 {
-	
-	for (int i = 0; i < MAX_LEVEL; i++)
+	GameConfig::GetInstance()->Load("Res/config.txt");
+
+	for (int i = 0; i <= GameConfig::GetInstance()->MaxLevel; i++)
 	{
 		CastlevaniaScreen* screen = new CastlevaniaScreen();
 		this->screens[i] = screen;
@@ -280,7 +281,8 @@ void CGame::display() {
 
 void CGame::Update(DWORD dt)
 {
-	if (current_scene != GameConfig::GameLevel)
-		SwitchScene(GameConfig::GameLevel);
+	if (current_scene != GameConfig::GetInstance()->CurrentLevel)
+		SwitchScene(GameConfig::GetInstance()->CurrentLevel);
+
 	GetCurrentScene()->Update(dt);
 }

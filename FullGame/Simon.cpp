@@ -134,7 +134,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 					//Va cham DOOR
 					if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
-						++GameConfig::GameLevel;
+						GameConfig::GetInstance()->LevelUp();
 					}
 					break;
 
