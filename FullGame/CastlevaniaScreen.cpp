@@ -10,16 +10,18 @@ CastlevaniaScreen::CastlevaniaScreen( string filePath)
 CastlevaniaScreen::CastlevaniaScreen() {
 	// init 
 	this->gameMap = new GameMap();
-	this->simon = new Simon();
+	this->simon = Simon::GetInstance();
 
-	this -> board = new CBoard();
+	this->board = new CBoard();
 }
 
 CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)
 {
 	switch (object)
 	{
-	
+	case eType::ID_BRICK:
+		return new Brick(x, y, id_item, type, w, h);
+
 	case eType::ID_TORCH:
 		return new Torch(x, y, id_item);
 
@@ -116,14 +118,15 @@ void CastlevaniaScreen::Render() {
 	// render
 	this->gameMap->DrawMap();
 
-	if (!items.empty()) {
-		for (int i = 0; i < items.size(); i++) {
+	if (!items.empty()) 
+	{
+		for (int i = 0; i < items.size(); i++) 
+		{
 			items[i]->Render();
 		}
 	}
 
 	this->simon->Render();
-
 	//this->board->Render();
 }
 

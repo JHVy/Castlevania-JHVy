@@ -65,96 +65,33 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	}
 
 	// collision simon with object item
-	if (!coObjects->empty()) {
-		RECT rect1, rectSimon;
-
-		// simon vs item
-		float ls = 0, ts = 0, rs = 0, bs = 0;
-		this->GetBoundingBox(ls, ts, rs, bs);
-
-		rectSimon.left = (int)ls;
-		rectSimon.top = (int)ts;
-		rectSimon.right = (int)rs;
-		rectSimon.bottom = (int)bs;
-		float l1 = 0, t1 = 0, r1 = 0, b1 = 0;
-		Torch* torch;
-		CHidenObject* hidenObj;
-
-		for (int index = 0; index < coObjects->size(); index++) 
-		{
-			LPGAMEOBJECT obj = coObjects->at(index);
-
-			switch (obj->_type) 
-			{
-				case eType::TORCH:
-					torch = (Torch*)(obj);
-
-					obj->GetBoundingBox(l1, t1, r1, b1);
-
-					rect1.left = (int)l1;
-					rect1.top = (int)t1;
-					rect1.right = (int)r1;
-					rect1.bottom = (int)b1;
-
-					if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
-						if (torch->GetState() == TORCH_STATE_ITEM) {
-
-							if (torch->getItemType() == eType::WHIPUPGRADE)
-								this->vampireKiller->setUpLevel();
-
-							torch->invisibleItem();
-							//this->SetState(TORCH_STATE_NOT_EXSIST);
-						}
-					}
-					break;
-
-				case eType::OBJECT_HIDDEN_DOOR:
-					hidenObj = (CHidenObject*)(obj);
-
-					obj->GetBoundingBox(l1, t1, r1, b1);
-
-					rect1.left = (int)l1;
-					rect1.top = (int)t1;
-					rect1.right = (int)r1;
-					rect1.bottom = (int)b1;
-
-					//Va cham DOOR
-					if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
-						GameConfig::GetInstance()->LevelUp();
-					}
-					break;
-
-				default:
-					break;
-			}
-		}
-	}
+	CollisionWithObjects(coObjects);
 
 	// update simon location
 	x = x + vx * dt;
 	y = y + vy * dt;
 	vy += SIMON_GRAVITY * dt;
 
+	// Ra khoi man hinh Game
 	if (x < 30) x = 30;
-
-	if (y > SIMON_POS_Y) {
-		y = SIMON_POS_Y;
+	if (y > SCREEN_HEIGHT) 
+	{
+		y = SCREEN_HEIGHT;
 		vy = 0;
 		vx = 0;
 		start_jump = 0;
 	}
 
 	// simon attack
-	if (attack_start) {
+	if (attack_start) 
+	{
 		int t = GetTickCount();
-
-		if (t - attack_start > ATTACK_TIME) {
+		if (t - attack_start > ATTACK_TIME) 
+		{
 			attack_start = 0;
 			this->state = SIMON_STATE_IDLE;
-
 			return;
 		}
-
 		return;
 	}
 
@@ -244,6 +181,108 @@ void Simon::Render()
 
 }
 
+void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
+{
+	if (!coObjects->empty()) 
+	{
+		RECT rect1, rectSimon;
+
+		// simon vs item
+		float ls = 0, ts = 0, rs = 0, bs = 0;
+		this->GetBoundingBox(ls, ts, rs, bs);
+
+		rectSimon.left = (int)ls;
+		rectSimon.top = (int)ts;
+		rectSimon.right = (int)rs;
+		rectSimon.bottom = (int)bs;
+		float l1 = 0, t1 = 0, r1 = 0, b1 = 0;
+		Torch* torch;
+		CHidenObject* hidenObj;
+		Brick* brick;
+
+		//duyet qua list object de check va cham va xu ly
+		for (int index = 0; index < coObjects->size(); index++)
+		{
+			LPGAMEOBJECT obj = coObjects->at(index);
+
+			switch (obj->_type)
+			{
+			case eType::TORCH:
+				torch = (Torch*)(obj);
+
+				obj->GetBoundingBox(l1, t1, r1, b1);
+
+				rect1.left = (int)l1;
+				rect1.top = (int)t1;
+				rect1.right = (int)r1;
+				rect1.bottom = (int)b1;
+
+				if (CGame::GetInstance()->isCollision(rect1, rectSimon)) 
+				{
+					if (torch->GetState() == TORCH_STATE_ITEM) 
+					{
+						if (torch->getItemType() == eType::WHIPUPGRADE)
+							this->vampireKiller->setUpLevel();
+
+						torch->invisibleItem();
+						torch->SetState(TORCH_STATE_NOT_EXSIST);
+					}
+				}
+				break;
+
+			case eType::OBJECT_HIDDEN_DOOR:
+				hidenObj = (CHidenObject*)(obj);
+
+				obj->GetBoundingBox(l1, t1, r1, b1);
+
+				rect1.left = (int)l1;
+				rect1.top = (int)t1;
+				rect1.right = (int)r1;
+				rect1.bottom = (int)b1;
+
+				//Va cham DOOR
+				if (CGame::GetInstance()->isCollision(rect1, rectSimon)) {
+					GameConfig::GetInstance()->LevelUp();
+				}
+				break;
+
+			case eType::BRICK_2:
+				brick = (Brick*)(obj);
+
+				obj->GetBoundingBox(l1, t1, r1, b1);
+
+				rect1.left = (int)l1;
+				rect1.top = (int)t1;
+				rect1.right = (int)r1;
+				rect1.bottom = (int)b1;
+				
+				if (vy > 0 && rectSimon.bottom >= rect1.top)
+				{
+					vy = 0;
+					start_jump = 0;
+					//this->SetState(SIMON_STATE_IDLE);
+				}
+				break;
+
+			default:
+				break;
+			}
+		}
+	}
+}
+
+void Simon::CollisionWithHidenBricks(vector<LPGAMEOBJECT>* coObjects)
+{
+
+}
+
+void Simon::CollisionWithItems(vector<LPGAMEOBJECT>* coObjects)
+{
+
+}
+
+
+
 void Simon::SetState(int state)
 {
 	// need update
@@ -286,21 +325,21 @@ void Simon::SetState(int state)
 		start_jump = GetTickCount();
 		last_jump = start_jump;
 		vy = -SIMON_JUMP_SPEED_Y;
-		y = SIMON_POS_Y;
+		//y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_WALKING_RIGHT:
 		vx = SIMON_WALKING_SPEED;
 		nx = 1;
 		vy = 0;
-		y = SIMON_POS_Y;
+		//y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_WALKING_LEFT:
 		vx = -SIMON_WALKING_SPEED;
 		nx = -1;
 		vy = 0;
-		y = SIMON_POS_Y;
+		//y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_SIT:

@@ -15,6 +15,7 @@
 #include "ItemHeart.h"
 #include "Torch.h"
 #include "HidenObject.h"
+#include "Brick.h"
 
 class CGame;
 class Simon;

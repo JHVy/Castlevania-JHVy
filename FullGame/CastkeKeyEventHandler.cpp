@@ -61,7 +61,7 @@ void CastkeKeyEventHandler::OnKeyUp(int KeyCode)
 void CastkeKeyEventHandler::KeyState(BYTE* states)
 {
 	// need update
-	Simon* simon = this->castleVaninaScreen->simon;
+	Simon* simon = Simon::GetInstance();//    this->castleVaninaScreen->simon;
 
 	if (simon->IsAttacking()) {
 		return;
