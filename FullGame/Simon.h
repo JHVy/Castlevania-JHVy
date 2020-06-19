@@ -5,6 +5,7 @@
 #include "Weapon.h"
 #include "VampireKiller.h"
 #include "Utils.h"
+#include "Sound.h"
 
 #define SIMON_WALKING_SPEED		0.12f
 #define SIMON_JUMP_SPEED_Y		0.36f
@@ -77,6 +78,8 @@ protected:
 	DWORD trans_start;
 	DWORD attack_start;
 	DWORD start_jump;
+
+	Sound* sound;
 
 	int _energy;
 	int _score;

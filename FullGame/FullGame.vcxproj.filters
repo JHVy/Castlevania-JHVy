@@ -1,205 +1,71 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprites.cpp">
-      <Filter>TextureManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Animations.cpp">
-      <Filter>TextureManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>GameManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Textures.cpp">
-      <Filter>TextureManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="XML\tinyxmlparser.cpp">
-      <Filter>TextureManagement\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="XML\tinyxmlerror.cpp">
-      <Filter>TextureManagement\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="XML\tinyxml.cpp">
-      <Filter>TextureManagement\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="XML\tinystr.cpp">
-      <Filter>TextureManagement\XML</Filter>
-    </ClCompile>
-    <ClCompile Include="Loader.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="CastlevaniaScreen.cpp">
-      <Filter>GameManagement\Screen</Filter>
-    </ClCompile>
-    <ClCompile Include="GameMap.cpp">
-      <Filter>GameManagement</Filter>
-    </ClCompile>
-    <ClCompile Include="Define.cpp">
-      <Filter>Define</Filter>
-    </ClCompile>
-    <ClCompile Include="Simon.cpp">
-      <Filter>GameObject\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>GameObject\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="VampireKiller.cpp">
-      <Filter>GameObject\Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="CastkeKeyEventHandler.cpp">
-      <Filter>GameManagement\GameControl</Filter>
-    </ClCompile>
-    <ClCompile Include="Torch.cpp">
-      <Filter>GameObject\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemHeart.cpp">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemDagger.cpp">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemUpgrade.cpp">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="CastkeKeyEventHandler.cpp" />
+    <ClCompile Include="CastlevaniaScreen.cpp" />
+    <ClCompile Include="CBoard.cpp" />
     <ClCompile Include="CCode.cpp" />
-=======
+    <ClCompile Include="Define.cpp" />
     <ClCompile Include="GameConfig.cpp" />
-    <ClCompile Include="HidenObject.cpp">
-      <Filter>GameObject\Object</Filter>
-    </ClCompile>
->>>>>>> 7c137664652efc6396a26deee058919a65eeb81c
+    <ClCompile Include="HidenObject.cpp" />
+    <ClCompile Include="ItemDagger.cpp" />
+    <ClCompile Include="ItemHeart.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemUpgrade.cpp" />
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="GameMap.cpp" />
+    <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Torch.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Sprites.cpp" />
+    <ClCompile Include="Textures.cpp" />
+    <ClCompile Include="VampireKiller.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="XML\tinystr.cpp" />
+    <ClCompile Include="XML\tinyxml.cpp" />
+    <ClCompile Include="XML\tinyxmlerror.cpp" />
+    <ClCompile Include="XML\tinyxmlparser.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="DSutil.cpp" />
+    <ClCompile Include="dxutil.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprites.h">
-      <Filter>TextureManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Animations.h">
-      <Filter>TextureManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>GameManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Textures.h">
-      <Filter>TextureManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="XML\tinyxml.h">
-      <Filter>TextureManagement\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="XML\tinystr.h">
-      <Filter>TextureManagement\XML</Filter>
-    </ClInclude>
-    <ClInclude Include="Loader.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>Define</Filter>
-    </ClInclude>
-    <ClInclude Include="CastlevaniaScreen.h">
-      <Filter>GameManagement\Screen</Filter>
-    </ClInclude>
-    <ClInclude Include="GameMap.h">
-      <Filter>GameManagement</Filter>
-    </ClInclude>
-    <ClInclude Include="Simon.h">
-      <Filter>GameObject\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>GameObject\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="VampireKiller.h">
-      <Filter>GameObject\Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyEventHandler.h">
-      <Filter>GameManagement\GameControl</Filter>
-    </ClInclude>
-    <ClInclude Include="CastkeKeyEventHandler.h">
-      <Filter>GameManagement\GameControl</Filter>
-    </ClInclude>
-    <ClInclude Include="Torch.h">
-      <Filter>GameObject\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemHeart.h">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemDagger.h">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemUpgrade.h">
-      <Filter>GameObject\Object\Item</Filter>
-    </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="Animations.h" />
+    <ClInclude Include="CastkeKeyEventHandler.h" />
+    <ClInclude Include="CastlevaniaScreen.h" />
+    <ClInclude Include="CBoard.h" />
     <ClInclude Include="CCode.h" />
-=======
+    <ClInclude Include="Define.h" />
     <ClInclude Include="GameConfig.h" />
-    <ClInclude Include="HidenObject.h">
-      <Filter>GameObject\Object</Filter>
-    </ClInclude>
->>>>>>> 7c137664652efc6396a26deee058919a65eeb81c
+    <ClInclude Include="HidenObject.h" />
+    <ClInclude Include="ItemDagger.h" />
+    <ClInclude Include="ItemHeart.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemUpgrade.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="GameMap.h" />
+    <ClInclude Include="Simon.h" />
+    <ClInclude Include="Torch.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="KeyEventHandler.h" />
+    <ClInclude Include="Sprites.h" />
+    <ClInclude Include="Textures.h" />
+    <ClInclude Include="VampireKiller.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="XML\tinystr.h" />
+    <ClInclude Include="XML\tinyxml.h" />
+    <ClInclude Include="Sound.h" />
+    <ClInclude Include="DSutil.h" />
+    <ClInclude Include="dxutil.h" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{95e98e85-e540-4cdf-8b93-60e53977e260}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TextureManagement">
-      <UniqueIdentifier>{bce6ddcc-f3f1-43de-a78a-985016bd83c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManagement">
-      <UniqueIdentifier>{85e32d73-fe50-411f-995e-30a6dfe40e05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Character">
-      <UniqueIdentifier>{7ebf5ca9-dc07-4c41-ac2d-4629dd37530a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManagement\Screen">
-      <UniqueIdentifier>{280feed5-66f8-4f82-8611-9c667d5ca5d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{c062e021-5850-4548-a52e-37b194b396bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TextureManagement\XML">
-      <UniqueIdentifier>{41d49b3e-3e9c-4668-8812-186e48d93206}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Define">
-      <UniqueIdentifier>{a7f1e4f1-ae3a-45e7-84b4-d476b3abaa86}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Weapon">
-      <UniqueIdentifier>{759d4f2a-801a-44d2-9224-f789e632d908}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameManagement\GameControl">
-      <UniqueIdentifier>{e81352aa-dd83-45b5-a957-8463d370d981}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Object">
-      <UniqueIdentifier>{4755e79f-82d2-4450-973f-412761924a56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Object\Item">
-      <UniqueIdentifier>{2e65d009-23b2-4603-8212-4521e25bd7e1}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="Animations.xml">
-      <Filter>TextureManagement\XML</Filter>
-    </Xml>
-    <Xml Include="Sprites.xml">
-      <Filter>TextureManagement\XML</Filter>
-    </Xml>
+    <Xml Include="Animations.xml" />
+    <Xml Include="Sprites.xml" />
   </ItemGroup>
 </Project>

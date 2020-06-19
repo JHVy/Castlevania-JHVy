@@ -13,6 +13,7 @@ CastlevaniaScreen::CastlevaniaScreen() {
 	this->simon = Simon::GetInstance();
 
 	this -> board = new CBoard();
+	this->sound = Sound::GetInstance();
 }
 
 CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)

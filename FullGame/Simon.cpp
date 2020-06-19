@@ -40,6 +40,8 @@ Simon::Simon() {
 	_score = 0;
 	_lives = 3;
 	_heart = 0;
+
+	sound = Sound::GetInstance();
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -116,9 +118,16 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 							//
 
 							if (torch->getItemType() == eType::WHIPUPGRADE)
+							{
+								sound->Play(eSound::soundCollectWeapon);
 								this->vampireKiller->setUpLevel();
+							}
+								
 							else if (torch->getItemType() == eType::HEART)
-								_heart+=5;
+							{
+								sound->Play(eSound::soundCollectItem);
+								_heart += 5;
+							}
 
 							torch->invisibleItem();
 							torch->SetState(TORCH_STATE_NOT_EXSIST);
@@ -283,6 +292,7 @@ void Simon::SetState(int state)
 			return;
 
 		attack_start = GetTickCount();
+		sound->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
 
 		this->vampireKiller->GetAnimation()->ResetFrame();
@@ -293,6 +303,7 @@ void Simon::SetState(int state)
 			return;
 
 		attack_start = GetTickCount();
+		sound->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
 		this->vampireKiller->GetAnimation()->ResetFrame();
 		break;

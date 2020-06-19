@@ -15,10 +15,12 @@
 #include "ItemHeart.h"
 #include "Torch.h"
 #include "HidenObject.h"
+#include "Sound.h"
 
 class CGame;
 class Simon;
 class CBoard;
+class Sound;
 
 class CastlevaniaScreen
 {
@@ -27,6 +29,8 @@ protected:
 	string path;
 
 	CBoard * board;
+
+	Sound* sound;
 
 	float screen_size_x, screen_size_y;
 	vector<CGameObject*> items;

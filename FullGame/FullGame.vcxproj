@@ -131,6 +131,8 @@
     <ClCompile Include="CBoard.cpp" />
     <ClCompile Include="CCode.cpp" />
     <ClCompile Include="Define.cpp" />
+    <ClCompile Include="DSutil.cpp" />
+    <ClCompile Include="dxutil.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="HidenObject.cpp" />
     <ClCompile Include="ItemDagger.cpp" />
@@ -140,6 +142,7 @@
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Simon.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Torch.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -161,6 +164,8 @@
     <ClInclude Include="CBoard.h" />
     <ClInclude Include="CCode.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="DSutil.h" />
+    <ClInclude Include="dxutil.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="HidenObject.h" />
     <ClInclude Include="ItemDagger.h" />
@@ -170,6 +175,7 @@
     <ClInclude Include="Loader.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="Simon.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Torch.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Game.h" />
