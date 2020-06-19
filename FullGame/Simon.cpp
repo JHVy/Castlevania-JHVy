@@ -175,7 +175,7 @@ void Simon::Render()
 	DebugOut(L"[START DRAW SIMON] ");
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
-	int x1 = x, y1 = y;
+	int x1 = x + SCREEN_PADING_TOP, y1 = y + SCREEN_PADING_TOP;
 	/*if (id == SIMON_ANI_SITTING || id == SIMON_ANI_SITTING_ATTACKING)
 		y1 = y1 + 15;*/
 
@@ -225,6 +225,8 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					{
 						if (torch->getItemType() == eType::WHIPUPGRADE)
 							this->vampireKiller->setUpLevel();
+						else if (torch->getItemType() == eType::HEART)
+							this->_heart += 5;
 
 						torch->invisibleItem();
 						torch->SetState(TORCH_STATE_NOT_EXSIST);
@@ -360,8 +362,7 @@ void Simon::SetState(int state)
 
 	case SIMON_STATE_WALKING_LEFT:
 		vx = -SIMON_WALKING_SPEED;
-		//nx = -1;
-		nx = 1;
+		nx = -1;
 		//vy = 0;
 		//y = SIMON_POS_Y;
 		break;

@@ -50,7 +50,7 @@ void VampireKiller::Render()
 
 void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _nx) {
 	float x1, y1, nx1;
-	
+	simon_y += SCREEN_PADING_TOP;
 	nx1 = _nx;
 	y1 = simon_y;
 	x1 = x;

@@ -127,7 +127,7 @@ void CastlevaniaScreen::Render() {
 	}
 
 	this->simon->Render();
-	//this->board->Render();
+	this->board->Render();
 }
 
 void CastlevaniaScreen::Unload() {
