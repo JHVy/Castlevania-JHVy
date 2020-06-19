@@ -71,16 +71,17 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	x = x + vx * dt;
 	y = y + vy * dt;
 	vy += SIMON_GRAVITY * dt;
+	//vx = 0;	//sau khi xu ly theo event key thi phai reset lai vx
 
 	// Ra khoi man hinh Game
-	if (x < 30) x = 30;
+	/*if (x < 30) x = 30;
 	if (y > SCREEN_HEIGHT) 
 	{
 		y = SCREEN_HEIGHT;
 		vy = 0;
 		vx = 0;
 		start_jump = 0;
-	}
+	}*/
 
 	// simon attack
 	if (attack_start) 
@@ -170,13 +171,14 @@ void Simon::Render()
 	}
 	int alpha = 255;
 
-
+	//id = SIMON_ANI_IDLE;
 	DebugOut(L"[START DRAW SIMON] ");
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
 	int x1 = x, y1 = y;
-	if (id == SIMON_ANI_SITTING || id == SIMON_ANI_SITTING_ATTACKING)
-		y1 = y1 + 15;
+	/*if (id == SIMON_ANI_SITTING || id == SIMON_ANI_SITTING_ATTACKING)
+		y1 = y1 + 15;*/
+
 	ani->Render(x1, y1, nx, alpha);
 
 }
@@ -256,12 +258,33 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				rect1.right = (int)r1;
 				rect1.bottom = (int)b1;
 				
-				if (vy > 0 && rectSimon.bottom >= rect1.top)
+				// Simon cham vat can (brick)
+				if (vy > 0	//dang roi xuong
+					&& (rectSimon.bottom + 5*vy) >= rect1.top 
+
+					&& (Utils::IsOverlapX(rectSimon, rect1))
+					)	
 				{
 					vy = 0;
 					start_jump = 0;
-					//this->SetState(SIMON_STATE_IDLE);
 				}
+
+				if (vx > 0	//go right
+					&& (rectSimon.right + vx) >= rect1.left
+					&& (Utils::IsOverlapY(rectSimon, rect1))
+					)
+				{
+					//vx = 0;
+				}
+
+				//if (vx < 0	//go left
+				//	&& (rectSimon.left + vx) <= rect1.right
+				//	&& (Utils::IsOverlapY(rect1, rectSimon))
+				//	)
+				//{
+				//	vx = 0;
+				//}
+				
 				break;
 
 			default:
@@ -337,8 +360,9 @@ void Simon::SetState(int state)
 
 	case SIMON_STATE_WALKING_LEFT:
 		vx = -SIMON_WALKING_SPEED;
-		nx = -1;
-		vy = 0;
+		//nx = -1;
+		nx = 1;
+		//vy = 0;
 		//y = SIMON_POS_Y;
 		break;
 
@@ -347,7 +371,12 @@ void Simon::SetState(int state)
 		vy = 0;
 		break;
 
+	case SIMON_STATE_IDLE:
+		vx = 0;		
+		break;
+
 	default:
+		vx = 0;
 		break;
 	}
 
@@ -362,10 +391,10 @@ void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 	float x1 = x;
 	float y1 = y;
 
-	if (nx > 0)
+	/*if (nx > 0)
 		x1 = x + 20;
 	else
-		x1 = x - 40;
+		x1 = x - 40;*/
 
 	left = x1;
 	top = y1;

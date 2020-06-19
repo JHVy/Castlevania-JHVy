@@ -13,7 +13,7 @@
 #define TILE_SIZE 64
 #define BRICK_SIZE 32
 
-#define SCREEN_PADING_TOP				40
+#define SCREEN_PADING_TOP				0	//40
 
 using namespace std;
 

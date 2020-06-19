@@ -72,7 +72,9 @@ void CGame::Init(HWND hWnd)
 void CGame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	float x1 = x - cam_x, y1 = y - cam_y;
-	if (x1 + 70 >= 0 && x1 <= SCREEN_WIDTH && y1 + 70 >= 0 && y1 <= SCREEN_HEIGHT) {
+
+	if (x1 + 70 >= 0 && x1 <= SCREEN_WIDTH && y1 + 70 >= 0 && y1 <= SCREEN_HEIGHT) 
+	{
 		D3DXVECTOR3 p(x1, y1, 0);
 		//D3DXVECTOR3 p(150, 150, 0);
 		RECT r;
