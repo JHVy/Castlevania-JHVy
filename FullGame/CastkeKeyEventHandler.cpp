@@ -131,6 +131,8 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 		return;
 	}
 
+	//default
+	simon->SetState(SIMON_STATE_IDLE);
 	return;
 }
 

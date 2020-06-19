@@ -61,3 +61,29 @@ LPCWSTR ToLPCWSTR(string st)
 	// delete wcstring   // << can I ? 
 	return w->c_str();
 }
+
+int GetDistanceX(RECT r1, RECT r2) 
+{
+	int x1 = (r1.left + r1.right) / 2,
+		x2 = (r2.left + r2.right) / 2;
+
+	return abs(x2 - x1);
+}
+
+int GetDistanceY(RECT r1, RECT r2)
+{
+	int y1 = (r1.top + r1.bottom) / 2,
+		y2 = (r2.top + r2.bottom) / 2;
+
+	return abs(y2 - y1);
+}
+
+int GetRectW(RECT r)
+{
+	return r.right - r.left;
+}
+
+int GetRectH(RECT r)
+{
+	return r.bottom - r.top;
+}
