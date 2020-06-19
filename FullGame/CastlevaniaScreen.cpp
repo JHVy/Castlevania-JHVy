@@ -10,9 +10,10 @@ CastlevaniaScreen::CastlevaniaScreen( string filePath)
 CastlevaniaScreen::CastlevaniaScreen() {
 	// init 
 	this->gameMap = new GameMap();
-	this->simon = new Simon();
+	this->simon = Simon::GetInstance();
 
 	this -> board = new CBoard();
+	//this->sound = Sound::GetInstance();
 }
 
 CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)

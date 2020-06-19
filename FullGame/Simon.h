@@ -67,6 +67,8 @@
 
 class CGame;
 class Simon;
+class VampireKiller;
+class Weapon;
 
 class Simon :
 	public CGameObject
@@ -78,9 +80,12 @@ protected:
 	DWORD attack_start;
 	DWORD start_jump;
 
+	//Sound* sound;
+
 	int _energy;
 	int _score;
 	int _lives;
+	int _heart;
 
 	static Simon* _instance;
 
@@ -130,6 +135,10 @@ public:
 		return _lives;
 	}
 
+	int GetHeart()
+	{
+		return _heart;
+	}
 private:
 	// helper
 	CAnimation* getAnimation(int id) {

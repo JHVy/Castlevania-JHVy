@@ -97,6 +97,8 @@ public:
 		return !(r1.right < r2.left || r1.left > r2.right || r1.top > r2.bottom || r1.bottom < r2.top);
 	}
 
+	HWND GetWindowHandle() { return hWnd; }
+
 	~CGame();
 };
 
