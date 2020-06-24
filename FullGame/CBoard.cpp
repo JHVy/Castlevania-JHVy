@@ -28,7 +28,7 @@ void CBoard::Render()
 
 	// Draw board 
 	CSprites* sprites = CSprites::GetInstance();
-	sprites->Get(50000)->Draw(cx + 540, cy);
+	sprites->Get(50000)->Draw(cx, cy);
 
 	// Draw number
 	code->DrawNumber(6, cx + 110, cy + 12, simon->GetScore()); // score simon

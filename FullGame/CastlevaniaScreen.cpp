@@ -25,6 +25,9 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 	case eType::ID_TORCH:
 		return new Torch(x, y, id_item);
 
+	case eType::ID_CANDLE:
+		return new Candle(x, y, id_item);
+
 	case eType::ID_HIDDEN:
 		return new CHidenObject(x, y, type);
 

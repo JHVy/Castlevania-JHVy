@@ -94,6 +94,11 @@ void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _n
 		}
 	}
 
+	if (nx < 0)
+		x1 = x1 + 20;
+	else
+		x1 += 80;
+
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
 	ani->Render(x1, y1, nx, 255);

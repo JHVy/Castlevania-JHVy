@@ -8,8 +8,7 @@
 
 #define TORCH_WIDTH 32
 #define TORCH_HEIGHT 64
-#define CANDLE_WIDTH 16
-#define CANDLE_HEIGHT 32
+
 
 #define TORCH_STATE_NOT_EXSIST 0
 #define TORCH_STATE_EXSIST 1
@@ -19,6 +18,8 @@
 #define ID_WHIPUPGRADE  1
 #define ID_DAGGER		2
 #define ID_HEART		3
+#define ID_SMAILLHEART	4
+#define ID_BOONGMERANG	5
 
 
 class Item_Heart;
@@ -32,7 +33,8 @@ private:
 
 public:
 	Torch(int _x, int _y) {
-		this->_type = eType::TORCH;
+		
+		this->_type = eType::TORCH;		//default is Torch
 		x = _x;
 		y = _y;
 		this->numAnimation = 501;
@@ -40,13 +42,14 @@ public:
 	}
 
 	Torch(int _x, int _y, int _id_item) {
-		this->_type = eType::TORCH;
+		this->_type = eType::TORCH;		//default is Torch
 		x = _x;
 		y = _y;
 		this->numAnimation = 501;
 		this->state = TORCH_STATE_EXSIST;
 
-		switch (_id_item) {
+		switch (_id_item) 
+		{
 		case ID_HEART:
 			item = new Item_Heart(x, y);
 			return;
@@ -59,7 +62,9 @@ public:
 			item = new ItemDagger(x, y);
 			return;
 
+
 		default:
+			item = NULL;
 			return;
 		}
 	}
