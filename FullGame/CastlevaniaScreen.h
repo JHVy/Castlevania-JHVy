@@ -14,6 +14,7 @@
 
 #include "ItemHeart.h"
 #include "Torch.h"
+#include "Candle.h"
 #include "HidenObject.h"
 #include "Brick.h"
 

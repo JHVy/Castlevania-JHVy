@@ -80,6 +80,8 @@
     <ClCompile Include="Brick.cpp">
       <Filter>GameObject\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Candle.cpp" />
+    <ClCompile Include="ItemBoongmerang.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -157,6 +159,8 @@
     <ClInclude Include="Brick.h">
       <Filter>GameObject\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Candle.h" />
+    <ClInclude Include="ItemBoongmerang.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

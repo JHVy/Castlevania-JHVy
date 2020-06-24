@@ -32,31 +32,7 @@ public:
 		nx = trendX;
 		ny = trendY;
 		this->state = state;
-		switch (state)
-		{
-		/*	case eType::STAIR_DOWN:
-				if (nx > 0)
-					_autoX = x - 5;
-				else
-					_autoX = x - 10;
-				break;
-			case eType::STAIR_UP:
-				if (nx < 0)
-					_autoX = x - 30;
-				else
-					_autoX = x + 10;
-				break;
-			case eType::OBJECT_HIDDEN_DOOR:
-				_autoX = x + 40;
-				break;
-			case eType::OBJECT_HIDDEN_PANTHER_JUMP:
-				_height = 150;
-				_width = 15;
-				break;*/
-
-			default:
-				break;
-		}
+		
 
 	}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);

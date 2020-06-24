@@ -201,6 +201,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 		Torch* torch;
 		CHidenObject* hidenObj;
 		Brick* brick;
+		Candle* candle;
 
 		//duyet qua list object de check va cham va xu ly
 		for (int index = 0; index < coObjects->size(); index++)
@@ -227,13 +228,40 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 							this->vampireKiller->setUpLevel();
 						else if (torch->getItemType() == eType::HEART)
 							this->_heart += 5;
+						else if (torch->getItemType() == eType::SMALLHEART)
+							this->_heart++;
 
 						torch->invisibleItem();
 						torch->SetState(TORCH_STATE_NOT_EXSIST);
 					}
 				}
+			case eType::CANDLE:
+				candle = (Candle*)(obj);
+
+				obj->GetBoundingBox(l1, t1, r1, b1);
+
+				rect1.left = (int)l1;
+				rect1.top = (int)t1;
+				rect1.right = (int)r1;
+				rect1.bottom = (int)b1;
+
+				if (CGame::GetInstance()->isCollision(rect1, rectSimon))
+				{
+					if (candle->GetState() == CANDLE_STATE_ITEM)
+					{
+						if (candle->getItemType() == eType::HEART)
+							this->_heart += 5;
+						else if (candle->getItemType() == eType::SMALLHEART)
+							this->_heart++;
+
+						candle->invisibleItem();
+						candle->SetState(CANDLE_STATE_NOT_EXSIST);
+					}
+				}
 				break;
 
+
+			// Va cham cua qua man khac
 			case eType::OBJECT_HIDDEN_DOOR:
 				hidenObj = (CHidenObject*)(obj);
 
@@ -250,6 +278,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				}
 				break;
 
+			// check va cham gach
 			case eType::BRICK_2:
 				brick = (Brick*)(obj);
 
@@ -262,7 +291,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				
 				// Simon cham vat can (brick)
 				if (vy > 0	//dang roi xuong
-					&& (rectSimon.bottom + 5*vy) >= rect1.top 
+					&& (rectSimon.bottom + vy) >= rect1.top 
 
 					&& (Utils::IsOverlapX(rectSimon, rect1))
 					)	

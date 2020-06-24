@@ -25,16 +25,8 @@ void Torch::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 	{
 		left = x;
 		top = y;
-		if (_type == eType::CANDLE)
-		{
-			right = x + CANDLE_WIDTH;
-			bottom = y + CANDLE_HEIGHT;
-		}
-		else
-		{
-			right = x + TORCH_WIDTH;
-			bottom = y + TORCH_HEIGHT;
-		}
+		right = x + TORCH_WIDTH;
+		bottom = y + TORCH_HEIGHT;
 	}
 	else if (state == TORCH_STATE_ITEM)
 	{

@@ -29,7 +29,6 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	CGameObject::Update(dt);
 
-	// Simple fall down
-	y += ITEM_GRAVITY * dt;
-	if (y >= 340) y = 340;
+	y += ITEM_GRAVITY * dt; 
+	if (y >= 310) y = 310;   // HARD code item roi
 }
