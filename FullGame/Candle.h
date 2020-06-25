@@ -16,6 +16,16 @@
 #define ID_HEART		1
 #define ID_SMAILLHEART	2
 #define ID_BOONGMERANG	3
+#define ID_MONEY_1		4  //100
+#define ID_MONEY_2		5  //400
+#define ID_MONEY_3		6 //700
+#define ID_MONEY_4		7  //1000
+#define ID_II			8
+#define ID_HOLLYWATTER	9
+#define ID_III			10
+#define ID_AXE   		11
+#define ID_VASE			12 // cai binh -> tang hinh
+
 
 
 class Item_Heart;
