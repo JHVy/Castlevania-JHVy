@@ -14,10 +14,7 @@ Simon* Simon::GetInstance()
 }
 
 Simon::Simon() {
-	VampireKiller* rob = new VampireKiller();
-	vampireKiller = rob;
-	//vampireKiller->setUpLevel();
-	//vampireKiller->setUpLevel();
+	vampireKiller = new VampireKiller();
 
 	untouchable = 0;
 	trans_start = 0;
@@ -64,24 +61,45 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		}
 	}
 
-	// collision simon with object item
-	CollisionWithObjects(coObjects);
-
-	// update simon location
-	x = x + vx * dt;
-	y = y + vy * dt;
+	// Calculate dx, dy 
+	CGameObject::Update(dt);
+	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
-	//vx = 0;	//sau khi xu ly theo event key thi phai reset lai vx
 
-	// Ra khoi man hinh Game
-	/*if (x < 30) x = 30;
-	if (y > SCREEN_HEIGHT) 
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+
+	// turn off collision when die 
+	if (state != SIMON_STATE_DIE)
+		CalcPotentialCollisions(coObjects, coEvents);
+
+	// No collision occured, proceed normally
+	if (coEvents.size() == 0)
 	{
-		y = SCREEN_HEIGHT;
-		vy = 0;
-		vx = 0;
-		start_jump = 0;
-	}*/
+		x += dx;
+		y += dy;
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		// block 
+		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
+		y += min_ty * dy + ny * 0.4f;
+
+		if (nx != 0) vx = 0;
+		if (ny != 0) vy = 0;
+	}
+
+	// clean up collision events
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
+	// collision simon with object item
+	//CollisionWithObjects(coObjects);
 
 	// simon attack
 	if (attack_start) 
@@ -176,11 +194,8 @@ void Simon::Render()
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
 	int x1 = x + SCREEN_PADING_TOP, y1 = y + SCREEN_PADING_TOP;
-	/*if (id == SIMON_ANI_SITTING || id == SIMON_ANI_SITTING_ATTACKING)
-		y1 = y1 + 15;*/
 
 	ani->Render(x1, y1, nx, alpha);
-
 }
 
 void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
