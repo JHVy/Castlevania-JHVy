@@ -35,6 +35,7 @@ void GameMap::LoadMap(int _id, string filepath) {
 	int game_stage = _id;
 	//Mapi
 	string sPath = "Res\\maps\\map" + to_string(game_stage) + ".png";
+	//string sPath = "Res\\maps\\map6.png";
 	CTextures::GetInstance()->Add(game_stage, ToLPCWSTR(sPath), D3DCOLOR_XRGB(255, 0, 255));
 	int index = 0;
 	for (int i = 0; i < numRows; i++)

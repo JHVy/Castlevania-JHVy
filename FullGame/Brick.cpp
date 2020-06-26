@@ -18,6 +18,6 @@ void Brick::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 
 void Brick::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
