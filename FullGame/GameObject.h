@@ -4,13 +4,12 @@
 #include <d3dx9.h>
 #include <vector>
 
+#include "Define.h"
 #include "Sprites.h"
 #include "Animations.h"
 
 
 using namespace std;
-
-#define ID_TEX_BBOX -100		// special texture to draw object bounding box
 
 class CGameObject; 
 typedef CGameObject * LPGAMEOBJECT;
@@ -97,9 +96,7 @@ public:
 		float &min_tx, 
 		float &min_ty, 
 		float &nx, 
-		float &ny, 
-		float &rdx, 
-		float &rdy);
+		float &ny);
 
 	CGameObject(float _x = 0, float _y = 0, int type = 0);
 
