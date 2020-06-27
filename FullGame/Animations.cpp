@@ -20,7 +20,7 @@ void CAnimation::Add(int spriteId, DWORD time)
 }
 
 // NOTE: sometimes Animation object is NULL ??? HOW ??? 
-void CAnimation::Render(float x, float y, int trend, int alpha)
+void CAnimation::Render(float x, float y, int w, int trend, int alpha)
 {
 	DWORD now = GetTickCount();
 	if (currentFrame == -1)
@@ -43,7 +43,7 @@ void CAnimation::Render(float x, float y, int trend, int alpha)
 	if (trend < 0)
 		frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
 	else
-		frames[currentFrame]->GetSprite()->DrawFlipX(x, y, alpha);
+		frames[currentFrame]->GetSprite()->DrawFlipX(x+w, y, alpha);
 }
 
 void CAnimation::Render(float x, float y, int alpha)

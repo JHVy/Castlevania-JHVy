@@ -17,10 +17,13 @@ CastlevaniaScreen::CastlevaniaScreen() {
 
 CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)
 {
+	CGameObject* objRet = NULL;
 	switch (object)
 	{
 	case eType::ID_BRICK:
-		return new Brick(x, y, id_item, type, w, h);
+		objRet = new Brick(x, y, id_item, type, w, h);
+		objCollisionCheck.push_back(objRet);
+		return objRet;
 
 	case eType::ID_TORCH:
 		return new Torch(x, y, id_item);
@@ -38,6 +41,7 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 
 void CastlevaniaScreen::LoadObject(string file_path) {
 	items.clear();
+	objCollisionCheck.clear();
 
 	ifstream inFile(file_path);
 
@@ -58,7 +62,7 @@ void CastlevaniaScreen::LoadObject(string file_path) {
 
 void CastlevaniaScreen::Load() {
 	int gameLevel = GameConfig::GetInstance()->CurrentLevel;
-	float start_simon_x = 60, start_simon_y = 150;
+	float start_simon_x = 0, start_simon_y = 0;
 	GameConfig::GetInstance()->GetSimonPosition(start_simon_x, start_simon_y);
 	string sScreenID = to_string(gameLevel);
 
@@ -76,17 +80,19 @@ void CastlevaniaScreen::Load() {
 
 void CastlevaniaScreen::Update(DWORD dt) {
 
-	this->simon->Update(dt, &items);
+	this->simon->Update(dt, &objCollisionCheck);
 
 	float simon_x, simon_y;
 	this->simon->GetPosition(simon_x, simon_y);
-	if (simon_x > this->screen_size_x - 10) {
-		simon_x = this->screen_size_x - 10;
+	if (simon_x >= this->screen_size_x) 
+	{
+		simon_x = this->screen_size_x;
 		this->simon->SetPosition(simon_x, simon_y);
 	}
 
 	// update
-	if (!items.empty()) {
+	if (!items.empty()) 
+	{
 		for (int i = 0; i < items.size(); i++) {
 			items[i]->Update(dt, NULL);
 		}
@@ -108,9 +114,9 @@ void CastlevaniaScreen::UpdateCamera() {
 	cam_x = simon_x - kc_x;
 	//cam_y = simon_y - kc_y;
 
-	if (cam_x + SCREEN_WIDTH >= this->screen_size_x)
-		cam_x = this->screen_size_x - SCREEN_WIDTH;
-	if (cam_x < 0) cam_x = 0;
+	/*if (cam_x + SCREEN_WIDTH > this->screen_size_x)
+		cam_x = this->screen_size_x  - SCREEN_WIDTH;
+	if (cam_x < 0) cam_x = 0;*/
 
 	//DebugOut(L"[DEBUG] Cal postion camera : (%f, %f) - (%f, %f) - (%f, %f) !\n", screen_x, screen_y, mainObject_x, mainObject_y, cam_x, cam_y);
 
@@ -132,7 +138,7 @@ void CastlevaniaScreen::Render() {
 	}
 
 	this->simon->Render();
-	this->board->Render();
+	//this->board->Render();
 }
 
 void CastlevaniaScreen::Unload() {

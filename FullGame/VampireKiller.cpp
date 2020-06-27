@@ -1,8 +1,10 @@
 ﻿#include "VampireKiller.h"
+#include "Simon.h"
 
 VampireKiller::VampireKiller() :Weapon()
 {
-	_level = 1;
+	_level = 2;
+	w = 120;
 	AddAnimation(600);
 	AddAnimation(601);
 	AddAnimation(602);
@@ -22,20 +24,22 @@ void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, i
 
 	if (nx < 0)
 	{
-		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-			x = simon_x - 50;
-			y = simon_y + 15;
+		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) 
+		{
+			x = simon_x;
+			y = simon_y;
 		}
 		else
-			x = simon_x - 50;
+			x = simon_x;
 	}
-	else {
+	else 
+	{
 		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-			x = simon_x - 25;
-			y = simon_y + 15;
+			x = simon_x;
+			y = simon_y;
 		}
 		else
-			x = simon_x - 25;
+			x = simon_x;
 	}
 }
 
@@ -43,9 +47,9 @@ void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, i
 void VampireKiller::Render()
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
-	ani->Render(x, y, nx, 255);
+	ani->Render(x, y, w, nx, 255);
 
-	// RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _nx) {
@@ -53,55 +57,17 @@ void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _n
 	simon_y += SCREEN_PADING_TOP;
 	nx1 = _nx;
 	y1 = simon_y;
-	x1 = x;
+	x1 = simon_x;
 
-	if (_level < 3) {
-		if (_nx < 0)
-		{
-			if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-				x1 = simon_x + 25;
-				y1 = simon_y + 15;
-			}
-			else
-				x1 = simon_x + 25;
-		}
-		else {
-			if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-				x1 = simon_x + 35;
-				y1 = simon_y + 15;
-			}
-			else
-				x1 = simon_x + 35;
-		}
-	}
-	else {
-		if (_nx < 0)
-		{
-			if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-				x1 = simon_x + 45;
-				y1 = simon_y + 15;
-			}
-			else
-				x1 = simon_x + 45;
-		}
-		else {
-			if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-				x1 = simon_x - 55;
-				y1 = simon_y + 15;
-			}
-			else
-				x1 = simon_x + 55;
-		}
-	}
-
-	if (nx < 0)
-		x1 = x1 + 20;
+	if (nx1 < 0)
+		x1 = x1 - 50;
 	else
-		x1 += 80;
+		x1 = x1 - 40;// -10;// Simon::GetInstance()->GetW();
 
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
-	ani->Render(x1, y1, nx, 255);
+	ani->Render(x1, y1, w, nx, 255);
+	//RenderBoundingBox();
 }
 
 void VampireKiller::setDefaultLevel()
@@ -118,6 +84,7 @@ void VampireKiller::setUpLevel()
 
 void VampireKiller::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	int w = 120, h = 20;
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
 	if (ani->GetCurrentFrame() < 2)
@@ -126,16 +93,16 @@ void VampireKiller::GetBoundingBox(float& left, float& top, float& right, float&
 	if (_level == 1 || _level == 2)
 	{
 		left = x;
-		right = x + 120;
+		right = x + w;
 		top = y;
-		bottom = y + 20;
+		bottom = y + h;
 	}
 	else
 	{
 		left = x;
-		right = x + 145;
+		right = x + w;
 		top = y;
-		bottom = y + 20;
+		bottom = y + h;
 
 	}
 }

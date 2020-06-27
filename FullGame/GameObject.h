@@ -45,6 +45,8 @@ class CGameObject
 public:
 	int id;
 
+	int w, h;
+
 	// toa do
 	float x; 
 	float y;
@@ -65,7 +67,6 @@ public:
 	DWORD dt; 
 
 	int _type;
-	int _energy;
 
 	unordered_map<int, LPANIMATION> animations;
 	LPANIMATION animation;
@@ -83,6 +84,8 @@ public:
 	int GetType() { return _type; }
 
 	int GetState() { return this->state; }
+
+	int GetW() { return w; }
 
 	void RenderBoundingBox();
 
@@ -109,10 +112,6 @@ public:
 
 	int GetID() { return id; }
 	void SetID(int id) { this->id = id; }
-
-	int GetEnergy() { return _energy; }
-	virtual void Hurt() { _energy -= 2; }
-	virtual void Go() {}
 
 	~CGameObject();
 };

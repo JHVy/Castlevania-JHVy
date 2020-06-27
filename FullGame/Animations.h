@@ -32,7 +32,7 @@ public:
 	void Add(int spriteId, DWORD time = 0);
 
 	int GetCurrentFrame() { return currentFrame; }
-	void Render(float x, float y, int trend, int alpha = 255);
+	void Render(float x, float y, int w, int trend, int alpha = 255);
 	void Render(float x, float y, int alpha = 255);
 	void ResetFrame() { lastFrameTime = -1; currentFrame = -1; }
 	int GetLastFrame() { return frames.size() - 1; }

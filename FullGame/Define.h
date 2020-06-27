@@ -17,7 +17,7 @@ using namespace std;
 #define BACKGROUND_COLOR_CROSS D3DCOLOR_XRGB(188, 188, 188)
 #define SCREEN_WIDTH				560
 #define SCREEN_HEIGHT				500	//460
-#define SCREEN_PADING_TOP			80	//40
+#define SCREEN_PADING_TOP			0	//80	//40
 
 #define MAX_FRAME_RATE 50
 
