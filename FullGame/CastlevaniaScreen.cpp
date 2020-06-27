@@ -114,9 +114,9 @@ void CastlevaniaScreen::UpdateCamera() {
 	cam_x = simon_x - kc_x;
 	//cam_y = simon_y - kc_y;
 
-	/*if (cam_x + SCREEN_WIDTH > this->screen_size_x)
+	if (cam_x + SCREEN_WIDTH > this->screen_size_x)
 		cam_x = this->screen_size_x  - SCREEN_WIDTH;
-	if (cam_x < 0) cam_x = 0;*/
+	if (cam_x < 0) cam_x = 0;
 
 	//DebugOut(L"[DEBUG] Cal postion camera : (%f, %f) - (%f, %f) - (%f, %f) !\n", screen_x, screen_y, mainObject_x, mainObject_y, cam_x, cam_y);
 
