@@ -19,6 +19,8 @@ Simon::Simon() {
 	untouchable = 0;
 	trans_start = 0;
 	start_jump = 0;
+	w = SIMON_WIDTH;
+	h = SIMON_HEIGHT_STAND;
 
 	_energy = 16;
 	_score = 0;
@@ -83,7 +85,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	}
 	else
 	{
-		float min_tx, min_ty, nx = 0, ny;
+		float min_tx, min_ty, nx = 0, ny = 0;
 
 		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
@@ -195,7 +197,8 @@ void Simon::Render()
 
 	int x1 = x + SCREEN_PADING_TOP, y1 = y + SCREEN_PADING_TOP;
 
-	ani->Render(x1, y1, nx, alpha);
+	ani->Render(x1, y1, this->w, nx, alpha);
+	//RenderBoundingBox();
 }
 
 void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
@@ -367,7 +370,8 @@ void Simon::SetState(int state)
 
 
 	
-	switch (state) {
+	switch (state) 
+	{
 	case SIMON_STATE_STAND_ATTACK:
 		if (attack_start || currentTime - last_attack < ATTACK_TIME_WAIT)
 			return;
@@ -400,15 +404,11 @@ void Simon::SetState(int state)
 	case SIMON_STATE_WALKING_RIGHT:
 		vx = SIMON_WALKING_SPEED;
 		nx = 1;
-		vy = 0;
-		//y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_WALKING_LEFT:
 		vx = -SIMON_WALKING_SPEED;
 		nx = -1;
-		//vy = 0;
-		//y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_SIT:
