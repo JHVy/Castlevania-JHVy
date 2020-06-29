@@ -4,20 +4,12 @@ Brick::Brick(float _x, float _y, int id , int type, float width, float height) :
 {
 	this->_type = eType::BRICK_2;
 
-	w = width;
-	h = height;
-}
-
-void Brick::GetBoundingBox(float& left, float& top, float& right, float& bottom)
-{
-	left = x;
-	top = y;
-	right = x + w;
-	bottom = y + h;
+	this->width = width;
+	this->height = height;
 }
 
 void Brick::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 

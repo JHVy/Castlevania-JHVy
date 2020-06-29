@@ -123,7 +123,7 @@ public:
 
 	void SetState(int state);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
-	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	//void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 	int GetEnergy()
 	{

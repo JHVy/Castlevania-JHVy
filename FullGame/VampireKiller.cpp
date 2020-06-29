@@ -1,10 +1,11 @@
 ﻿#include "VampireKiller.h"
 #include "Simon.h"
 
-VampireKiller::VampireKiller() :Weapon()
+VampireKiller::VampireKiller() : Weapon()
 {
 	_level = 2;
-	w = 120;
+	width = 120;
+	height = 20;
 	AddAnimation(600);
 	AddAnimation(601);
 	AddAnimation(602);
@@ -13,7 +14,8 @@ VampireKiller::VampireKiller() :Weapon()
 
 void VampireKiller::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	CollisionWithObject(dt, *coObjects);
+	if (IsUsing())
+		CollisionWithObject(dt, *coObjects);
 }
 
 
@@ -47,9 +49,9 @@ void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, i
 void VampireKiller::Render()
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
-	ani->Render(x, y, w, nx, 255);
+	ani->Render(x, y, width, nx, 255);
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _nx) {
@@ -61,7 +63,7 @@ void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _n
 
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
-	ani->Render(x1, y1, w, nx, 255);
+	ani->Render(x1, y1, width, nx, 255);
 	RenderBoundingBox();
 }
 
@@ -79,33 +81,16 @@ void VampireKiller::setUpLevel()
 
 void VampireKiller::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	int w = 120, h = 20;
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
-	if (ani->GetCurrentFrame() < 2)
-		return;
+	//DebugOut(L"ani->GetCurrentFrame() %d\n", ani->GetCurrentFrame());
+	//if (ani->GetCurrentFrame() < 2)
+	//	return;
 
-	if (_level == 1 || _level == 2)
-	{
-		left = x;
-		right = x + w;
-		top = y;
-		bottom = y + h;
-	}
-	else
-	{
-		left = x;
-		right = x + w;
-		top = y;
-		bottom = y + h;
-
-	}
+	Weapon::GetBoundingBox(left, top, right, bottom);
 }
 
 void VampireKiller::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 {
-	//if (animation->GetCurrentFrame() < 2)
-		//return;
-
 	Weapon::CollisionWithObject(dt, listObj);
 }

@@ -45,7 +45,7 @@ class CGameObject
 public:
 	int id;
 
-	int w, h;
+	int width, height;
 
 	// toa do
 	float x; 
@@ -85,7 +85,6 @@ public:
 
 	int GetState() { return this->state; }
 
-	int GetW() { return w; }
 
 	void RenderBoundingBox();
 
@@ -103,13 +102,14 @@ public:
 
 	CGameObject(float _x = 0, float _y = 0, int type = 0);
 
-	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
+	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);
 	virtual void Render() = 0;
 	virtual void SetState(int state) { this->state = state; }
 
 	void AddAnimation(int aniId);
 
+	bool IsCollisedWith(LPGAMEOBJECT objPointer);
 	int GetID() { return id; }
 	void SetID(int id) { this->id = id; }
 

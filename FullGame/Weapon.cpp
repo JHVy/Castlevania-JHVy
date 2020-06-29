@@ -12,8 +12,6 @@ void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 	CollisionWithObject(dt, listObj);
-
-
 }
 
 
@@ -25,8 +23,7 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 		{
 			if (listObj.at(i)->GetState() == TORCH_STATE_EXSIST)
 			{
-				LPCOLLISIONEVENT e = SweptAABBEx(listObj.at(i));
-				if (e->t > 0) //đụng độ
+				if (this->IsCollisedWith(listObj.at(i))) //đụng độ
 				{
 					listObj.at(i)->SetState(TORCH_STATE_ITEM);
 				}

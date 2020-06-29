@@ -18,6 +18,38 @@ CGameObject::CGameObject(float _x, float _y, int type)
 	_type = type;
 }
 
+bool CGameObject::IsCollisedWith(LPGAMEOBJECT objPointer)
+{
+	RECT rectThis, rect1;
+
+	// this
+	float l = 0, t = 0, r = 0, b = 0;
+	this->GetBoundingBox(l, t, r, b);
+	rectThis.left = (int)l;
+	rectThis.top = (int)t;
+	rectThis.right = (int)r;
+	rectThis.bottom = (int)b;
+
+	//obj
+	float l1, t1, r1, b1;
+	objPointer->GetBoundingBox(l1, t1, r1, b1);
+	rect1.left = (int)l1;
+	rect1.top = (int)t1;
+	rect1.right = (int)r1;
+	rect1.bottom = (int)b1;
+	
+
+	return CGame::GetInstance()->isCollision(rectThis, rect1);
+}
+
+void CGameObject::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+{
+	left = x;
+	top = y;
+	right = x + width;
+	bottom = y + height;
+}
+
 void CGameObject::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 {
 	this->dt = dt;
@@ -72,6 +104,9 @@ void CGameObject::CalcPotentialCollisions(
 {
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
+		if (coObjects->at(i)->GetType() != eType::BRICK_2)
+			continue;	// skip check NOT BRICK
+
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));
 
 		if (e->t > 0 && e->t <= 1.0f)

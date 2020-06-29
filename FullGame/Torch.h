@@ -33,7 +33,7 @@ private:
 
 public:
 	Torch(int _x, int _y) {
-		this->w = TORCH_WIDTH;
+		this->width = TORCH_WIDTH;
 		this->_type = eType::TORCH;		//default is Torch
 		x = _x;
 		y = _y;
@@ -45,7 +45,7 @@ public:
 		this->_type = eType::TORCH;		//default is Torch
 		x = _x;
 		y = _y;
-		this->w = TORCH_WIDTH;
+		this->width = TORCH_WIDTH;
 		this->numAnimation = 501;
 		this->state = TORCH_STATE_EXSIST;
 
