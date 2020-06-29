@@ -61,7 +61,7 @@ void GameMap::DrawMap() {
 		for (int j = 0; j < numCols; j++)
 		{
 			float posX = j * cellW;
-			float posY = i * cellH + SCREEN_PADING_TOP;
+			float posY = i * cellH;
 
 			if (posX < 0 || posY < 0) continue;
 			

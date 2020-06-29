@@ -7,7 +7,7 @@ void Item::Render()
 	{
 		/*if (animations.size() > 0)
 			animations[this->numAnimation]->Render(x, y);*/
-		CAnimations::GetInstance()->Get(this->numAnimation)->Render(x + SCREEN_PADING_TOP, y + SCREEN_PADING_TOP, 1, 255);
+		CAnimations::GetInstance()->Get(this->numAnimation)->Render(x, y, 1, 255);
 	}
 	//RenderBoundingBox();
 }

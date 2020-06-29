@@ -2,7 +2,7 @@
 
 void Torch::Render() {
 	if (state == TORCH_STATE_EXSIST) {
-		CAnimations::GetInstance()->Get(this->numAnimation)->Render(x, y + SCREEN_PADING_TOP, width, -1, 255);
+		CAnimations::GetInstance()->Get(this->numAnimation)->Render(x, y, -1, 255);
 	}
 	else if (state == TORCH_STATE_ITEM) {
 		if (item != NULL)

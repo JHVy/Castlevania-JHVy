@@ -49,21 +49,20 @@ void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, i
 void VampireKiller::Render()
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
-	ani->Render(x, y, width, nx, 255);
+	ani->Render(x, y, nx, 255);
 
 	//RenderBoundingBox();
 }
 
 void VampireKiller::Render(float simon_x, float simon_y, int simon_state, int _nx) {
 	float x1, y1, nx1;
-	simon_y += SCREEN_PADING_TOP;
 	nx1 = _nx;
 	y1 = simon_y;
 	x1 = simon_x;
 
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
-	ani->Render(x1, y1, width, nx, 255);
+	ani->Render(x1, y1, nx, 255);
 	RenderBoundingBox();
 }
 

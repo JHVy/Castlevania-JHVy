@@ -2,7 +2,7 @@
 
 void Candle::Render() {
 	if (state == CANDLE_STATE_EXSIST) {
-		CAnimations::GetInstance()->Get(this->numAnimation)->Render(x + SCREEN_PADING_TOP, y + SCREEN_PADING_TOP, 1, 255);
+		CAnimations::GetInstance()->Get(this->numAnimation)->Render(x, y, 1, 255);
 	}
 	else if (state == CANDLE_STATE_ITEM) {
 		if (item != NULL)

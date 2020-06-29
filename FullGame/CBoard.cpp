@@ -24,6 +24,9 @@ void CBoard::Render()
 	float cx, cy;
 	game->GetCamera(cx, cy);
 
+	// Giam y de ve lui y ve TOP = 0
+	cy -= SCREEN_PADING_TOP;
+
 	Simon* simon = Simon::GetInstance();
 
 	// Draw board 
@@ -40,5 +43,4 @@ void CBoard::Render()
 	// Draw energy bar
 	code->DrawEnergyBar(cx + 110, cy + 30, 0, simon->GetEnergy()); // player simon->getEnergy - lay gia tri energy cua simon, tru di sau khi va cham voi enemy
 	code->DrawEnergyBar(cx + 110, cy + 50, 1, 5); // enemy  boss->getEnergy 
-
 }

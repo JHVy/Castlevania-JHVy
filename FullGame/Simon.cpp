@@ -178,9 +178,9 @@ void Simon::Render()
 	DebugOut(L"[START DRAW SIMON] ");
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
-	int x1 = x, y1 = y + SCREEN_PADING_TOP;
+	int x1 = x, y1 = y;
 
-	ani->Render(x1, y1, this->width, nx, alpha);
+	ani->Render(x1, y1, nx, alpha);
 	//RenderBoundingBox();
 }
 
