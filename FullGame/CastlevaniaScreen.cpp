@@ -32,7 +32,7 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 		return new Candle(x, y, id_item);
 
 	case eType::ID_HIDDEN:
-		return new CHidenObject(x, y, type);
+		return new CHidenObject(x, y, w, h, type, trend);
 
 	default:
 		return NULL;

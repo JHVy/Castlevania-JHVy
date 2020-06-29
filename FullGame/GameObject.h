@@ -100,7 +100,7 @@ public:
 		float &nx, 
 		float &ny);
 
-	CGameObject(float _x = 0, float _y = 0, int type = 0);
+	CGameObject(float _x = 0, float _y = 0, int type = 0, int w = 0, int h = 0);
 
 	virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects = NULL);

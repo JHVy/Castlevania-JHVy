@@ -7,7 +7,7 @@
 #include "Utils.h"
 
 #define SIMON_WALKING_SPEED		0.12f
-#define SIMON_JUMP_SPEED_Y		0.36f
+#define SIMON_JUMP_SPEED_Y		0.46f	//0.36f
 #define SIMON_GRAVITY			0.001f
 
 #define SIMON_POS_Y				320
@@ -101,6 +101,7 @@ protected:
 	VampireKiller* vampireKiller;
 
 public:
+	int isOnStair;
 
 	static Simon* GetInstance();
 
@@ -117,7 +118,7 @@ public:
 	}
 
 	void CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects);
-	void CollisionWithHidenBricks(vector<LPGAMEOBJECT>* coObjects);
+	void CollisionWithStair(int type, LPGAMEOBJECT pObj);
 	void CollisionWithItems(vector<LPGAMEOBJECT>* coObjects);
 
 

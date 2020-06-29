@@ -9,7 +9,7 @@ CastkeKeyEventHandler::CastkeKeyEventHandler(CastlevaniaScreen* screen) :CKeyEve
 
 void CastkeKeyEventHandler::OnKeyDown(int KeyCode)
 {
-	DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
+	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
 
 	Simon* simon = this->castleVaninaScreen->simon;
 
@@ -124,10 +124,13 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 		return;
 	}
 
-	if (IsKeyDown(DIK_UP)) {
+	if (IsKeyDown(DIK_UP)) 
+	{
 		if (simon->IsSitting())
 			simon->SetState(SIMON_STATE_IDLE);
 
+		if (simon->isOnStair)
+			simon->SetState(SIMON_STATE_GO_UP);
 		return;
 	}
 

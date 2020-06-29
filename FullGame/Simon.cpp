@@ -25,6 +25,8 @@ Simon::Simon() {
 	_energy = 16;
 	_score = 0;
 	_lives = 3;
+
+	isOnStair = false;
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) 
@@ -83,7 +85,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (nx < 0)
 			vampireKiller->x = this->x - 50;
 		else
-			vampireKiller->x = this->x - 40;// -10;// Simon::GetInstance()->GetW();
+			vampireKiller->x = this->x - 40;
 	}
 	vampireKiller->Update(dt, coObjects);
 
@@ -175,7 +177,6 @@ void Simon::Render()
 	int alpha = 255;
 
 	//id = SIMON_ANI_IDLE;
-	DebugOut(L"[START DRAW SIMON] ");
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
 	int x1 = x, y1 = y;
@@ -239,6 +240,16 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					GameConfig::GetInstance()->LevelUp();
 					break;
 
+				// Va cham STAIR_UP
+				case eType::STAIR_UP:
+					CollisionWithStair(eType::STAIR_UP, obj);
+					break;
+					
+				// Va cham STAIR_DOWN
+				case eType::STAIR_DOWN:
+					CollisionWithStair(eType::STAIR_DOWN, obj);
+					break;
+
 				default:
 					break;
 			}
@@ -246,9 +257,17 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void Simon::CollisionWithHidenBricks(vector<LPGAMEOBJECT>* coObjects)
+void Simon::CollisionWithStair(int type, LPGAMEOBJECT pObj)
 {
-
+	isOnStair = true;
+	if (type == eType::STAIR_UP)
+	{
+		DebugOut(L"[SIMON-STAIR_UP] %d\n", isOnStair);
+	}
+	else if (type == eType::STAIR_DOWN)
+	{
+		DebugOut(L"[SIMON-STAIR_DOWN] %d\n", isOnStair);
+	}
 }
 
 void Simon::CollisionWithItems(vector<LPGAMEOBJECT>* coObjects)
@@ -261,7 +280,7 @@ void Simon::CollisionWithItems(vector<LPGAMEOBJECT>* coObjects)
 void Simon::SetState(int state)
 {
 	// need update
-	DebugOut(L"[SIMON-SETSTATE] %d\n", state);
+	//DebugOut(L"[SIMON-SETSTATE] %d\n", state);
 
 	int currentTime = GetTickCount();
 
@@ -320,6 +339,11 @@ void Simon::SetState(int state)
 
 	case SIMON_STATE_IDLE:
 		vx = 0;		
+		break;
+
+	case SIMON_STATE_GO_UP:
+		vx = SIMON_WALKING_SPEED;
+		vy = -SIMON_WALKING_SPEED;
 		break;
 
 	default:

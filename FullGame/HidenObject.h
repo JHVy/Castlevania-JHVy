@@ -18,24 +18,19 @@
 class CHidenObject : public CGameObject
 {
 private:
-	int _height;
-	int _width;
 	int _autoX;
 	int ny;
 public:
 
-	CHidenObject(float _x = 0, float _y = 0,int state = 0, int trendX = 0,int trendY = 0) :CGameObject(_x, _y)
+	CHidenObject(float _x, float _y, int w, int h, int type, int trendX = 0, int trendY = 0) :CGameObject(_x, _y, type, w, h)
 	{
-		this->_type = eType::OBJECT_HIDDEN_DOOR;
-		_height = 10;
-		_width = 50;
+		this->_type = type;
 		nx = trendX;
 		ny = trendY;
 		this->state = state;
-		
-
 	}
-	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+
+	//void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void Render();
 	int getNx() { return nx; }
 	int getNy() { return ny; }
