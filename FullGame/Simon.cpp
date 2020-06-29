@@ -68,6 +68,11 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
 
+	if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
+	{
+		start_jump = 0;
+	}
+
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -103,6 +108,19 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	// collision simon with object item
 	//CollisionWithObjects(coObjects);
 
+
+	// update weapon
+	if (vampireKiller != NULL) 
+	{
+		vampireKiller->y = this->y;
+		if (nx < 0)
+			this->vampireKiller->x = x - 50;
+		else
+			this->vampireKiller->x = x - 40;// -10;// Simon::GetInstance()->GetW();
+	}
+	vampireKiller->Update(dt, coObjects);
+
+
 	// simon attack
 	if (attack_start) 
 	{
@@ -111,7 +129,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 		{
 			attack_start = 0;
 			this->state = SIMON_STATE_IDLE;
-			return;
 		}
 		return;
 	}
@@ -139,10 +156,8 @@ void Simon::Render()
 	{
 		id = SIMON_ANI_SITTING_ATTACKING;
 
-		if (vampireKiller != NULL) {
-			vampireKiller->Render(x, y, state, nx);
-			vampireKiller->SetPosition(x, y, state, nx);
-		}
+		if (vampireKiller != NULL) 
+			vampireKiller->Render();
 	}
 	else if (state == SIMON_STATE_STAND_ATTACK)
 	{
@@ -151,10 +166,8 @@ void Simon::Render()
 		if (start_jump)
 			id = SIMON_ANI_SITTING_ATTACKING;
 
-		if (vampireKiller != NULL) {
-			vampireKiller->Render(x, y, state, nx);
-			vampireKiller->SetPosition(x, y, state, nx);
-		}
+		if (vampireKiller != NULL) 
+			vampireKiller->Render();
 
 	}
 	else if (state == SIMON_STATE_ATTACK_DAGGER)
@@ -168,9 +181,9 @@ void Simon::Render()
 	}
 	else if (state == SIMON_STATE_JUMP)
 	{
-		if (start_jump > 0)
-			id = SIMON_ANI_JUMPING;
-		else
+		//if (start_jump > 0)
+			//id = SIMON_ANI_JUMPING;
+		//else
 			id = SIMON_ANI_IDLE;
 	}
 	else 
@@ -195,7 +208,7 @@ void Simon::Render()
 	DebugOut(L"[START DRAW SIMON] ");
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
-	int x1 = x + SCREEN_PADING_TOP, y1 = y + SCREEN_PADING_TOP;
+	int x1 = x, y1 = y + SCREEN_PADING_TOP;
 
 	ani->Render(x1, y1, this->w, nx, alpha);
 	//RenderBoundingBox();
@@ -398,7 +411,6 @@ void Simon::SetState(int state)
 		start_jump = GetTickCount();
 		last_jump = start_jump;
 		vy = -SIMON_JUMP_SPEED_Y;
-		//y = SIMON_POS_Y;
 		break;
 
 	case SIMON_STATE_WALKING_RIGHT:
@@ -425,8 +437,8 @@ void Simon::SetState(int state)
 		break;
 	}
 
+	
 	this->state = state;
-
 	return;
 }
 

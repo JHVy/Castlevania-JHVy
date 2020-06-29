@@ -80,7 +80,7 @@ void CastlevaniaScreen::Load() {
 
 void CastlevaniaScreen::Update(DWORD dt) {
 
-	this->simon->Update(dt, &objCollisionCheck);
+	this->simon->Update(dt, &items);
 
 	float simon_x, simon_y;
 	this->simon->GetPosition(simon_x, simon_y);
