@@ -31,7 +31,7 @@ protected:
 	CBoard * board;
 
 	float screen_size_x, screen_size_y;
-	vector<CGameObject*> items, objCollisionCheck;
+	vector<CGameObject*> items;
 
 	
 public:

@@ -57,6 +57,7 @@ void CSprite::DrawFlipX(float x, float y, int alpha) {
 
 	spriteHandler->SetTransform(&finalMt);
 
+	x -= (right - left);
 
 	this->DrawCam(x, y, alpha);
 
@@ -66,7 +67,7 @@ void CSprite::DrawFlipX(float x, float y, int alpha) {
 void CSprite::DrawCam(float x, float y, int alpha)
 {
 	//CGame* game = CGame::GetInstance();
-	CGame::GetInstance()->Draw(x, y, texture, left, top, right, bottom, alpha);
+	CGame::GetInstance()->DrawFlipX(x, y, texture, left, top, right, bottom, alpha);
 }
 
 void CSprite::load(std::ifstream& inFile)

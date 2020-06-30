@@ -92,6 +92,7 @@ void CGame::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top
 void CGame::DrawFlipX(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom, int alpha)
 {
 	float x1 = x + cam_x, y1 = y - cam_y;
+	y1 += SCREEN_PADING_TOP;
 
 	D3DXVECTOR3 p(x1, y1, 0);
 	RECT r;

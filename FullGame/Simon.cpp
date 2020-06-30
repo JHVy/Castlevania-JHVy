@@ -182,7 +182,7 @@ void Simon::Render()
 	int x1 = x, y1 = y;
 
 	ani->Render(x1, y1, nx, alpha);
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 
 void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
@@ -344,6 +344,11 @@ void Simon::SetState(int state)
 	case SIMON_STATE_GO_UP:
 		vx = SIMON_WALKING_SPEED;
 		vy = -SIMON_WALKING_SPEED;
+		break;
+
+	case SIMON_STATE_GO_DOWN:
+		vx = -SIMON_WALKING_SPEED;
+		vy = +SIMON_WALKING_SPEED;
 		break;
 
 	default:

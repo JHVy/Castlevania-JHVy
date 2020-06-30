@@ -22,7 +22,6 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 	{
 	case eType::ID_BRICK:
 		objRet = new Brick(x, y, id_item, type, w, h);
-		objCollisionCheck.push_back(objRet);
 		return objRet;
 
 	case eType::ID_TORCH:
@@ -41,7 +40,6 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 
 void CastlevaniaScreen::LoadObject(string file_path) {
 	items.clear();
-	objCollisionCheck.clear();
 
 	ifstream inFile(file_path);
 

@@ -43,8 +43,8 @@ void CAnimation::Render(float x, float y, int trend, int alpha)
 	if (trend < 0)
 		frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
 	else
-		frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
-		//frames[currentFrame]->GetSprite()->DrawFlipX(x+w, y, alpha);
+		//frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
+		frames[currentFrame]->GetSprite()->DrawFlipX(x, y, alpha);
 }
 
 void CAnimation::Render(float x, float y, int alpha)
