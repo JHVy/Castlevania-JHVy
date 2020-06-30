@@ -27,6 +27,7 @@ Simon::Simon() {
 	_lives = 3;
 
 	isOnStair = false;
+	listGameObj = NULL;
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) 
@@ -34,8 +35,10 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
+	
 	// Simple fall down
-	vy += SIMON_GRAVITY * dt;
+	if (!isOnStair)
+		vy += SIMON_GRAVITY * dt;
 
 	if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
 	{
@@ -48,7 +51,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	coEvents.clear();
 
 	// turn off collision when die 
-	if (state != SIMON_STATE_DIE)
+	if (state != SIMON_STATE_DIE && !isOnStair)
 		CalcPotentialCollisions(coObjects, coEvents);
 
 	// No collision occured, proceed normally
@@ -240,16 +243,6 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					GameConfig::GetInstance()->LevelUp();
 					break;
 
-				// Va cham STAIR_UP
-				case eType::STAIR_UP:
-					CollisionWithStair(eType::STAIR_UP, obj);
-					break;
-					
-				// Va cham STAIR_DOWN
-				case eType::STAIR_DOWN:
-					CollisionWithStair(eType::STAIR_DOWN, obj);
-					break;
-
 				default:
 					break;
 			}
@@ -257,16 +250,66 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void Simon::CollisionWithStair(int type, LPGAMEOBJECT pObj)
+void Simon::CheckCollisionWithStair(int keyPress)
 {
-	isOnStair = true;
-	if (type == eType::STAIR_UP)
+	if (listGameObj == NULL)
+		return;
+
+	for (int index = 0; index < listGameObj->size(); index++)
 	{
-		DebugOut(L"[SIMON-STAIR_UP] %d\n", isOnStair);
-	}
-	else if (type == eType::STAIR_DOWN)
-	{
-		DebugOut(L"[SIMON-STAIR_DOWN] %d\n", isOnStair);
+		LPGAMEOBJECT obj = listGameObj->at(index);
+
+		if (obj->GetType() != eType::STAIR_UP && obj->GetType() != eType::STAIR_DOWN)
+			continue;	//ko phai STAIR thi bo qua
+
+		//if (this->IsCollisedWith(obj))
+		{
+			if (keyPress == DIK_UP)
+			{
+				// Vao thang
+				if (!isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
+				{
+					isOnStair = true;
+				}
+
+				// Tren thang
+				if (isOnStair)
+				{
+					vx = SIMON_WALKING_SPEED;
+					vy = -vx;
+				}
+
+				//Ra khoi thang
+				if (isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
+				{
+					isOnStair = false;
+					vx = vy = 0;
+					y -= 20;	// tang y nhay len mot chut len de khoi overlap voi BRICK
+				}
+			}
+			else if(keyPress == DIK_DOWN)
+			{
+				// Vao thang
+				if (!isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
+				{
+					isOnStair = true;
+				}
+
+				// Tren thang
+				if (isOnStair)
+				{
+					vx = -SIMON_WALKING_SPEED;
+					vy = -vx;
+				}
+
+				//Ra khoi thang
+				if (isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
+				{
+					isOnStair = false;
+					vx = vy = 0;
+				}
+			}
+		}
 	}
 }
 
@@ -339,6 +382,7 @@ void Simon::SetState(int state)
 
 	case SIMON_STATE_IDLE:
 		vx = 0;		
+		vy = 0;
 		break;
 
 	case SIMON_STATE_GO_UP:

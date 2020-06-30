@@ -38,7 +38,8 @@ CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, 
 	}
 }
 
-void CastlevaniaScreen::LoadObject(string file_path) {
+void CastlevaniaScreen::LoadObject(string file_path) 
+{
 	items.clear();
 
 	ifstream inFile(file_path);
@@ -56,6 +57,8 @@ void CastlevaniaScreen::LoadObject(string file_path) {
 		}
 		inFile.close();
 	}
+
+	this->simon->SetListObject(&items);
 }
 
 void CastlevaniaScreen::Load() {

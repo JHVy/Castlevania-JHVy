@@ -91,6 +91,7 @@ protected:
 
 	unordered_map<int, Weapon*> weapons;
 	bool isFall;
+	vector<LPGAMEOBJECT>* listGameObj;
 
 	
 	// history
@@ -101,13 +102,16 @@ protected:
 	VampireKiller* vampireKiller;
 
 public:
-	int isOnStair;
+	bool isOnStair;
 
 	static Simon* GetInstance();
 
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void Render();
+
+	void SetListObject(vector<LPGAMEOBJECT>* listGameObj) { this->listGameObj = listGameObj; }
+	vector<LPGAMEOBJECT>* GetListObject() { return listGameObj; }
 
 	// check state
 	bool IsAttacking() { if (attack_start > 0) return true; return false; }
@@ -118,7 +122,7 @@ public:
 	}
 
 	void CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects);
-	void CollisionWithStair(int type, LPGAMEOBJECT pObj);
+	void CheckCollisionWithStair(int keyPress);
 	void CollisionWithItems(vector<LPGAMEOBJECT>* coObjects);
 
 
