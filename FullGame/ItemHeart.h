@@ -8,10 +8,10 @@
 
 class Item;
 
-class Item_Heart: public Item
+class ItemHeart: public Item
 {
 public:
-	Item_Heart(int _x, int _y): Item(_x, _y) {
+	ItemHeart(int _x, int _y): Item(_x, _y) {
 		this->numAnimation = 702;
 		this->AddAnimation(702);
 		this->itemType = eType::HEART;

@@ -43,4 +43,33 @@ void CBoard::Render()
 	// Draw energy bar
 	code->DrawEnergyBar(cx + 110, cy + 30, 0, simon->GetEnergy()); // player simon->getEnergy - lay gia tri energy cua simon, tru di sau khi va cham voi enemy
 	code->DrawEnergyBar(cx + 110, cy + 50, 1, 5); // enemy  boss->getEnergy 
+
+	if (_weapon != 0)
+	{
+
+		switch (_weapon)
+		{
+		case eType::ITEMAXE:
+			sprites->Get(13010)->Draw(cx + 310, cy + 30);
+			break;
+		case eType::ITEMBOONGMERANG:
+			sprites->Get(13020)->Draw(cx + 310, cy + 27);
+			break;
+		default:
+			break;
+		}
+		if (_numberOfWeapon != 0)
+		{
+			if (_numberOfWeapon == 2)
+			{
+				sprites->Get(13014)->Draw(cx + 440, cy + 40);
+			}
+			else if (_numberOfWeapon == 3)
+			{
+				sprites->Get(13017)->Draw(cx + 440, cy + 40);
+			}
+		}
+
+	}
 }
+

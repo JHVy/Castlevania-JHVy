@@ -4,6 +4,14 @@
 #include "GameObject.h"
 #include "Item.h"
 #include "ItemBoongmerang.h"
+#include "ItemAxe.h"
+#include "ItemII.h"
+#include "ItemBoongmerang.h"
+#include "ItemHollyWatter.h"
+#include "ItemIII.h"
+#include "ItemVase.h"
+#include "ItemSmallHeart.h"
+#include "ItemMoney.h"
 
 #define CANDLE_WIDTH 16
 #define CANDLE_HEIGHT 32
@@ -13,23 +21,21 @@
 #define CANDLE_STATE_ITEM 2
 #define CANDLE_STATE_ITEM_NOT_EXSIST 3
 
-#define ID_HEART		1
+#define ID_HEART		1 // --
 #define ID_SMAILLHEART	2
-#define ID_BOONGMERANG	3
+#define ID_BOONGMERANG	3 // --
 #define ID_MONEY_1		4  //100
 #define ID_MONEY_2		5  //400
 #define ID_MONEY_3		6 //700
 #define ID_MONEY_4		7  //1000
-#define ID_II			8
-#define ID_HOLLYWATTER	9
-#define ID_III			10
-#define ID_AXE   		11
-#define ID_VASE			12 // cai binh -> tang hinh
+#define ID_II			8 // --
+#define ID_HOLLYWATTER	9 // --
+#define ID_III			10 // --
+#define ID_AXE   		11 // --
+#define ID_VASE			12 // -- cai binh -> tang hinh
 
 
 
-class Item_Heart;
-class Iteam_SmallHeart;
 class Item;
 
 class Candle : public CGameObject
@@ -57,19 +63,45 @@ public:
 		switch (_id_item) 
 		{
 		case ID_HEART:
-			item = new Item_Heart(x, y);
+			item = new ItemHeart(x,y);
 			return;
-
 		case ID_BOONGMERANG:
 			item = new ItemBoongmerang(x, y);
 			return;
-
-		/*case ID_SMAILLHEART: 
-			item = new Iteam_SmallHeart(x, y);
-			return;*/
+		case ID_SMAILLHEART: 
+			item = new ItemSmallHeart(x, y);
+			return;
+		case ID_AXE:
+			item = new ItemAxe(x,y);
+			return;
+		case ID_MONEY_1:
+			item = new ItemMoney(x,y, eType::MONEY_1);
+			return;
+		case ID_MONEY_2:
+			item = new ItemMoney(x, y, eType::MONEY_2);
+			return;
+		case ID_MONEY_3:
+			item = new ItemMoney(x, y, eType::MONEY_3);
+			return;
+		case ID_MONEY_4:
+			item = new ItemMoney(x, y, eType::MONEY_4);
+			return;
+		case ID_HOLLYWATTER:
+			item = new ItemHollyWatter(x,y);
+			return;
+		case ID_II:
+			item = new ItemII(x,y);
+			return;
+		case ID_III:
+			item = new ItemIII(x,y);
+			return;
+		case ID_VASE:
+			item = new ItemVase(x,y);
+			return;
 
 		default:
-			item = NULL;
+			//item = NULL;
+			item = new ItemHollyWatter(x, y);
 			return;
 		}
 	}

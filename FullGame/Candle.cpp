@@ -32,6 +32,6 @@ void Candle::GetBoundingBox(float& left, float& top, float& right, float& bottom
 	}
 	else if (state == CANDLE_STATE_ITEM)
 	{
-		item->GetBoundingBox(left, top, right, bottom);
+ 		item->GetBoundingBox(left, top, right, bottom);
 	}
 }

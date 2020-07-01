@@ -11,7 +11,7 @@ class ItemBoongmerang : public Item
 {
 public:
 	ItemBoongmerang(int _x, int _y) : Item(_x, _y) {
-		this->numAnimation = 719;
+		this->numAnimation = 719;//719
 		AddAnimation(719);
 		this->itemType = eType::ITEMBOONGMERANG;
 	}

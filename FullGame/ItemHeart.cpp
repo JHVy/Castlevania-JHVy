@@ -1,6 +1,6 @@
 #include "ItemHeart.h"
 
-void Item_Heart::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void ItemHeart::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	if (state == ITEM_STATE_EXSIST)
 	{
