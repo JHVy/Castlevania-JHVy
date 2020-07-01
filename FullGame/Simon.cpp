@@ -37,8 +37,10 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	CGameObject::Update(dt);
 	
 	// Simple fall down
-	if (!isOnStair)
-		vy += SIMON_GRAVITY * dt;
+	vy += SIMON_GRAVITY * dt;
+	if (isOnStair)
+		vy = 0;
+
 
 	if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
 	{
@@ -275,8 +277,8 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = SIMON_WALKING_SPEED;
-					vy = -vx;
+					vx = -SIMON_WALKING_SPEED;
+					vy = vx;
 				}
 
 				//Ra khoi thang
@@ -330,6 +332,21 @@ void Simon::SetState(int state)
 	if (attack_start)
 		return;
 
+	// Dang jump van qua phai trai duoc
+	if (start_jump)
+	{
+		if (state == SIMON_STATE_WALKING_RIGHT)
+		{
+			vx = SIMON_WALKING_SPEED;
+			nx = 1;
+		}
+		else if (state == SIMON_STATE_WALKING_LEFT) 
+		{
+			vx = -SIMON_WALKING_SPEED;
+			nx = -1;
+		}
+	}
+
 	if (start_jump && state != SIMON_STATE_STAND_ATTACK) 
 		return;
 
@@ -382,7 +399,7 @@ void Simon::SetState(int state)
 
 	case SIMON_STATE_IDLE:
 		vx = 0;		
-		vy = 0;
+		//vy = 0;
 		break;
 
 	case SIMON_STATE_GO_UP:
