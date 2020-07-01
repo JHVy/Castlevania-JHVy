@@ -82,6 +82,13 @@
     </ClCompile>
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="ItemBoongmerang.cpp" />
+    <ClCompile Include="ItemHollyWatter.cpp" />
+    <ClCompile Include="ItemIII.cpp" />
+    <ClCompile Include="ItemVase.cpp" />
+    <ClCompile Include="ItemAxe.cpp" />
+    <ClCompile Include="ItemII.cpp" />
+    <ClCompile Include="ItemSmallHeart.cpp" />
+    <ClCompile Include="ItemMoney.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -161,6 +168,13 @@
     </ClInclude>
     <ClInclude Include="Candle.h" />
     <ClInclude Include="ItemBoongmerang.h" />
+    <ClInclude Include="ItemHollyWatter.h" />
+    <ClInclude Include="ItemIII.h" />
+    <ClInclude Include="ItemVase.h" />
+    <ClInclude Include="ItemAxe.h" />
+    <ClInclude Include="ItemII.h" />
+    <ClInclude Include="ItemSmallHeart.h" />
+    <ClInclude Include="ItemMoney.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">

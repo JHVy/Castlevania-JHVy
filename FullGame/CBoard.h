@@ -16,6 +16,9 @@ class CBoard
 	CCode* code;
 	static CBoard* __instance;
 
+	int _weapon;
+	int _numberOfWeapon;
+
 public:
 	static CBoard* GetInstance();
 	CBoard()
@@ -23,6 +26,8 @@ public:
 		_time = 300;
 		_count = GetTickCount();
 		code = new CCode();
+		_weapon = 0;
+		_numberOfWeapon = 0;
 	}
 
 	~CBoard()
@@ -34,4 +39,6 @@ public:
 
 	void Update(DWORD dt);
 	void Render();
+
+	//void ChangeWeapon();
 };

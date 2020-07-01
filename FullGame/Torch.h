@@ -52,7 +52,7 @@ public:
 		switch (_id_item) 
 		{
 		case ID_HEART:
-			item = new Item_Heart(x, y);
+			item = new ItemHeart(x, y);
 			return;
 
 		case ID_WHIPUPGRADE:

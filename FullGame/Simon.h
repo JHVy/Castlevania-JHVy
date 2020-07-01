@@ -135,6 +135,11 @@ public:
 		return _score;
 	}
 
+	void SetScore(int score) 
+	{ 
+		_score += score; 
+	}
+
 	int GetLives()
 	{
 		return _lives;
