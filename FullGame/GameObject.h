@@ -68,7 +68,7 @@ public:
 
 	int _type;
 
-	unordered_map<int, LPANIMATION> animations;
+	vector<LPANIMATION> animations;
 	LPANIMATION animation;
 
 public: 

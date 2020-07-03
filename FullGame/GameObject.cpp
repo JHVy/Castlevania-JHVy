@@ -175,13 +175,13 @@ void CGameObject::RenderBoundingBox()
 void CGameObject::AddAnimation(int aniId)
 {
 	LPANIMATION ani = CAnimations::GetInstance()->Get(aniId);
-	animations[aniId] = ani;
+	animations.push_back(ani);
 }
 
 CGameObject::~CGameObject()
 {
+	animations.clear();
 	if (animation != NULL)
 		delete animation;
 	animation = NULL;
-	animations.clear();
 }

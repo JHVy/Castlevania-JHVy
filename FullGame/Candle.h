@@ -60,6 +60,7 @@ public:
 		this->numAnimation = 502;
 		this->_type = eType::CANDLE;
 
+		
 		switch (_id_item) 
 		{
 		case ID_HEART:
@@ -74,7 +75,7 @@ public:
 		case ID_AXE:
 			item = new ItemAxe(x,y);
 			return;
-		case ID_MONEY_1:
+		/*case ID_MONEY_1:
 			item = new ItemMoney(x,y, eType::MONEY_1);
 			return;
 		case ID_MONEY_2:
@@ -85,7 +86,7 @@ public:
 			return;
 		case ID_MONEY_4:
 			item = new ItemMoney(x, y, eType::MONEY_4);
-			return;
+			return;*/
 		case ID_HOLLYWATTER:
 			item = new ItemHollyWatter(x,y);
 			return;
@@ -101,7 +102,7 @@ public:
 
 		default:
 			//item = NULL;
-			item = new ItemHollyWatter(x, y);
+			item = new ItemSmallHeart(x, y);
 			return;
 		}
 	}

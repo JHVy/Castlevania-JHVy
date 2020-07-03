@@ -226,27 +226,27 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					}
 					break;
 
-				case eType::CANDLE:
-					candle = (Candle*)obj;
-					if (obj->GetState() == CANDLE_STATE_ITEM)
-					{
-						if (candle->getItemType() == eType::HEART)
-							this->_heart += 5;
-						else if (candle->getItemType() == eType::SMALLHEART)
-							this->_heart++;
-						else if (candle->getItemType() == eType::MONEY_1)
-							this->_score += 100;
-						else if (candle->getItemType() == eType::MONEY_2)
-							this->_score += 400;
-						else if (candle->getItemType() == eType::MONEY_3)
-							this->_score += 700;
-						else if (candle->getItemType() == eType::MONEY_4)
-							this->_score += 1000;
+				//case eType::CANDLE:
+				//	candle = (Candle*)obj;
+				//	if (obj->GetState() == CANDLE_STATE_ITEM)
+				//	{
+				//		if (candle->getItemType() == eType::HEART)
+				//			this->_heart += 5;
+				//		/*else if (candle->getItemType() == eType::SMALLHEART)
+				//			this->_heart++;
+				//		else if (candle->getItemType() == eType::MONEY_1)
+				//			this->_score += 100;
+				//		else if (candle->getItemType() == eType::MONEY_2)
+				//			this->_score += 400;
+				//		else if (candle->getItemType() == eType::MONEY_3)
+				//			this->_score += 700;
+				//		else if (candle->getItemType() == eType::MONEY_4)
+				//			this->_score += 1000;*/
 
-						candle->invisibleItem();
-						candle->SetState(CANDLE_STATE_NOT_EXSIST);
-					}
-					break;
+				//		candle->invisibleItem();
+				//		candle->SetState(CANDLE_STATE_NOT_EXSIST);
+				//	}
+				//	break;
 
 				// Va cham cua qua man khac
 				case eType::OBJECT_HIDDEN_DOOR:

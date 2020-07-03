@@ -26,17 +26,23 @@ void ItemSmallHeart::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	// Simple fall down
 
+
+
 	vector<LPGAMEOBJECT> listBrick;
-	for (int i = 0; i < coObjects->size(); i++)
+	if (coObjects != NULL)
 	{
-
-		if (dynamic_cast<Brick*>(coObjects->at(i)))
+		for (int i = 0; i < coObjects->size(); i++)
 		{
-			Brick* brick = dynamic_cast<Brick*>(coObjects->at(i));
-			listBrick.push_back(brick);
-		}
 
+			if (dynamic_cast<Brick*>(coObjects->at(i)))
+			{
+				Brick* brick = dynamic_cast<Brick*>(coObjects->at(i));
+				listBrick.push_back(brick);
+			}
+
+		}
 	}
+	
 
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;

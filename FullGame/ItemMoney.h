@@ -17,7 +17,8 @@ class ItemMoney : public Item
 	static bool isStartShowHiden;
 public:
 	ItemMoney(float _x, float _y, int type) : Item(_x, _y)
-	{
+	{		
+		animations.clear();
 		destination_x = x;
 		destination_y = y - 33;
 		switch (type)
