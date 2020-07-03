@@ -23,8 +23,8 @@
 //-----------------------------------------------------------------------------
 HRESULT DXUtil_GetDXSDKMediaPathCch( TCHAR* strDest, int cchDest );
 HRESULT DXUtil_GetDXSDKMediaPathCb( TCHAR* szDest, int cbDest );
-HRESULT DXUtil_FindMediaFileCch( TCHAR* strDestPath, int cchDest, TCHAR* strFilename );
-HRESULT DXUtil_FindMediaFileCb( TCHAR* szDestPath, int cbDest, TCHAR* strFilename );
+HRESULT DXUtil_FindMediaFileCch( TCHAR* strDestPath, int cchDest, LPCTSTR strFilename );
+HRESULT DXUtil_FindMediaFileCb( TCHAR* szDestPath, int cbDest, LPCTSTR strFilename );
 #endif // !UNDER_CE
 
 

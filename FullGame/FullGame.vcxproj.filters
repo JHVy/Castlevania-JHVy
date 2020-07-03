@@ -89,6 +89,15 @@
     <ClCompile Include="ItemII.cpp" />
     <ClCompile Include="ItemSmallHeart.cpp" />
     <ClCompile Include="ItemMoney.cpp" />
+    <ClCompile Include="Sound.cpp">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClCompile>
+    <ClCompile Include="DSutil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="dxutil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -175,6 +184,15 @@
     <ClInclude Include="ItemII.h" />
     <ClInclude Include="ItemSmallHeart.h" />
     <ClInclude Include="ItemMoney.h" />
+    <ClInclude Include="Sound.h">
+      <Filter>GameManagement\GameControl</Filter>
+    </ClInclude>
+    <ClInclude Include="DSutil.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="dxutil.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
