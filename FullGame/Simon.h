@@ -103,6 +103,7 @@ protected:
 
 public:
 	bool isOnStair;
+	int StairTrend;
 
 	static Simon* GetInstance();
 
