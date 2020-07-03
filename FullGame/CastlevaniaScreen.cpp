@@ -95,7 +95,7 @@ void CastlevaniaScreen::Update(DWORD dt) {
 	if (!items.empty()) 
 	{
 		for (int i = 0; i < items.size(); i++) {
-			items[i]->Update(dt, NULL);
+			items[i]->Update(dt, &items);
 		}
 	}
 
