@@ -4,9 +4,9 @@
 
 VampireKiller::VampireKiller() : Weapon()
 {
-	_level = 2;
+	_level = 1;
 	width = 120;
-	height = 20;
+	height = 50;
 	AddAnimation(600);
 	AddAnimation(601);
 	AddAnimation(602);
@@ -49,7 +49,9 @@ void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, i
 
 void VampireKiller::Render()
 {
-	LPANIMATION ani = CAnimations::GetInstance()->Get(600);
+	int sprite_number = 600 + this->_level - 1;		//600 is VampireKiller
+	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
+
 	ani->Render(x, y, nx, 255);
 
 	//RenderBoundingBox();

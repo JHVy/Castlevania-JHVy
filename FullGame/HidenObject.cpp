@@ -2,5 +2,5 @@
 
 void CHidenObject::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }

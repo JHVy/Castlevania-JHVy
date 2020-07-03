@@ -160,9 +160,9 @@ void Simon::Render()
 	}
 	else if (state == SIMON_STATE_JUMP)
 	{
-		//if (start_jump > 0)
-			//id = SIMON_ANI_JUMPING;
-		//else
+		if (start_jump > 0)
+			id = SIMON_ANI_JUMPING;
+		else
 			id = SIMON_ANI_IDLE;
 	}
 	else 
@@ -189,7 +189,7 @@ void Simon::Render()
 	int x1 = x, y1 = y;
 
 	ani->Render(x1, y1, nx, alpha);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
@@ -435,7 +435,9 @@ void Simon::SetState(int state)
 		break;
 	}
 
-	
+	// update Trend for weapon, weapon trend = simon trend
+	vampireKiller->SetTrend(nx);
+
 	this->state = state;
 	return;
 }
