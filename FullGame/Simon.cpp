@@ -1,5 +1,6 @@
 #include "Simon.h"
 #include "Game.h"
+#include "Sound.h"
 #include "GameConfig.h"
 
 Simon* Simon::_instance = NULL;
@@ -218,7 +219,11 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						if (torch->getItemType() == eType::WHIPUPGRADE)
 							this->vampireKiller->setUpLevel();
 						else if (torch->getItemType() == eType::HEART)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_heart += 5;
+						}
+							
 						/*else if (torch->getItemType() == eType::SMALLHEART)
 							this->_heart += 2;*/
 
@@ -370,6 +375,7 @@ void Simon::SetState(int state)
 			return;
 
 		attack_start = GetTickCount();
+		Sound::GetInstance()->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
 
 		//this->vampireKiller->GetAnimation()->ResetFrame();
@@ -380,6 +386,7 @@ void Simon::SetState(int state)
 			return;
 
 		attack_start = GetTickCount();
+		Sound::GetInstance()->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
 		//this->vampireKiller->GetAnimation()->ResetFrame();
 		break;

@@ -1,5 +1,6 @@
 ﻿#include "VampireKiller.h"
 #include "Simon.h"
+#include "Sound.h"
 
 VampireKiller::VampireKiller() : Weapon()
 {
@@ -73,6 +74,7 @@ void VampireKiller::setDefaultLevel()
 
 void VampireKiller::setUpLevel()
 {
+	Sound::GetInstance()->Play(eSound::soundCollectWeapon);
 	if (_level < 3)
 		_level++;
 	animation = animations[_level - 1];

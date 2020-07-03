@@ -13,42 +13,41 @@ Sound::Sound()
 
 void Sound::LoadResourceSound()
 {
-	AddSound(eSound::soundWhip, L"Resources/sound/usingwhip.wav");
-	AddSound(eSound::soundHolyWater, L"Resources/sound/holywater.wav");
-	AddSound(eSound::soundHit, L"Resources/sound/hit.wav");
-	AddSound(eSound::soundCollectItem, L"Resources/sound/collectitem.wav");
-	AddSound(eSound::soundCollectWeapon, L"Resources/sound/collectweapon.wav");
-	AddSound(eSound::soundHolyCross, L"Resources/sound/holycross.wav");
-	AddSound(eSound::soundBoomerang, L"Resources/sound/08-boomerang.wav");
+	AddSound(eSound::soundWhip, L"Res/sound/usingwhip.wav");
+	AddSound(eSound::soundHolyWater, L"Res/sound/holywater.wav");
+	AddSound(eSound::soundHit, L"Res/sound/hit.wav");
+	AddSound(eSound::soundCollectItem, L"Res/sound/collectitem.wav");
+	AddSound(eSound::soundCollectWeapon, L"Res/sound/collectweapon.wav");
+	AddSound(eSound::soundHolyCross, L"Res/sound/holycross.wav");
+	AddSound(eSound::soundBoomerang, L"Res/sound/08-boomerang.wav");
 
 
 
-	AddSound(eSound::soundStopTimer, L"Resources/sound/stoptimer.wav");
-	AddSound(eSound::soundDagger, L"Resources/sound/usingdagger.wav");
-	AddSound(eSound::soundDisplayMonney, L"Resources/sound/display_monney.wav");
-	AddSound(eSound::soundAxe, L"Resources/sound/Axe.wav");
-	AddSound(eSound::soundStopWatch, L"Resources/sound/StopWatch.wav");
-	AddSound(eSound::soundInvisibilityPotion_Begin, L"Resources/sound/InvisibilityPotion_Begin.wav");
-	AddSound(eSound::soundInvisibilityPotion_End, L"Resources/sound/InvisibilityPotion_End.wav");
+	AddSound(eSound::soundStopTimer, L"Res/sound/stoptimer.wav");
+	AddSound(eSound::soundDagger, L"Res/sound/usingdagger.wav");
+	AddSound(eSound::soundDisplayMonney, L"Res/sound/display_monney.wav");
+	AddSound(eSound::soundAxe, L"Res/sound/Axe.wav");
+	AddSound(eSound::soundStopWatch, L"Res/sound/StopWatch.wav");
+	AddSound(eSound::soundInvisibilityPotion_Begin, L"Res/sound/InvisibilityPotion_Begin.wav");
+	AddSound(eSound::soundInvisibilityPotion_End, L"Res/sound/InvisibilityPotion_End.wav");
 
 
-	AddSound(eSound::soundHurting, L"Resources/sound/hurting.wav");
-	AddSound(eSound::soundOpenDoor, L"Resources/sound/opendoor.wav");
-	AddSound(eSound::soundBrokenBrick, L"Resources/sound/broken_brick.wav");
-	AddSound(eSound::soundSplashwater, L"Resources/sound/splashwater.wav");
-	AddSound(eSound::soundFallingDownWaterSurface, L"Resources/sound/fallingdownwatersurface.wav");
-	AddSound(eSound::soundGetScoreTimer, L"Resources/sound/getscoretime.wav");
-	AddSound(eSound::soundGetScoreHeart, L"Resources/sound/getscoreheart-[AudioTrimmer.com].wav");
+	AddSound(eSound::soundHurting, L"Res/sound/hurting.wav");
+	AddSound(eSound::soundOpenDoor, L"Res/sound/opendoor.wav");
+	AddSound(eSound::soundBrokenBrick, L"Res/sound/broken_brick.wav");
+	AddSound(eSound::soundSplashwater, L"Res/sound/splashwater.wav");
+	AddSound(eSound::soundFallingDownWaterSurface, L"Res/sound/fallingdownwatersurface.wav");
+	AddSound(eSound::soundGetScoreTimer, L"Res/sound/getscoretime.wav");
+	AddSound(eSound::soundGetScoreHeart, L"Res/sound/getscoreheart-[AudioTrimmer.com].wav");
 
 
 
-	AddSound(eSound::musicState1, L"Resources/music/Stage_01_Vampire_Killer.wav");
-	AddSound(eSound::musicLifeLost, L"Resources/music/Life_Lost.wav");
+	AddSound(eSound::musicState1, L"Res/music/Stage_01_Vampire_Killer.wav");
+	AddSound(eSound::musicLifeLost, L"Res/music/Life_Lost.wav");
 
-	AddSound(eSound::music_Boss, L"Resources/music/Boss_Battle_Poison_Mind.wav");
-	AddSound(eSound::musicStateClear, L"Resources/music/Stage_Clear.wav");
-	AddSound(eSound::musicGame_Start_Prologue, L"Resources/music/Game_Start_Prologue.wav");
-
+	AddSound(eSound::music_Boss, L"Res/music/Boss_Battle_Poison_Mind.wav");
+	AddSound(eSound::musicStateClear, L"Res/music/Stage_Clear.wav");
+	AddSound(eSound::musicGame_Start_Prologue, L"Res/music/Game_Start_Prologue.wav");
 }
 
 bool Sound::isPlaying(eSound type)
