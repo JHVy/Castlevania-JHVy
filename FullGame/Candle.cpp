@@ -8,7 +8,7 @@ void Candle::Render() {
 		if (item != NULL)
 			item->Render();
 	}
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Candle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
