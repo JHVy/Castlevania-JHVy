@@ -1,4 +1,5 @@
 #include "Item.h"
+#include "Brick.h"
 
 
 void Item::Render()
@@ -29,6 +30,56 @@ void Item::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	CGameObject::Update(dt);
 
-	y += ITEM_GRAVITY * dt; 
-	if (y >= 310) y = 310;   // HARD code item roi
+	//y += ITEM_GRAVITY * dt; 
+	//if (y >= 310) y = 310;   // HARD code item roi
+
+	// Simple fall down
+	vy += ITEM_GRAVITY * dt;
+
+	vector<LPGAMEOBJECT> listBrick;
+	if (coObjects != NULL)
+	{
+		for (int i = 0; i < coObjects->size(); i++)
+		{
+
+			if (dynamic_cast<Brick*>(coObjects->at(i)))
+			{
+				Brick* brick = dynamic_cast<Brick*>(coObjects->at(i));
+				listBrick.push_back(brick);
+			}
+
+		}
+	}
+	
+
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+
+	coEvents.clear();
+
+	// turn off collision when die 
+	if (state != SIMON_STATE_DIE)
+		CalcPotentialCollisions(&listBrick, coEvents);
+
+	// No collision occured, proceed normally
+	if (coEvents.size() == 0)
+	{
+		x += dx;
+		y += dy;
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny;
+
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+
+		//// block 
+		//x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
+		y += min_ty * dy + ny * 0.4f;
+
+		if (nx != 0) vx = 0;
+		if (ny != 0) vy = 0;
+	}
+	// clean up collision events
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
 }
