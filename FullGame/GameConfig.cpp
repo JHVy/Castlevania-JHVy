@@ -14,7 +14,7 @@ GameConfig* GameConfig::GetInstance()
 
 GameConfig::GameConfig()
 {
-	CurrentLevel = 1;
+	CurrentLevel = 4;
 	MaxLevel = 1;
 	SimonPosition = NULL;
 }

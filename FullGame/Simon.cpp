@@ -27,6 +27,7 @@ Simon::Simon() {
 	_lives = 3;
 
 	isOnStair = false;
+	StairTrend = 0;
 	listGameObj = NULL;
 }
 
@@ -280,13 +281,14 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				if (!isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
 				{
 					isOnStair = true;
+					StairTrend = obj->GetTrend();
 				}
 
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = -SIMON_WALKING_SPEED;
-					vy = vx;
+					vx = StairTrend * SIMON_WALKING_SPEED;
+					vy = -SIMON_WALKING_SPEED;
 				}
 
 				//Ra khoi thang
@@ -303,13 +305,14 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				if (!isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
 				{
 					isOnStair = true;
+					StairTrend = obj->GetTrend();
 				}
 
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = -SIMON_WALKING_SPEED;
-					vy = -vx;
+					vx = -StairTrend * SIMON_WALKING_SPEED;
+					vy = SIMON_WALKING_SPEED;
 				}
 
 				//Ra khoi thang
