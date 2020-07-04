@@ -47,15 +47,15 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// Update luc dang nhay len
 	if (start_jump > 0)
 	{
-		// neu dang nhay len 
-		if (GetTickCount() - start_jump > SIMON_TIME_STATE_JUMP)
-		{
-			state = SIMON_STATE_IDLE;
-		}
-		else // dang roi xuong
-		{
-			state = SIMON_STATE_JUMP;
-		}
+		//// neu dang nhay len 
+		//if (GetTickCount() - start_jump > SIMON_TIME_STATE_JUMP)
+		//{
+		//	state = SIMON_STATE_IDLE;
+		//}
+		//else // dang roi xuong
+		//{
+		//	state = SIMON_STATE_JUMP;
+		//}
 
 		if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
 		{
@@ -176,10 +176,11 @@ void Simon::Render()
 	}
 	else if (state == SIMON_STATE_JUMP)
 	{
-		if (start_jump > 0)
+		// neu dang nhay len 
+		if (start_jump > 0 && GetTickCount() - start_jump < SIMON_TIME_STATE_JUMP)
 			id = SIMON_ANI_JUMPING;
-		//else
-			//id = SIMON_ANI_IDLE;
+		else // dang roi xuong
+			id = SIMON_ANI_IDLE;
 	}
 	else if (state == SIMON_STATE_GO_UP && isOnStair)
 	{
