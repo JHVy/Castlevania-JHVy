@@ -44,9 +44,23 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		vy = 0;
 
 
-	if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
+	// Update luc dang nhay len
+	if (start_jump > 0)
 	{
-		start_jump = 0;
+		// neu dang nhay len 
+		if (GetTickCount() - start_jump > SIMON_TIME_STATE_JUMP)
+		{
+			state = SIMON_STATE_IDLE;
+		}
+		else // dang roi xuong
+		{
+			state = SIMON_STATE_JUMP;
+		}
+
+		if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
+		{
+			start_jump = 0;
+		}
 	}
 
 	vector<LPCOLLISIONEVENT> coEvents;
@@ -86,14 +100,16 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 
 	// update weapon
-	if (vampireKiller != NULL)
+	/*if (vampireKiller != NULL)
 	{
 		vampireKiller->y = this->y;
 		if (nx < 0)
 			vampireKiller->x = this->x - 50;
 		else
 			vampireKiller->x = this->x - 40;
-	}
+	}*/
+
+	vampireKiller->SetPosition(x, y, state, nx);
 	vampireKiller->Update(dt, coObjects);
 
 
@@ -162,8 +178,19 @@ void Simon::Render()
 	{
 		if (start_jump > 0)
 			id = SIMON_ANI_JUMPING;
+		//else
+			//id = SIMON_ANI_IDLE;
+	}
+	else if (state == SIMON_STATE_GO_UP && isOnStair)
+	{
+		id = SIMON_ANI_GO_UP;
+	}
+	else if (state == SIMON_STATE_GO_DOWN)
+	{
+		if (isOnStair)
+			id = SIMON_ANI_GO_DOWN;
 		else
-			id = SIMON_ANI_IDLE;
+			id = SIMON_ANI_SITTING;
 	}
 	else 
 	{
@@ -292,8 +319,7 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = StairTrend * SIMON_WALKING_SPEED;
-					vy = -SIMON_WALKING_SPEED;
+					this->SetState(SIMON_STATE_GO_UP);
 				}
 
 				//Ra khoi thang
@@ -316,8 +342,7 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = -StairTrend * SIMON_WALKING_SPEED;
-					vy = SIMON_WALKING_SPEED;
+					this->SetState(SIMON_STATE_GO_DOWN);
 				}
 
 				//Ra khoi thang
@@ -421,13 +446,15 @@ void Simon::SetState(int state)
 		break;
 
 	case SIMON_STATE_GO_UP:
-		vx = SIMON_WALKING_SPEED;
+		nx = StairTrend;
+		vx = StairTrend * SIMON_WALKING_SPEED;
 		vy = -SIMON_WALKING_SPEED;
 		break;
 
 	case SIMON_STATE_GO_DOWN:
-		vx = -SIMON_WALKING_SPEED;
-		vy = +SIMON_WALKING_SPEED;
+		nx = -StairTrend;
+		vx = -StairTrend * SIMON_WALKING_SPEED;
+		vy = SIMON_WALKING_SPEED;
 		break;
 
 	default:

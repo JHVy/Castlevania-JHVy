@@ -87,8 +87,8 @@ void VampireKiller::GetBoundingBox(float& left, float& top, float& right, float&
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
 	//DebugOut(L"ani->GetCurrentFrame() %d\n", ani->GetCurrentFrame());
-	//if (ani->GetCurrentFrame() < 2)
-	//	return;
+	if (ani->GetCurrentFrame() < 2)
+		return;
 
 	Weapon::GetBoundingBox(left, top, right, bottom);
 }
