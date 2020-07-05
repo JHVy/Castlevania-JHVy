@@ -7,7 +7,7 @@
 #include "Utils.h"
 
 #define SIMON_WALKING_SPEED		0.12f
-#define SIMON_JUMP_SPEED_Y		0.46f	//0.36f
+#define SIMON_JUMP_SPEED_Y		0.36f	//0.36f
 #define SIMON_GRAVITY			0.001f
 
 #define SIMON_POS_Y				320

@@ -8,11 +8,17 @@ class VampireKiller: public Weapon
 	int _level;
 	bool is_using;
 
+	static VampireKiller* _instance;
+
 public:
 	VampireKiller();
+
+	static VampireKiller* GetInstance();
+
+
 	bool IsUsing() { return is_using; }
 	void SetUsing(bool b) { is_using = b; }
-	void SetPosition(float simon_x, float simon_y, int simon_state, int nx);
+	void SetPosition(float simon_x, float simon_y);
 	void Render();
 	void Render(float simon_x, float simon_y, int simon_state, int nx);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);

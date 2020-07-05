@@ -82,7 +82,7 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 	{
 		DebugOut(L" X - Key Down");
 		simon->SetState(SIMON_STATE_JUMP);
-		return;
+		//return;	//vi cai nay nen moi luc no chi nhan duoc 1 button thoi, neu muon nhan dong thoi nhieu button thì ko return
 	}
 
 	if (IsKeyDown(DIK_LEFT))

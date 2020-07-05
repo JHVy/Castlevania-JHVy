@@ -30,6 +30,7 @@ Simon::Simon() {
 	isOnStair = false;
 	StairTrend = 0;
 	listGameObj = NULL;
+
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) 
@@ -43,6 +44,11 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (isOnStair)
 		vy = 0;
 
+	if (start_jump > 0 &&  GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
+	{
+		start_jump = 0;
+	}
+	
 
 	if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
 	{
@@ -86,14 +92,15 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 
 	// update weapon
-	if (vampireKiller != NULL)
+	/*if (vampireKiller != NULL)
 	{
 		vampireKiller->y = this->y;
 		if (nx < 0)
-			vampireKiller->x = this->x - 50;
-		else
 			vampireKiller->x = this->x - 40;
-	}
+		else
+			vampireKiller->x = this->x - 15;
+	}*/
+	vampireKiller->SetPosition(x, y);
 	vampireKiller->Update(dt, coObjects);
 
 
@@ -135,7 +142,7 @@ void Simon::Render()
 	{
 		id = SIMON_ANI_SITTING_ATTACKING;
 
-		if (vampireKiller != NULL) 
+		if (vampireKiller != NULL)
 			vampireKiller->Render();
 	}
 	else if (state == SIMON_STATE_STAND_ATTACK)
@@ -160,9 +167,10 @@ void Simon::Render()
 	}
 	else if (state == SIMON_STATE_JUMP)
 	{
-		if (start_jump > 0)
+		// neu dang nhay len 
+		if (start_jump > 0 && GetTickCount() - start_jump < SIMON_TIME_STATE_JUMP)
 			id = SIMON_ANI_JUMPING;
-		else
+		else // dang roi xuong
 			id = SIMON_ANI_IDLE;
 	}
 	else 
@@ -217,15 +225,20 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					if (obj->GetState() == TORCH_STATE_ITEM) 
 					{
 						if (torch->getItemType() == eType::WHIPUPGRADE)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
 							this->vampireKiller->setUpLevel();
+
+						}
 						else if (torch->getItemType() == eType::HEART)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_heart += 5;
 						}
-							
-						/*else if (torch->getItemType() == eType::SMALLHEART)
-							this->_heart += 2;*/
+						else if (torch->getItemType() == eType::ITEMDAGGER)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+						}
 
 						torch->invisibleItem();
 						torch->SetState(TORCH_STATE_NOT_EXSIST);
@@ -237,17 +250,63 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					if (obj->GetState() == CANDLE_STATE_ITEM)
 					{
 						if (candle->getItemType() == eType::HEART)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_heart += 5;
+						}
 						else if (candle->getItemType() == eType::SMALLHEART)
-							this->_heart++;
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_heart ++;
+						}
 						else if (candle->getItemType() == eType::MONEY_1)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_score += 100;
+						}
 						else if (candle->getItemType() == eType::MONEY_2)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_score += 400;
+						}
 						else if (candle->getItemType() == eType::MONEY_3)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_score += 700;
+						}
 						else if (candle->getItemType() == eType::MONEY_4)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_score += 1000;
+						}
+						else if (candle->getItemType() == eType::ITEMBOONGMERANG)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+						}
+						else if (candle->getItemType() == eType::ITEMAXE)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+						}
+						else if (candle->getItemType() == eType::GATE)
+						{
+							Sound::GetInstance()->Play(eSound::soundOpenDoor);
+						}
+						else if (candle->getItemType() == eType::ITEMHOLLYWATTER)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
+						else if (candle->getItemType() == eType::ITEMVASE)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
+						else if (candle->getItemType() == eType::ITEMII)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
+						else if (candle->getItemType() == eType::ITEMIII)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
 
 						candle->invisibleItem();
 						candle->SetState(CANDLE_STATE_NOT_EXSIST);
@@ -256,7 +315,11 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 
 				// Va cham cua qua man khac
 				case eType::OBJECT_HIDDEN_DOOR:
+				{
+					//Sound::GetInstance()->Play(eSound::);
 					GameConfig::GetInstance()->LevelUp();
+
+				}
 					break;
 
 				default:
@@ -292,8 +355,7 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = StairTrend * SIMON_WALKING_SPEED;
-					vy = -SIMON_WALKING_SPEED;
+					this->SetState(SIMON_STATE_GO_UP);
 				}
 
 				//Ra khoi thang
@@ -316,8 +378,7 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				// Tren thang
 				if (isOnStair)
 				{
-					vx = -StairTrend * SIMON_WALKING_SPEED;
-					vy = SIMON_WALKING_SPEED;
+					this->SetState(SIMON_STATE_GO_DOWN);
 				}
 
 				//Ra khoi thang
@@ -421,13 +482,15 @@ void Simon::SetState(int state)
 		break;
 
 	case SIMON_STATE_GO_UP:
-		vx = SIMON_WALKING_SPEED;
+		nx = StairTrend;
+		vx = StairTrend * SIMON_WALKING_SPEED;
 		vy = -SIMON_WALKING_SPEED;
 		break;
 
 	case SIMON_STATE_GO_DOWN:
-		vx = -SIMON_WALKING_SPEED;
-		vy = +SIMON_WALKING_SPEED;
+		nx = -StairTrend;
+		vx = -StairTrend * SIMON_WALKING_SPEED;
+		vy = SIMON_WALKING_SPEED;
 		break;
 
 	default:

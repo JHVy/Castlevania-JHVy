@@ -2,6 +2,18 @@
 #include "Simon.h"
 #include "Sound.h"
 
+
+VampireKiller* VampireKiller::_instance = NULL;
+
+VampireKiller* VampireKiller::GetInstance()
+{
+	if (_instance == NULL)
+	{
+		_instance = new VampireKiller();
+	}
+	return _instance;
+}
+
 VampireKiller::VampireKiller() : Weapon()
 {
 	_level = 1;
@@ -20,30 +32,44 @@ void VampireKiller::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 }
 
 
-void VampireKiller::SetPosition(float simon_x, float simon_y, int simon_state, int _nx)
+void VampireKiller::SetPosition(float simon_x, float simon_y)
 {
-	this->nx = _nx;
-	y = simon_y;
+	/*this->nx = _nx;
+	y = simon_y;*/
 
-	if (nx < 0)
+	if (_level == 1 || _level == 2)
 	{
-		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) 
+		if (nx < 0)
 		{
-			x = simon_x;
-			y = simon_y;
+			if (Simon::GetInstance()->GetState() == SIMON_STATE_SIT_ATTACK || Simon::GetInstance()->GetState() == SIMON_STATE_SIT)
+			{
+				x = simon_x - 40; //-0
+				//y = simon_y;
+			}
+			else
+				x = simon_x - 45;// -0
 		}
 		else
-			x = simon_x;
+		{
+			if (Simon::GetInstance()->GetState() == SIMON_STATE_SIT_ATTACK || Simon::GetInstance()->GetState() == SIMON_STATE_SIT) {
+				x = simon_x - 15; //-0
+				//y = simon_y;
+			}
+			else
+				x = simon_x - 10; // -0
+		}
 	}
-	else 
+	else
 	{
-		if (simon_state == SIMON_STATE_SIT_ATTACK || simon_state == SIMON_STATE_SIT) {
-			x = simon_x;
-			y = simon_y;
+		if (nx < 0)
+		{
+			x = simon_x - 75;
 		}
-		else
-			x = simon_x;
+		else {
+			x = simon_x - 10;
+		}
 	}
+	y = simon_y;
 }
 
 
@@ -86,11 +112,26 @@ void VampireKiller::GetBoundingBox(float& left, float& top, float& right, float&
 {
 	int sprite_number = 600 + this->_level - 1;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(sprite_number);
-	//DebugOut(L"ani->GetCurrentFrame() %d\n", ani->GetCurrentFrame());
-	//if (ani->GetCurrentFrame() < 2)
-	//	return;
+	DebugOut(L"ani->GetCurrentFrame() %d\n", ani->GetCurrentFrame());
+	if (ani->GetCurrentFrame() < 2)
+		return;
 
-	Weapon::GetBoundingBox(left, top, right, bottom);
+	if (_level == 1 || _level == 2)
+	{
+		left = x;
+		right = x + 120;
+		top = y;
+		bottom = y + 20;
+	}
+	else
+	{
+		left = x;
+		right = x + 145;
+		top = y;
+		bottom = y + 20;
+
+	}
+	//Weapon::GetBoundingBox(left, top, right, bottom);
 }
 
 void VampireKiller::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
