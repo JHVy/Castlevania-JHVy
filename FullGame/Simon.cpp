@@ -49,12 +49,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		start_jump = 0;
 	}
 	
-
-	if (GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
-	{
-		start_jump = 0;
-	}
-
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -172,6 +166,17 @@ void Simon::Render()
 			id = SIMON_ANI_JUMPING;
 		else // dang roi xuong
 			id = SIMON_ANI_IDLE;
+	}
+	else if (state == SIMON_STATE_GO_UP && isOnStair)
+	{
+		id = SIMON_ANI_GO_UP;
+	}
+	else if (state == SIMON_STATE_GO_DOWN)
+	{
+		if (isOnStair)
+			id = SIMON_ANI_GO_DOWN;
+		else
+			id = SIMON_ANI_SITTING;
 	}
 	else 
 	{
