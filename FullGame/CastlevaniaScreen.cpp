@@ -64,8 +64,6 @@ void CastlevaniaScreen::LoadObject(string file_path)
 void CastlevaniaScreen::Load() {
 	int gameLevel = GameConfig::GetInstance()->CurrentLevel;
 	this->simon->ResetLevel(gameLevel);
-	float start_simon_x = 0, start_simon_y = 0;
-	GameConfig::GetInstance()->GetSimonPosition(start_simon_x, start_simon_y);
 	string sScreenID = to_string(gameLevel);
 
 	this->gameMap->LoadMap(gameLevel, "Res/maps/map" + sScreenID + ".txt");
@@ -73,8 +71,6 @@ void CastlevaniaScreen::Load() {
 
 	this->screen_size_x = this->gameMap->getCols() * this->gameMap->getTileW();
 	this->screen_size_y = this->gameMap->getRows() * this->gameMap->getTileH();
-
-	this->simon->SetPosition(start_simon_x, start_simon_y);
 
 	this->LoadObject("Res/maps/objects_" + sScreenID + ".txt");
 	//this->LoadObject("Res/maps/objects_6.txt");

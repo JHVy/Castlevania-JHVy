@@ -122,6 +122,7 @@ public:
 		return false;
 	}
 
+	bool IsDie();
 	void CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects);
 	void CheckCollisionWithStair(int keyPress);
 	void CollisionWithItems(vector<LPGAMEOBJECT>* coObjects);

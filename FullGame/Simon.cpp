@@ -35,7 +35,14 @@ Simon::Simon() {
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) 
 {
-	
+	if (this->IsDie())
+	{
+		if (_lives > 0)
+			_lives--;
+
+		this->ResetLevel(GameConfig::GetInstance()-> CurrentLevel);
+	}
+
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 	
@@ -127,6 +134,7 @@ void Simon::ResetLevel(int level)
 	if (level == 5)
 		StairTrend = -1;
 
+	GameConfig::GetInstance()->GetSimonPosition(x, y);
 }
 
 void Simon::Render()
@@ -216,6 +224,14 @@ void Simon::Render()
 
 	ani->Render(x1, y1, nx, alpha);
 	//RenderBoundingBox();
+}
+
+bool Simon::IsDie()
+{
+	if (y > 4*SCREEN_HEIGHT)
+		return true;
+
+	return false;
 }
 
 void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
