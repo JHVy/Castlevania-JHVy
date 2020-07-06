@@ -63,6 +63,7 @@ void CastlevaniaScreen::LoadObject(string file_path)
 
 void CastlevaniaScreen::Load() {
 	int gameLevel = GameConfig::GetInstance()->CurrentLevel;
+	this->simon->ResetLevel(gameLevel);
 	float start_simon_x = 0, start_simon_y = 0;
 	GameConfig::GetInstance()->GetSimonPosition(start_simon_x, start_simon_y);
 	string sScreenID = to_string(gameLevel);

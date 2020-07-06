@@ -1,6 +1,7 @@
 #include "CastkeKeyEventHandler.h"
 #include <dinput.h>
 #include "CastlevaniaScreen.h"
+#include "GameConfig.h"
 
 CastkeKeyEventHandler::CastkeKeyEventHandler(CastlevaniaScreen* screen) :CKeyEventHandler()
 {
@@ -145,6 +146,19 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 
 		return;
 	}
+
+	// HACK LEVEL
+	for (int i = DIK_1; i <= DIK_6; i++)
+	{
+		if (IsKeyDown(i))
+		{
+			int gameLevel = i - DIK_ESCAPE;
+			GameConfig::GetInstance()->SetGameLevel(gameLevel);
+			return;
+		}
+	}
+	
+
 
 	//default
 	simon->SetState(SIMON_STATE_IDLE);

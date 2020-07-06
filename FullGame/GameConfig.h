@@ -11,7 +11,7 @@
 
 
 using namespace std;
-
+class Simon;
 class GameConfig
 {
 private:
@@ -26,7 +26,15 @@ public:
 	static GameConfig* GetInstance();
 
 	void Load(string filePath);
-	void LevelUp() { if (CurrentLevel < MaxLevel) ++CurrentLevel; }
+	void LevelUp() { SetGameLevel(++CurrentLevel); }
+	void SetGameLevel(int level) 
+	{ 
+		if (level <= MaxLevel) 
+			CurrentLevel = level;
+		else
+			CurrentLevel = MaxLevel;
+	}
+
 	void GetSimonPosition(float& x, float& y);
 };
 

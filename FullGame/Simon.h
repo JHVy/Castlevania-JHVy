@@ -110,7 +110,7 @@ public:
 	Simon();
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	virtual void Render();
-
+	void ResetLevel(int level);
 	void SetListObject(vector<LPGAMEOBJECT>* listGameObj) { this->listGameObj = listGameObj; }
 	vector<LPGAMEOBJECT>* GetListObject() { return listGameObj; }
 
