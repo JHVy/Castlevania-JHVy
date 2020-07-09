@@ -40,7 +40,7 @@ class Item;
 
 class Candle : public CGameObject
 {
-private:
+protected:
 	int numAnimation = 0;
 	Item* item;
 

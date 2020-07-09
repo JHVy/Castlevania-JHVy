@@ -135,7 +135,9 @@
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="DSutil.cpp" />
     <ClCompile Include="dxutil.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameConfig.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="HidenObject.cpp" />
     <ClCompile Include="ItemAxe.cpp" />
     <ClCompile Include="ItemBoongmerang.cpp" />
@@ -178,7 +180,9 @@
     <ClInclude Include="Define.h" />
     <ClInclude Include="DSutil.h" />
     <ClInclude Include="dxutil.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameConfig.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="HidenObject.h" />
     <ClInclude Include="ItemAxe.h" />
     <ClInclude Include="ItemBoongmerang.h" />

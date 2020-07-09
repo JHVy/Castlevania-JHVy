@@ -23,6 +23,9 @@ using namespace std;
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
 #define ID_TEX 1
+#define TIME_ENEMY_DIE 150
+#define TIME_BOSS_DIE 500
+#define BOSS_POSITION 5340.0f, 95.0f
 
 
 #define BRICK_ANI					6
@@ -30,6 +33,21 @@ using namespace std;
 #define VAMPIREKILLER_1				8
 #define VAMPIREKILLER_2				9
 #define VAMPIREKILLER_3				10
+
+
+#define SCENCE_0_LEFT 0
+#define SCENCE_1_LEFT 0
+#define SCENCE_2_LEFT 3084
+#define SCENCE_3_LEFT 3074
+#define SCENCE_4_LEFT 4096
+#define SCENCE_5_LEFT 5122
+
+#define SCENCE_0_RIGHT 1536
+#define SCENCE_1_RIGHT 3084
+#define SCENCE_2_RIGHT 4107
+#define SCENCE_3_RIGHT 4107
+#define SCENCE_4_RIGHT 5642
+#define SCENCE_5_RIGHT 5642
 
 
 #ifndef SAFE_DELETE
@@ -110,7 +128,14 @@ enum eType
 	ITEMBOONGMERANG = 69,
 	ITEMVASE = 70,
 
-	
+	// Enemy
+	GHOST = 141,
+	PANTHER = 142,
+	BAT = 143,
+	FISHMEN = 144,
+
+	//BOSS
+	BOSS = 150,
 
 
 	// id load

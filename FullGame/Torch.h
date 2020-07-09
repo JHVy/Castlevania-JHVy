@@ -27,7 +27,7 @@ class Item;
 
 class Torch : public CGameObject
 {
-private:
+protected:
 	int numAnimation = 0;
 	Item* item;
 

@@ -98,6 +98,12 @@
     <ClCompile Include="dxutil.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -193,6 +199,12 @@
     <ClInclude Include="dxutil.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -230,6 +242,9 @@
     </Filter>
     <Filter Include="GameObject\Object\Item">
       <UniqueIdentifier>{2e65d009-23b2-4603-8212-4521e25bd7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Enemy">
+      <UniqueIdentifier>{57853135-9885-49c1-bc53-ffd96fb6d60e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
