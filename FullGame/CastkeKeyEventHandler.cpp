@@ -68,6 +68,12 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 		return;
 	}
 
+	if (IsKeyDown(DIK_Z) && IsKeyDown(DIK_UP) && !simon->IsAttacking())
+	{
+		simon->SetState(SIMON_STATE_ATTACK_DAGGER);
+		return;
+	}
+
 	if (IsKeyDown(DIK_Z)) {
 		DebugOut(L"Z - Key Down");
 		

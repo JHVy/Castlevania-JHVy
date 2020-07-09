@@ -39,6 +39,6 @@ public:
 
 	void Update(DWORD dt);
 	void Render();
-
-	//void ChangeWeapon();
+	void SetWeapon(int weapon) { _weapon = weapon; }
+	int GetWeapon() { return _weapon; }
 };

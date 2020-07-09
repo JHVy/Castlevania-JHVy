@@ -20,12 +20,16 @@ protected:
 	float start_x, start_y;
 	DWORD dt_die;
 	DWORD dt_appear;
-
+	int _energy;
 public:
+	int GetEnergy() { return _energy; }
+	virtual void Hurt() { _energy -= 2; }
+
 	Enemy(float _x, float _y, int id = 0) : Candle(_x, _y, id)
 	{
 		start_x = _x;
 		start_y = _y;
+		_energy = 1;
 	}
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) = 0;

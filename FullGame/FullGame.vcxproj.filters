@@ -75,20 +75,9 @@
     <ClCompile Include="HidenObject.cpp">
       <Filter>GameObject\Object</Filter>
     </ClCompile>
-    <ClCompile Include="CBoard.cpp" />
-    <ClCompile Include="CCode.cpp" />
     <ClCompile Include="Brick.cpp">
       <Filter>GameObject\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Candle.cpp" />
-    <ClCompile Include="ItemBoongmerang.cpp" />
-    <ClCompile Include="ItemHollyWatter.cpp" />
-    <ClCompile Include="ItemIII.cpp" />
-    <ClCompile Include="ItemVase.cpp" />
-    <ClCompile Include="ItemAxe.cpp" />
-    <ClCompile Include="ItemII.cpp" />
-    <ClCompile Include="ItemSmallHeart.cpp" />
-    <ClCompile Include="ItemMoney.cpp" />
     <ClCompile Include="Sound.cpp">
       <Filter>GameManagement\GameControl</Filter>
     </ClCompile>
@@ -103,6 +92,45 @@
     </ClCompile>
     <ClCompile Include="Ghost.cpp">
       <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemAxe.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBoongmerang.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemHollyWatter.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemII.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemIII.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemMoney.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemSmallHeart.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemVase.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Candle.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoard.cpp">
+      <Filter>GameManagement\GameBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CCode.cpp">
+      <Filter>GameManagement\GameBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Axe.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Dagger.cpp">
+      <Filter>GameObject\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,20 +204,9 @@
     <ClInclude Include="HidenObject.h">
       <Filter>GameObject\Object</Filter>
     </ClInclude>
-    <ClInclude Include="CBoard.h" />
-    <ClInclude Include="CCode.h" />
     <ClInclude Include="Brick.h">
       <Filter>GameObject\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Candle.h" />
-    <ClInclude Include="ItemBoongmerang.h" />
-    <ClInclude Include="ItemHollyWatter.h" />
-    <ClInclude Include="ItemIII.h" />
-    <ClInclude Include="ItemVase.h" />
-    <ClInclude Include="ItemAxe.h" />
-    <ClInclude Include="ItemII.h" />
-    <ClInclude Include="ItemSmallHeart.h" />
-    <ClInclude Include="ItemMoney.h" />
     <ClInclude Include="Sound.h">
       <Filter>GameManagement\GameControl</Filter>
     </ClInclude>
@@ -204,6 +221,45 @@
     </ClInclude>
     <ClInclude Include="Ghost.h">
       <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemAxe.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBoongmerang.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemHollyWatter.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemII.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemIII.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemMoney.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemSmallHeart.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemVase.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Candle.h">
+      <Filter>GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoard.h">
+      <Filter>GameManagement\GameBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="CCode.h">
+      <Filter>GameManagement\GameBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Axe.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Dagger.h">
+      <Filter>GameObject\Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +301,9 @@
     </Filter>
     <Filter Include="GameObject\Enemy">
       <UniqueIdentifier>{57853135-9885-49c1-bc53-ffd96fb6d60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameManagement\GameBoard">
+      <UniqueIdentifier>{459ee5fc-1d02-43d5-9c60-de8d930894bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

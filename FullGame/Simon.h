@@ -69,6 +69,7 @@ class CGame;
 class Simon;
 class VampireKiller;
 class Weapon;
+class CBoard;
 
 class Simon :
 	public CGameObject
@@ -99,7 +100,7 @@ protected:
 	int last_jump = 0;
 
 	// weapon 
-	VampireKiller* vampireKiller;
+	//VampireKiller* vampireKiller;
 
 public:
 	bool isOnStair;
@@ -156,6 +157,11 @@ public:
 	{
 		return _heart;
 	}
+
+	void ThrowWeapon() { _heart--; }
+
+	Weapon* GetCurrentWeapon();
+
 private:
 	// helper
 	CAnimation* getAnimation(int id) {

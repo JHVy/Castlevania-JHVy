@@ -126,12 +126,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animations.cpp" />
+    <ClCompile Include="Axe.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastkeKeyEventHandler.cpp" />
     <ClCompile Include="CastlevaniaScreen.cpp" />
     <ClCompile Include="CBoard.cpp" />
     <ClCompile Include="CCode.cpp" />
+    <ClCompile Include="Dagger.cpp" />
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="DSutil.cpp" />
     <ClCompile Include="dxutil.cpp" />
@@ -171,12 +173,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animations.h" />
+    <ClInclude Include="Axe.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CastkeKeyEventHandler.h" />
     <ClInclude Include="CastlevaniaScreen.h" />
     <ClInclude Include="CBoard.h" />
     <ClInclude Include="CCode.h" />
+    <ClInclude Include="Dagger.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="DSutil.h" />
     <ClInclude Include="dxutil.h" />

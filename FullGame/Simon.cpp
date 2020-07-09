@@ -1,7 +1,10 @@
 #include "Simon.h"
-#include "Game.h"
+//#include "Game.h"
 #include "Sound.h"
 #include "GameConfig.h"
+//#include "Dagger.cpp"
+#include "Axe.h"
+#include "Dagger.h"
 
 Simon* Simon::_instance = NULL;
 
@@ -15,7 +18,7 @@ Simon* Simon::GetInstance()
 }
 
 Simon::Simon() {
-	vampireKiller = new VampireKiller();
+	weapons[eType::VAMPIREKILLER] = VampireKiller::GetInstance();
 
 	untouchable = 0;
 	trans_start = 0;
@@ -31,31 +34,35 @@ Simon::Simon() {
 	StairTrend = 0;
 	listGameObj = NULL;
 
+	weapons[eType::DAGGER] = Dagger::GetInstance();
+	weapons[eType::AXE] = Axe::GetInstance();
+	/*weapons[eType::HOLLYWATTER] = HollyWatter::GetInstance();
+	weapons[eType::BOONGMERANG] = Boongmerang::GetInstance();*/
 }
 
-void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) 
+void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (this->IsDie())
 	{
 		if (_lives > 0)
 			_lives--;
 
-		this->ResetLevel(GameConfig::GetInstance()-> CurrentLevel);
+		this->ResetLevel(GameConfig::GetInstance()->CurrentLevel);
 	}
 
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
-	
+
 	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
 	if (isOnStair)
 		vy = 0;
 
-	if (start_jump > 0 &&  GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
+	if (start_jump > 0 && GetTickCount() - start_jump > SIMON_TIME_START_JUMP)
 	{
 		start_jump = 0;
 	}
-	
+
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 
@@ -101,19 +108,31 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		else
 			vampireKiller->x = this->x - 15;
 	}*/
-	vampireKiller->SetPosition(x, y);
-	vampireKiller->Update(dt, coObjects);
-
+	if (state == SIMON_STATE_SIT_ATTACK || state == SIMON_STATE_STAND_ATTACK)
+	{
+		VampireKiller::GetInstance()->SetPosition(x, y);
+		weapons[eType::VAMPIREKILLER]->Update(dt, coObjects);
+	}
+	else if (_heart > 0 && state == SIMON_STATE_ATTACK_DAGGER)
+	{
+		if (this->GetCurrentWeapon()->GetState() == DAGGER_STATE_HIDE)
+		{
+			this->GetCurrentWeapon()->SetPosition(x, y);
+			this->GetCurrentWeapon()->SetTrend(nx);
+			this->GetCurrentWeapon()->SetState(DAGGER_STATE_ATTACK);
+			_heart--;
+		}
+	}
 
 	// simon attack
 	if (attack_start) 
 	{
-		vampireKiller->SetUsing(true);
+		weapons[eType::VAMPIREKILLER]->SetUsing(true);
 
 		int t = GetTickCount();
 		if (t - attack_start > ATTACK_TIME) 
 		{
-			vampireKiller->SetUsing(false);
+			weapons[eType::VAMPIREKILLER]->SetUsing(false);
 			attack_start = 0;
 			this->state = SIMON_STATE_IDLE;
 		}
@@ -157,8 +176,8 @@ void Simon::Render()
 	{
 		id = SIMON_ANI_SITTING_ATTACKING;
 
-		if (vampireKiller != NULL)
-			vampireKiller->Render();
+		if (weapons[eType::VAMPIREKILLER] != NULL)
+			weapons[eType::VAMPIREKILLER]->Render();
 	}
 	else if (state == SIMON_STATE_STAND_ATTACK)
 	{
@@ -167,8 +186,8 @@ void Simon::Render()
 		if (start_jump)
 			id = SIMON_ANI_SITTING_ATTACKING;
 
-		if (vampireKiller != NULL) 
-			vampireKiller->Render();
+		if (weapons[eType::VAMPIREKILLER] != NULL)
+			weapons[eType::VAMPIREKILLER]->Render();
 
 	}
 	else if (state == SIMON_STATE_ATTACK_DAGGER)
@@ -261,7 +280,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						if (torch->getItemType() == eType::WHIPUPGRADE)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
-							this->vampireKiller->setUpLevel();
+							VampireKiller::GetInstance()->setUpLevel();
 
 						}
 						else if (torch->getItemType() == eType::HEART)
@@ -272,6 +291,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (torch->getItemType() == eType::ITEMDAGGER)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+							CBoard::GetInstance()->SetWeapon(eType::DAGGER);
 						}
 
 						torch->invisibleItem();
@@ -316,10 +336,13 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (candle->getItemType() == eType::ITEMBOONGMERANG)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+							CBoard::GetInstance()->SetWeapon(candle->getItemType());
 						}
 						else if (candle->getItemType() == eType::ITEMAXE)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+							//weapons[eType::AXE] = CAxe::GetInstance();
+							CBoard::GetInstance()->SetWeapon(candle->getItemType());
 						}
 						else if (candle->getItemType() == eType::GATE)
 						{
@@ -328,6 +351,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (candle->getItemType() == eType::ITEMHOLLYWATTER)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							CBoard::GetInstance()->SetWeapon(candle->getItemType());
 						}
 						else if (candle->getItemType() == eType::ITEMVASE)
 						{
@@ -431,7 +455,14 @@ void Simon::CollisionWithItems(vector<LPGAMEOBJECT>* coObjects)
 
 }
 
-
+Weapon* Simon::GetCurrentWeapon()
+{
+	Weapon* wp = NULL;
+	int idWeapon = CBoard::GetInstance()->GetWeapon();
+	if (idWeapon != 0)
+		wp = weapons[idWeapon];
+	return wp;
+};
 
 void Simon::SetState(int state)
 {
@@ -461,10 +492,36 @@ void Simon::SetState(int state)
 	if (start_jump && state != SIMON_STATE_STAND_ATTACK) 
 		return;
 
-
 	
 	switch (state) 
 	{
+	case SIMON_STATE_ATTACK_DAGGER:
+		attack_start = GetTickCount();
+		vx = 0;
+		if (_heart > 0 && CBoard::GetInstance()->GetWeapon() != 0)
+		{
+			int idWeapon = CBoard::GetInstance()->GetWeapon();
+			eSound idSound = eSound::soundDagger;
+			if (idWeapon == ITEMAXE)
+				idSound = eSound::soundAxe;
+
+			if (weapons[idWeapon]->GetState() == DAGGER_STATE_ATTACK)
+			{
+				this->state = SIMON_STATE_IDLE;
+			}
+			else
+			{
+				Sound::GetInstance()->Play(idSound);
+			}
+			
+			//animations[SIMON_ANI_STANDING_ATTACKING]->ResetFrame();
+		}
+		else
+		{
+			this->state = SIMON_STATE_IDLE;
+		}
+		break;
+
 	case SIMON_STATE_STAND_ATTACK:
 		if (attack_start || currentTime - last_attack < ATTACK_TIME_WAIT)
 			return;
@@ -533,7 +590,7 @@ void Simon::SetState(int state)
 	}
 
 	// update Trend for weapon, weapon trend = simon trend
-	vampireKiller->SetTrend(nx);
+	weapons[eType::VAMPIREKILLER]->SetTrend(nx);
 
 	this->state = state;
 	return;

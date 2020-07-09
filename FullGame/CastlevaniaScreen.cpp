@@ -12,7 +12,7 @@ CastlevaniaScreen::CastlevaniaScreen() {
 	this->gameMap = new GameMap();
 	this->simon = Simon::GetInstance();
 
-	this->board = new CBoard();
+	this->board = CBoard::GetInstance();
 }
 
 CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)
@@ -100,6 +100,12 @@ void CastlevaniaScreen::Update(DWORD dt) {
 	}
 
 	this->UpdateCamera();
+
+	if (simon->GetCurrentWeapon() != NULL)
+	{
+		simon->GetCurrentWeapon()->Update(dt, &items);
+	}
+
 	board->Update(dt);
 }
 
@@ -138,8 +144,13 @@ void CastlevaniaScreen::Render() {
 		}
 	}
 
+	if (simon->GetCurrentWeapon() != NULL)
+	{
+		simon->GetCurrentWeapon()->Render();
+	}
 	this->simon->Render();
 	this->board->Render();
+	
 }
 
 void CastlevaniaScreen::Unload() {

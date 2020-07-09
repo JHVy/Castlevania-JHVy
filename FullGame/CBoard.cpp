@@ -49,8 +49,14 @@ void CBoard::Render()
 
 		switch (_weapon)
 		{
+		case eType::DAGGER:
+			sprites->Get(13001)->Draw(cx + 310, cy + 40);;
+			break;
 		case eType::ITEMAXE:
 			sprites->Get(13010)->Draw(cx + 310, cy + 30);
+			break;
+		case eType::ITEMHOLLYWATTER:
+			sprites->Get(13015)->Draw(cx + 310, cy + 27);
 			break;
 		case eType::ITEMBOONGMERANG:
 			sprites->Get(13020)->Draw(cx + 310, cy + 27);
@@ -58,6 +64,7 @@ void CBoard::Render()
 		default:
 			break;
 		}
+		
 		if (_numberOfWeapon != 0)
 		{
 			if (_numberOfWeapon == 2)
