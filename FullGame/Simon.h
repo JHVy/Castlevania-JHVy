@@ -123,6 +123,7 @@ public:
 		return false;
 	}
 
+	void HackSimon();
 	bool IsDie();
 	void CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects);
 	void CheckCollisionWithStair(int keyPress);

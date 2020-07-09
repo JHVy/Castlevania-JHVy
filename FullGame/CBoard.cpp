@@ -52,13 +52,13 @@ void CBoard::Render()
 		case eType::DAGGER:
 			sprites->Get(13001)->Draw(cx + 310, cy + 40);;
 			break;
-		case eType::ITEMAXE:
+		case eType::AXE:
 			sprites->Get(13010)->Draw(cx + 310, cy + 30);
 			break;
-		case eType::ITEMHOLLYWATTER:
+		case eType::HOLLYWATTER:
 			sprites->Get(13015)->Draw(cx + 310, cy + 27);
 			break;
-		case eType::ITEMBOONGMERANG:
+		case eType::BOONGMERANG:
 			sprites->Get(13020)->Draw(cx + 310, cy + 27);
 			break;
 		default:

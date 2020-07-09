@@ -8,8 +8,8 @@
 Dagger* Dagger::__instance = NULL;
 Dagger::Dagger() :Weapon()
 {
-	animations.clear();
 	vx = 0.5f;
+	animations.clear();
 	AddAnimation(701);
 	state = DAGGER_STATE_HIDE;
 	start_attack = 0;
@@ -65,8 +65,8 @@ void Dagger::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Dagger::Render()
 {
 	if (isRender) {
-		//animations[0]->Render(x, y, nx, 255);
-		RenderBoundingBox();
+		animations[0]->Render(x, y, nx, 255);
+		//RenderBoundingBox();
 	}
 }
 

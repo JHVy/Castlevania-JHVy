@@ -245,10 +245,20 @@ void Simon::Render()
 	//RenderBoundingBox();
 }
 
+void Simon::HackSimon()
+{
+	_heart = 99;
+	_energy = 16;
+	_lives = 99;
+}
+
 bool Simon::IsDie()
 {
-	if (y > 4*SCREEN_HEIGHT)
+	if (y > 4 * SCREEN_HEIGHT)
+	{
+		Sound::GetInstance()->Play(eSound::musicLifeLost);
 		return true;
+	}
 
 	return false;
 }
@@ -336,13 +346,13 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (candle->getItemType() == eType::ITEMBOONGMERANG)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
-							CBoard::GetInstance()->SetWeapon(candle->getItemType());
+							CBoard::GetInstance()->SetWeapon(eType::BOONGMERANG);
 						}
 						else if (candle->getItemType() == eType::ITEMAXE)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
 							//weapons[eType::AXE] = CAxe::GetInstance();
-							CBoard::GetInstance()->SetWeapon(candle->getItemType());
+							CBoard::GetInstance()->SetWeapon(eType::AXE);
 						}
 						else if (candle->getItemType() == eType::GATE)
 						{
@@ -351,7 +361,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (candle->getItemType() == eType::ITEMHOLLYWATTER)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectItem);
-							CBoard::GetInstance()->SetWeapon(candle->getItemType());
+							CBoard::GetInstance()->SetWeapon(eType::HOLLYWATTER);
 						}
 						else if (candle->getItemType() == eType::ITEMVASE)
 						{
@@ -374,7 +384,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				// Va cham cua qua man khac
 				case eType::OBJECT_HIDDEN_DOOR:
 				{
-					//Sound::GetInstance()->Play(eSound::);
+					Sound::GetInstance()->Play(eSound::musicState1);
 					GameConfig::GetInstance()->LevelUp();
 
 				}

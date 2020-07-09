@@ -148,6 +148,7 @@ void CastlevaniaScreen::Render() {
 	{
 		simon->GetCurrentWeapon()->Render();
 	}
+
 	this->simon->Render();
 	this->board->Render();
 	

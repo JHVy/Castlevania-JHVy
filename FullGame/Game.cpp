@@ -246,7 +246,6 @@ CGame* CGame::GetInstance()
 void CGame::Load()
 {
 	GameConfig::GetInstance()->Load("Res/config.txt");
-
 	for (int i = 0; i <= GameConfig::GetInstance()->MaxLevel; i++)
 	{
 		CastlevaniaScreen* screen = new CastlevaniaScreen();

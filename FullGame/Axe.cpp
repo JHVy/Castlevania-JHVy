@@ -40,7 +40,7 @@ void Axe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			start_attack = 0;
 			vy = -AXE_SPEED_Y;
 			isRender = false;
-			animations[0]->ResetFrame();
+			//animations[0]->ResetFrame();
 		}
 	}
 	if (state == AXE_STATE_ATTACK) {
@@ -63,8 +63,8 @@ void Axe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Axe::Render()
 {
 	if (isRender) {
-		//animations[0]->Render(x, y, nx, 255);
-		RenderBoundingBox();
+		animations[0]->Render(x, y, nx, 255);
+		//RenderBoundingBox();
 	}
 }
 

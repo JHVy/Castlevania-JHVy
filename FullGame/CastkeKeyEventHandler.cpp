@@ -163,6 +163,12 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 			return;
 		}
 	}
+
+	if (IsKeyDown(DIK_0))
+	{
+		simon->HackSimon();
+		return;
+	}
 	
 
 
