@@ -6,6 +6,7 @@
 #include "Axe.h"
 #include "Dagger.h"
 #include "Boongmerang.h"
+#include "HolyWater.h"
 
 Simon* Simon::_instance = NULL;
 
@@ -37,7 +38,7 @@ Simon::Simon() {
 
 	weapons[eType::DAGGER] = Dagger::GetInstance();
 	weapons[eType::AXE] = Axe::GetInstance();
-	//weapons[eType::HOLLYWATTER] = HollyWatter::GetInstance();
+	weapons[eType::HOLLYWATTER] = HollyWatter::GetInstance();
 	weapons[eType::BOONGMERANG] = Boongmerang::GetInstance();
 }
 
@@ -517,6 +518,8 @@ void Simon::SetState(int state)
 				idSound = eSound::soundAxe;
 			else if (idWeapon == eType::BOONGMERANG)
 					idSound = eSound::soundBoomerang;
+			else if (idWeapon == eType::HOLLYWATTER)
+				idSound = eSound::soundHolyWater;
 
 			if (weapons[idWeapon]->GetState() == DAGGER_STATE_ATTACK)
 			{

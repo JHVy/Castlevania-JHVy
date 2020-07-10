@@ -26,14 +26,14 @@
 #define HOLLY_WATTER_TIME_ATTACK 2000
 
 
-class CHollyWatter : public CWeapon
+class HollyWatter : public Weapon
 {
-	static CHollyWatter* __instance;
+	static HollyWatter* __instance;
 	DWORD start_attack;
 public:
 
-	static CHollyWatter* GetInstance();
-	CHollyWatter();
+	static HollyWatter* GetInstance();
+	HollyWatter();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects = NULL);
 	void SetPosition(float simon_x, float simon_y);
 	void Render();

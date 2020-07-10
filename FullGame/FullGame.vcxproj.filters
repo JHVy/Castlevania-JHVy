@@ -135,6 +135,9 @@
     <ClCompile Include="Boongmerang.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="HolyWater.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -265,6 +268,9 @@
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Boongmerang.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="HolyWater.h">
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
   </ItemGroup>

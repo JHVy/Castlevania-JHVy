@@ -1,11 +1,12 @@
 ﻿#include "Game.h"
 #include "Axe.h"
 #include "Torch.h"
-#include "Boss.h"
+//#include "Boss.h"
 #include "HolyWater.h"
+#include "Sound.h"
 
-CHollyWatter* CHollyWatter::__instance = NULL;
-CHollyWatter::CHollyWatter() :CWeapon()
+HollyWatter* HollyWatter::__instance = NULL;
+HollyWatter::HollyWatter() :Weapon()
 {
 	AddAnimation(604);
 	AddAnimation(820);
@@ -13,13 +14,13 @@ CHollyWatter::CHollyWatter() :CWeapon()
 	state = HOLLY_WATTER_STATE_HIDE;
 	start_attack = 0;
 }
-CHollyWatter* CHollyWatter::GetInstance()
+HollyWatter* HollyWatter::GetInstance()
 {
-	if (__instance == NULL) __instance = new CHollyWatter();
+	if (__instance == NULL) __instance = new HollyWatter();
 	return __instance;
 }
 
-void CHollyWatter::SetPosition(float simon_x, float simon_y)
+void HollyWatter::SetPosition(float simon_x, float simon_y)
 {
 	if (nx < 0)
 	{
@@ -31,7 +32,7 @@ void CHollyWatter::SetPosition(float simon_x, float simon_y)
 
 	y = simon_y;
 }
-void CHollyWatter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void HollyWatter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (start_attack > 0)
 	{
@@ -60,12 +61,12 @@ void CHollyWatter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 }
 
-void CHollyWatter::Render()
+void HollyWatter::Render()
 {
 	if (state == HOLLY_WATTER_STATE_ATTACK) 
 	{
 		animations[0]->Render(x, y, nx, 255);
-		RenderBoundingBox();
+		//RenderBoundingBox();
 	}
 	else if(state == HOLLY_WATTER_STATE_FIRE)
 	{
@@ -74,13 +75,13 @@ void CHollyWatter::Render()
 			animations[1]->Render(x, y, nx, 255);
 		else
 			animations[1]->Render(x - 10, y, nx, 255);
-		RenderBoundingBox();
+		//RenderBoundingBox();
 
 	}
 
 }
 
-void CHollyWatter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void HollyWatter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	if (state == HOLLY_WATTER_STATE_ATTACK)
 	{
@@ -98,7 +99,7 @@ void CHollyWatter::GetBoundingBox(float& left, float& top, float& right, float& 
 	}
 
 }
-void CHollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
+void HollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 {
 	if (state != HOLLY_WATTER_STATE_HIDE)
 	{
@@ -114,14 +115,15 @@ void CHollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 
 		for (int i = 0; i < listObj.size(); i++)
 		{
-			if (dynamic_cast<CTorch*>(listObj.at(i)))
+			if (dynamic_cast<Enemy*>(listObj.at(i)))
 			{
-				CTorch* torch = dynamic_cast<CTorch*>(listObj.at(i));
-				if (torch->GetState() == TORCH_STATE_EXSIST ||
-					((torch->GetState() == BOSS_STATE_ATTACK || torch->GetState() == BOSS_STATE_FLY) && torch->GetType() == eType::BOSS))
+				Enemy* enemy = dynamic_cast<Enemy*>(listObj.at(i));
+				//if (enemy->GetState() == TORCH_STATE_EXSIST ||
+					//((enemy->GetState() == BOSS_STATE_ATTACK || enemy->GetState() == BOSS_STATE_FLY) && enemy->GetType() == eType::BOSS))
+				if (enemy->GetState() == TORCH_STATE_EXSIST)
 				{
 
-					torch->GetBoundingBox(l1, t1, r1, b1);
+					enemy->GetBoundingBox(l1, t1, r1, b1);
 					rect1.left = (int)l1;
 					rect1.top = (int)t1;
 					rect1.right = (int)r1;
@@ -129,37 +131,37 @@ void CHollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 					if (CGame::GetInstance()->isCollision(rect, rect1)) // đụng độ
 					{
 						Sound::GetInstance()->Play(eSound::soundHolyWater);
-						if (torch->GetType() == eType::BRICK_1 || torch->GetType() == eType::BRICK_2)
+						if (enemy->GetType() == eType::BRICK_2)
 						{
 							vx = vy = 0;
 							state = HOLLY_WATTER_STATE_FIRE;
 							y -= 1;
 							continue;
 						}
-						torch->Hurt();
+						enemy->Hurt();
 
-						if (torch->GetEnergy() <= 0)
+						if (enemy->GetEnergy() <= 0)
 						{
-							CSimon* simon = CSimon::GetInstance();
-							if (torch->GetType() == eType::GHOST)
+							Simon* simon = Simon::GetInstance();
+							if (enemy->GetType() == eType::GHOST)
 								simon->SetScore(100);
-							else if (torch->GetType() == eType::PANTHER)
+							else if (enemy->GetType() == eType::PANTHER)
 								simon->SetScore(300);
-							else if (torch->GetType() == eType::BAT)
+							else if (enemy->GetType() == eType::BAT)
 								simon->SetScore(200);
-							else if (torch->GetType() == eType::FISHMEN)
+							else if (enemy->GetType() == eType::FISHMEN)
 								simon->SetScore(300);
 
-							if (torch->GetEnergy() <= 0)
+							if (enemy->GetEnergy() <= 0)
 							{
-								if (torch->GetType() == eType::BOSS)
+								if (enemy->GetType() == eType::BOSS)
 								{
-									torch->SetState(BOSS_STATE_NOT_EXSIST);
+									//enemy->SetState(BOSS_STATE_NOT_EXSIST);
 									simon->SetScore(1000);
 								}
 								else
 								{
-									torch->SetState(TORCH_STATE_NOT_EXSIST);
+									enemy->SetState(TORCH_STATE_NOT_EXSIST);
 								}
 							}
 						}
@@ -175,7 +177,7 @@ void CHollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 }
 
 
-void CHollyWatter::SetState(int _state) {
+void HollyWatter::SetState(int _state) {
 	CGameObject::SetState(_state);
 	if (state == HOLLY_WATTER_STATE_ATTACK)
 	{
