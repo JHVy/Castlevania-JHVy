@@ -44,7 +44,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		
 			float s_x, s_y;
 			Simon::GetInstance()->GetPosition(s_x, s_y);
-			state = TORCH_STATE_EXSIST;
+			state = CANDLE_STATE_EXSIST;
 			x = start_x;
 			y = start_y;
 			if (x > s_x)
@@ -61,11 +61,12 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		else
 			return;
 	}
+
 	if (vx == 0 && vy == 0)
 		return;
 	if (dt_die == 0)
 	{
-		if (state == TORCH_STATE_EXSIST)
+		if (state == CANDLE_STATE_EXSIST)
 		{
 			float _x, _y;
 			Simon::GetInstance()->GetPosition(_x, _y);
@@ -77,7 +78,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 			if (x < cam_x - GHOST_DISTANCE_TOO_FAR || x > cam_x + SCREEN_WIDTH + GHOST_DISTANCE_TOO_FAR)
 			{
-				state = TORCH_STATE_ITEM_NOT_EXSIST;
+				state = CANDLE_STATE_ITEM_NOT_EXSIST;
 				dt_appear = GetTickCount();
 			}
 			vector<LPGAMEOBJECT> list;
@@ -136,9 +137,15 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			list.clear();
 			// clean up collision events
 			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
+			//update item
+			if (item != NULL)
+			{
+				item->SetPosition(x, y);
+			}
+
 		}
-		else 
-		if (state == TORCH_STATE_NOT_EXSIST) 
+		else if (state == CANDLE_STATE_ITEM)
 		{
 			dt_die = GetTickCount();
 			if (item)
@@ -147,7 +154,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 			else
 			{
-				state = TORCH_STATE_ITEM_NOT_EXSIST;
+				state = CANDLE_STATE_ITEM_NOT_EXSIST;
 				dt_appear = GetTickCount();
 				return;
 			}
@@ -155,16 +162,16 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	else
 	{
-		if (item != NULL) {//co item
+		if (item != NULL) 
+		{//co item
 
 			if (GetTickCount() - dt_die > TIME_ENEMY_DIE) // cho 150 mili second
 			{
 				item->Update(dt, coObjects);
-				item->GetPosition(x, y);
-				state = TORCH_STATE_ITEM;
+				state = CANDLE_STATE_ITEM;
 				if (item->GetState() == ITEM_STATE_NOT_EXSIST)
 				{
-					state = TORCH_STATE_ITEM_NOT_EXSIST;
+					state = CANDLE_STATE_ITEM_NOT_EXSIST;
 					dt_appear = GetTickCount();
 					return;
 				}
@@ -172,7 +179,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else
 		{
-			state = TORCH_STATE_ITEM_NOT_EXSIST;
+			state = CANDLE_STATE_ITEM_NOT_EXSIST;
 			dt_appear = GetTickCount();
 			return;
 		}
@@ -187,11 +194,12 @@ void Ghost::Render()
 	
 	if (x == 0 && y == 0)
 		return;
-	if (state == TORCH_STATE_EXSIST)
+
+	if (state == CANDLE_STATE_EXSIST)
 	{
 		animations[0]->Render(x, y, nx, 255);
 	}
-	else if (state == TORCH_STATE_ITEM)
+	else if (state == CANDLE_STATE_ITEM)
 	{
 		if (item != NULL)
 			item->Render();
@@ -206,19 +214,19 @@ void Ghost::Render()
 		}
 	}
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 void Ghost::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 
-	if (state == TORCH_STATE_EXSIST)
+	if (state == CANDLE_STATE_EXSIST)
 	{
 		left = x;
 		top = y;
 		right = x + GHOST_BBOX_WIDTH;
 		bottom = y + GHOST_BBOX_HEIGHT;
 	}
-	else if (state == TORCH_STATE_ITEM)
+	else if (state == CANDLE_STATE_ITEM)
 	{
 		item->GetBoundingBox(left, top, right, bottom);
 	}

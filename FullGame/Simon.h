@@ -160,6 +160,10 @@ public:
 	}
 
 	void ThrowWeapon() { _heart--; }
+	void Hurt() {
+		_energy -= 2; 
+		y = 5 * SCREEN_HEIGHT;	//force die
+	}
 
 	Weapon* GetCurrentWeapon();
 

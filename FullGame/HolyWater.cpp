@@ -138,6 +138,7 @@ void HollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 							y -= 1;
 							continue;
 						}
+
 						enemy->Hurt();
 
 						if (enemy->GetEnergy() <= 0)

@@ -115,7 +115,7 @@ void Axe::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 						if (enemy->GetType() == eType::BRICK_2)
 						{
 							vx = vy = 0;
-							break;
+							continue;
 						}
 						enemy->Hurt();
 

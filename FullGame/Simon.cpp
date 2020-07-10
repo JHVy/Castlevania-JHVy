@@ -273,6 +273,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 		CHidenObject* hidenObj;
 		Brick* brick;
 		Candle* candle;
+		Enemy* enemy;
 
 		//duyet qua list object de check va cham va xu ly
 		for (int index = 0; index < coObjects->size(); index++)
@@ -323,7 +324,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (candle->getItemType() == eType::SMALLHEART)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectItem);
-							this->_heart ++;
+							this->_heart++;
 						}
 						else if (candle->getItemType() == eType::MONEY_1)
 						{
@@ -353,7 +354,6 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						else if (candle->getItemType() == eType::ITEMAXE)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
-							//weapons[eType::AXE] = CAxe::GetInstance();
 							CBoard::GetInstance()->SetWeapon(eType::AXE);
 						}
 						else if (candle->getItemType() == eType::GATE)
@@ -380,6 +380,15 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 
 						candle->invisibleItem();
 						candle->SetState(CANDLE_STATE_NOT_EXSIST);
+					}
+					break;
+
+				case eType::GHOST:
+					enemy = (Ghost*)obj;
+					if (obj->GetState() == CANDLE_STATE_EXSIST)		// Va cham GHOST
+					{
+						Sound::GetInstance()->Play(eSound::soundHurting);
+						this->Hurt();
 					}
 					break;
 
