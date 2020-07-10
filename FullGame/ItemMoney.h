@@ -47,6 +47,7 @@ public:
 			break;
 		}
 		_type = type;
+		this->itemType = type;
 		start_effection = 0;
 	}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);

@@ -248,9 +248,9 @@ void Simon::Render()
 
 void Simon::HackSimon()
 {
-	_heart = 99;
+	_heart = 50;
 	_energy = 16;
-	_lives = 99;
+	_lives = 50;
 }
 
 bool Simon::IsDie()
@@ -385,7 +385,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				// Va cham cua qua man khac
 				case eType::OBJECT_HIDDEN_DOOR:
 				{
-					Sound::GetInstance()->Play(eSound::musicState1);
+					Sound::GetInstance()->Play(eSound::musicStateClear);
 					GameConfig::GetInstance()->LevelUp();
 
 				}
