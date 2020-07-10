@@ -132,6 +132,9 @@
     <ClCompile Include="Dagger.cpp">
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Boongmerang.cpp">
+      <Filter>GameObject\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -259,6 +262,9 @@
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Dagger.h">
+      <Filter>GameObject\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Boongmerang.h">
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
   </ItemGroup>

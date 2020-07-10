@@ -5,6 +5,7 @@
 //#include "Dagger.cpp"
 #include "Axe.h"
 #include "Dagger.h"
+#include "Boongmerang.h"
 
 Simon* Simon::_instance = NULL;
 
@@ -36,8 +37,8 @@ Simon::Simon() {
 
 	weapons[eType::DAGGER] = Dagger::GetInstance();
 	weapons[eType::AXE] = Axe::GetInstance();
-	/*weapons[eType::HOLLYWATTER] = HollyWatter::GetInstance();
-	weapons[eType::BOONGMERANG] = Boongmerang::GetInstance();*/
+	//weapons[eType::HOLLYWATTER] = HollyWatter::GetInstance();
+	weapons[eType::BOONGMERANG] = Boongmerang::GetInstance();
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -512,8 +513,10 @@ void Simon::SetState(int state)
 		{
 			int idWeapon = CBoard::GetInstance()->GetWeapon();
 			eSound idSound = eSound::soundDagger;
-			if (idWeapon == ITEMAXE)
+			if (idWeapon == eType::AXE)
 				idSound = eSound::soundAxe;
+			else if (idWeapon == eType::BOONGMERANG)
+					idSound = eSound::soundBoomerang;
 
 			if (weapons[idWeapon]->GetState() == DAGGER_STATE_ATTACK)
 			{
