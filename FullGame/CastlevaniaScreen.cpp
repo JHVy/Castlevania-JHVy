@@ -106,6 +106,9 @@ void CastlevaniaScreen::Update(DWORD dt) {
 	{
 		simon->GetCurrentWeapon()->Update(dt, &items);
 	}
+	
+	//update list object cho grid
+	//grid->GetListObject(objects, cam_x, cam_y);
 
 	board->Update(dt);
 }

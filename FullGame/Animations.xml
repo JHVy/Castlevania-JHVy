@@ -306,57 +306,78 @@
     <sprite id="30001"/>
   </Animation>
 
-  <!--panther sit-->
+  <!--bat sleep -->
   <Animation animationID ="1001" frameTime ="100">
     <sprite id="30002"/>
   </Animation>
 
-  <!--panther run-->
+  <!--bat run-->
   <Animation animationID ="1002" frameTime ="100">
     <sprite id="30003"/>
     <sprite id="30004"/>
     <sprite id="30005"/>
   </Animation>
 
-  <!--bat run-->
+  <!--black knight run-->
   <Animation animationID ="1003" frameTime ="100">
     <sprite id="30006"/>
     <sprite id="30007"/>
     <sprite id="30008"/>
-    <sprite id="30009"/>
   </Animation>
 
-  <!--fishman jump-->
+  <!--white skeleton jump-->
   <Animation animationID ="1004" frameTime ="100">
-    <sprite id="30012"/>
+    <sprite id="30009"/>
+    <sprite id="30010"/>
   </Animation>
 
-  <!--fishman walking-->
+  <!--white skeleton throw-->
   <Animation animationID ="1005" frameTime ="100">
+    <sprite id="30009"/>
+    <sprite id="30010"/>
     <sprite id="30011"/>
     <sprite id="30012"/>
+    <sprite id="30013"/>
   </Animation>
 
-  <!--fishman attack-->
+  <!--mini ghost-->
   <Animation animationID ="1006" frameTime ="100">
-    <sprite id="30010"/>
-    <sprite id="30012"/>
+    <sprite id="30014"/>
+    <sprite id="30015"/>
+  </Animation>
+
+  <!--fleaman-->
+  <Animation animationID ="1007" frameTime ="100">
+    <sprite id="30016"/>
+    <sprite id="30017"/>
+  </Animation>
+
+  <!--raven sleep-->
+  <Animation animationID ="1008" frameTime ="100">
+    <sprite id="30018"/>
+  </Animation>
+
+  <!--raven run-->
+  <Animation animationID ="1009" frameTime ="100">
+    <sprite id="30019"/>
+    <sprite id="30020"/>
+    <sprite id="30021"/>
   </Animation>
 
   <!--boss sleep-->
   <Animation animationID ="1090" frameTime ="100">
-    <sprite id="30013"/>
+    <sprite id="30022"/>
   </Animation>
 
   <!--boss run-->
   <Animation animationID ="1091" frameTime ="100">
-    <sprite id="30014" />
-    <sprite id="30015"/>
+    <sprite id="30023" />
+    <sprite id="30024"/>
   </Animation>
 
   <!--boss attack-->
   <Animation animationID ="1092" frameTime ="100">
-    <sprite id="30015"/>
+    <sprite id="30024"/>
   </Animation>
 
   <!--smallball-->

@@ -85,23 +85,29 @@
   <sprite id="13151" left="116" top="323" right="153" bottom="351"/>
   <sprite id="30000" left="128" top="0" right="160" bottom="64"/>
   <sprite id="30001" left="160" top="0" right="192" bottom="64"/>
-  <sprite id="30002" left="0" top="82" right="64" bottom="114"/>
-  <sprite id="30003" left="64" top="82" right="128" bottom="114"/>
-  <sprite id="30004" left="128" top="82" right="192" bottom="114"/>
-  <sprite id="30005" left="192" top="82" right="256" bottom="114"/>
-  <sprite id="30006" left="0" top="0" right="32" bottom="32"/>
-  <sprite id="30007" left="32" top="0" right="64" bottom="32"/>
-  <sprite id="30008" left="64" top="0" right="96" bottom="32"/>
-  <sprite id="30009" left="96" top="0" right="128" bottom="32"/>
-  <sprite id="30012" left="264" top="0" right="300" bottom="64"/>
-  <sprite id="30011" left="233" top="0" right="264" bottom="64"/>
-  <sprite id="30012" left="264" top="0" right="300" bottom="64"/>
-  <sprite id="30010" left="203" top="0" right="234" bottom="64"/>
-  <sprite id="30012" left="264" top="0" right="300" bottom="64"/>
-  <sprite id="30013" left="300" top="0" right="400" bottom="37"/>
-  <sprite id="30014" left="400" top="0" right="500" bottom="45"/>
-  <sprite id="30015" left="500" top="0" right="594" bottom="45"/>
-  <sprite id="30015" left="500" top="0" right="594" bottom="45"/>
+  <sprite id="30002" left="417" top="962" right="435" bottom="988"/>
+  <sprite id="30003" left="404" top="962" right="472" bottom="991"/>
+  <sprite id="30004" left="474" top="967" right="499" bottom="986"/>
+  <sprite id="30005" left="501" top="964" right="532" bottom="990"/>
+  <sprite id="30006" left="698" top="995" right="725" bottom="1054"/>
+  <sprite id="30007" left="726" top="993" right="754" bottom="1054"/>
+  <sprite id="30008" left="756" top="995" right="786" bottom="1054"/>
+  <sprite id="30009" left="608" top="1084" right="637" bottom="1142"/>
+  <sprite id="30010" left="638" top="1082" right="667" bottom="1142"/>
+  <sprite id="30011" left="670" top="1082" right="681" bottom="1113"/>
+  <sprite id="30012" left="684" top="1086" right="710" bottom="1111"/>
+  <sprite id="30013" left="716" top="1085" right="740" bottom="1111"/>
+  <sprite id="30014" left="2" top="1081" right="26" bottom="1113"/>
+  <sprite id="30015" left="28" top="1081" right="59" bottom="1113"/>
+  <sprite id="30016" left="346" top="1082" right="379" bottom="1113"/>
+  <sprite id="30017" left="380" top="1082" right="404" bottom="1113"/>
+  <sprite id="30018" left="483" top="1088" right="512" bottom="1111"/>
+  <sprite id="30019" left="512" top="1082" right="541" bottom="1113"/>
+  <sprite id="30020" left="544" top="1082" right="572" bottom="1111"/>
+  <sprite id="30021" left="573" top="1084" right="599" bottom="1113"/>
+  <sprite id="30022" left="300" top="0" right="400" bottom="37"/>
+  <sprite id="30023" left="400" top="0" right="500" bottom="45"/>
+  <sprite id="30024" left="500" top="0" right="594" bottom="45"/>
   <sprite id="70000" left="438" top="332" right="450" bottom="344"/>
   <sprite id="40000" left="2" top="118" right="32" bottom="212"/>
   <sprite id="40000" left="2" top="118" right="32" bottom="212"/>

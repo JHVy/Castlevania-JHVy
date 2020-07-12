@@ -56,6 +56,9 @@ public:
 		return this->items;
 	}
 
+	vector<LPGAMEOBJECT> objects;
+
+
 private:
 	void UpdateCamera();
 	//void LoadObject(string file_path); //
