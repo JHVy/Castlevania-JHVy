@@ -19,6 +19,8 @@
 #include "HidenObject.h"
 #include "Brick.h"
 
+#include "Grid.h"
+
 class CGame;
 class Simon;
 class CBoard;
@@ -30,6 +32,8 @@ protected:
 	string path;
 
 	CBoard * board;
+
+	Grid* grid;
 
 	float screen_size_x, screen_size_y;
 	vector<CGameObject*> items;
@@ -54,8 +58,8 @@ public:
 
 private:
 	void UpdateCamera();
-	void LoadObject(string file_path);
-	CGameObject* GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object);
+	//void LoadObject(string file_path); //
+	//CGameObject* GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object);
 };
 
 #endif // !__CASTLEVANIASCREEN_H__

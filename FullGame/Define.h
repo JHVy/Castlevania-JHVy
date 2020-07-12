@@ -72,7 +72,7 @@ enum eType
 	///
 	// object nền
 	GATE = 20,
-	//BRICK_1 = 21,
+	BRICK_1 = 21,
 	BRICK_2 = 22,
 	//BRICK_3 = 23,
 	//BRICK_4 = 24,

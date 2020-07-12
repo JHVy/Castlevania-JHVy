@@ -141,6 +141,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameConfig.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="HidenObject.cpp" />
     <ClCompile Include="HolyWater.cpp" />
     <ClCompile Include="ItemAxe.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameConfig.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="HidenObject.h" />
     <ClInclude Include="HolyWater.h" />
     <ClInclude Include="ItemAxe.h" />

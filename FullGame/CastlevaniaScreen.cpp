@@ -13,56 +13,57 @@ CastlevaniaScreen::CastlevaniaScreen() {
 	this->simon = Simon::GetInstance();
 
 	this->board = CBoard::GetInstance();
+	this->grid = Grid::GetInstance();
 }
 
-CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)
-{
-	CGameObject* objRet = NULL;
-	switch (object)
-	{
-	case eType::ID_BRICK:
-		objRet = new Brick(x, y, id_item, type, w, h);
-		return objRet;
+//CGameObject* CastlevaniaScreen::GetNewObject(int type, int trend, int x, int y, int w, int h, int id_item, int object)
+//{
+//	CGameObject* objRet = NULL;
+//	switch (object)
+//	{
+//	case eType::ID_BRICK:
+//		objRet = new Brick(x, y, id_item, type, w, h);
+//		return objRet;
+//
+//	case eType::ID_TORCH:
+//		return new Torch(x, y, id_item);
+//
+//	case eType::ID_CANDLE:
+//		return new Candle(x, y, id_item);
+//
+//	case eType::ID_HIDDEN:
+//		return new CHidenObject(x, y, w, h, type, trend);
+//
+//	case eType::GHOST: 
+//		return new Ghost(x, y, id_item);
+//
+//	default:
+//		return NULL;
+//	}
+//}
 
-	case eType::ID_TORCH:
-		return new Torch(x, y, id_item);
-
-	case eType::ID_CANDLE:
-		return new Candle(x, y, id_item);
-
-	case eType::ID_HIDDEN:
-		return new CHidenObject(x, y, w, h, type, trend);
-
-	case eType::GHOST: 
-		return new Ghost(x, y, id_item);
-
-	default:
-		return NULL;
-	}
-}
-
-void CastlevaniaScreen::LoadObject(string file_path) 
-{
-	items.clear();
-
-	ifstream inFile(file_path);
-
-	int id, grid_x, grid_y, type, trend, id_item, nx, ny, object;
-	float x, y, w, h;
-
-	if (inFile)
-	{
-		while (inFile >> id >> grid_x >> grid_y >> type >> trend >> x >> y >> w >> h >> id_item >> object)
-		{
-			CGameObject* obj = GetNewObject(type, trend, x, y, w, h, id_item, object);
-			if (obj != NULL)
-				items.push_back(obj);
-		}
-		inFile.close();
-	}
-
-	this->simon->SetListObject(&items);
-}
+//void CastlevaniaScreen::LoadObject(string file_path) 
+//{
+//	items.clear();
+//
+//	ifstream inFile(file_path);
+//
+//	int id, grid_x, grid_y, type, trend, id_item, nx, ny, object;
+//	float x, y, w, h;
+//
+//	if (inFile)
+//	{
+//		while (inFile >> id >> grid_x >> grid_y >> type >> trend >> x >> y >> w >> h >> id_item >> object)
+//		{
+//			CGameObject* obj = GetNewObject(type, trend, x, y, w, h, id_item, object);
+//			if (obj != NULL)
+//				items.push_back(obj);
+//		}
+//		inFile.close();
+//	}
+//
+//	this->simon->SetListObject(&items);
+//}
 
 void CastlevaniaScreen::Load() {
 	int gameLevel = GameConfig::GetInstance()->CurrentLevel;
@@ -75,7 +76,7 @@ void CastlevaniaScreen::Load() {
 	this->screen_size_x = this->gameMap->getCols() * this->gameMap->getTileW();
 	this->screen_size_y = this->gameMap->getRows() * this->gameMap->getTileH();
 
-	this->LoadObject("Res/maps/objects_" + sScreenID + ".txt");
+	grid->LoadObject("Res/maps/objects_" + sScreenID + ".txt");
 	//this->LoadObject("Res/maps/objects_6.txt");
 }
 
