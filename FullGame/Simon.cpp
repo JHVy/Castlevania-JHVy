@@ -146,14 +146,14 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void Simon::ResetLevel(int level) 
 {
-	StairTrend = 1;
+	nx = StairTrend = 1;
 	if (level == 3 || level == 5)
 		isOnStair = true;
 	else
 		isOnStair = false;
 
 	if (level == 5)
-		StairTrend = -1;
+		nx = StairTrend = -1;
 
 	GameConfig::GetInstance()->GetSimonPosition(x, y);
 	vx = vy = 0;
