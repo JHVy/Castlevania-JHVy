@@ -156,6 +156,7 @@ void Simon::ResetLevel(int level)
 		StairTrend = -1;
 
 	GameConfig::GetInstance()->GetSimonPosition(x, y);
+	vx = vy = 0;
 }
 
 void Simon::Render()

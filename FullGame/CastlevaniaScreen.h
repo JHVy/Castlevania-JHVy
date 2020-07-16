@@ -24,6 +24,7 @@
 class CGame;
 class Simon;
 class CBoard;
+class Grid;
 
 class CastlevaniaScreen
 {
@@ -36,7 +37,7 @@ protected:
 	Grid* grid;
 
 	float screen_size_x, screen_size_y;
-	vector<CGameObject*> items;
+	vector<LPGAMEOBJECT> items;
 
 	
 public:
@@ -52,7 +53,7 @@ public:
 	virtual void Render();
 	virtual void Unload();
 
-	vector<CGameObject*> getListObject() {
+	vector<LPGAMEOBJECT> getListObject() {
 		return this->items;
 	}
 

@@ -9,7 +9,7 @@ CastlevaniaScreen::CastlevaniaScreen( string filePath)
 
 CastlevaniaScreen::CastlevaniaScreen() {
 	// init 
-	this->gameMap = new GameMap();
+	this->gameMap = GameMap::GetInstance();
 	this->simon = Simon::GetInstance();
 
 	this->board = CBoard::GetInstance();
@@ -81,6 +81,13 @@ void CastlevaniaScreen::Load() {
 }
 
 void CastlevaniaScreen::Update(DWORD dt) {
+	float cam_x, cam_y;
+	CGame::GetInstance()->GetCamera(cam_x, cam_y);
+	
+	//update list object cho grid
+	items.clear();
+	grid->GetListObject(items, cam_x, cam_y);
+	simon->SetListObject(&items);
 
 	this->simon->Update(dt, &items);
 
@@ -106,9 +113,6 @@ void CastlevaniaScreen::Update(DWORD dt) {
 	{
 		simon->GetCurrentWeapon()->Update(dt, &items);
 	}
-	
-	//update list object cho grid
-	//grid->GetListObject(objects, cam_x, cam_y);
 
 	board->Update(dt);
 }

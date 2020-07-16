@@ -28,8 +28,10 @@ private:
 	
 	// cell type
 	int cellTypes[200][200];
+	static GameMap* __instance;
 
 public:
+	static GameMap* GetInstance();
 	void setId(int _id) { this->id = _id; }
 	void LoadMap(int _id, string filepath);
 	void DrawMap();

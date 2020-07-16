@@ -4,6 +4,15 @@
 #include "fstream"
 #include "Utils.h"
 
+GameMap* GameMap::__instance = NULL;
+
+GameMap* GameMap::GetInstance()
+{
+	if (__instance == NULL)
+		__instance = new GameMap();
+	return __instance;
+}
+
 GameMap::GameMap() {
 	this->numCols = 0;
 	this->numRows = 0;

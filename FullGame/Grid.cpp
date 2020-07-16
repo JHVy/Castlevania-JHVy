@@ -22,13 +22,28 @@ Grid* Grid::GetInstance()
 
 void Grid::LoadObject(string file_path)
 {
-	//objects.clear();
+	//clear old data
+	for (int i = 0; i < Row; i++)
+	{
+		delete[] cells[i];
+	}
+	SAFE_DELETE(cells);
 
-	for (int i = 0; i < GRID_ROW_MAX; i++)
-		for (int j = 0; j < GRID_COLUMN_MAX; j++)
+	// New data
+	Row = GameMap::GetInstance()->getRows();
+	Col = GameMap::GetInstance()->getCols();
+	CellW = GameMap::GetInstance()->getTileW();
+	CellH = GameMap::GetInstance()->getTileH();
+
+	cells = new vector<LPGAMEOBJECT>*[Row];
+	for (int i = 0; i < Row; i++)
+	{
+		cells[i] = new vector<LPGAMEOBJECT>[Col];
+		for (int j = 0; j < Col; j++)
 		{
 			cells[i][j].clear();
 		}
+	}
 
 	ifstream inFile(file_path);
 
@@ -83,24 +98,24 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 }
 
 
-void Grid::GetListObject(vector<LPGAMEOBJECT>& ListObj, float cam_x, float cam_y)
+void Grid::GetListObject(vector<LPGAMEOBJECT>&ListObj, float cam_x, float cam_y)
 {
+
 	ListObj.clear();
 
 	unordered_map<int, LPGAMEOBJECT> mapObject;
 
-	int bottom = (int)((cam_y + SCREEN_HEIGHT) / GRID_CELL_HEIGHT);
-	int top = (int)(cam_y / GRID_CELL_HEIGHT);
+	int bottom = (int)((cam_y + SCREEN_HEIGHT) / CellH);
+	int top = (int)(cam_y / CellH);
 
-	int left = (int)(cam_x / GRID_CELL_WIDTH);
-	if (left > 0)
-		left--;
-	int right = (int)((cam_x + SCREEN_HEIGHT) / GRID_CELL_WIDTH);
-	right++;
+	int left = (int)(cam_x / CellW);
+	//if (left > 0) left--;
+	int right = (int)((cam_x + SCREEN_WIDTH) / CellW);
+	//right++;
 
-	for (int i = top; i <= bottom + 1; i++)
+	for (int i = top; i < bottom && i < Row; i++)
 	{
-		for (int j = left; j <= right + 1; j++)
+		for (int j = left; j < right && j < Col; j++)
 		{
 			for (UINT k = 0; k < cells[i][j].size(); k++)
 			{
@@ -115,6 +130,6 @@ void Grid::GetListObject(vector<LPGAMEOBJECT>& ListObj, float cam_x, float cam_y
 
 	for (auto& x : mapObject)
 	{
-	ListObj.push_back(x.second);
+		ListObj.push_back(x.second);
 	}
 }
