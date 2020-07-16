@@ -15,6 +15,7 @@ class Grid
 
 	vector<LPGAMEOBJECT>** cells;
 public:
+	static bool IsOutOfCamera(float cam_x, float cam_y, LPGAMEOBJECT obj);
 	static Grid* GetInstance();
 
 	int Row, Col, CellW, CellH;

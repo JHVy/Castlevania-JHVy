@@ -97,6 +97,27 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 	}
 }
 
+bool Grid::IsOutOfCamera(float cam_x, float cam_y, LPGAMEOBJECT obj)
+{
+	RECT rectThis, rect1;
+
+	// CAM
+	float l = cam_x, t = cam_y, r = cam_x + SCREEN_WIDTH-100, b = cam_y + SCREEN_HEIGHT;
+	rectThis.left = (int)l;
+	rectThis.top = (int)t;
+	rectThis.right = (int)r;
+	rectThis.bottom = (int)b;
+
+	//obj
+	float l1, t1, r1, b1;
+	obj->GetBoundingBox(l1, t1, r1, b1);
+	rect1.left = (int)l1;
+	rect1.top = (int)t1;
+	rect1.right = (int)r1;
+	rect1.bottom = (int)b1;
+
+	return !CGame::GetInstance()->isCollision(rectThis, rect1);
+}
 
 void Grid::GetListObject(vector<LPGAMEOBJECT>&ListObj, float cam_x, float cam_y)
 {
@@ -105,24 +126,17 @@ void Grid::GetListObject(vector<LPGAMEOBJECT>&ListObj, float cam_x, float cam_y)
 
 	unordered_map<int, LPGAMEOBJECT> mapObject;
 
-	int bottom = (int)((cam_y + SCREEN_HEIGHT) / CellH);
-	int top = (int)(cam_y / CellH);
-
-	int left = (int)(cam_x / CellW);
-	//if (left > 0) left--;
-	int right = (int)((cam_x + SCREEN_WIDTH) / CellW);
-	//right++;
-
-	for (int i = top; i < bottom && i < Row; i++)
+	for (int i = 0; i < Row; i++)
 	{
-		for (int j = left; j < right && j < Col; j++)
+		for (int j = 0; j < Col; j++)
 		{
 			for (UINT k = 0; k < cells[i][j].size(); k++)
 			{
-				if (cells[i][j].at(k)->GetState() != TORCH_STATE_ITEM_NOT_EXSIST || cells[i][j].at(k)->GetState() != CANDLE_STATE_ITEM_NOT_EXSIST || dynamic_cast<Enemy*>(cells[i][j].at(k))) // còn tồn tại || enemy
+				LPGAMEOBJECT pObj = cells[i][j].at(k);
+				if (!Grid::IsOutOfCamera(cam_x, cam_y, pObj))	// thuoc man hinh camera dang hien thi
 				{
-					if (mapObject.find(cells[i][j].at(k)->GetID()) == mapObject.end()) // chưa có trong map
-						mapObject[cells[i][j].at(k)->GetID()] = cells[i][j].at(k);
+					if (mapObject.find(pObj->GetID()) == mapObject.end()) // chưa có trong map
+						mapObject[pObj->GetID()] = pObj;
 				}
 			}
 		}
