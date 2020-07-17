@@ -102,7 +102,7 @@ bool Grid::IsOutOfCamera(float cam_x, float cam_y, LPGAMEOBJECT obj)
 	RECT rectThis, rect1;
 
 	// CAM
-	float l = cam_x, t = cam_y, r = cam_x + SCREEN_WIDTH-100, b = cam_y + SCREEN_HEIGHT;
+	float l = cam_x, t = cam_y, r = cam_x + SCREEN_WIDTH, b = cam_y + SCREEN_HEIGHT;
 	rectThis.left = (int)l;
 	rectThis.top = (int)t;
 	rectThis.right = (int)r;

@@ -430,6 +430,7 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				{
 					isOnStair = true;
 					StairTrend = obj->GetTrend();
+					this->x = obj->x;
 				}
 
 				// Tren thang
@@ -453,6 +454,7 @@ void Simon::CheckCollisionWithStair(int keyPress)
 				{
 					isOnStair = true;
 					StairTrend = obj->GetTrend();
+					this->x = obj->x;
 				}
 
 				// Tren thang
