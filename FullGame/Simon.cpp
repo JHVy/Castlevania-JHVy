@@ -57,6 +57,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
+
 	if (isOnStair)
 		vy = 0;
 
@@ -102,14 +103,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 
 	// update weapon
-	/*if (vampireKiller != NULL)
-	{
-		vampireKiller->y = this->y;
-		if (nx < 0)
-			vampireKiller->x = this->x - 40;
-		else
-			vampireKiller->x = this->x - 15;
-	}*/
 	if (state == SIMON_STATE_SIT_ATTACK || state == SIMON_STATE_STAND_ATTACK)
 	{
 		VampireKiller::GetInstance()->SetPosition(x, y);
@@ -140,8 +133,6 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		return;
 	}
-
-	
 }
 
 void Simon::ResetLevel(int level) 
@@ -166,6 +157,14 @@ void Simon::Render()
 	if (state == SIMON_STATE_DIE)
 	{
 		id = SIMON_ANI_DIE;
+	}
+	else if (state == SIMON_STATE_IDLE_DOWN)
+	{
+		id = SIMON_ANI_IDLE_DOWN;
+	}
+	else if (state == SIMON_STATE_IDLE_UP)
+	{
+		id = SIMON_ANI_IDLE_UP;
 	}
 	else if (state == SIMON_STATE_IDLE_DOWN)
 	{
@@ -421,59 +420,57 @@ void Simon::CheckCollisionWithStair(int keyPress)
 		if (obj->GetType() != eType::STAIR_UP && obj->GetType() != eType::STAIR_DOWN)
 			continue;	//ko phai STAIR thi bo qua
 
-		//if (this->IsCollisedWith(obj))
+		if (keyPress == DIK_UP)
 		{
-			if (keyPress == DIK_UP)
+			// Vao thang
+			if (!isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
 			{
-				// Vao thang
-				if (!isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
-				{
-					isOnStair = true;
-					StairTrend = obj->GetTrend();
-					this->x = obj->x;
-				}
-
-				// Tren thang
-				if (isOnStair)
-				{
-					this->SetState(SIMON_STATE_GO_UP);
-				}
-
-				//Ra khoi thang
-				if (isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
-				{
-					isOnStair = false;
-					vx = vy = 0;
-					y -= 20;	// tang y nhay len mot chut len de khoi overlap voi BRICK
-				}
+				isOnStair = true;
+				StairTrend = obj->GetTrend();
+				this->x = obj->x;
 			}
-			else if(keyPress == DIK_DOWN)
+
+			// Tren thang
+			if (isOnStair)
 			{
-				/*if (IsJumping())
-				{
-					return;
-				}*/
+				this->SetState(SIMON_STATE_GO_UP);
+			}
 
-				// Vao thang
-				if (!isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
-				{
-					isOnStair = true;
-					StairTrend = obj->GetTrend();
-					this->x = obj->x;
-				}
+			//Ra khoi thang
+			if (isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
+			{
+				isOnStair = false;
+				vx = vy = 0;
+				y -= 20;	// tang y nhay len mot chut len de khoi overlap voi BRICK
+			}
+		}
+		else if(keyPress == DIK_DOWN)
+		{
+			//if (IsJumping())
+			//{
+			//	return;
+			//}
 
-				// Tren thang
-				if (isOnStair)
-				{
-					this->SetState(SIMON_STATE_GO_DOWN);
-				}
 
-				//Ra khoi thang
-				if (isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
-				{
-					isOnStair = false;
-					vx = vy = 0;
-				}
+			// Vao thang
+			if (!isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
+			{
+				isOnStair = true;
+				StairTrend = obj->GetTrend();
+				this->x = obj->x;
+			}
+
+			// Tren thang
+			if (isOnStair)
+			{
+				this->SetState(SIMON_STATE_GO_DOWN);
+			}
+
+			//Ra khoi thang
+			if (isOnStair && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
+			{
+				isOnStair = false;
+				vx = vy = 0;
 			}
 		}
 	}
@@ -502,6 +499,10 @@ void Simon::SetState(int state)
 
 	if (attack_start)
 		return;
+
+	if (state != this->state
+		&& (this->state == SIMON_STATE_SIT || this->state == SIMON_STATE_SIT_ATTACK))
+		y -= SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT;
 
 	// Dang jump van qua phai trai duoc
 	if (start_jump)
@@ -597,10 +598,12 @@ void Simon::SetState(int state)
 
 	case SIMON_STATE_SIT:
 		vx = 0;
-		vy = 0;
+		//vy = 0;
 		break;
 
 	case SIMON_STATE_IDLE:
+	case SIMON_STATE_IDLE_UP:
+	case SIMON_STATE_IDLE_DOWN:
 		vx = 0;		
 		//vy = 0;
 		break;
@@ -630,30 +633,21 @@ void Simon::SetState(int state)
 }
 
 
-//void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
-//{
-//	float x1 = x;
-//	float y1 = y;
-//
-//	/*if (nx > 0)
-//		x1 = x + 20;
-//	else
-//		x1 = x - 40;*/
-//
-//	left = x1;
-//	top = y1;
-//	right = x1 + SIMON_WIDTH;
-//	bottom = y1 + SIMON_HEIGHT_STAND;
-//	if (state == SIMON_STATE_DIE)
-//	{
-//		right = x1 + SIMON_WIDTH_DIE;
-//		bottom = y1 + SIMON_HEIGHT_DIE;
-//	}
-//	else if ( state == SIMON_STATE_SIT_ATTACK
-//		|| (state == SIMON_STATE_SIT)
-//		|| (start_jump > 0 && GetTickCount() - start_jump <= SIMON_TIME_STATE_JUMP))
-//	{
-//		bottom = y1 + SIMON_HEIGHT_SIT;
-//	}
-//
-//}
+void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+{
+	height = SIMON_HEIGHT_STAND;
+	width = SIMON_WIDTH;
+	if (state == SIMON_STATE_DIE)
+	{
+		width = SIMON_WIDTH_DIE;
+		height = SIMON_HEIGHT_DIE;
+	}
+	else if ( state == SIMON_STATE_SIT_ATTACK
+		|| (state == SIMON_STATE_SIT)
+		|| (start_jump > 0 && GetTickCount() - start_jump <= SIMON_TIME_STATE_JUMP))
+	{
+		height = SIMON_HEIGHT_SIT;
+	}
+
+	CGameObject::GetBoundingBox(left, top, right, bottom);
+}

@@ -61,8 +61,8 @@
 #define SIMON_STRANS_TIME 400
 #define SIMON_TIME_PER_STEP 200
 #define SIMON_STRANS_TIME 400
-#define SIMON_TIME_STATE_JUMP 700
-#define SIMON_TIME_START_JUMP 1000
+#define SIMON_TIME_STATE_JUMP 400
+#define SIMON_TIME_START_JUMP SIMON_TIME_STATE_JUMP
 
 
 class CGame;
@@ -99,9 +99,6 @@ protected:
 	int last_attack = 0;
 	int last_jump = 0;
 
-	// weapon 
-	//VampireKiller* vampireKiller;
-
 public:
 	bool isOnStair;
 	int StairTrend;
@@ -137,7 +134,7 @@ public:
 
 	void SetState(int state);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
-	//void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 	int GetEnergy()
 	{
