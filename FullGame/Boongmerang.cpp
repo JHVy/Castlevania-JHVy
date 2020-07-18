@@ -106,9 +106,7 @@ void Boongmerang::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 			if (dynamic_cast<Enemy*>(listObj.at(i)))
 			{
 				Enemy* enemy = dynamic_cast<Enemy*>(listObj.at(i));
-				//if (enemy->GetState() == TORCH_STATE_EXSIST ||
-				//	((enemy->GetState() == BOSS_STATE_ATTACK || enemy->GetState() == BOSS_STATE_FLY) && enemy->GetType() == eType::BOSS))
-				if (enemy->GetState() == TORCH_STATE_EXSIST)
+				if (enemy->GetState() == CANDLE_STATE_EXSIST)
 				{
 
 					enemy->GetBoundingBox(l1, t1, r1, b1);
@@ -131,12 +129,6 @@ void Boongmerang::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 							Simon* simon = Simon::GetInstance();
 							if (enemy->GetType() == eType::GHOST)
 								simon->SetScore(100);
-							else if (enemy->GetType() == eType::PANTHER)
-								simon->SetScore(300);
-							else if (enemy->GetType() == eType::BAT)
-								simon->SetScore(200);
-							else if (enemy->GetType() == eType::FISHMEN)
-								simon->SetScore(300);
 
 							if (enemy->GetEnergy() <= 0)
 							{
@@ -147,7 +139,7 @@ void Boongmerang::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 								}
 								else
 								{
-									enemy->SetState(TORCH_STATE_NOT_EXSIST);
+									enemy->SetState(CANDLE_STATE_NOT_EXSIST);
 								}
 							}
 						}
