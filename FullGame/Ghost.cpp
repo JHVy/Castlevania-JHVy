@@ -44,7 +44,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		
 			float s_x, s_y;
 			Simon::GetInstance()->GetPosition(s_x, s_y);
-			state = CANDLE_STATE_EXSIST;
+			state = CANDLE_STATE_EXSIST;	
 			x = start_x;
 			y = start_y;
 			if (x > s_x)
@@ -168,6 +168,7 @@ void Ghost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (GetTickCount() - dt_die > TIME_ENEMY_DIE) // cho 150 mili second
 			{
 				item->Update(dt, coObjects);
+				item->GetPosition(x,y);
 				state = CANDLE_STATE_ITEM;
 				if (item->GetState() == ITEM_STATE_NOT_EXSIST)
 				{

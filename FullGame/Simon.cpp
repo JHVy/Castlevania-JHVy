@@ -270,7 +270,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 {
 	if (!coObjects->empty()) 
 	{
-		Torch* torch;
+		Torch* torch	;
 		CHidenObject* hidenObj;
 		Brick* brick;
 		Candle* candle;
@@ -391,7 +391,19 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						Sound::GetInstance()->Play(eSound::soundHurting);
 						this->Hurt();
 					}
-					break;
+					////else
+					//if (obj->GetState() == CANDLE_STATE_ITEM)
+					//{
+					//	if (enemy->getItemType() == eType::SMALLHEART)
+					//	{
+					//		Sound::GetInstance()->Play(eSound::soundCollectItem);
+					//		this->_heart++;
+
+					//	}
+					//	enemy->invisibleItem();
+					//	enemy->SetState(TORCH_STATE_NOT_EXSIST);
+					//}
+					//break;
 
 				// Va cham cua qua man khac
 				case eType::OBJECT_HIDDEN_DOOR:

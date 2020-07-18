@@ -68,7 +68,8 @@ void Grid::Insert(int id, int grid_x, int grid_y, int type, int trend, float x, 
 
 	obj->SetTrend(trend);
 	obj->SetID(id);
-	
+	DebugOut(L"[XXXX] CreateDevice failed %d, %d,%d" ,obj->GetID(), grid_x, grid_y);
+	if(obj->GetID() < 4)
 	cells[grid_x][grid_y].push_back(obj);
 }
 
