@@ -38,6 +38,8 @@ protected:
 
 	float screen_size_x, screen_size_y;
 	vector<LPGAMEOBJECT> items;
+	vector<LPGAMEOBJECT> enemys;
+
 
 	
 public:

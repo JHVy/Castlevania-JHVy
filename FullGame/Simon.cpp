@@ -449,6 +449,10 @@ void Simon::CheckCollisionWithStair(int keyPress)
 			}
 			else if(keyPress == DIK_DOWN)
 			{
+				if (IsJumping() && obj->GetType() == eType::STAIR_UP && this->IsCollisedWith(obj))
+					DebugOut(L"[Draw] Jump and colli");
+					return;
+
 				// Vao thang
 				if (!isOnStair && obj->GetType() == eType::STAIR_DOWN && this->IsCollisedWith(obj))
 				{

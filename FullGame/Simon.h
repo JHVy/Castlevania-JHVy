@@ -123,6 +123,11 @@ public:
 		return false;
 	}
 
+	bool IsJumping() {
+		if (this->state == SIMON_STATE_JUMP)
+			return true;
+		return false;
+	}
 	void HackSimon();
 	bool IsDie();
 	void CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects);
