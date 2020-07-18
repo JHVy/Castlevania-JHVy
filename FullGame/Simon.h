@@ -99,9 +99,6 @@ protected:
 	int last_attack = 0;
 	int last_jump = 0;
 
-	// weapon 
-	//VampireKiller* vampireKiller;
-
 public:
 	bool isOnStair;
 	int StairTrend;
@@ -132,7 +129,7 @@ public:
 
 	void SetState(int state);
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount(); }
-	//void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
 	int GetEnergy()
 	{
