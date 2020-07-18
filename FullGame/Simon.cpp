@@ -52,16 +52,12 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		this->ResetLevel(GameConfig::GetInstance()->CurrentLevel);
 	}
 
-	/*if (this->state == SIMON_STATE_SIT)
-		height = SIMON_HEIGHT_SIT;
-	else
-		height = SIMON_HEIGHT_STAND;*/
-
 	// Calculate dx, dy 
 	CGameObject::Update(dt);
 
 	// Simple fall down
 	vy += SIMON_GRAVITY * dt;
+
 	if (isOnStair)
 		vy = 0;
 
@@ -161,6 +157,14 @@ void Simon::Render()
 	if (state == SIMON_STATE_DIE)
 	{
 		id = SIMON_ANI_DIE;
+	}
+	else if (state == SIMON_STATE_IDLE_DOWN)
+	{
+		id = SIMON_ANI_IDLE_DOWN;
+	}
+	else if (state == SIMON_STATE_IDLE_UP)
+	{
+		id = SIMON_ANI_IDLE_UP;
 	}
 	else if (state == SIMON_STATE_IDLE_DOWN)
 	{
@@ -592,6 +596,8 @@ void Simon::SetState(int state)
 		break;
 
 	case SIMON_STATE_IDLE:
+	case SIMON_STATE_IDLE_UP:
+	case SIMON_STATE_IDLE_DOWN:
 		vx = 0;		
 		//vy = 0;
 		break;
