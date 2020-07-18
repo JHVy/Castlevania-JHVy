@@ -69,7 +69,7 @@ void Grid::Insert(int id, int grid_x, int grid_y, int type, int trend, float x, 
 	obj->SetTrend(trend);
 	obj->SetID(id);
 	
-	cells[grid_x][grid_y].push_back(obj);
+	cells[grid_y][grid_x].push_back(obj);
 }
 
 
