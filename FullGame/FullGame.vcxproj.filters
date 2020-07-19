@@ -139,6 +139,12 @@
       <Filter>GameObject\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="MiniGhost.cpp" />
+    <ClCompile Include="BlackKnight.cpp" />
+    <ClCompile Include="Bat.cpp" />
+    <ClCompile Include="WhiteSkeleton.cpp" />
+    <ClCompile Include="Fleaman.cpp" />
+    <ClCompile Include="Raven.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -275,6 +281,12 @@
       <Filter>GameObject\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="MiniGhost.h" />
+    <ClInclude Include="BlackKnight.h" />
+    <ClInclude Include="Bat.h" />
+    <ClInclude Include="WhiteSkeleton.h" />
+    <ClInclude Include="Fleaman.h" />
+    <ClInclude Include="Raven.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
