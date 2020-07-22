@@ -31,9 +31,9 @@
   <sprite id="11001" left="45" top="246" right="72" bottom="310"/>
   <sprite id="11002" left="87" top="262" right="103" bottom="294"/>
   <sprite id="11003" left="103" top="262" right="119" bottom="294"/>
-  <sprite id="12000" left="40" top="353" right="160" bottom="423"/>
-  <sprite id="12001" left="198" top="353" right="320" bottom="423"/>
-  <sprite id="12002" left="362" top="353" right="465" bottom="423"/>
+  <sprite id="12000" left="25" top="353" right="160" bottom="423"/>
+  <sprite id="12001" left="186" top="353" right="320" bottom="423"/>
+  <sprite id="12002" left="350" top="353" right="465" bottom="423"/>
   <sprite id="12010" left="25" top="423" right="160" bottom="490"/>
   <sprite id="12011" left="186" top="423" right="320" bottom="490"/>
   <sprite id="12012" left="346" top="423" right="465" bottom="490"/>
