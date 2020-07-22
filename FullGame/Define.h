@@ -144,6 +144,7 @@ enum eType
 
 
 	// id load
+	ID_BRICKMOVING = 300,
 	ID_BRICK = 200,
 	ID_TORCH = 201,
 	ID_CANDLE = 205,

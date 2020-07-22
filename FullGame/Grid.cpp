@@ -6,6 +6,7 @@
 #include "ItemUpgrade.h"
 #include "ItemDagger.h"
 #include "Brick.h"
+#include "BrickMoving.h"
 #include "Dagger.h"
 #include "HidenObject.h"
 #include "Ghost.h"
@@ -85,6 +86,9 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 	{
 	case eType::ID_BRICK:
 		return new Brick(x, y, id_item, type, w, h);
+
+	case eType::ID_BRICKMOVING:
+		return new BrickMoving(x, y, id_item, type, w, h);
 
 	case eType::ID_TORCH:
 		return new Torch(x, y, id_item);

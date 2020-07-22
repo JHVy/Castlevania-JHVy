@@ -131,6 +131,7 @@
     <ClCompile Include="BlackKnight.cpp" />
     <ClCompile Include="Boongmerang.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="BrickMoving.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastkeKeyEventHandler.cpp" />
     <ClCompile Include="CastlevaniaScreen.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="BlackKnight.h" />
     <ClInclude Include="Boongmerang.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="BrickMoving.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CastkeKeyEventHandler.h" />
     <ClInclude Include="CastlevaniaScreen.h" />
