@@ -9,6 +9,12 @@
 #include "Dagger.h"
 #include "HidenObject.h"
 #include "Ghost.h"
+#include "Fleaman.h"
+#include "Raven.h"
+#include "MiniGhost.h"
+#include "Bat.h"
+#include "BlackKnight.h"
+#include "WhiteSkeleton.h"
 #include "CBoard.h"
 
 Grid* Grid::__instance = NULL;
@@ -92,6 +98,24 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 	case eType::GHOST: 
 		return new Ghost(x, y, id_item);
 
+	case eType::FLEAMAN:
+		return new Fleaman(x, y, id_item);
+
+	case eType::WHITESKELETON:
+		return new WhiteSkeleton(x, y, id_item);
+
+	case eType::RAVEN:
+		return new Raven(x, y, id_item);
+
+	case eType::MINIGHOST:
+		return new MiniGhost(x, y, id_item);
+
+	case eType::BAT:
+		return new Bat(x, y, id_item);
+
+	case eType::BLACKKNIGHT:
+		return new BlackKnight(x, y, id_item);
+		
 	default:
 		return NULL;
 	}

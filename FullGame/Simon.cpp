@@ -505,7 +505,7 @@ void Simon::SetState(int state)
 		y -= SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT;
 
 	// Dang jump van qua phai trai duoc
-	if (start_jump)
+	/*if (start_jump)
 	{
 		if (state == SIMON_STATE_WALKING_RIGHT)
 		{
@@ -517,7 +517,7 @@ void Simon::SetState(int state)
 			vx = -SIMON_WALKING_SPEED;
 			nx = -1;
 		}
-	}
+	}*/
 
 	if (start_jump && state != SIMON_STATE_STAND_ATTACK) 
 		return;
@@ -564,7 +564,7 @@ void Simon::SetState(int state)
 		Sound::GetInstance()->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
 
-		//this->vampireKiller->GetAnimation()->ResetFrame();
+		VampireKiller::GetInstance()->GetAnimation()->ResetFrame();
 		break;
 
 	case SIMON_STATE_SIT_ATTACK:
@@ -574,7 +574,7 @@ void Simon::SetState(int state)
 		attack_start = GetTickCount();
 		Sound::GetInstance()->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
-		//this->vampireKiller->GetAnimation()->ResetFrame();
+		VampireKiller::GetInstance()->GetAnimation()->ResetFrame();
 		break;
 
 	case SIMON_STATE_JUMP:
