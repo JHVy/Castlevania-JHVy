@@ -399,7 +399,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					//else 
 					if (obj->GetState() == CANDLE_STATE_ITEM)
 					{
-						if (enemy->getItemType() == eType::HEART)
+						/*if (enemy->getItemType() == eType::HEART)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_heart += 5;
@@ -462,7 +462,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						}
 
 						enemy->invisibleItem();
-						enemy->SetState(CANDLE_STATE_NOT_EXSIST);
+						enemy->SetState(CANDLE_STATE_NOT_EXSIST);*/
 					}
 					break;
 
