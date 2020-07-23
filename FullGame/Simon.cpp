@@ -2,7 +2,6 @@
 //#include "Game.h"
 #include "Sound.h"
 #include "GameConfig.h"
-//#include "Dagger.cpp"
 #include "Axe.h"
 #include "Dagger.h"
 #include "Boongmerang.h"
@@ -19,7 +18,8 @@ Simon* Simon::GetInstance()
 	return _instance;
 }
 
-Simon::Simon() {
+Simon::Simon() 
+{
 	weapons[eType::VAMPIREKILLER] = VampireKiller::GetInstance();
 
 	untouchable = 0;

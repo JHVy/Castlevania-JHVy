@@ -29,33 +29,33 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
 
-	if (dt_appear > 0)
-	{
-		if (start_x > cam_x + SCREEN_WIDTH + BLACKKNIGHT_DISTANCE_TOO_FAR || start_x < cam_x - BLACKKNIGHT_DISTANCE_TOO_FAR)
-			return;
+	//if (dt_appear > 0)
+	//{
+	//	if (start_x > cam_x + SCREEN_WIDTH + BLACKKNIGHT_DISTANCE_TOO_FAR || start_x < cam_x - BLACKKNIGHT_DISTANCE_TOO_FAR)
+	//		return;
 
-		if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
-		{
+	//	if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
+	//	{
 
-			float s_x, s_y;
-			Simon::GetInstance()->GetPosition(s_x, s_y);
-			state = CANDLE_STATE_EXSIST;
-			x = start_x;
-			y = start_y;
-			if (x > s_x)
-				nx = -1;
-			else
-				nx = 1;
-			vx = nx * BLACKKNIGHT_SPEED;
+	//		float s_x, s_y;
+	//		Simon::GetInstance()->GetPosition(s_x, s_y);
+	//		state = CANDLE_STATE_EXSIST;
+	//		x = start_x;
+	//		y = start_y;
+	//		if (x > s_x)
+	//			nx = -1;
+	//		else
+	//			nx = 1;
+	//		//vx = nx * BLACKKNIGHT_SPEED;
 
-			if (item)
-				item->SetState(ITEM_STATE_EXSIST);
-			dt_appear = 0;
-			dt_die = 0;
-		}
-		else
-			return;
-	}
+	//		if (item)
+	//			item->SetState(ITEM_STATE_EXSIST);
+	//		dt_appear = 0;
+	//		dt_die = 0;
+	//	}
+	//	else
+	//		return;
+	//}
 
 	if (vx == 0 && vy == 0)
 		return;
@@ -118,7 +118,6 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 						CollisionWithBrick(dt, e->obj, min_tx, min_ty, nx, ny_1);
 					}
 				}
-
 			}
 			list.clear();
 			// clean up collision events
@@ -202,7 +201,7 @@ void BlackKnight::Render()
 		}
 	}
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 void BlackKnight::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
@@ -232,13 +231,22 @@ void BlackKnight::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0,
 
 	CalcPotentialCollisions(&list, coEvents);
 
-	float min_tx, min_ty, nx = 0, ny;
+	float min_tx, min_ty, _nx = 0, ny;
 
-	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, _nx, ny);
 
 	//// block 
 	if (min_tx <= min_tx0)
-		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
+		x += min_tx * dx + _nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
+	/*DebugOut(L"[BlackKnight::CollisionWithBrick nx] %f\n", this->nx);
+	DebugOut(L"[BlackKnight::CollisionWithBrick vx] %f\n", vx);
+	DebugOut(L"[BlackKnight::CollisionWithBrick min_tx] %f\n", min_tx);*/
+
+	if (_nx != 0)
+	{
+		this->vx *= -1;
+	}
+
 	if (min_ty <= min_ty0)
 		y += min_ty * dy + ny * 0.4f;
 	
