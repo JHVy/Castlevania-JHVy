@@ -400,6 +400,12 @@
     <sprite id="40000"/>
     <sprite id="40000"/>
   </Animation>
+	
+	<!-- moving platform-->
+	<Animation animationID="1300" frameTime="100">
+		<sprite id="80001" />
+	</Animation>	
+	
 
 </Texture>
 
