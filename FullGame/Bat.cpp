@@ -2,40 +2,39 @@
 
 #include "CastlevaniaScreen.h"
 
-
-bool Bat::isStart = true;
-
-Bat::Bat(float _x, float _y, int id) :Enemy(_x, _y, id)
+Bat::Bat(float _x, float _y, int id):Enemy(_x, _y, id)
 {
 	this->_type = eType::BAT;
 	animations.clear();
 	AddAnimation(1002);
 	AddAnimation(800);
-	vx = -0.07f;
-	vy = 0.04f;
-	nx = -1;
-	ny = 1;
+	nx = 1;
+	ny = 1; 
+	vx = nx * BAT_SPEED_X;
+	vy = ny * BAT_SPEED_Y;
 	Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
 	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 	topLimit -= SIMON_HEIGHT_STAND;
+	isStart = false;
 }
+
 void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (!Bat::IsStart())
+	if (!this->IsStart())
 		return;
 	float c_x, c_y;
 	CGame::GetInstance()->GetCamera(c_x, c_y);
 	
 	if (dt_die == 0)
 	{
-		if (state == TORCH_STATE_NOT_EXSIST) {
+		if (state == TORCH_STATE_NOT_EXSIST) 
+		{
 			dt_die = GetTickCount();
 			if (item)
 				item->SetPosition(x, y);
 		}
 		else
 		{
-
 			Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
 			bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 			topLimit -= SIMON_HEIGHT_STAND;
@@ -44,6 +43,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				vx = -vx;
 				nx = -nx;
 			}
+
 			if ((y <= topLimit && ny < 0) || (y >= bottomLimit && ny > 0))
 			{
 				vy = -vy;
@@ -52,7 +52,6 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			CGameObject::Update(dt);
 			x += dx;
 			y += dy;
-
 		}
 	}
 	else
@@ -68,11 +67,20 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 }
+
+bool Bat::IsStart()
+{ 
+	if (this->DistanceTo(Simon::GetInstance()) <= 200)
+		isStart = true;
+
+	return isStart; 
+}
+
 void Bat::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 
-	if (!Bat::IsStart())
-		return;
+	//if (!Bat::IsStart())
+		//return;
 	if (state == TORCH_STATE_EXSIST)
 	{
 		left = x;
@@ -87,8 +95,8 @@ void Bat::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 }
 void Bat::Render()
 {
-	if (!Bat::IsStart())
-		return;
+	/*if (!Bat::IsStart())
+		return;*/
 	if (state == TORCH_STATE_EXSIST)
 	{
 		animations[0]->Render(x, y, nx, 255);
@@ -107,5 +115,5 @@ void Bat::Render()
 		}
 	}
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }

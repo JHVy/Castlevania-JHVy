@@ -10,6 +10,6 @@ Brick::Brick(float _x, float _y, int id , int type, float width, float height) :
 
 void Brick::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }
 

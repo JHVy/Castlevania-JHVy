@@ -15,7 +15,7 @@ MiniGhost::MiniGhost(float _x, float _y, int id) :Enemy(_x, _y, id)
 	AddAnimation(1006);
 	AddAnimation(800);
 	AddAnimation(802);
-	nx = 1;
+	nx = -1;
 	SetSpeed(GetTrend() * MINIGHOST_SPEED, 0);
 	dt_appear = 0;
 	if (x > 4000)

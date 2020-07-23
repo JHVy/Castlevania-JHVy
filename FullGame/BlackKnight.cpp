@@ -53,7 +53,12 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			vector<LPGAMEOBJECT> list;
 			for (int i = 0; i < coObjects->size(); i++)
 			{
-				if (dynamic_cast<Brick*>(coObjects->at(i)))
+				LPGAMEOBJECT pObj = coObjects->at(i);
+				if (dynamic_cast<Brick*>(pObj))
+				{
+					list.push_back(coObjects->at(i));
+				} 
+				else if (dynamic_cast<CHidenObject*>(pObj))
 				{
 					list.push_back(coObjects->at(i));
 				}
@@ -85,7 +90,11 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				for (UINT i = 0; i < coEventsResult.size(); i++)
 				{
 					LPCOLLISIONEVENT e = coEventsResult[i];
-					if (dynamic_cast<Brick*>(e->obj))
+					if(dynamic_cast<Brick*>(e->obj))
+					{
+						CollisionWithBrick(dt, e->obj, min_tx, min_ty, nx, ny_1);
+					}
+					else if (dynamic_cast<CHidenObject*>(e->obj))
 					{
 						CollisionWithBrick(dt, e->obj, min_tx, min_ty, nx, ny_1);
 					}

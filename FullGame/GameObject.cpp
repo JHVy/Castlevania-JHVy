@@ -44,6 +44,19 @@ bool CGameObject::IsCollisedWith(LPGAMEOBJECT objPointer)
 	return CGame::GetInstance()->isCollision(rectThis, rect1);
 }
 
+
+float CGameObject::DistanceTo(LPGAMEOBJECT objPointer)
+{
+
+	float d = -1.0f;
+	float x_diff = this->x - objPointer->x,
+			y_diff = this->y - objPointer->y;
+
+	return d = sqrt(x_diff * x_diff + y_diff * y_diff);
+
+	return d;
+}
+
 void CGameObject::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x;
@@ -106,7 +119,8 @@ void CGameObject::CalcPotentialCollisions(
 {
 	for (UINT i = 0; i < coObjects->size(); i++)
 	{
-		if (coObjects->at(i)->GetType() != eType::BRICK_2)
+		if (coObjects->at(i)->GetType() != eType::BRICK_2
+			&& coObjects->at(i)->GetType() != eType::OBJECT_HIDDEN_BLACKKNIGHT)
 			continue;	// skip check NOT BRICK
 
 		LPCOLLISIONEVENT e = SweptAABBEx(coObjects->at(i));

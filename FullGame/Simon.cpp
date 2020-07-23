@@ -384,6 +384,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					break;
 
 				case eType::GHOST:
+				case eType::MINIGHOST:
 				case eType::BLACKKNIGHT:
 				case eType::RAVEN:
 				case eType::FLEAMAN:

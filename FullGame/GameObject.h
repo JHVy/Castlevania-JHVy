@@ -110,6 +110,7 @@ public:
 	void AddAnimation(int aniId);
 
 	bool IsCollisedWith(LPGAMEOBJECT objPointer);
+	float DistanceTo(LPGAMEOBJECT objPointer);
 	int GetID() { return id; }
 	void SetID(int id) { this->id = id; }
 
