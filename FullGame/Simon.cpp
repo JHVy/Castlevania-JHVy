@@ -396,6 +396,74 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						Sound::GetInstance()->Play(eSound::soundHurting);
 						this->Hurt();
 					}
+					//else 
+					if (obj->GetState() == CANDLE_STATE_ITEM)
+					{
+						if (enemy->getItemType() == eType::HEART)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_heart += 5;
+						}
+						else if (enemy->getItemType() == eType::SMALLHEART)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_heart++;
+						}
+						else if (enemy->getItemType() == eType::MONEY_1)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_score += 100;
+						}
+						else if (enemy->getItemType() == eType::MONEY_2)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_score += 400;
+						}
+						else if (enemy->getItemType() == eType::MONEY_3)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_score += 700;
+						}
+						else if (enemy->getItemType() == eType::MONEY_4)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							this->_score += 1000;
+						}
+						else if (enemy->getItemType() == eType::ITEMBOONGMERANG)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+							CBoard::GetInstance()->SetWeapon(eType::BOONGMERANG);
+						}
+						else if (enemy->getItemType() == eType::ITEMAXE)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectWeapon);
+							CBoard::GetInstance()->SetWeapon(eType::AXE);
+						}
+						else if (enemy->getItemType() == eType::GATE)
+						{
+							Sound::GetInstance()->Play(eSound::soundOpenDoor);
+						}
+						else if (enemy->getItemType() == eType::ITEMHOLLYWATTER)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+							CBoard::GetInstance()->SetWeapon(eType::HOLLYWATTER);
+						}
+						else if (enemy->getItemType() == eType::ITEMVASE)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
+						else if (enemy->getItemType() == eType::ITEMII)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
+						else if (enemy->getItemType() == eType::ITEMIII)
+						{
+							Sound::GetInstance()->Play(eSound::soundCollectItem);
+						}
+
+						enemy->invisibleItem();
+						enemy->SetState(CANDLE_STATE_NOT_EXSIST);
+					}
 					break;
 
 				// Va cham cua qua man khac
