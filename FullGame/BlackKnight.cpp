@@ -29,34 +29,6 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
 
-	//if (dt_appear > 0)
-	//{
-	//	if (start_x > cam_x + SCREEN_WIDTH + BLACKKNIGHT_DISTANCE_TOO_FAR || start_x < cam_x - BLACKKNIGHT_DISTANCE_TOO_FAR)
-	//		return;
-
-	//	if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
-	//	{
-
-	//		float s_x, s_y;
-	//		Simon::GetInstance()->GetPosition(s_x, s_y);
-	//		state = CANDLE_STATE_EXSIST;
-	//		x = start_x;
-	//		y = start_y;
-	//		if (x > s_x)
-	//			nx = -1;
-	//		else
-	//			nx = 1;
-	//		//vx = nx * BLACKKNIGHT_SPEED;
-
-	//		if (item)
-	//			item->SetState(ITEM_STATE_EXSIST);
-	//		dt_appear = 0;
-	//		dt_die = 0;
-	//	}
-	//	else
-	//		return;
-	//}
-
 	if (vx == 0 && vy == 0)
 		return;
 
@@ -201,7 +173,7 @@ void BlackKnight::Render()
 		}
 	}
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 void BlackKnight::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
@@ -245,6 +217,7 @@ void BlackKnight::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0,
 	if (_nx != 0)
 	{
 		this->vx *= -1;
+		this->nx *= -1;
 	}
 
 	if (min_ty <= min_ty0)

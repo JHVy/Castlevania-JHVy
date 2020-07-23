@@ -384,7 +384,12 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					break;
 
 				case eType::GHOST:
-					enemy = (Ghost*)obj;
+				case eType::BLACKKNIGHT:
+				case eType::RAVEN:
+				case eType::FLEAMAN:
+				case eType::WHITESKELETON:
+				case eType::BAT:
+					enemy = (Enemy*)obj;
 					if (obj->GetState() == CANDLE_STATE_EXSIST)		// Va cham GHOST
 					{
 						Sound::GetInstance()->Play(eSound::soundHurting);
