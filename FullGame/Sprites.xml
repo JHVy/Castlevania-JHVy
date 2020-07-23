@@ -14,7 +14,7 @@
   <sprite id="10013" left="1079" top="3" right="1139" bottom="65" />
   <sprite id="10016" left="660" top="131" right="720" bottom="180"/>
   <sprite id="10014" left="720" top="131" right="780" bottom="180" />
-  <sprite id="10015" left="780" top="131" right="840" bottom="197" />
+  <sprite id="10015" left="1092" top="67" right="1140" bottom="113" />
   <sprite id="10100" left="915" top="65" right="950" bottom="131"/>
   <sprite id="10101" left="975" top="65" right="1010" bottom="131"/>
   <sprite id="10102" left="787" top="65" right="826" bottom="131"/>
@@ -131,6 +131,7 @@
   <sprite id="60012" left="277" top="77" right="289" bottom="96"/>
   <sprite id="60013" left="300" top="77" right="311" bottom="96"/>
   <sprite id="70001" left="19" top="1238" right="537" bottom="1686"/>
+  <sprite id="80001" left="288" top="274" right="348" bottom="288"/>
 </Texture>
 
 

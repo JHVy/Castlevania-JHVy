@@ -7,6 +7,8 @@
 BrickMoving::BrickMoving(float _x, float _y, int id, int type, float width, float height)
 	:Brick(_x, _y, id, type, width, height) 
 {
+	animations.clear();
+	AddAnimation(1300);
 	vx = BRICKMOVING_SPEED;
 }
 
@@ -39,6 +41,7 @@ void BrickMoving::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void BrickMoving::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
+	animations[0]->Render(x, y, nx, 255);
 }
 
