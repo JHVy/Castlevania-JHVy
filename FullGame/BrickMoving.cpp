@@ -1,5 +1,6 @@
 #include "BrickMoving.h"
 #include "Utils.h"
+#include "Simon.h"
 #define BRICKMOVING_SPEED		0.05f
 
 
@@ -24,7 +25,16 @@ void BrickMoving::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 	//DebugOut(L"[BrickMoving] %f\n", vx);
-	x += dt * vx;
+	dx = dt * vx;
+	x += dx;
+
+	// Update Simon
+	Simon* simon = Simon::GetInstance();
+	float simon_y = simon->y;
+	simon->y += this->height;	//tam thoi tang y cua Simon len -> dich chuyen Simon thap xuong mot chut de check va cham
+	if (simon->IsCollisedWith(this))
+		simon->x += dx;
+	simon->y = simon_y;	// tra ve vi tri y ban dau cua Simon
 }
 
 void BrickMoving::Render()
