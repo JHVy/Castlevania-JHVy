@@ -13,25 +13,19 @@ BlackKnight::BlackKnight(float _x, float _y, int id) :Enemy(_x, _y, id)
 	AddAnimation(1003);
 	AddAnimation(800);
 	AddAnimation(802);
-	nx = 1;
+	nx = -1;
 	SetSpeed(GetTrend() * BLACKKNIGHT_SPEED, 0);
 	dt_appear = 0;
-	if (x > 4000)
-	{
-		_leftLimit = SCENCE_4_LEFT;
-		_rightLimit = SCENCE_4_RIGHT - SCREEN_WIDTH * 3 / 2;
-	}
-	else
-	{
-		_leftLimit = SCENCE_1_LEFT;
-		_rightLimit = SCENCE_1_RIGHT - BLACKKNIGHT_BBOX_WIDTH;
-	}
+	_leftLimit = x - BLACKKNIGHT_DISTANCE_MOVING;
+	_rightLimit = x;
 	Start();
 }
+
 void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (!BlackKnight::IsStart())
 		return;
+
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
 
@@ -39,6 +33,7 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (start_x > cam_x + SCREEN_WIDTH + BLACKKNIGHT_DISTANCE_TOO_FAR || start_x < cam_x - BLACKKNIGHT_DISTANCE_TOO_FAR)
 			return;
+
 		if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
 		{
 
@@ -64,6 +59,7 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (vx == 0 && vy == 0)
 		return;
+
 	if (dt_die == 0)
 	{
 		if (state == CANDLE_STATE_EXSIST)
@@ -81,23 +77,17 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				state = CANDLE_STATE_ITEM_NOT_EXSIST;
 				dt_appear = GetTickCount();
 			}
+
 			vector<LPGAMEOBJECT> list;
 			for (int i = 0; i < coObjects->size(); i++)
 			{
-
 				if (dynamic_cast<Brick*>(coObjects->at(i)))
 				{
 					list.push_back(coObjects->at(i));
 				}
-				else if (dynamic_cast<CHidenObject*>(coObjects->at(i)))
-				{
-					if (coObjects->at(i)->GetState() == eType::OBJECT_HIDDEN_BLACKKNIGHT)
-						list.push_back(coObjects->at(i));
-				}
 			}
 
 			vy += SIMON_GRAVITY * dt;
-
 			CGameObject::Update(dt);
 
 			// Simple fall down
@@ -114,7 +104,8 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				x += dx;
 				y += dy;
 			}
-			else {
+			else 
+			{
 				float min_tx, min_ty, nx = 0, ny_1;
 
 				FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny_1);
@@ -126,17 +117,14 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					{
 						CollisionWithBrick(dt, e->obj, min_tx, min_ty, nx, ny_1);
 					}
-					if (dynamic_cast<CHidenObject*>(e->obj))
-					{
-						CollisionWithHiden(dt, e->obj, min_tx, min_ty, nx, ny_1);
-					}
-
 				}
 
 			}
 			list.clear();
 			// clean up collision events
 			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
+
 
 			//update item
 			if (item != NULL)
@@ -253,6 +241,7 @@ void BlackKnight::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0,
 		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
 	if (min_ty <= min_ty0)
 		y += min_ty * dy + ny * 0.4f;
+	
 	if (ny != 0) vy = 0;
 	if (vx == 0)
 		vx = -BLACKKNIGHT_SPEED;

@@ -3,7 +3,7 @@
 #include "CastlevaniaScreen.h"
 
 
-bool Bat::isStart = false;
+bool Bat::isStart = true;
 
 Bat::Bat(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
