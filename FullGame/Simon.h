@@ -63,7 +63,7 @@
 #define SIMON_STRANS_TIME 400
 #define SIMON_TIME_STATE_JUMP 400
 #define SIMON_TIME_START_JUMP SIMON_TIME_STATE_JUMP
-
+#define SIMON_UNTOUCHABLE_TIME 5000
 
 class CGame;
 class Simon;
@@ -164,7 +164,11 @@ public:
 	void ThrowWeapon() { _heart--; }
 	void Hurt() {
 		_energy -= 2; 
-		y = 5 * SCREEN_HEIGHT;	//force die
+
+		if (_energy <= 0)
+		{
+			y = 5 * SCREEN_HEIGHT;	//force die
+		}
 	}
 
 	Weapon* GetCurrentWeapon();

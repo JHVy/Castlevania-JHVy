@@ -1,4 +1,4 @@
-#include "Simon.h"
+﻿#include "Simon.h"
 //#include "Game.h"
 #include "Sound.h"
 #include "GameConfig.h"
@@ -133,6 +133,15 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		return;
 	}
+
+	// simon invi because too hurt
+	if (GetTickCount() - untouchable_start > SIMON_UNTOUCHABLE_TIME)
+	{
+		untouchable_start = 0;
+		untouchable = 0;
+	}
+
+
 }
 
 void Simon::ResetLevel(int level) 
@@ -242,6 +251,8 @@ void Simon::Render()
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
 	int x1 = x, y1 = y;
+
+	if (untouchable) alpha = 128;
 
 	ani->Render(x1, y1, nx, alpha);
 	//RenderBoundingBox();
@@ -391,10 +402,14 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				case eType::WHITESKELETON:
 				case eType::BAT:
 					enemy = (Enemy*)obj;
-					if (obj->GetState() == CANDLE_STATE_EXSIST)		// Va cham GHOST
+					if (obj->GetState() == CANDLE_STATE_EXSIST)		// Va cham GHOST -- khuc nay va cham với enemy 
 					{
-						Sound::GetInstance()->Play(eSound::soundHurting);
-						this->Hurt();
+						if (!untouchable)
+						{
+							this->StartUntouchable();
+							Sound::GetInstance()->Play(eSound::soundHurting);
+							this->Hurt();
+						}
 					}
 					//else 
 					if (obj->GetState() == CANDLE_STATE_ITEM)
