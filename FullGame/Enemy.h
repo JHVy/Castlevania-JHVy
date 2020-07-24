@@ -35,4 +35,5 @@ public:
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) = 0;
 	virtual void Reset() {}
 	virtual void Dead() { state = CANDLE_STATE_NOT_EXSIST; }
+	virtual bool Idle() { return false; }
 };

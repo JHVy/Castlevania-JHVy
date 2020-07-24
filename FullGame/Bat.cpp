@@ -6,7 +6,7 @@ Bat::Bat(float _x, float _y, int id):Enemy(_x, _y, id)
 {
 	this->_type = eType::BAT;
 	animations.clear();
-	AddAnimation(1002);
+	AddAnimation(1001);
 	AddAnimation(800);
 	nx = 1;
 	ny = 1; 
@@ -72,7 +72,11 @@ bool Bat::IsStart()
 { 
 	if (this->DistanceTo(Simon::GetInstance()) <= 200)
 		isStart = true;
-
+	if (isStart)
+	{
+		animations.clear();
+		AddAnimation(1002);
+	}
 	return isStart; 
 }
 
@@ -115,5 +119,5 @@ void Bat::Render()
 		}
 	}
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }

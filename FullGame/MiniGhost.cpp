@@ -28,7 +28,7 @@ MiniGhost::MiniGhost(float _x, float _y, int id) :Enemy(_x, _y, id)
 		_leftLimit = SCENCE_1_LEFT;
 		_rightLimit = SCENCE_1_RIGHT - MINIGHOST_BBOX_WIDTH;
 	}
-	Start();
+	//Start();
 }
 void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -218,6 +218,20 @@ void MiniGhost::Render()
 
 	//RenderBoundingBox();
 }
+
+bool MiniGhost::IsStart()
+{
+	//isStart = false;
+	float x, y;
+	Simon::GetInstance()->GetPosition(x, y);
+
+
+	if (x < 1100)
+		Start();
+	
+	return isStart;
+}
+
 void MiniGhost::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 
