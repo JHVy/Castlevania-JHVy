@@ -47,10 +47,12 @@ bool CGameObject::IsCollisedWith(LPGAMEOBJECT objPointer)
 
 float CGameObject::DistanceTo(LPGAMEOBJECT objPointer)
 {
-
 	float d = -1.0f;
-	float x_diff = this->x - objPointer->x,
-			y_diff = this->y - objPointer->y;
+
+	int x1 = this->x + this->width / 2, x2 = objPointer->x + objPointer->width / 2,
+		y1 = this->y + this->height / 2, y2 = objPointer->y + objPointer->height / 2;
+	float x_diff = x1 - x2,
+			y_diff = y1 - y2;
 
 	return d = sqrt(x_diff * x_diff + y_diff * y_diff);
 

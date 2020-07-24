@@ -14,21 +14,51 @@ BrickMoving::BrickMoving(float _x, float _y, int id, int type, float width, floa
 
 void BrickMoving::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	Brick::Update(dt, coObjects);
-	//DebugOut(L"[BrickMoving Update] %f\n", vx);
+	if (this->DistanceTo(Simon::GetInstance()) >= 2*CAM_PADDING)
+		return;
+
+	vector<LPGAMEOBJECT> list;
 	for (int i = 0; i < coObjects->size(); i++)
 	{
 		LPGAMEOBJECT pObj = coObjects->at(i);
-		if (dynamic_cast<Brick*>(pObj) && this->IsCollisedWith(pObj) && !dynamic_cast<BrickMoving*>(pObj))  //cham gach -> quay nguoc lai
+		if (dynamic_cast<Brick*>(pObj) && !dynamic_cast<BrickMoving*>(pObj))
 		{
-			vx = -vx;
-			break;
+			list.push_back(coObjects->at(i));
 		}
 	}
 
-	//DebugOut(L"[BrickMoving] %f\n", vx);
-	dx = dt * vx;
-	x += dx;
+	Brick::Update(dt);
+
+	vector<LPCOLLISIONEVENT> coEvents;
+	vector<LPCOLLISIONEVENT> coEventsResult;
+	coEvents.clear();
+
+	CalcPotentialCollisions(&list, coEvents);
+
+	if (coEvents.size() == 0)
+	{
+		x += dx;
+		y += dy;
+	}
+	else
+	{
+		float min_tx, min_ty, nx = 0, ny_1;
+
+		FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny_1);
+		
+		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
+
+		if (nx != 0)
+		{
+			this->vx *= -1;
+		}
+		
+	}
+	list.clear();
+	// clean up collision events
+	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+
+
 
 	// Update Simon
 	Simon* simon = Simon::GetInstance();

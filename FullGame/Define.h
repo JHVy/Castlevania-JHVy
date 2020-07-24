@@ -21,6 +21,8 @@ using namespace std;
 
 #define MAX_FRAME_RATE 50
 
+#define CAM_PADDING		200
+
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
 #define ID_TEX 1
 #define TIME_ENEMY_DIE 150
