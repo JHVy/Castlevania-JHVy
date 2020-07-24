@@ -23,7 +23,8 @@ public:
 	virtual void Render();
 	static void Start() { isStart = true; }
 	static void Stop() { isStart = false; }
-	static bool IsStart() { return isStart; }
+	bool IsStart(); //{ return isStart; }
+	bool Idle() { return !isStart; };
 	void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 	void CollisionWithHiden(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 

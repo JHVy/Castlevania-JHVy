@@ -409,6 +409,11 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					enemy = (Enemy*)obj;
 					if (obj->GetState() == CANDLE_STATE_EXSIST)		// Va cham GHOST -- khuc nay va cham với enemy 
 					{
+						if (enemy->Idle())
+						{
+							return;
+						}
+
 						if (!untouchable)
 						{
 							this->StartUntouchable();
