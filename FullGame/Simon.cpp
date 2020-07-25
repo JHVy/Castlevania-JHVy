@@ -598,9 +598,9 @@ void Simon::SetState(int state)
 
 	int currentTime = GetTickCount();
 
-	if (state != this->state
+	/*if (state != this->state
 		&& (this->state == SIMON_STATE_SIT || this->state == SIMON_STATE_SIT_ATTACK))
-		y -= (SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT);
+		y -= (SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT);*/
 
 	if (attack_start)
 		return;
@@ -736,6 +736,8 @@ void Simon::SetState(int state)
 
 void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	int simon_height_pre = this->height;
+
 	height = SIMON_HEIGHT_STAND;
 	width = SIMON_WIDTH;
 	if (state == SIMON_STATE_DIE)
@@ -749,6 +751,10 @@ void Simon::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 	{
 		height = SIMON_HEIGHT_SIT;
 	}
+
+	//neu dang ngoi chuyen sang dung -> giam y lai de nang simon len keo overlap voi dat de tranh roi xuong
+	if (simon_height_pre < this->height)	
+		y -= (SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT);
 
 	CGameObject::GetBoundingBox(left, top, right, bottom);
 }
