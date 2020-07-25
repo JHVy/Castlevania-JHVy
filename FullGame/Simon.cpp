@@ -75,6 +75,11 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (state != SIMON_STATE_DIE && !isOnStair)
 		CalcPotentialCollisions(coObjects, coEvents);
 
+	//Only keep check colission with Brick, else remove
+	for (UINT i = 0; i < coEvents.size(); i++) 
+		if (coEvents[i]->obj->GetType() != eType::BRICK_2)
+			coEvents.erase(coEvents.begin() + i);
+
 	// No collision occured, proceed normally
 	if (coEvents.size() == 0)
 	{
