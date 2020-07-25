@@ -50,6 +50,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			_lives--;
 
 		this->ResetLevel(GameConfig::GetInstance()->CurrentLevel);
+		return;
 	}
 
 	// Calculate dx, dy 
@@ -162,6 +163,7 @@ void Simon::ResetLevel(int level)
 
 	GameConfig::GetInstance()->GetSimonPosition(x, y);
 	vx = vy = 0;
+	_energy = 16;
 }
 
 void Simon::Render()
@@ -272,7 +274,7 @@ void Simon::HackSimon()
 
 bool Simon::IsDie()
 {
-	if (y > 4 * SCREEN_HEIGHT)
+	if (y > 4 * SCREEN_HEIGHT || _energy <= 0)
 	{
 		Sound::GetInstance()->Play(eSound::musicLifeLost);
 		return true;
@@ -421,10 +423,9 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 							this->Hurt();
 						}
 					}
-					//else 
-					if (obj->GetState() == CANDLE_STATE_ITEM)
+					else if (obj->GetState() == CANDLE_STATE_ITEM)
 					{
-						/*if (enemy->getItemType() == eType::HEART)
+						if (enemy->getItemType() == eType::HEART)
 						{
 							Sound::GetInstance()->Play(eSound::soundCollectItem);
 							this->_heart += 5;
@@ -487,7 +488,8 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 						}
 
 						enemy->invisibleItem();
-						enemy->SetState(CANDLE_STATE_NOT_EXSIST);*/
+						enemy->item->SetState(ITEM_STATE_NOT_EXSIST);
+						enemy->SetState(CANDLE_STATE_NOT_EXSIST);
 					}
 					break;
 
@@ -596,12 +598,12 @@ void Simon::SetState(int state)
 
 	int currentTime = GetTickCount();
 
-	if (attack_start)
-		return;
-
 	if (state != this->state
 		&& (this->state == SIMON_STATE_SIT || this->state == SIMON_STATE_SIT_ATTACK))
-		y -= SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT;
+		y -= (SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT);
+
+	if (attack_start)
+		return;
 
 	// Dang jump van qua phai trai duoc
 	/*if (start_jump)

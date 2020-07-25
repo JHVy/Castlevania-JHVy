@@ -42,9 +42,10 @@ class Candle : public CGameObject
 {
 protected:
 	int numAnimation = 0;
-	Item* item;
 
 public:
+	Item* item;
+
 	Candle(int _x, int _y) {
 		
 		this->_type = eType::CANDLE;

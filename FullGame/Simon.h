@@ -165,10 +165,10 @@ public:
 	void Hurt() {
 		_energy -= 2; 
 
-		if (_energy <= 0)
-		{
-			y = 5 * SCREEN_HEIGHT;	//force die
-		}
+		//if (_energy <= 0)
+		//{
+		//	y = 5 * SCREEN_HEIGHT;	//force die
+		//}
 	}
 
 	Weapon* GetCurrentWeapon();
