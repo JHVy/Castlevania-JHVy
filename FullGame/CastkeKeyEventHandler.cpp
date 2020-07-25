@@ -76,6 +76,8 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 
 	if (IsKeyDown(DIK_Z)) {
 		DebugOut(L"Z - Key Down");
+		if (simon->isOnStair)
+			return;
 
 		if (!simon->IsSitting())
 			simon->SetState(SIMON_STATE_STAND_ATTACK);
@@ -87,7 +89,7 @@ void CastkeKeyEventHandler::KeyState(BYTE* states)
 
 	if (IsKeyDown(DIK_X))
 	{
-		if(simon->IsSitting())
+		if(simon->IsSitting() || simon->isOnStair)
 			return;
 		DebugOut(L" X - Key Down");
 		simon->SetState(SIMON_STATE_JUMP);
