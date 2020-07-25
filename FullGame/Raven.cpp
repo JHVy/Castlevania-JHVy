@@ -3,10 +3,9 @@
 #include "CastlevaniaScreen.h"
 
 
-bool Raven::isStart = false;
-
 Raven::Raven(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
+	isStart = false;
 	this->_type = eType::RAVEN;
 	animations.clear();
 	AddAnimation(1009);
@@ -21,8 +20,9 @@ Raven::Raven(float _x, float _y, int id) :Enemy(_x, _y, id)
 }
 void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (!Raven::IsStart())
+	if (!this->IsStart())
 		return;
+
 	float c_x, c_y;
 	CGame::GetInstance()->GetCamera(c_x, c_y);
 
@@ -71,8 +71,8 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Raven::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 
-	if (!Raven::IsStart())
-		return;
+	/*if (!Raven::IsStart())
+		return;*/
 	if (state == TORCH_STATE_EXSIST)
 	{
 		left = x;
@@ -87,8 +87,8 @@ void Raven::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 }
 void Raven::Render()
 {
-	if (!Raven::IsStart())
-		return;
+	/*if (!Raven::IsStart())
+		return;*/
 	if (state == TORCH_STATE_EXSIST)
 	{
 		animations[0]->Render(x, y, nx, 255);

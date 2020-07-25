@@ -4,10 +4,9 @@
 #include"Torch.h"
 #include "Game.h"
 
-bool WhiteSkeleton::isStart = false;
-
 WhiteSkeleton::WhiteSkeleton(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
+	isStart = false;
 	this->_type = eType::WHITESKELETON;
 	animations.clear();
 	AddAnimation(1005);
@@ -26,12 +25,12 @@ WhiteSkeleton::WhiteSkeleton(float _x, float _y, int id) :Enemy(_x, _y, id)
 		_leftLimit = SCENCE_1_LEFT;
 		_rightLimit = SCENCE_1_RIGHT - WHITESKELETON_BBOX_WIDTH;
 	}
-	Start();
 }
 void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (!WhiteSkeleton::IsStart())
+	if (!this->IsStart())
 		return;
+
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
 
@@ -189,8 +188,8 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void WhiteSkeleton::Render()
 {
-	if (!WhiteSkeleton::IsStart())
-		return;
+	/*if (!this->IsStart())
+		return;*/
 
 	if (x == 0 && y == 0)
 		return;

@@ -13,7 +13,7 @@ class Enemy;
 
 class MiniGhost :public Enemy
 {
-	static bool isStart;
+	bool isStart;
 	float _leftLimit;
 	float _rightLimit;
 public:
@@ -21,8 +21,8 @@ public:
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();
-	static void Start() { isStart = true; }
-	static void Stop() { isStart = false; }
+	void Start() { isStart = true; }
+	void Stop() { isStart = false; }
 	bool IsStart(); //{ return isStart; }
 	bool Idle() { return !isStart; };
 	void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);

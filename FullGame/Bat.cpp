@@ -72,6 +72,7 @@ bool Bat::IsStart()
 { 
 	if (this->DistanceTo(Simon::GetInstance()) <= 200)
 		isStart = true;
+
 	if (isStart)
 	{
 		animations.clear();

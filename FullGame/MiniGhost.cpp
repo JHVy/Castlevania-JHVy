@@ -6,10 +6,9 @@
 #include"Torch.h"
 #include "Game.h"
 
-bool MiniGhost::isStart = false;
-
 MiniGhost::MiniGhost(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
+	isStart = false;
 	this->_type = eType::MINIGHOST;
 	animations.clear();
 	AddAnimation(1006);
@@ -32,7 +31,7 @@ MiniGhost::MiniGhost(float _x, float _y, int id) :Enemy(_x, _y, id)
 }
 void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (!MiniGhost::IsStart())
+	if (!this->IsStart())
 		return;
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
@@ -191,7 +190,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void MiniGhost::Render()
 {
-	if (!MiniGhost::IsStart())
+	if (!this->IsStart())
 		return;
 
 	if (x == 0 && y == 0)
@@ -224,7 +223,6 @@ bool MiniGhost::IsStart()
 	//isStart = false;
 	float x, y;
 	Simon::GetInstance()->GetPosition(x, y);
-
 
 	if (x < 1100)
 		Start();

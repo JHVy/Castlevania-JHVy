@@ -4,10 +4,9 @@
 #include"Torch.h"
 #include "Game.h"
 
-bool Fleaman::isStart = false;
-
 Fleaman::Fleaman(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
+	isStart = false;
 	this->_type = eType::FLEAMAN;
 	animations.clear();
 	AddAnimation(1007);
@@ -26,11 +25,11 @@ Fleaman::Fleaman(float _x, float _y, int id) :Enemy(_x, _y, id)
 		_leftLimit = SCENCE_1_LEFT;
 		_rightLimit = SCENCE_1_RIGHT - FLEAMAN_BBOX_WIDTH;
 	}
-	Start();
+	
 }
 void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	if (!Fleaman::IsStart())
+	if (!this->IsStart())
 		return;
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
@@ -189,8 +188,8 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void Fleaman::Render()
 {
-	if (!Fleaman::IsStart())
-		return;
+	/*if (!this->IsStart())
+		return;*/
 
 	if (x == 0 && y == 0)
 		return;
