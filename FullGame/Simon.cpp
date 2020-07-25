@@ -135,7 +135,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			weapons[eType::VAMPIREKILLER]->SetUsing(false);
 			attack_start = 0;
-			this->state = SIMON_STATE_IDLE;
+			//this->state = SIMON_STATE_IDLE;
 		}
 		return;
 	}
