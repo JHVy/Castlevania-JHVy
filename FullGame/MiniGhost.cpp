@@ -113,7 +113,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (coEvents.size() == 0)
 			{
 				x += dx;
-				y += dy;
+				//y += dy;
 			}
 			else {
 				float min_tx, min_ty, nx = 0, ny_1;
@@ -265,8 +265,8 @@ void MiniGhost::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, f
 	//// block 
 	if (min_tx <= min_tx0)
 		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
-	if (min_ty <= min_ty0)
-		y += min_ty * dy + ny * 0.4f;
+	//if (min_ty <= min_ty0)
+	//	y += min_ty * dy + ny * 0.4f;
 	if (ny != 0) vy = 0;
 	if (vx == 0)
 		vx = -MINIGHOST_SPEED;

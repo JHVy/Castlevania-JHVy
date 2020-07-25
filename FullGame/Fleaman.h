@@ -2,8 +2,8 @@
 #pragma once
 #include "Enemy.h"
 
-#define FLEAMAN_BBOX_WIDTH 40
-#define FLEAMAN_BBOX_HEIGHT 60
+#define FLEAMAN_BBOX_WIDTH 32
+#define FLEAMAN_BBOX_HEIGHT 32
 
 #define FLEAMAN_SPEED 0.05f
 #define FLEAMAN_GRAVITY 0.05f
@@ -23,7 +23,7 @@ public:
 	virtual void Render();
 	void Start() { isStart = true; }
 	void Stop() { isStart = false; }
-	bool IsStart() { return isStart; }
+	bool IsStart(); //{ return isStart; }
 	void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 	void CollisionWithHiden(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 

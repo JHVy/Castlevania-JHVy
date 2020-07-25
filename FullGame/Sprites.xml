@@ -97,10 +97,10 @@
   <sprite id="30011" left="670" top="1082" right="681" bottom="1113"/>
   <sprite id="30012" left="684" top="1086" right="710" bottom="1111"/>
   <sprite id="30013" left="716" top="1085" right="740" bottom="1111"/>
-  <sprite id="30014" left="0" top="1081" right="27" bottom="1113"/>
-  <sprite id="30015" left="30" top="1081" right="60" bottom="1113"/>
-  <sprite id="30016" left="346" top="1082" right="379" bottom="1113"/>
-  <sprite id="30017" left="380" top="1082" right="404" bottom="1113"/>
+  <sprite id="30014" left="951" top="1111" right="986" bottom="1143"/>
+  <sprite id="30015" left="1015" top="1111" right="1052" bottom="1143"/>
+  <sprite id="30016" left="957" top="1064" right="989" bottom="1096"/>
+  <sprite id="30017" left="1010" top="1064" right="1043" bottom="1096"/>
   <sprite id="30018" left="483" top="1088" right="512" bottom="1111"/>
   <sprite id="30019" left="512" top="1082" right="541" bottom="1113"/>
   <sprite id="30020" left="544" top="1082" right="572" bottom="1111"/>

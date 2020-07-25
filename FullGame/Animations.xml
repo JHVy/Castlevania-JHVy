@@ -347,7 +347,7 @@
   </Animation>
 
   <!--fleaman-->
-  <Animation animationID ="1007" frameTime ="100">
+  <Animation animationID ="1007" frameTime ="50">
     <sprite id="30016"/>
     <sprite id="30017"/>
   </Animation>

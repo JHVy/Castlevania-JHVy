@@ -67,8 +67,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (state == CANDLE_STATE_EXSIST)
 		{
-			float _x, _y;
-			Simon::GetInstance()->GetPosition(_x, _y);
 			if ((x < _leftLimit && nx < 0) || (x > _rightLimit && nx > 0))
 			{
 				nx = -nx;
@@ -186,6 +184,14 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 }
 
+bool Fleaman::IsStart()
+{
+	if (this->DistanceTo(Simon::GetInstance()) <= 200)
+		isStart = true;
+	
+	return isStart;
+}
+
 void Fleaman::Render()
 {
 	/*if (!this->IsStart())
@@ -248,6 +254,10 @@ void Fleaman::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, flo
 	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 	//// block 
+	if (!Fleaman::IsStart())
+	{
+		return;
+	}
 	if (min_tx <= min_tx0)
 		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
 	if (min_ty <= min_ty0)
