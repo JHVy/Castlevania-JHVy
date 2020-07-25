@@ -13,7 +13,6 @@ Fleaman::Fleaman(float _x, float _y, int id) :Enemy(_x, _y, id)
 	AddAnimation(1007);
 	AddAnimation(800);
 	AddAnimation(802);
-	nx = 1;
 	SetSpeed(GetTrend() * FLEAMAN_SPEED, 0);
 	dt_appear = 0;
 	if (x > 4000)
@@ -26,7 +25,7 @@ Fleaman::Fleaman(float _x, float _y, int id) :Enemy(_x, _y, id)
 		_leftLimit = SCENCE_1_LEFT;
 		_rightLimit = SCENCE_1_RIGHT - FLEAMAN_BBOX_WIDTH;
 	}
-	Start();
+	//Start();
 }
 void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -68,13 +67,12 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (state == CANDLE_STATE_EXSIST)
 		{
-			float _x, _y;
-			Simon::GetInstance()->GetPosition(_x, _y);
 			if ((x < _leftLimit && nx < 0) || (x > _rightLimit && nx > 0))
 			{
 				nx = -nx;
 				vx = -vx;
 			}
+
 
 			if (x < cam_x - FLEAMAN_DISTANCE_TOO_FAR || x > cam_x + SCREEN_WIDTH + FLEAMAN_DISTANCE_TOO_FAR)
 			{
@@ -187,10 +185,18 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 }
 
+bool Fleaman::IsStart()
+{
+	if (this->DistanceTo(Simon::GetInstance()) <= 200)
+		isStart = true;
+	
+	return isStart;
+}
+
 void Fleaman::Render()
 {
-	if (!Fleaman::IsStart())
-		return;
+	//if (!Fleaman::IsStart())
+	//	return;
 
 	if (x == 0 && y == 0)
 		return;
@@ -249,6 +255,10 @@ void Fleaman::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, flo
 	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
 
 	//// block 
+	if (!Fleaman::IsStart())
+	{
+		return;
+	}
 	if (min_tx <= min_tx0)
 		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
 	if (min_ty <= min_ty0)

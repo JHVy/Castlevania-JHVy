@@ -59,7 +59,7 @@ void Grid::LoadObject(string file_path)
 
 	if (inFile)
 	{
-		while (inFile >> id >> grid_x >> grid_y >> type >> trend >> x >> y >> w >> h >> id_item >> object)
+		while (inFile >> id >> grid_x >> grid_y >> type >> trend >> x >> y >> w >> h >> id_item >> object)  // chỗ này là hàm đọc file
 		{
 			Insert(id, grid_x, grid_y, type, trend, x, y, w, h, id_item, object);
 		}

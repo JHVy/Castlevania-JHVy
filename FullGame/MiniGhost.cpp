@@ -1,4 +1,4 @@
-#include "MiniGhost.h"
+﻿#include "MiniGhost.h"
 
 
 #include "HidenObject.h"
@@ -39,7 +39,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (dt_appear > 0)
 	{
-		if (start_x > cam_x + SCREEN_WIDTH + MINIGHOST_DISTANCE_TOO_FAR || start_x < cam_x - MINIGHOST_DISTANCE_TOO_FAR)
+		if (start_x > cam_x + SCREEN_WIDTH + MINIGHOST_DISTANCE_TOO_FAR || start_x < cam_x - MINIGHOST_DISTANCE_TOO_FAR) 
 			return;
 		if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
 		{
@@ -50,7 +50,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			x = start_x;
 			y = start_y;
 			if (x > s_x)
-				nx = -1;
+				nx = -1; 
 			else
 				nx = 1;
 			vx = nx * MINIGHOST_SPEED;
@@ -66,7 +66,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (vx == 0 && vy == 0)
 		return;
-	if (dt_die == 0)
+	if (dt_die == 0) 
 	{
 		if (state == CANDLE_STATE_EXSIST)
 		{
@@ -83,6 +83,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				state = CANDLE_STATE_ITEM_NOT_EXSIST;
 				dt_appear = GetTickCount();
 			}
+
 			vector<LPGAMEOBJECT> list;
 			for (int i = 0; i < coObjects->size(); i++)
 			{
@@ -114,7 +115,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			if (coEvents.size() == 0)
 			{
 				x += dx;
-				y += dy;
+				//y += dy;
 			}
 			else {
 				float min_tx, min_ty, nx = 0, ny_1;
@@ -189,7 +190,7 @@ void MiniGhost::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 }
 
-void MiniGhost::Render()
+void MiniGhost::Render() //  đây là hàm vẽ object lên game
 {
 	if (!MiniGhost::IsStart())
 		return;
@@ -216,7 +217,7 @@ void MiniGhost::Render()
 		}
 	}
 
-	//RenderBoundingBox();
+	//RenderBoundingBox(); // đây là vẽ cái cục màu đỏ để xem mà check va chạm
 }
 
 bool MiniGhost::IsStart()
@@ -231,7 +232,6 @@ bool MiniGhost::IsStart()
 	
 	return isStart;
 }
-
 void MiniGhost::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 
@@ -268,7 +268,7 @@ void MiniGhost::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, f
 	if (min_tx <= min_tx0)
 		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
 	if (min_ty <= min_ty0)
-		y += min_ty * dy + ny * 0.4f;
+		//y += min_ty * dy + ny * 0.4f;
 	if (ny != 0) vy = 0;
 	if (vx == 0)
 		vx = -MINIGHOST_SPEED;
