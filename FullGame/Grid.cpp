@@ -74,6 +74,10 @@ void Grid::Insert(int id, int grid_x, int grid_y, int type, int trend, float x, 
 	if (obj == NULL)
 		return;
 
+	float xGrid = x, //grid_x * CellW,
+		yGrid = y; //grid_y * CellH;
+
+	obj->SetPosition(xGrid, yGrid);
 	obj->SetTrend(trend);
 	obj->SetID(id);
 	

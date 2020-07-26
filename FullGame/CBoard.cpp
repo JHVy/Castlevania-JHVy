@@ -1,5 +1,6 @@
 ﻿#include "CBoard.h"
 #include "GameConfig.h"
+#include "Boss.h"
 
 CBoard* CBoard::__instance = NULL;
 
@@ -42,7 +43,7 @@ void CBoard::Render()
 
 	// Draw energy bar
 	code->DrawEnergyBar(cx + 110, cy + 30, 0, simon->GetEnergy()); // player simon->getEnergy - lay gia tri energy cua simon, tru di sau khi va cham voi enemy
-	code->DrawEnergyBar(cx + 110, cy + 50, 1, 5); // enemy  boss->getEnergy 
+	code->DrawEnergyBar(cx + 110, cy + 50, 1, Boss::GetInstance()->GetEnergy()); // enemy  boss->getEnergy 
 
 	if (_weapon != 0)
 	{
