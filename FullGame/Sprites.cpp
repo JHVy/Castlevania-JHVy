@@ -39,13 +39,12 @@ void CSprite::Draw(float x, float y, int alpha)
 }
 
 void CSprite::DrawFlipX(float x, float y, int alpha) {
-	//DebugOut(L"[Draw FlipX] %f %f\n", x, y);
+	//DebugOut(L"[Draw FlipX] %f %f\n", x, y);   d d d d dss
 
 	LPD3DXSPRITE spriteHandler = CGame::GetInstance()->GetSpriteHandler();
 
 	D3DXMATRIX oldMt;
 	spriteHandler->GetTransform(&oldMt);
-
 	D3DXMATRIX newMt;
 
 	D3DXVECTOR2 top_left = D3DXVECTOR2(x, y);

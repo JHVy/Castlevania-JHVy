@@ -8,7 +8,7 @@ Raven::Raven(float _x, float _y, int id) :Enemy(_x, _y, id)
 	isStart = false;
 	this->_type = eType::RAVEN;
 	animations.clear();
-	AddAnimation(1009);
+	AddAnimation(1008);
 	AddAnimation(800);
 	vx = -0.07f;
 	vy = 0.04f;
@@ -18,6 +18,22 @@ Raven::Raven(float _x, float _y, int id) :Enemy(_x, _y, id)
 	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 	topLimit -= SIMON_HEIGHT_STAND;
 }
+
+bool Raven::IsStart()
+{
+	if (this->DistanceTo(Simon::GetInstance()) <= 200)
+	{
+		isStart = true;
+	}
+
+	if (isStart)
+	{
+		animations.clear();
+		AddAnimation(1009);
+	}
+	return isStart;
+}
+
 void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (!this->IsStart())
@@ -35,7 +51,6 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else
 		{
-
 			Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
 			bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 			topLimit -= SIMON_HEIGHT_STAND;

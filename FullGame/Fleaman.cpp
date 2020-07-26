@@ -15,16 +15,6 @@ Fleaman::Fleaman(float _x, float _y, int id) :Enemy(_x, _y, id)
 	nx = 1;
 	SetSpeed(GetTrend() * FLEAMAN_SPEED, 0);
 	dt_appear = 0;
-	if (x > 4000)
-	{
-		_leftLimit = SCENCE_4_LEFT;
-		_rightLimit = SCENCE_4_RIGHT - SCREEN_WIDTH * 3 / 2;
-	}
-	else
-	{
-		_leftLimit = SCENCE_1_LEFT;
-		_rightLimit = SCENCE_1_RIGHT - FLEAMAN_BBOX_WIDTH;
-	}
 	
 }
 void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -36,8 +26,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (dt_appear > 0)
 	{
-		if (start_x > cam_x + SCREEN_WIDTH + FLEAMAN_DISTANCE_TOO_FAR || start_x < cam_x - FLEAMAN_DISTANCE_TOO_FAR)
-			return;
 		if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
 		{
 
@@ -67,17 +55,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (state == CANDLE_STATE_EXSIST)
 		{
-			if ((x < _leftLimit && nx < 0) || (x > _rightLimit && nx > 0))
-			{
-				nx = -nx;
-				vx = -vx;
-			}
-
-			if (x < cam_x - FLEAMAN_DISTANCE_TOO_FAR || x > cam_x + SCREEN_WIDTH + FLEAMAN_DISTANCE_TOO_FAR)
-			{
-				state = CANDLE_STATE_ITEM_NOT_EXSIST;
-				dt_appear = GetTickCount();
-			}
 			vector<LPGAMEOBJECT> list;
 			for (int i = 0; i < coObjects->size(); i++)
 			{
@@ -86,15 +63,10 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					list.push_back(coObjects->at(i));
 				}
-				else if (dynamic_cast<CHidenObject*>(coObjects->at(i)))
-				{
-					if (coObjects->at(i)->GetState() == eType::OBJECT_HIDDEN_FLEAMAN)
-						list.push_back(coObjects->at(i));
-				}
 			}
 
-			vy += SIMON_GRAVITY * dt;
-
+			vy += FLEAMAN_GRAVITY * dt;
+			
 			CGameObject::Update(dt);
 
 			// Simple fall down
@@ -123,11 +95,6 @@ void Fleaman::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 					{
 						CollisionWithBrick(dt, e->obj, min_tx, min_ty, nx, ny_1);
 					}
-					if (dynamic_cast<CHidenObject*>(e->obj))
-					{
-						CollisionWithHiden(dt, e->obj, min_tx, min_ty, nx, ny_1);
-					}
-
 				}
 
 			}
@@ -194,9 +161,6 @@ bool Fleaman::IsStart()
 
 void Fleaman::Render()
 {
-	/*if (!this->IsStart())
-		return;*/
-
 	if (x == 0 && y == 0)
 		return;
 
@@ -227,7 +191,7 @@ void Fleaman::GetBoundingBox(float& left, float& top, float& right, float& botto
 	if (state == CANDLE_STATE_EXSIST)
 	{
 		left = x;
-		top = y;
+		top = y - 10;
 		right = x + FLEAMAN_BBOX_WIDTH;
 		bottom = y + FLEAMAN_BBOX_HEIGHT;
 	}
@@ -265,44 +229,5 @@ void Fleaman::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, flo
 	if (ny != 0) vy = 0;
 	if (vx == 0)
 		vx = -FLEAMAN_SPEED;
-	list.clear();
-}
-
-void Fleaman::CollisionWithHiden(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, float min_ty0, int nx0, int ny0)
-{
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-
-	coEvents.clear();
-
-	vector<LPGAMEOBJECT> list;
-	list.push_back((LPGAMEOBJECT)(obj));
-	// turn off collision when die 
-
-	CalcPotentialCollisions(&list, coEvents);
-
-	float min_tx, min_ty, nx = 0, ny;
-
-	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-
-	//// block 
-
-	// clean up collision events
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-	CHidenObject* ohiden = dynamic_cast<CHidenObject*>(obj);
-	if (ohiden->GetState() == eType::OBJECT_HIDDEN_FLEAMAN)
-	{
-		vx = 0;
-		vy = FLEAMAN_SPEED * 2;
-		y += vy * dt;
-		x += vx * dt;
-	}
-	else
-	{
-		x += vx * dt;
-
-	}
-
-	ohiden = NULL;
 	list.clear();
 }
