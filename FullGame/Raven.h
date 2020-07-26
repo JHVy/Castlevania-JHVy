@@ -13,6 +13,7 @@ class Raven : public Enemy
 {
 	float topLimit;
 	float bottomLimit;
+	bool delayTime;
 	bool isStart;
 public:
 	Raven(float _x = 3500, float _y = 200, int id = 0);
@@ -21,6 +22,6 @@ public:
 	void Render();
 	void Start() { isStart = true; }
 	void Stop() { isStart = false; }
-	bool IsStart() { return isStart; }
+	bool IsStart();// { return isStart; }
 };
 

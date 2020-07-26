@@ -32,7 +32,7 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (vx == 0 && vy == 0)
 		return;
 
-	if (dt_die == 0)
+	if (dt_die == 0) // chua die
 	{
 		if (state == CANDLE_STATE_EXSIST)
 		{
@@ -44,11 +44,6 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				vx = -vx;
 			}
 
-			if (x < cam_x - BLACKKNIGHT_DISTANCE_TOO_FAR || x > cam_x + SCREEN_WIDTH + BLACKKNIGHT_DISTANCE_TOO_FAR)
-			{
-				state = CANDLE_STATE_ITEM_NOT_EXSIST;
-				dt_appear = GetTickCount();
-			}
 
 			vector<LPGAMEOBJECT> list;
 			for (int i = 0; i < coObjects->size(); i++)
@@ -58,10 +53,6 @@ void BlackKnight::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 				{
 					list.push_back(coObjects->at(i));
 				} 
-				else if (dynamic_cast<CHidenObject*>(pObj))
-				{
-					list.push_back(coObjects->at(i));
-				}
 			}
 
 			vy += SIMON_GRAVITY * dt;
@@ -238,41 +229,3 @@ void BlackKnight::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0,
 	list.clear();
 }
 
-void BlackKnight::CollisionWithHiden(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, float min_ty0, int nx0, int ny0)
-{
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-
-	coEvents.clear();
-
-	vector<LPGAMEOBJECT> list;
-	list.push_back((LPGAMEOBJECT)(obj));
-	// turn off collision when die 
-
-	CalcPotentialCollisions(&list, coEvents);
-
-	float min_tx, min_ty, nx = 0, ny;
-
-	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-
-	//// block 
-
-	// clean up collision events
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-	CHidenObject* ohiden = dynamic_cast<CHidenObject*>(obj);
-	if (ohiden->GetState() == eType::OBJECT_HIDDEN_BLACKKNIGHT)
-	{
-		vx = 0;
-		vy = BLACKKNIGHT_SPEED * 2;
-		y += vy * dt;
-		x += vx * dt;
-	}
-	else
-	{
-		x += vx * dt;
-
-	}
-
-	ohiden = NULL;
-	list.clear();
-}

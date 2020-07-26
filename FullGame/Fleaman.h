@@ -8,7 +8,6 @@
 #define FLEAMAN_SPEED 0.05f
 #define FLEAMAN_GRAVITY 0.05f
 
-#define FLEAMAN_DISTANCE_TOO_FAR 300
 class Enemy;
 
 class Fleaman :public Enemy
@@ -23,9 +22,8 @@ public:
 	virtual void Render();
 	void Start() { isStart = true; }
 	void Stop() { isStart = false; }
-	bool IsStart(); //{ return isStart; }
+	bool IsStart();
 	void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
-	void CollisionWithHiden(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 
 };
 

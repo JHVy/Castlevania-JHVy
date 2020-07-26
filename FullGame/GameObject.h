@@ -62,7 +62,7 @@ public:
 	int nx;	 
 
 	int state;
-
+	
 	// thoi gian di chuyen
 	DWORD dt; 
 

@@ -32,7 +32,7 @@
   </Animation>
 
   <!--SIMON_STAND_ATTACK-->
-  <Animation animationID ="404" frameTime ="100">
+  <Animation animationID ="404" frameTime ="200">
     <sprite id="10011"/>
     <sprite id="10012"/>
     <sprite id="10013"/>
@@ -333,8 +333,6 @@
 
   <!--white skeleton throw-->
   <Animation animationID ="1005" frameTime ="100">
-    <sprite id="30009"/>
-    <sprite id="30010"/>
     <sprite id="30011"/>
     <sprite id="30012"/>
     <sprite id="30013"/>
@@ -347,7 +345,7 @@
   </Animation>
 
   <!--fleaman-->
-  <Animation animationID ="1007" frameTime ="50">
+  <Animation animationID ="1007" frameTime ="100">
     <sprite id="30016"/>
     <sprite id="30017"/>
   </Animation>
