@@ -11,6 +11,7 @@
 #define SIMON_GRAVITY			0.001f
 
 #define SIMON_POS_Y				320
+#define ONE_HIT					2
 
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
@@ -163,7 +164,7 @@ public:
 
 	void ThrowWeapon() { _heart--; }
 	void Hurt() {
-		_energy -= 2; 
+		_energy -= ONE_HIT;
 
 		//if (_energy <= 0)
 		//{

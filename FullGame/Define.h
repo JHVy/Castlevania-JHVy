@@ -29,6 +29,10 @@ using namespace std;
 #define TIME_BOSS_DIE 500
 #define BOSS_POSITION 5340.0f, 95.0f
 
+#define SMALLBALL_SPEED 0.3f
+
+#define NUMBER_ERROR 2.0f
+
 
 #define BRICK_ANI					6
 #define TORCH_ANI_FIRE				7

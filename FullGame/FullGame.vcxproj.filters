@@ -160,6 +160,15 @@
     <ClCompile Include="BrickMoving.cpp">
       <Filter>GameObject\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBossBall.cpp">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallBall.cpp">
+      <Filter>GameObject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -316,6 +325,15 @@
     </ClInclude>
     <ClInclude Include="BrickMoving.h">
       <Filter>GameObject\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBossball.h">
+      <Filter>GameObject\Object\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallBall.h">
+      <Filter>GameObject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

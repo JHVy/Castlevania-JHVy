@@ -17,6 +17,7 @@
 #include "BlackKnight.h"
 #include "WhiteSkeleton.h"
 #include "CBoard.h"
+#include "Boss.h"
 
 Grid* Grid::__instance = NULL;
 
@@ -178,4 +179,5 @@ void Grid::GetListObject(vector<LPGAMEOBJECT>&ListObj, float cam_x, float cam_y)
 	{
 		ListObj.push_back(x.second);
 	}
+	ListObj.push_back(Boss::GetInstance());
 }
