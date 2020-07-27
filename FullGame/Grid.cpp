@@ -38,10 +38,10 @@ void Grid::LoadObject(string file_path)
 	SAFE_DELETE(cells);
 
 	// New data
-	Row = GameMap::GetInstance()->getRows();
+	Row = GameMap::GetInstance()->getRows() * 2;
 	Col = GameMap::GetInstance()->getCols();
 	CellW = GameMap::GetInstance()->getTileW();
-	CellH = GameMap::GetInstance()->getTileH();
+	CellH = GameMap::GetInstance()->getTileH()/2;
 
 	cells = new vector<LPGAMEOBJECT>*[Row];
 	for (int i = 0; i < Row; i++)
@@ -76,8 +76,10 @@ void Grid::Insert(int id, int grid_x, int grid_y, int type, int trend, float x, 
 
 	float xGrid = grid_x * CellW,
 		yGrid = grid_y * CellH;
+	
+	if (object != eType::ID_HIDDEN)
+		obj->SetPosition(xGrid, yGrid);
 
-	obj->SetPosition(xGrid, yGrid);
 	obj->SetTrend(trend);
 	obj->SetID(id);
 	

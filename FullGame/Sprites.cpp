@@ -39,7 +39,7 @@ void CSprite::Draw(float x, float y, int alpha)
 }
 
 void CSprite::DrawFlipX(float x, float y, int alpha) {
-	//DebugOut(L"[Draw FlipX] %f %f\n", x, y);   d d d d dss
+	//DebugOut(L"[Draw FlipX] %f %f\n", x, y);
 
 	LPD3DXSPRITE spriteHandler = CGame::GetInstance()->GetSpriteHandler();
 
