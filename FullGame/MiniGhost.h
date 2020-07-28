@@ -27,5 +27,6 @@ public:
 	void Start() { isStart = true; }
 	void Stop() { isStart = false; }
 	bool IsStart(); //{ return isStart; }
+	bool Idle() { return !isStart; };
 	void ChasingSimon(int x, int y);
 };

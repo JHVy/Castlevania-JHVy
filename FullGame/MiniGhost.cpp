@@ -8,6 +8,7 @@
 
 MiniGhost::MiniGhost(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
+	isStart = false;
 	this->_type = eType::MINIGHOST;
 	animations.clear();
 	AddAnimation(1006);
