@@ -4,10 +4,13 @@
 #define MINIGHOST_BBOX_WIDTH 32
 #define MINIGHOST_BBOX_HEIGHT 32
 
-#define MINIGHOST_SPEED 0.05f
-#define MINIGHOST_GRAVITY 0.05f
+//#define MINIGHOST_GRAVITY 0.05f
 
-#define MINIGHOST_DISTANCE_TOO_FAR 300
+#define MINIGHOST_SPEED 0.085f
+#define VY_GHOST	0.022f;
+#define DEAD		1;
+#define MINIGHOST_DISTANCE_TOO_FAR	300;
+
 
 class Enemy;
 
@@ -24,6 +27,5 @@ public:
 	void Start() { isStart = true; }
 	void Stop() { isStart = false; }
 	bool IsStart(); //{ return isStart; }
-	bool Idle() { return !isStart; };
-	void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
+	void ChasingSimon(int x, int y);
 };
