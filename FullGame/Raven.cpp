@@ -6,18 +6,27 @@
 Raven::Raven(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
 	isStart = false;
+	
 	this->_type = eType::RAVEN;
+	this->enemyState = RAVEN_IDLE;
+	timeStop = 0;
+
 	animations.clear();
 	AddAnimation(1009);
 	AddAnimation(800);
-	vx = -0.07f;
-	vy = 0.04f;
+	
+	vx = SPEED_RAVEN;
+	vy = SPEED_RAVEN;
 	nx = -1;
 	ny = 1;
 	Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
+
 	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 	topLimit -= SIMON_HEIGHT_STAND;
+
+	this->Start();
 }
+
 void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	if (!this->IsStart())
@@ -35,24 +44,20 @@ void Raven::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else
 		{
+			float xSimon, ySimon;
+			Simon::GetInstance()->GetPosition(xSimon, ySimon);
 
-			Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
-			bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
-			topLimit -= SIMON_HEIGHT_STAND;
-			if ((x <= c_x && nx < 0) || (x >= c_x + SCREEN_WIDTH && nx > 0))
-			{
-				vx = -vx;
-				nx = -nx;
-			}
-			if ((y <= topLimit && ny < 0) || (y >= bottomLimit && ny > 0))
-			{
-				vy = -vy;
-				ny = -ny;
-			}
+			if (abs(x - xSimon) < RANGE_ACTIVE)
+				enemyState = RAVEN_FLY;
+
+			if (enemyState == RAVEN_IDLE)
+				return;
+
 			CGameObject::Update(dt);
 			x += dx;
 			y += dy;
 
+			ChasingSimon(xSimon, ySimon);
 		}
 	}
 	else
@@ -85,10 +90,70 @@ void Raven::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 		item->GetBoundingBox(left, top, right, bottom);
 	}
 }
+
+void Raven::ChasingSimon(int xS, int yS)
+{
+	if (y < yS)
+	{
+		if (x > xS)
+		{
+			nx = -1;
+			vx = -SPEED_RAVEN;
+			if (abs(x - xS) < RANGE_STOP)
+			{
+				vx = 0;
+				vy = 0;
+				timeStop++;
+				if (timeStop < TIME_STOP1)
+					return;
+				vx = -SPEED_RAVEN;
+				vy = SPEED_RAVEN;
+			}
+			if (abs(x - xS) < RANGE_STOP / 2)
+			{
+				vx = 0;
+				vy = 0;
+				timeStop++;
+				if (timeStop < TIME_STOP2)
+					return;
+				vx = -SPEED_RAVEN;
+				vy = SPEED_RAVEN;
+			}
+		}
+		else
+		{
+			nx = 1;
+			vx = SPEED_RAVEN;
+			if (abs(x - xS) < RANGE_STOP)
+			{
+				vx = 0;
+				vy = 0;
+				timeStop++;
+				if (timeStop < TIME_STOP1)
+					return;
+				vx = SPEED_RAVEN;
+				vy = SPEED_RAVEN;
+			}
+			if (abs(x - xS) < RANGE_STOP / 2)
+			{
+				vx = 0;
+				vy = 0;
+				timeStop++;
+				if (timeStop < TIME_STOP2)
+					return;
+				vx = SPEED_RAVEN;
+				vy = SPEED_RAVEN;
+			}
+		}
+	}
+	else
+	{
+		vx = 0;
+		vy = -SPEED_RAVEN;
+	}
+}
 void Raven::Render()
 {
-	/*if (!Raven::IsStart())
-		return;*/
 	if (state == TORCH_STATE_EXSIST)
 	{
 		animations[0]->Render(x, y, nx, 255);
