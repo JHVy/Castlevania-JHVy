@@ -39,9 +39,9 @@ void Grid::LoadObject(string file_path)
 
 	// New data
 	Row = GameMap::GetInstance()->getRows() * 2;
-	Col = GameMap::GetInstance()->getCols();
-	CellW = GameMap::GetInstance()->getTileW();
-	CellH = GameMap::GetInstance()->getTileH()/2;
+	Col = GameMap::GetInstance()->getCols() * 2;
+	CellW = GameMap::GetInstance()->getTileW() / 2;
+	CellH = GameMap::GetInstance()->getTileH() / 2;
 
 	cells = new vector<LPGAMEOBJECT>*[Row];
 	for (int i = 0; i < Row; i++)
