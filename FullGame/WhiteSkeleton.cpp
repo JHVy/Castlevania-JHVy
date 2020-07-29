@@ -9,7 +9,7 @@ WhiteSkeleton::WhiteSkeleton(float _x, float _y, int id) :Enemy(_x, _y, id)
 	isStart = false;
 	this->_type = eType::WHITESKELETON;
 	animations.clear();
-	AddAnimation(1005);
+	AddAnimation(1004);
 	AddAnimation(800);
 	AddAnimation(802);
 	nx = 1;
@@ -34,41 +34,10 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	float cam_x, cam_y;
 	CGame::GetInstance()->GetCamera(cam_x, cam_y);
 
-	if (dt_appear > 0)
-	{
-		if (start_x > cam_x + SCREEN_WIDTH + WHITESKELETON_DISTANCE_TOO_FAR || start_x < cam_x - WHITESKELETON_DISTANCE_TOO_FAR)
-			return;
-		if (GetTickCount() - dt_appear > TIME_APPEAR && (start_x > cam_x + SCREEN_WIDTH) || (start_x < cam_x))
-		{
-
-			float s_x, s_y;
-			Simon::GetInstance()->GetPosition(s_x, s_y);
-			state = CANDLE_STATE_EXSIST;
-			x = start_x;
-			y = start_y;
-			if (x > s_x)
-				nx = -1;
-			else
-				nx = 1;
-			vx = nx * WHITESKELETON_SPEED;
-
-			if (item)
-				item->SetState(ITEM_STATE_EXSIST);
-			dt_appear = 0;
-			dt_die = 0;
-		}
-		else
-			return;
-	}
-
-	if (vx == 0 && vy == 0)
-		return;
 	if (dt_die == 0)
 	{
 		if (state == CANDLE_STATE_EXSIST)
 		{
-			float _x, _y;
-			Simon::GetInstance()->GetPosition(_x, _y);
 			if ((x < _leftLimit && nx < 0) || (x > _rightLimit && nx > 0))
 			{
 				nx = -nx;
@@ -118,24 +87,36 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 				FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny_1);
 
-				for (UINT i = 0; i < coEventsResult.size(); i++)
-				{
-					LPCOLLISIONEVENT e = coEventsResult[i];
-					if (dynamic_cast<Brick*>(e->obj))
-					{
-						CollisionWithBrick(dt, e->obj, min_tx, min_ty, nx, ny_1);
-					}
-					if (dynamic_cast<CHidenObject*>(e->obj))
-					{
-						CollisionWithHiden(dt, e->obj, min_tx, min_ty, nx, ny_1);
-					}
+				x += min_tx * dx + nx * 0.4f;
+				y += min_ty * dy + ny * 0.4f;
 
-				}
+				if (ny != 0)
+					vy = 0;
+				isGrounded = true;
+				if (nx != 0)
+					vx *= -1;
 
 			}
-			list.clear();
+
+			float xSimon, ySimon;
+			Simon::GetInstance()->GetPosition(xSimon, ySimon);
+
+			ChasingSimon(xSimon, ySimon);
+
+			if (coEvents.size()  == 0)
+			{
+				enemyState = JUMP;
+				vy = -0.1;
+				isGrounded = false;
+			}
+			else {
+				enemyState = WALK;
+			}
+
+			//list.clear();
 			// clean up collision events
-			for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+			for (UINT i = 0; i < coEvents.size(); i++) 
+				delete coEvents[i];
 
 			//update item
 			if (item != NULL)
@@ -161,26 +142,13 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	else
 	{
-		if (item != NULL)
-		{//co item
-
+		if (item != NULL) {//co item
 			if (GetTickCount() - dt_die > TIME_ENEMY_DIE) // cho 150 mili second
 			{
 				item->Update(dt, coObjects);
-				state = CANDLE_STATE_ITEM;
-				if (item->GetState() == ITEM_STATE_NOT_EXSIST)
-				{
-					state = CANDLE_STATE_ITEM_NOT_EXSIST;
-					dt_appear = GetTickCount();
-					return;
-				}
+				item->GetPosition(x, y);
+				state = TORCH_STATE_ITEM;
 			}
-		}
-		else
-		{
-			state = CANDLE_STATE_ITEM_NOT_EXSIST;
-			dt_appear = GetTickCount();
-			return;
 		}
 	}
 
@@ -188,11 +156,8 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void WhiteSkeleton::Render()
 {
-	/*if (!this->IsStart())
-		return;*/
-
-	if (x == 0 && y == 0)
-		return;
+	//if (x == 0 && y == 0)
+	//	return;
 
 	if (state == CANDLE_STATE_EXSIST)
 	{
@@ -230,69 +195,104 @@ void WhiteSkeleton::GetBoundingBox(float& left, float& top, float& right, float&
 		item->GetBoundingBox(left, top, right, bottom);
 	}
 }
-void WhiteSkeleton::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, float min_ty0, int nx0, int ny0)
+//void WhiteSkeleton::CollisionWithBrick(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, float min_ty0, int nx0, int ny0)
+//{
+//
+//	vector<LPCOLLISIONEVENT> coEvents;
+//	vector<LPCOLLISIONEVENT> coEventsResult;
+//
+//	coEvents.clear();
+//	vector<LPGAMEOBJECT> list;
+//	list.push_back((LPGAMEOBJECT)(obj));
+//	// turn off collision when die 
+//
+//	CalcPotentialCollisions(&list, coEvents);
+//
+//	float min_tx, min_ty, nx = 0, ny;
+//
+//	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+//
+//	//// block 
+//	if (min_tx <= min_tx0)
+//		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
+//	if (min_ty <= min_ty0)
+//		y += min_ty * dy + ny * 0.4f;
+//	if (ny != 0) vy = 0;
+//	if (vx == 0)
+//		vx = -WHITESKELETON_SPEED;
+//	list.clear();
+//}
+//
+//void WhiteSkeleton::CollisionWithHiden(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, float min_ty0, int nx0, int ny0)
+//{
+//	vector<LPCOLLISIONEVENT> coEvents;
+//	vector<LPCOLLISIONEVENT> coEventsResult;
+//
+//	coEvents.clear();
+//
+//	vector<LPGAMEOBJECT> list;
+//	list.push_back((LPGAMEOBJECT)(obj));
+//	// turn off collision when die 
+//
+//	CalcPotentialCollisions(&list, coEvents);
+//
+//	float min_tx, min_ty, nx = 0, ny;
+//
+//	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
+//
+//	//// block 
+//
+//	// clean up collision events
+//	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
+//	CHidenObject* ohiden = dynamic_cast<CHidenObject*>(obj);
+//	if (ohiden->GetState() == eType::OBJECT_HIDDEN_WHITESKELETON)
+//	{
+//		vx = 0;
+//		vy = WHITESKELETON_SPEED * 2;
+//		y += vy * dt;
+//		x += vx * dt;
+//	}
+//	else
+//	{
+//		x += vx * dt;
+//
+//	}
+//
+//	ohiden = NULL;
+//	list.clear();
+//}
+
+bool WhiteSkeleton::IsStart()
 {
+	if (this->DistanceTo(Simon::GetInstance()) <= AREA_ACTIVE)
+		isStart = true;
 
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
-
-	coEvents.clear();
-	vector<LPGAMEOBJECT> list;
-	list.push_back((LPGAMEOBJECT)(obj));
-	// turn off collision when die 
-
-	CalcPotentialCollisions(&list, coEvents);
-
-	float min_tx, min_ty, nx = 0, ny;
-
-	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-
-	//// block 
-	if (min_tx <= min_tx0)
-		x += min_tx * dx + nx * 0.4f;		// nx*0.4f : need to push out a bit to avoid overlapping next frame
-	if (min_ty <= min_ty0)
-		y += min_ty * dy + ny * 0.4f;
-	if (ny != 0) vy = 0;
-	if (vx == 0)
-		vx = -WHITESKELETON_SPEED;
-	list.clear();
+	return isStart;
 }
 
-void WhiteSkeleton::CollisionWithHiden(DWORD dt, LPGAMEOBJECT& obj, float min_tx0, float min_ty0, int nx0, int ny0)
+void WhiteSkeleton::ChasingSimon(int xs, int ys)
 {
-	vector<LPCOLLISIONEVENT> coEvents;
-	vector<LPCOLLISIONEVENT> coEventsResult;
+	if (enemyState == JUMP)
+		return;
 
-	coEvents.clear();
-
-	vector<LPGAMEOBJECT> list;
-	list.push_back((LPGAMEOBJECT)(obj));
-	// turn off collision when die 
-
-	CalcPotentialCollisions(&list, coEvents);
-
-	float min_tx, min_ty, nx = 0, ny;
-
-	FilterCollision(coEvents, coEventsResult, min_tx, min_ty, nx, ny);
-
-	//// block 
-
-	// clean up collision events
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];
-	CHidenObject* ohiden = dynamic_cast<CHidenObject*>(obj);
-	if (ohiden->GetState() == eType::OBJECT_HIDDEN_WHITESKELETON)
+	if (xs > x && abs(xs - x) > AREA_TURNING1)
 	{
-		vx = 0;
-		vy = WHITESKELETON_SPEED * 2;
-		y += vy * dt;
-		x += vx * dt;
+		nx = 1;
+		vx = SKELETON_SPEED_X;
 	}
-	else
+	else if (xs > x && abs(xs - x) < AREA_TURNING2)
 	{
-		x += vx * dt;
-
+		nx = 1;
+		vx = -SKELETON_SPEED_X;
 	}
-
-	ohiden = NULL;
-	list.clear();
+	else if (xs < x && abs(xs - x) > AREA_TURNING3)
+	{
+		nx = -1;
+		vx = -SKELETON_SPEED_X;
+	}
+	else if (xs < x && abs(xs - x) < AREA_TURNING4)
+	{
+		nx = -1;
+		vx = SKELETON_SPEED_X;
+	}
 }
