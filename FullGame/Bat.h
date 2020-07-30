@@ -10,14 +10,18 @@
 #define BAT_BOTTOM_LIMIT 500
 
 #define BAT_DISTANCE_MOVING 200
-#define BAT_SPEED_X 0.07f
+#define BAT_SPEED_X 0.1f
 #define BAT_SPEED_Y 0.04f
+#define SPEED_BAT	0.18f	
+
+#define RANGE 80
 
 class Bat : public Enemy
 {
 	float topLimit;
 	float bottomLimit;
 	bool isStart;
+	double r;
 public:
 	Bat(float _x = 3500, float _y = 200, int id = 0);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);

@@ -418,6 +418,10 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 
 						if (!untouchable)
 						{
+							if (enemy->GetType() == eType::BAT)
+							{
+								enemy->Dead();
+							}
 							this->StartUntouchable();
 							Sound::GetInstance()->Play(eSound::soundHurting);
 							this->Hurt();

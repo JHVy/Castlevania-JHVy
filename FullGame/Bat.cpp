@@ -10,8 +10,8 @@ Bat::Bat(float _x, float _y, int id):Enemy(_x, _y, id)
 	AddAnimation(800);
 	nx = 1;
 	ny = 1; 
-	vx = nx * BAT_SPEED_X;
-	vy = ny * BAT_SPEED_Y;
+	vx = SPEED_BAT;
+	vy = SPEED_BAT;
 	Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
 	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 	topLimit -= SIMON_HEIGHT_STAND;
@@ -35,23 +35,12 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else
 		{
-			Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
-			bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
-			topLimit -= SIMON_HEIGHT_STAND;
-			if ((x <= c_x && nx < 0) || (x >= c_x + SCREEN_WIDTH && nx > 0))
-			{
-				vx = -vx;
-				nx = -nx;
-			}
-
-			if ((y <= topLimit && ny < 0) || (y >= bottomLimit && ny > 0))
-			{
-				vy = -vy;
-				ny = -ny;
-			}
 			CGameObject::Update(dt);
+
 			x += dx;
-			y += dy;
+			r += dy;
+			if (r < RANGE)
+				y += dy;
 		}
 	}
 	else
@@ -70,7 +59,10 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 bool Bat::IsStart()
 { 
-	if (this->DistanceTo(Simon::GetInstance()) <= 200)
+	float xSimon, ySimon;
+	Simon::GetInstance()->GetPosition(xSimon, ySimon);
+
+	if (abs(x - xSimon) < 210 && abs(y - ySimon) < 80)
 		isStart = true;
 
 	if (isStart)
