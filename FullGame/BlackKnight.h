@@ -10,6 +10,7 @@
 #define BLACKKNIGHT_SPEED 0.05f
 #define BLACKKNIGHT_GRAVITY 0.05f
 
+#define BLACKKNIGHT_DISTANCE_TOO_FAR 300
 class Enemy;
 
 class BlackKnight :public Enemy
@@ -26,4 +27,6 @@ public:
 	static void Stop() { isStart = false; }
 	static bool IsStart() { return isStart; }
 	void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
+	void CollisionWithHiden(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
+
 };
