@@ -117,11 +117,13 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	else if (_heart > 0 && state == SIMON_STATE_ATTACK_DAGGER)
 	{
 		if (this->GetCurrentWeapon()->GetState() == DAGGER_STATE_HIDE)
+		//if (attack_start == 0)
 		{
+			//attack_start = GetTickCount();
 			this->GetCurrentWeapon()->SetPosition(x, y);
 			this->GetCurrentWeapon()->SetTrend(nx);
 			this->GetCurrentWeapon()->SetState(DAGGER_STATE_ATTACK);
-			_heart--;
+			ThrowWeapon();
 		}
 	}
 
@@ -606,6 +608,21 @@ void Simon::CollisionWithItems(vector<LPGAMEOBJECT>* coObjects)
 
 }
 
+void Simon::ThrowWeapon()
+{
+	int idWeapon = CBoard::GetInstance()->GetWeapon();
+	eSound idSound = eSound::soundDagger;
+	if (idWeapon == eType::AXE)
+		idSound = eSound::soundAxe;
+	else if (idWeapon == eType::BOONGMERANG)
+		idSound = eSound::soundBoomerang;
+	else if (idWeapon == eType::HOLLYWATTER)
+		idSound = eSound::soundHolyWater;
+	Sound::GetInstance()->Play(idSound);
+
+	_heart--;
+}
+
 Weapon* Simon::GetCurrentWeapon()
 {
 	Weapon* wp = NULL;
@@ -647,33 +664,25 @@ void Simon::SetState(int state)
 	switch (state) 
 	{
 	case SIMON_STATE_ATTACK_DAGGER:
+		if (attack_start || currentTime - last_attack < ATTACK_TIME_WAIT)
+			return;
+
 		attack_start = GetTickCount();
 		vx = 0;
+		
 		if (_heart > 0 && CBoard::GetInstance()->GetWeapon() != 0)
 		{
 			int idWeapon = CBoard::GetInstance()->GetWeapon();
-			eSound idSound = eSound::soundDagger;
-			if (idWeapon == eType::AXE)
-				idSound = eSound::soundAxe;
-			else if (idWeapon == eType::BOONGMERANG)
-					idSound = eSound::soundBoomerang;
-			else if (idWeapon == eType::HOLLYWATTER)
-				idSound = eSound::soundHolyWater;
-
 			if (weapons[idWeapon]->GetState() == DAGGER_STATE_ATTACK)
 			{
-				this->state = SIMON_STATE_IDLE;
-			}
-			else
-			{
-				Sound::GetInstance()->Play(idSound);
+				state = SIMON_STATE_IDLE;
 			}
 			
 			CAnimations::GetInstance()->Get(SIMON_ANI_STANDING_ATTACKING)->ResetFrame();
 		}
 		else
 		{
-			this->state = SIMON_STATE_IDLE;
+			state = SIMON_STATE_IDLE;
 		}
 		break;
 

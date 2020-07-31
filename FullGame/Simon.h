@@ -164,7 +164,7 @@ public:
 		return _heart;
 	}
 
-	void ThrowWeapon() { _heart--; }
+	void ThrowWeapon();
 	void Hurt() {
 		_energy -= ONE_HIT;
 
