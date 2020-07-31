@@ -101,28 +101,19 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			float xSimon, ySimon;
 			Simon::GetInstance()->GetPosition(xSimon, ySimon);
 
-			ChasingSimon(xSimon, ySimon);
+			if (this->IsStart())
+				ChasingSimon(xSimon, ySimon);
 
-			if (coEvents.size()  == 0)
+			if (coEvents.size() == 0)
 			{
-				enemyState = JUMP;
-				vy = -0.1;
-				isGrounded = false;
+				SetState(JUMP);
 			}
-			else {
-				enemyState = WALK;
-			}
+			else
+				SetState(WALK);
 
-			//list.clear();
 			// clean up collision events
 			for (UINT i = 0; i < coEvents.size(); i++) 
 				delete coEvents[i];
-
-			//update item
-			if (item != NULL)
-			{
-				item->SetPosition(x, y);
-			}
 
 		}
 		else if (state == CANDLE_STATE_ITEM)
@@ -151,7 +142,26 @@ void WhiteSkeleton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			}
 		}
 	}
+}
 
+void WhiteSkeleton::SetState(int state)
+{
+	this->enemyState= state;
+
+	switch (state)
+	{
+	case WALK:
+		break;
+	case JUMP:
+		if (isGrounded)
+		{
+			vy = -0.42;
+			isGrounded = false;
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 void WhiteSkeleton::Render()
