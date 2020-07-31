@@ -38,4 +38,5 @@ public:
 	//void CollisionWithBrick(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 	//void CollisionWithHiden(DWORD dt, LPGAMEOBJECT& listBrick, float min_tx0, float min_ty0, int nx0, int ny0);
 	void ChasingSimon(int x, int y);
+	void SetState(int state);
 };
