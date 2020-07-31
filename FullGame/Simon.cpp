@@ -111,7 +111,7 @@ void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	// update weapon
 	if (state == SIMON_STATE_SIT_ATTACK || state == SIMON_STATE_STAND_ATTACK)
 	{
-		VampireKiller::GetInstance()->SetPosition(x, y);
+		VampireKiller::GetInstance()->SetPosition(GetXDraw(), y);
 		weapons[eType::VAMPIREKILLER]->Update(dt, coObjects);
 	}
 	else if (_heart > 0 && state == SIMON_STATE_ATTACK_DAGGER)
@@ -251,7 +251,7 @@ void Simon::Render()
 	//id = SIMON_ANI_IDLE;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
-	int x1 = GetXDraw(id), y1 = y;
+	int x1 = GetXDraw(), y1 = y;
 
 	if (untouchable) alpha = 128;
 
@@ -266,17 +266,21 @@ void Simon::Render()
 	}
 }
 
-int Simon::GetXDraw(int id_ani)
+int Simon::GetXDraw()
 {
 	int x_new = x;
-	if (id_ani == SIMON_ANI_STANDING_ATTACKING)
+	if (state == SIMON_STATE_STAND_ATTACK)
 	{
 		x_new -= 10;
 		if (GetTrend() == 1)
 			x_new -= 8;
+	} 
+	else if (state == SIMON_STATE_SIT_ATTACK)
+	{
+		x_new -= 6;
+		if (GetTrend() == 1)
+			x_new -= 8;
 	}
-		
-
 
 	return x_new;
 }
