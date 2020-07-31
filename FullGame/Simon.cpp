@@ -259,7 +259,7 @@ void Simon::Render()
 	//RenderBoundingBox();
 
 	//Draw Vampire
-	if (id == SIMON_ANI_STANDING_ATTACKING || id == SIMON_ANI_SITTING_ATTACKING)
+	if (state == SIMON_STATE_STAND_ATTACK || state == SIMON_STATE_SIT_ATTACK)
 	{
 		if (weapons[eType::VAMPIREKILLER] != NULL)
 			weapons[eType::VAMPIREKILLER]->Render();
@@ -269,7 +269,7 @@ void Simon::Render()
 int Simon::GetXDraw()
 {
 	int x_new = x;
-	if (state == SIMON_STATE_STAND_ATTACK)
+	if (state == SIMON_STATE_STAND_ATTACK || state == SIMON_STATE_ATTACK_DAGGER)
 	{
 		x_new -= 10;
 		if (GetTrend() == 1)
@@ -622,10 +622,6 @@ void Simon::SetState(int state)
 
 	int currentTime = GetTickCount();
 
-	/*if (state != this->state
-		&& (this->state == SIMON_STATE_SIT || this->state == SIMON_STATE_SIT_ATTACK))
-		y -= (SIMON_HEIGHT_STAND - SIMON_HEIGHT_SIT);*/
-
 	if (attack_start)
 		return;
 
@@ -673,7 +669,7 @@ void Simon::SetState(int state)
 				Sound::GetInstance()->Play(idSound);
 			}
 			
-			//animations[SIMON_ANI_STANDING_ATTACKING]->ResetFrame();
+			CAnimations::GetInstance()->Get(SIMON_ANI_STANDING_ATTACKING)->ResetFrame();
 		}
 		else
 		{
@@ -690,6 +686,7 @@ void Simon::SetState(int state)
 		last_attack = attack_start + ATTACK_TIME;
 
 		VampireKiller::GetInstance()->GetAnimation()->ResetFrame();
+		CAnimations::GetInstance()->Get(SIMON_ANI_STANDING_ATTACKING)->ResetFrame();
 		break;
 
 	case SIMON_STATE_SIT_ATTACK:
@@ -700,6 +697,7 @@ void Simon::SetState(int state)
 		Sound::GetInstance()->Play(eSound::soundWhip);
 		last_attack = attack_start + ATTACK_TIME;
 		VampireKiller::GetInstance()->GetAnimation()->ResetFrame();
+		CAnimations::GetInstance()->Get(SIMON_ANI_SITTING_ATTACKING)->ResetFrame();
 		break;
 
 	case SIMON_STATE_JUMP:
