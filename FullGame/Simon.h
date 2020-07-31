@@ -126,6 +126,8 @@ public:
 			return true;
 		return false;
 	}
+
+	int GetXDraw(int id_ani);
 	void HackSimon();
 	bool IsDie();
 	void CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects);

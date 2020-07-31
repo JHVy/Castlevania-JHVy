@@ -193,9 +193,6 @@ void Simon::Render()
 	else if (state == SIMON_STATE_SIT_ATTACK)
 	{
 		id = SIMON_ANI_SITTING_ATTACKING;
-
-		if (weapons[eType::VAMPIREKILLER] != NULL)
-			weapons[eType::VAMPIREKILLER]->Render();
 	}
 	else if (state == SIMON_STATE_STAND_ATTACK)
 	{
@@ -203,9 +200,6 @@ void Simon::Render()
 
 		if (start_jump)
 			id = SIMON_ANI_SITTING_ATTACKING;
-
-		if (weapons[eType::VAMPIREKILLER] != NULL)
-			weapons[eType::VAMPIREKILLER]->Render();
 
 	}
 	else if (state == SIMON_STATE_ATTACK_DAGGER)
@@ -257,12 +251,34 @@ void Simon::Render()
 	//id = SIMON_ANI_IDLE;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
-	int x1 = x, y1 = y;
+	int x1 = GetXDraw(id), y1 = y;
 
 	if (untouchable) alpha = 128;
 
 	ani->Render(x1, y1, nx, alpha);
 	//RenderBoundingBox();
+
+	//Draw Vampire
+	if (id == SIMON_ANI_STANDING_ATTACKING || id == SIMON_ANI_SITTING_ATTACKING)
+	{
+		if (weapons[eType::VAMPIREKILLER] != NULL)
+			weapons[eType::VAMPIREKILLER]->Render();
+	}
+}
+
+int Simon::GetXDraw(int id_ani)
+{
+	int x_new = x;
+	if (id_ani == SIMON_ANI_STANDING_ATTACKING)
+	{
+		x_new -= 10;
+		if (GetTrend() == 1)
+			x_new -= 8;
+	}
+		
+
+
+	return x_new;
 }
 
 void Simon::HackSimon()
