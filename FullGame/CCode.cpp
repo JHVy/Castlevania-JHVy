@@ -3,6 +3,9 @@
 
 void CCode::DrawNumber(int max, float x, float y, int s)
 {
+	if (s < 0) 
+		s = 0;
+
 	CSprites* sprites = CSprites::GetInstance();
 	string str = to_string(s);
 
