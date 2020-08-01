@@ -657,17 +657,19 @@ void Simon::SetState(int state)
 		}
 	}*/
 
-	if (start_jump && state != SIMON_STATE_STAND_ATTACK) 
+	if (start_jump 
+		&& (state != SIMON_STATE_STAND_ATTACK && state != SIMON_STATE_ATTACK_DAGGER)
+		)
 		return;
 
 	
 	switch (state) 
 	{
 	case SIMON_STATE_ATTACK_DAGGER:
-		if (attack_start || currentTime - last_attack < ATTACK_TIME_WAIT)
+		/*if (attack_start || currentTime - last_attack < ATTACK_TIME_WAIT)
 			return;
 
-		attack_start = GetTickCount();
+		attack_start = GetTickCount();*/
 		vx = 0;
 		
 		if (_heart > 0 && CBoard::GetInstance()->GetWeapon() != 0)
