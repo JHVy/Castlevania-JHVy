@@ -1,6 +1,15 @@
 #include "CastlevaniaScreen.h"
 #include "GameConfig.h"
 
+
+CastlevaniaScreen* CastlevaniaScreen::__instance = NULL;
+
+CastlevaniaScreen* CastlevaniaScreen::GetInstance()
+{
+	if (__instance == NULL) __instance = new CastlevaniaScreen();
+	return __instance;
+}
+
 CastlevaniaScreen::CastlevaniaScreen( string filePath) 
 {
 	this->path = filePath;

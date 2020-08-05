@@ -430,6 +430,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 				case eType::FLEAMAN:
 				case eType::WHITESKELETON:
 				case eType::BAT:
+				case eType::BOSS:
 					enemy = (Enemy*)obj;
 					if (obj->GetState() == CANDLE_STATE_EXSIST)		// Va cham GHOST -- khuc nay va cham với enemy 
 					{

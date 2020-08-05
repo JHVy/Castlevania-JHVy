@@ -126,6 +126,8 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 
 	case eType::BLACKKNIGHT:
 		return new BlackKnight(x, y, id_item);
+	case eType::BOSS:
+		return new Boss(x, y, id_item);
 		
 	default:
 		return NULL;
@@ -185,5 +187,5 @@ void Grid::GetListObject(vector<LPGAMEOBJECT>&ListObj, float cam_x, float cam_y)
 	{
 		ListObj.push_back(x.second);
 	}
-	ListObj.push_back(Boss::GetInstance());
+	//ListObj.push_back(Boss::GetInstance());
 }

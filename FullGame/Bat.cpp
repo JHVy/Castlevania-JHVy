@@ -10,11 +10,6 @@ Bat::Bat(float _x, float _y, int id):Enemy(_x, _y, id)
 	AddAnimation(800);
 	nx = 1;
 	ny = 1; 
-	vx = SPEED_BAT;
-	vy = SPEED_BAT;
-	Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
-	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
-	topLimit -= SIMON_HEIGHT_STAND;
 	isStart = false;
 }
 
@@ -92,8 +87,6 @@ void Bat::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 }
 void Bat::Render()
 {
-	/*if (!Bat::IsStart())
-		return;*/
 	if (state == TORCH_STATE_EXSIST)
 	{
 		animations[0]->Render(x, y, nx, 255);
@@ -111,6 +104,4 @@ void Bat::Render()
 			animations[1]->Render(x, y);
 		}
 	}
-
-	//RenderBoundingBox();
 }

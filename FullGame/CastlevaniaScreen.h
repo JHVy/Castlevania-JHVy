@@ -40,6 +40,7 @@ protected:
 	vector<LPGAMEOBJECT> items;
 	vector<LPGAMEOBJECT> enemys;
 
+	static CastlevaniaScreen* __instance;
 
 	
 public:
@@ -48,6 +49,7 @@ public:
 public:
 	CastlevaniaScreen(string filePath);
 	CastlevaniaScreen();
+	static CastlevaniaScreen* GetInstance();
 
 public:	
 	virtual void Load();

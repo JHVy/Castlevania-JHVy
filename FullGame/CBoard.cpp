@@ -43,7 +43,7 @@ void CBoard::Render()
 
 	// Draw energy bar
 	code->DrawEnergyBar(cx + 110, cy + 30, 0, simon->GetEnergy()); // player simon->getEnergy - lay gia tri energy cua simon, tru di sau khi va cham voi enemy
-	code->DrawEnergyBar(cx + 110, cy + 50, 1, Boss::GetInstance()->GetEnergy()); // enemy  boss->getEnergy 
+	code->DrawEnergyBar(cx + 110, cy + 50, 1, 16); // enemy  boss->getEnergy oss::GetInstance()->GetEnergy()
 
 	if (_weapon != 0)
 	{

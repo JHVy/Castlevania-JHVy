@@ -176,7 +176,8 @@ const TiXmlEncoding TIXML_DEFAULT_ENCODING = TIXML_ENCODING_UNKNOWN;
 	In XML, the document and elements can contain
 	other elements and other types of nodes.
 
-	@verbatim
+	@ver
+	im
 	A Document can contain:	Element	(container or leaf)
 							Comment (leaf)
 							Unknown (leaf)
