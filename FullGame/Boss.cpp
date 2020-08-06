@@ -37,10 +37,96 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			CGameObject::Update(dt);
 
+			float xSimon, ySimon;
+			Simon::GetInstance()->GetPosition(xSimon, ySimon);
+
+			if (x > xSimon)
+				nx = -1;
+			else nx = 1;
+
+			if (y > ySimon)
+				ny = -1;
+			if (y <= ySimon)
+				ny = 1;
+
+			if (rand() % RAND_MIN == 1 && (x > c_x - SCREEN_BOX_LEFT) && (x < c_x + SCREEN_BOX_RIGHT) && !target)
+			{
+				if (!fly)
+				{
+					vx = (float)(nx * abs(xSimon - x)) / MAX_DISTANCE;
+					vy = (float)(ny * abs(ySimon - y)) / MAX_DISTANCE;
+				}
+				//checkstop = false;
+			}
+
+			if (abs(xSimon - x) <= 1.0f)
+			{
+				time = GetTickCount();
+				vy = -VY_DOWN;
+				if (rand() % 2 == 1)
+					vx = VX_CLOSE;
+				else
+					vx = -VX_CLOSE;
+				fly = true;
+				checkstop = true;
+			}
+
+			if (GetTickCount() - time > TIME_ATTACK_STOP && checkstop)
+			{
+				vx = vy = 0;
+				fly = false;
+				target = false;
+				checkstop = false;
+			}
+
+
+			if (x <= c_x - SCREEN_BOX_LEFT)
+			{
+				target = true;
+				vx = VX_CLOSE;
+				vy = -VY_DOWN;
+				if (abs(x - xSimon) > MAX_DISTANCE_RIGHT_LEFT)
+				{
+					target = false;
+				}
+			}
+			else if (x > c_x + SCREEN_BOX_RIGHT)
+			{
+
+				target = true;
+				vx = -VX_CLOSE;
+				if (rand() % 2 == 1)
+					vy = VY;
+				else
+					vy = -VY;
+				if (abs(x - xSimon) > MAX_DISTANCE_RIGHT_LEFT)
+				{
+					target = false;
+				}
+			}
+			else if (y < c_y + SCREEN_BOX_UP)
+			{
+				target = true;
+				vy = VY;
+				if (abs(y - ySimon) > MAX_DISTANCE_UP_DOWN)
+				{
+
+					target = false;
+				}
+			}
+			else if (y > c_y + SCREEN_BOX_DOWN)
+			{
+				target = true;
+				vy = -VY_DOWN;
+				if (abs(y - ySimon) > MAX_DISTANCE_UP_DOWN)
+				{
+
+					target = false;
+				}
+			}
+
 			x += dx;
-			r += dy;
-			if (r < RANGE)
-				y += dy;
+			y += dy;
 		}
 	}
 	else
@@ -62,7 +148,7 @@ bool Boss::IsStart()
 	float xSimon, ySimon;
 	Simon::GetInstance()->GetPosition(xSimon, ySimon);
 
-	if (abs(x - xSimon) < 210 && abs(y - ySimon) < 80)
+	if ((xSimon - x) > 150)
 		isStart = true;
 
 	if (isStart)
@@ -92,8 +178,9 @@ void Boss::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 }
 void Boss::Render()
 {
-	/*if (!Boss::IsStart())
-		return;*/
+	//if (!Boss::IsStart())
+	//	return;
+
 	if (state == TORCH_STATE_EXSIST)
 	{
 		animations[0]->Render(x, y, nx, 255);

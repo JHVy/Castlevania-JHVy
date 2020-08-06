@@ -14,14 +14,33 @@
 #define BOSS_SPEED_Y 0.04f
 #define SPEED_BOSS	0.18f	
 
-#define RANGE 80
+#define RAND_MIN 80
+#define MAX_DISTANCE 900
+
+#define SCREEN_BOX_LEFT -32
+#define SCREEN_BOX_RIGHT 420
+#define SCREEN_BOX_UP 100
+#define SCREEN_BOX_DOWN 380
+
+#define VY_DOWN 0.09
+#define VX_CLOSE 0.12
+#define VX 0.12
+#define VY 0.05
+
+#define TIME_ATTACK_STOP 1500
+#define MAX_DISTANCE_RIGHT_LEFT 150
+#define MAX_DISTANCE_UP_DOWN 100
 
 class Boss : public Enemy
 {
 	float topLimit;
 	float bottomLimit;
 	bool isStart;
-	double r;
+	bool checkactive,
+		target,
+		checkstop,
+		fly;
+	DWORD time, timeDelay;
 public:
 	Boss(float _x = 3500, float _y = 200, int id = 0);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
