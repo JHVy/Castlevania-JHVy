@@ -10,6 +10,9 @@ Boss::Boss(float _x, float _y, int id) :Enemy(_x, _y, id)
 	animations.clear();
 	AddAnimation(1090);
 	AddAnimation(800);
+
+	_energy = 10;
+
 	nx = 1;
 	ny = 1;
 	vx = SPEED_BOSS;
@@ -21,6 +24,17 @@ Boss::Boss(float _x, float _y, int id) :Enemy(_x, _y, id)
 	_energy = 16;
 
 	CurrentBoss = this;
+}
+
+Boss* Boss::_instance = NULL;
+
+Boss* Boss::GetInstance()
+{
+	if (_instance == NULL)
+	{
+		_instance = new Boss();
+	}
+	return _instance;
 }
 
 void Boss::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
