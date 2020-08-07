@@ -104,7 +104,7 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 		return new Candle(x, y, id_item);
 
 	case eType::ID_HIDDEN:
-		return new CHidenObject(x, y, w, h, type, trend);
+		return new CHidenObject(x, y, w, h, type, id_item, trend);
 
 	case eType::GHOST: 
 		return new Ghost(x, y, id_item);

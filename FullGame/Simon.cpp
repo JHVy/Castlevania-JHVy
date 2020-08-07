@@ -522,11 +522,13 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 
 				// Va cham cua qua man khac
 				case eType::OBJECT_HIDDEN_DOOR:
-				{
-					Sound::GetInstance()->Play(eSound::musicStateClear);
-					GameConfig::GetInstance()->LevelUp();
-
-				}
+					{	
+						hidenObj = (CHidenObject*)obj;
+						int gameLevel = hidenObj-> id_item;
+						DebugOut(L"[INFO] gameLevel: %d\n", gameLevel);
+						Sound::GetInstance()->Play(eSound::musicStateClear);
+						GameConfig::GetInstance()->SetGameLevel(gameLevel);
+					}
 					break;
 
 				default:
@@ -642,21 +644,6 @@ void Simon::SetState(int state)
 
 	if (attack_start)
 		return;
-
-	// Dang jump van qua phai trai duoc
-	/*if (start_jump)
-	{
-		if (state == SIMON_STATE_WALKING_RIGHT)
-		{
-			vx = SIMON_WALKING_SPEED;
-			nx = 1;
-		}
-		else if (state == SIMON_STATE_WALKING_LEFT) 
-		{
-			vx = -SIMON_WALKING_SPEED;
-			nx = -1;
-		}
-	}*/
 
 	if (start_jump 
 		&& (state != SIMON_STATE_STAND_ATTACK && state != SIMON_STATE_ATTACK_DAGGER)
