@@ -10,6 +10,12 @@ Bat::Bat(float _x, float _y, int id):Enemy(_x, _y, id)
 	AddAnimation(800);
 	nx = 1;
 	ny = 1; 
+
+	vx = SPEED_BAT;
+	vy = SPEED_BAT;
+	Simon::GetInstance()->GetPosition(bottomLimit, topLimit);
+	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
+	topLimit -= SIMON_HEIGHT_STAND;
 	isStart = false;
 }
 
