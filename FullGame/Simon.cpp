@@ -669,6 +669,7 @@ void Simon::SetState(int state)
 			}
 			
 			CAnimations::GetInstance()->Get(SIMON_ANI_STANDING_ATTACKING)->ResetFrame();
+			weapons[idWeapon]->SetUsing(true);
 		}
 		else
 		{

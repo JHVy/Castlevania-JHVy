@@ -29,6 +29,8 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 				if (this->IsCollisedWith(enemy)) //đụng độ
 				{
 					enemy->Hurt();
+					SetUsing(false);
+					isRender = false;
 				}
 			}
 		}
@@ -39,6 +41,8 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 				if (this->IsCollisedWith(listObj.at(i))) //đụng độ
 				{
 					listObj.at(i)->SetState(TORCH_STATE_ITEM);
+					SetUsing(false);
+					isRender = false;
 				}
 			}
 		}
@@ -49,6 +53,8 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 				if (this->IsCollisedWith(listObj.at(i))) //đụng độ
 				{
 					listObj.at(i)->SetState(CANDLE_STATE_ITEM);
+					SetUsing(false);
+					isRender = false;
 				}
 			}
 		}

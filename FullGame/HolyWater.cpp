@@ -34,6 +34,9 @@ void HollyWatter::SetPosition(float simon_x, float simon_y)
 }
 void HollyWatter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
+	if (!IsUsing())
+		return;
+
 	if (start_attack > 0)
 	{
 		if (GetTickCount() - start_attack > HOLLY_WATTER_TIME_ATTACK)
@@ -63,6 +66,9 @@ void HollyWatter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void HollyWatter::Render()
 {
+	if (!IsUsing())
+		return;
+
 	if (state == HOLLY_WATTER_STATE_ATTACK) 
 	{
 		animations[0]->Render(x, y, nx, 255);
@@ -83,6 +89,9 @@ void HollyWatter::Render()
 
 void HollyWatter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	if (!isRender)
+		return;
+
 	if (state == HOLLY_WATTER_STATE_ATTACK)
 	{
 		left = x;
@@ -101,72 +110,74 @@ void HollyWatter::GetBoundingBox(float& left, float& top, float& right, float& b
 }
 void HollyWatter::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 {
-	if (state != HOLLY_WATTER_STATE_HIDE)
-	{
-		RECT rect, rect1;
-		float l, t, r, b;
-		float l1, t1, r1, b1;
+	Weapon::CollisionWithObject(dt, listObj);
 
-		GetBoundingBox(l, t, r, b);
-		rect.left = (int)l;
-		rect.top = (int)t;
-		rect.right = (int)r;
-		rect.bottom = (int)b;
+	//if (state != HOLLY_WATTER_STATE_HIDE)
+	//{
+	//	RECT rect, rect1;
+	//	float l, t, r, b;
+	//	float l1, t1, r1, b1;
 
-		for (int i = 0; i < listObj.size(); i++)
-		{
-			if (dynamic_cast<Enemy*>(listObj.at(i)))
-			{
-				Enemy* enemy = dynamic_cast<Enemy*>(listObj.at(i));
-				if (enemy->GetState() == CANDLE_STATE_EXSIST)
-				{
+	//	GetBoundingBox(l, t, r, b);
+	//	rect.left = (int)l;
+	//	rect.top = (int)t;
+	//	rect.right = (int)r;
+	//	rect.bottom = (int)b;
 
-					enemy->GetBoundingBox(l1, t1, r1, b1);
-					rect1.left = (int)l1;
-					rect1.top = (int)t1;
-					rect1.right = (int)r1;
-					rect1.bottom = (int)b1;
-					if (CGame::GetInstance()->isCollision(rect, rect1)) // đụng độ
-					{
-						Sound::GetInstance()->Play(eSound::soundHolyWater);
-						if (enemy->GetType() == eType::BRICK_2)
-						{
-							vx = vy = 0;
-							state = HOLLY_WATTER_STATE_FIRE;
-							y -= 1;
-							continue;
-						}
+	//	for (int i = 0; i < listObj.size(); i++)
+	//	{
+	//		if (dynamic_cast<Enemy*>(listObj.at(i)))
+	//		{
+	//			Enemy* enemy = dynamic_cast<Enemy*>(listObj.at(i));
+	//			if (enemy->GetState() == CANDLE_STATE_EXSIST)
+	//			{
 
-						enemy->Hurt();
+	//				enemy->GetBoundingBox(l1, t1, r1, b1);
+	//				rect1.left = (int)l1;
+	//				rect1.top = (int)t1;
+	//				rect1.right = (int)r1;
+	//				rect1.bottom = (int)b1;
+	//				if (CGame::GetInstance()->isCollision(rect, rect1)) // đụng độ
+	//				{
+	//					Sound::GetInstance()->Play(eSound::soundHolyWater);
+	//					if (enemy->GetType() == eType::BRICK_2)
+	//					{
+	//						vx = vy = 0;
+	//						state = HOLLY_WATTER_STATE_FIRE;
+	//						y -= 1;
+	//						continue;
+	//					}
 
-						if (enemy->GetEnergy() <= 0)
-						{
-							Simon* simon = Simon::GetInstance();
-							if (enemy->GetType() == eType::GHOST)
-								simon->SetScore(100);
+	//					enemy->Hurt();
 
-							if (enemy->GetEnergy() <= 0)
-							{
-								if (enemy->GetType() == eType::BOSS)
-								{
-									//enemy->SetState(BOSS_STATE_NOT_EXSIST);
-									simon->SetScore(1000);
-								}
-								else
-								{
-									enemy->SetState(CANDLE_STATE_NOT_EXSIST);
-								}
-							}
-						}
+	//					if (enemy->GetEnergy() <= 0)
+	//					{
+	//						Simon* simon = Simon::GetInstance();
+	//						if (enemy->GetType() == eType::GHOST)
+	//							simon->SetScore(100);
 
-						state = HOLLY_WATTER_STATE_HIDE;
-						isRender = false;
-						break;
-					}
-				}
-			}
-		}
-	}
+	//						if (enemy->GetEnergy() <= 0)
+	//						{
+	//							if (enemy->GetType() == eType::BOSS)
+	//							{
+	//								//enemy->SetState(BOSS_STATE_NOT_EXSIST);
+	//								simon->SetScore(1000);
+	//							}
+	//							else
+	//							{
+	//								enemy->SetState(CANDLE_STATE_NOT_EXSIST);
+	//							}
+	//						}
+	//					}
+
+	//					state = HOLLY_WATTER_STATE_HIDE;
+	//					isRender = false;
+	//					break;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 
