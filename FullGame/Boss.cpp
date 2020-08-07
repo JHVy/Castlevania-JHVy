@@ -9,7 +9,7 @@ Boss::Boss(float _x, float _y, int id) :Enemy(_x, _y, id)
 	AddAnimation(1090);
 	AddAnimation(800);
 
-	_energy = 10;
+	_energy = 16;
 
 	nx = 1;
 	ny = 1;
@@ -41,7 +41,7 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (dt_die == 0)
 	{
-		if (state == TORCH_STATE_NOT_EXSIST)
+		if (state == CANDLE_STATE_NOT_EXSIST)
 		{
 			dt_die = GetTickCount();
 			if (item)
@@ -150,7 +150,7 @@ void Boss::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				item->Update(dt, coObjects);
 				item->GetPosition(x, y);
-				state = TORCH_STATE_ITEM;
+				state = CANDLE_STATE_ITEM;
 			}
 		}
 	}
