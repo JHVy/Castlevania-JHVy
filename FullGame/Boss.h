@@ -49,5 +49,9 @@ public:
 	void Start() { isStart = true; }
 	void Stop() { isStart = false; }
 	bool IsStart();// { return isStart; }
+
+	static Boss* GetInstance();
+	static Boss* _instance;
+
 };
 

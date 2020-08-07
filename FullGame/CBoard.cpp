@@ -29,6 +29,7 @@ void CBoard::Render()
 	cy -= SCREEN_PADING_TOP;
 
 	Simon* simon = Simon::GetInstance();
+	Boss* boss = Boss::GetInstance();
 
 	// Draw board 
 	CSprites* sprites = CSprites::GetInstance();
@@ -43,7 +44,7 @@ void CBoard::Render()
 
 	// Draw energy bar
 	code->DrawEnergyBar(cx + 110, cy + 30, 0, simon->GetEnergy()); // player simon->getEnergy - lay gia tri energy cua simon, tru di sau khi va cham voi enemy
-	code->DrawEnergyBar(cx + 110, cy + 50, 1, 16); // enemy  boss->getEnergy oss::GetInstance()->GetEnergy()
+	code->DrawEnergyBar(cx + 110, cy + 50, 1, boss->GetEnergy()); // enemy  boss->getEnergy oss::GetInstance()->GetEnergy()
 
 	if (_weapon != 0)
 	{

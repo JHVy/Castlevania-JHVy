@@ -22,7 +22,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	if (dt_die == 0)
 	{
-		if (state == TORCH_STATE_NOT_EXSIST) 
+		if (state == CANDLE_STATE_NOT_EXSIST) 
 		{
 			dt_die = GetTickCount();
 			if (item)
@@ -45,7 +45,7 @@ void Bat::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			{
 				item->Update(dt, coObjects);
 				item->GetPosition(x, y);
-				state = TORCH_STATE_ITEM;
+				state = CANDLE_STATE_ITEM;
 			}
 		}
 	}
