@@ -2,6 +2,8 @@
 
 #include "CastlevaniaScreen.h"
 
+Boss* Boss::CurrentBoss = NULL;
+
 Boss::Boss(float _x, float _y, int id) :Enemy(_x, _y, id)
 {
 	this->_type = eType::BOSS;
@@ -16,6 +18,9 @@ Boss::Boss(float _x, float _y, int id) :Enemy(_x, _y, id)
 	bottomLimit = topLimit + 2 * SIMON_HEIGHT_STAND;
 	topLimit -= SIMON_HEIGHT_STAND;
 	isStart = false;
+	_energy = 16;
+
+	CurrentBoss = this;
 }
 
 void Boss::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

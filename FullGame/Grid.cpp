@@ -126,6 +126,7 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 
 	case eType::BLACKKNIGHT:
 		return new BlackKnight(x, y, id_item);
+	
 	case eType::BOSS:
 		return new Boss(x, y, id_item);
 		
