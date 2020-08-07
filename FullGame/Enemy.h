@@ -23,7 +23,12 @@ protected:
 	int _energy;
 public:
 	int GetEnergy() { return _energy; }
-	virtual void Hurt() { _energy -= 2; }
+	virtual void Hurt() 
+	{ 
+		_energy -= 2; 
+		if (_energy <= 0)
+			this->SetState(CANDLE_STATE_ITEM);
+	}
 
 	Enemy(float _x, float _y, int id = 0) : Candle(_x, _y, id)
 	{

@@ -87,6 +87,7 @@ void Boongmerang::GetBoundingBox(float& left, float& top, float& right, float& b
 	}
 
 }
+
 void Boongmerang::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 {
 	if (state == BOONGMERANG_STATE_ATTACK)

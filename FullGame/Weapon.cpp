@@ -1,6 +1,7 @@
 ﻿#include "Weapon.h"
 #include "Torch.h"
 #include "Candle.h"
+#include "Enemy.h"
 
 void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -20,7 +21,18 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 {
 	for (int i = 0; i < listObj.size(); i++)
 	{
-		if (dynamic_cast<Torch*>(listObj.at(i)))
+		if (dynamic_cast<Enemy*>(listObj.at(i)))
+		{
+			Enemy* enemy = (Enemy*)listObj.at(i);
+			if (enemy->GetState() == TORCH_STATE_EXSIST)
+			{
+				if (this->IsCollisedWith(enemy)) //đụng độ
+				{
+					enemy->Hurt();
+				}
+			}
+		}
+		else if (dynamic_cast<Torch*>(listObj.at(i)))
 		{
 			if (listObj.at(i)->GetState() == TORCH_STATE_EXSIST)
 			{
