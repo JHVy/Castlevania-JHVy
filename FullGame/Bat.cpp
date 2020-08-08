@@ -107,7 +107,8 @@ void Bat::Render()
 	{
 		if (GetTickCount() - dt_die < TIME_ENEMY_DIE)
 		{
-			animations[1]->Render(x, y);
+			if (animations.size() > 1)
+				animations[1]->Render(x, y);
 		}
 	}
 }
