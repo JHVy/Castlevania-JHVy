@@ -166,6 +166,11 @@ void Simon::ResetLevel(int level)
 	GameConfig::GetInstance()->GetSimonPosition(x, y);
 	vx = vy = 0;
 	_energy = 16;
+
+
+	/// DEBUG
+	/*nx =1;
+	x += 200;*/
 }
 
 void Simon::Render()
@@ -250,15 +255,13 @@ void Simon::Render()
 	}
 	int alpha = 255;
 
-	//id = SIMON_ANI_IDLE;
+	//id = SIMON_ANI_STANDING_ATTACKING;
 	LPANIMATION ani = CAnimations::GetInstance()->Get(id);
 
 	int x1 = GetXDraw(), y1 = y;
 
 	if (untouchable) alpha = 128;
 
-	ani->Render(x1, y1, nx, alpha);
-	//RenderBoundingBox();
 
 	//Draw Vampire
 	if (state == SIMON_STATE_STAND_ATTACK || state == SIMON_STATE_SIT_ATTACK)
@@ -266,6 +269,9 @@ void Simon::Render()
 		if (weapons[eType::VAMPIREKILLER] != NULL)
 			weapons[eType::VAMPIREKILLER]->Render();
 	}
+
+	ani->Render(x1, y1, nx, alpha);
+	//RenderBoundingBox();
 }
 
 int Simon::GetXDraw()
@@ -638,6 +644,7 @@ Weapon* Simon::GetCurrentWeapon()
 
 void Simon::SetState(int state)
 {
+	//DEBUG -- state = SIMON_STATE_SIT_ATTACK;
 	// need update
 	//DebugOut(L"[SIMON-SETSTATE] %d\n", state);
 
