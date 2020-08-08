@@ -24,6 +24,7 @@ using namespace std;
 #define CAM_PADDING		200
 
 #define ID_TEX_BBOX -100		// special texture to draw object bounding box
+#define ID_BLACK_BBOX -101		// special texture to draw object bounding box
 #define ID_TEX 1
 #define TIME_ENEMY_DIE 150
 #define TIME_BOSS_DIE 500
@@ -96,6 +97,7 @@ enum eType
 	STAIR_UP = 33,
 	STAIR_DOWN = 34,
 	CANDLE = 35,
+	BRICKBREAK = 25,
 	OBJECT_HIDDEN_BLACKKNIGHT = 36,
 	OBJECT_HIDDEN_GHOST_1 = 37,
 	OBJECT_HIDDEN_GHOST_STOP_1 = 38,
@@ -151,6 +153,7 @@ enum eType
 
 
 	// id load
+	ID_BRICKBREAK = 301,
 	ID_BRICKMOVING = 300,
 	ID_BRICK = 200,
 	ID_TORCH = 201,

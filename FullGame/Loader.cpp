@@ -5,6 +5,7 @@ void LoadSpriteResource() {
 	CTextures* textures = CTextures::GetInstance();
 
 	textures->Add(ID_TEX_BBOX, L"Res\\textures\\bbox.png", D3DCOLOR_XRGB(255, 255, 255));
+	textures->Add(ID_BLACK_BBOX , L"Res\\textures\\blackbox.png", D3DCOLOR_XRGB(255, 255, 255));
 	textures->Add(ID_TEX, L"Res\\textures\\texture.png", D3DCOLOR_XRGB(255, 0, 255));
 
 	CSprites* sprites = CSprites::GetInstance();

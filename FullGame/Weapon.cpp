@@ -2,6 +2,7 @@
 #include "Torch.h"
 #include "Candle.h"
 #include "Enemy.h"
+#include "BrickBreak.h"
 
 void Weapon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -21,7 +22,20 @@ void Weapon::CollisionWithObject(DWORD dt, vector<LPGAMEOBJECT>& listObj)
 {
 	for (int i = 0; i < listObj.size(); i++)
 	{
-		if (dynamic_cast<Enemy*>(listObj.at(i)))
+		if (dynamic_cast<BrickBreak*>(listObj.at(i)))
+		{
+			BrickBreak* brickBreak = (BrickBreak*)listObj.at(i);
+			if (brickBreak->GetState() == TORCH_STATE_EXSIST)
+			{
+				if (this->IsCollisedWith(brickBreak)) //đụng độ
+				{
+					brickBreak->Hurt();
+					SetUsing(false);
+					isRender = false;
+				}
+			}
+		}
+		else if (dynamic_cast<Enemy*>(listObj.at(i)))
 		{
 			Enemy* enemy = (Enemy*)listObj.at(i);
 			if (enemy->GetState() == TORCH_STATE_EXSIST)

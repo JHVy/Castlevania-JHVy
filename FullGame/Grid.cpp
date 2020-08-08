@@ -7,6 +7,7 @@
 #include "ItemDagger.h"
 #include "Brick.h"
 #include "BrickMoving.h"
+#include "BrickBreak.h"
 #include "Dagger.h"
 #include "HidenObject.h"
 #include "Ghost.h"
@@ -70,15 +71,18 @@ void Grid::LoadObject(string file_path)
 
 void Grid::Insert(int id, int grid_x, int grid_y, int type, int trend, float x, float y, float w, float h, int id_item, int object)
 {
+	float xGrid = grid_x * CellW,
+		yGrid = grid_y * CellH;
+
+	if (object != eType::ID_HIDDEN)
+	{
+		x = xGrid;
+		y = yGrid;
+	}
+
 	CGameObject* obj = GetNewObject(type, trend, x, y, w, h, id_item, object);
 	if (obj == NULL)
 		return;
-
-	float xGrid = grid_x * CellW,
-		yGrid = grid_y * CellH;
-	
-	if (object != eType::ID_HIDDEN)
-		obj->SetPosition(xGrid, yGrid);
 
 	obj->SetTrend(trend);
 	obj->SetID(id);
@@ -96,6 +100,9 @@ CGameObject* Grid::GetNewObject(int type, int trend, int x, int y, int w, int h,
 
 	case eType::ID_BRICKMOVING:
 		return new BrickMoving(x, y, id_item, type, w, h);
+
+	case eType::ID_BRICKBREAK:
+		return new BrickBreak(x, y, w, h, type, id_item);
 
 	case eType::ID_TORCH:
 		return new Torch(x, y, id_item);

@@ -13,3 +13,9 @@ void Brick::Render()
 	//RenderBoundingBox();
 }
 
+void Brick::Disappear()
+{
+	this->width = 0;
+	this->height = 0;
+}
+

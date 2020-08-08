@@ -353,6 +353,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					break;
 
 				case eType::CANDLE:
+				//case eType::BRICKBREAK:
 					candle = (Candle*)obj;
 					if (obj->GetState() == CANDLE_STATE_ITEM)
 					{
@@ -525,7 +526,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					{	
 						hidenObj = (CHidenObject*)obj;
 						int gameLevel = hidenObj-> id_item;
-						DebugOut(L"[INFO] gameLevel: %d\n", gameLevel);
+						//DebugOut(L"[INFO] gameLevel: %d\n", gameLevel);
 						Sound::GetInstance()->Play(eSound::musicStateClear);
 						GameConfig::GetInstance()->SetGameLevel(gameLevel);
 					}

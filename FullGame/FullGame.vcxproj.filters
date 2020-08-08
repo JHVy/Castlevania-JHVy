@@ -169,6 +169,9 @@
     <ClCompile Include="SmallBall.cpp">
       <Filter>GameObject\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="BrickBreak.cpp">
+      <Filter>GameObject\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="SmallBall.h">
       <Filter>GameObject\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickBreak.h">
+      <Filter>GameObject\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

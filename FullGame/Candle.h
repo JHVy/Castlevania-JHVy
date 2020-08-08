@@ -51,16 +51,25 @@ public:
 		this->_type = eType::CANDLE;
 		x = _x;
 		y = _y;
+		width = CANDLE_WIDTH;
+		height = CANDLE_HEIGHT;
 		this->numAnimation = 502;
 		this->state = CANDLE_STATE_EXSIST;
 	}
 
-	Candle(int _x, int _y, int _id_item) {
-		x = _x;
-		y = _y; 
+	Candle(int _x, int _y, int _id_item, int w = 0, int h = 0) : CGameObject(_x, _y, eType::CANDLE, w, h)
+	{ 
 		this->numAnimation = 502;
 		this->_type = eType::CANDLE;
+		x = _x;
+		y = _y;
+		width = CANDLE_WIDTH;
+		height = CANDLE_HEIGHT;
 
+		if (w > 0)
+			this->width = w;
+		if (h > 0)
+			this->height = h;
 		
 		switch (_id_item) 
 		{

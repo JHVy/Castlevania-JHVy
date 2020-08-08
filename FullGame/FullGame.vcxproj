@@ -132,6 +132,7 @@
     <ClCompile Include="Boongmerang.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="BrickBreak.cpp" />
     <ClCompile Include="BrickMoving.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="CastkeKeyEventHandler.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Boongmerang.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="BrickBreak.h" />
     <ClInclude Include="BrickMoving.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="CastkeKeyEventHandler.h" />
