@@ -40,6 +40,8 @@ Simon::Simon()
 	weapons[eType::AXE] = Axe::GetInstance();
 	weapons[eType::HOLLYWATTER] = HollyWatter::GetInstance();
 	weapons[eType::BOONGMERANG] = Boongmerang::GetInstance();
+	
+	SetState(SIMON_STATE_STAND_ATTACK); // set first to init
 }
 
 void Simon::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
