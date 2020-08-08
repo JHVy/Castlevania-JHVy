@@ -22,7 +22,7 @@ void Candle::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void Candle::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == CANDLE_STATE_EXSIST)
+	if (state != CANDLE_STATE_ITEM)
 	{
 		left = x;
 		top = y;

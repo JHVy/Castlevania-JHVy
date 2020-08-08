@@ -359,7 +359,7 @@ void Simon::CollisionWithObjects(vector<LPGAMEOBJECT>* coObjects)
 					break;
 
 				case eType::CANDLE:
-				//case eType::BRICKBREAK:
+				case eType::BRICKBREAK:
 					candle = (Candle*)obj;
 					if (obj->GetState() == CANDLE_STATE_ITEM)
 					{
